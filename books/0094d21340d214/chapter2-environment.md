@@ -2,7 +2,7 @@
 title: "第2章: 環境構築：10分で始める執筆環境"
 ---
 
-## 必要なツールの準備
+必要なツールの準備
 
 まずは、以下のツールが必要です。
 
@@ -12,9 +12,9 @@ title: "第2章: 環境構築：10分で始める執筆環境"
 - **VSCode** または任意のエディタ
 - **Claude Code** アクセス権
 
-## Step 1: WSLの準備
+Step 1: WSLの準備
 
-### WSL環境の確認
+WSL環境の確認
 
 本記事では、**すべての作業をWSL上で実行**することを前提としています。Node.js、Claude Code、Zenn CLIなどのインストールや実行は、すべてWSL環境内で行います。
 
@@ -30,7 +30,7 @@ WSLのインストール方法については、本記事では詳しく扱い�
 **重要**: 以降のすべてのコマンドは、WSL環境内で実行してください。
 :::
 
-## Step 2: システムの更新（WSL内）
+Step 2: システムの更新（WSL内）
 
 ```bash
 # パッケージリストを更新
@@ -40,7 +40,7 @@ sudo apt update
 sudo apt upgrade -y
 ```
 
-## Step 3: Node.jsのインストール（WSL内）
+Step 3: Node.jsのインストール（WSL内）
 
 ```bash
 # WSL環境内でNode.jsをインストール
@@ -52,7 +52,7 @@ node --version  # v14.0.0以上が必要
 npm --version
 ```
 
-## Step 4: Git と GitHub CLI のインストール（WSL内）
+Step 4: Git と GitHub CLI のインストール（WSL内）
 
 ```bash
 # Gitをインストール
@@ -69,7 +69,7 @@ gh auth login
 gh auth status
 ```
 
-## Step 5: Zenn CLIのセットアップ（WSL内）
+Step 5: Zenn CLIのセットアップ（WSL内）
 
 ```bash
 # Zenn CLIをグローバルインストール（任意）
@@ -83,9 +83,9 @@ npx zenn --version
 実際のプロジェクトセットアップ（package.json初期化、Zenn CLI のローカルインストール、ディレクトリ構造作成）は、Step 9でリポジトリ内で行います。
 :::
 
-## Step 6: VSCodeのWSL環境への導入
+Step 6: VSCodeのWSL環境への導入
 
-### VSCodeのインストールと設定
+VSCodeのインストールと設定
 
 WSL環境で効率的に開発を行うために、VSCodeとWSL拡張機能をセットアップします。
 
@@ -94,7 +94,7 @@ WSL環境で効率的に開発を行うために、VSCodeとWSL拡張機能を�
 # まず、WindowsにVSCodeがインストールされていることを確認
 ```
 
-### WSL拡張機能のインストール
+WSL拡張機能のインストール
 
 1. **Windows側でVSCodeを起動**
 2. **WSL拡張機能をインストール**
@@ -102,7 +102,7 @@ WSL環境で効率的に開発を行うために、VSCodeとWSL拡張機能を�
    - 「WSL」で検索
    - 「WSL」拡張機能をインストール
 
-### WSL環境からVSCodeを起動
+WSL環境からVSCodeを起動
 
 ```bash
 # WSL環境内でVSCodeを起動
@@ -115,18 +115,18 @@ code .
 詳細なセットアップ方法については、[Microsoft公式ドキュメント](https://learn.microsoft.com/ja-jp/windows/wsl/tutorials/wsl-vscode)を参照してください。
 :::
 
-## Step 7: Claude Codeの導入
+Step 7: Claude Codeの導入
 
-### 必要な環境
+必要な環境
 - **Node.js 18以上**
 - **WSL環境**（Windows）
 - **最低4GBのRAM**
 
-### インストール方法
+インストール方法
 
 Claude Codeは2つの方法で利用できます。
 
-#### 方法1: CLI版のインストール
+方法1: CLI版のインストール
 
 ```bash
 # Node.jsのバージョン確認（18以上が必要）
@@ -140,7 +140,7 @@ npm install -g @anthropic-ai/claude-code
 **重要**: `sudo npm install -g` は使用しないでください。権限の問題やセキュリティリスクが発生する可能性があります。
 :::
 
-#### 方法2: VSCode拡張機能のインストール（推奨）
+方法2: VSCode拡張機能のインストール（推奨）
 
 1. **VSCodeを開く**
 2. **拡張機能マーケットプレイスを開く**（`Ctrl+Shift+X`）
@@ -149,7 +149,7 @@ npm install -g @anthropic-ai/claude-code
 
 ![Claude Code Extension](../images/books/0094d21340d214/claude-code-extension.png)
 
-### 認証の設定
+認証の設定
 
 Claude Codeの初回起動時に認証が必要です。
 
@@ -157,9 +157,9 @@ Claude Codeの初回起動時に認証が必要です。
 2. **Claude App**（Pro/Maxプランが必要）
 3. **Enterprise**: Amazon BedrockまたはGoogle Vertex AI連携
 
-### Claude Codeの起動
+Claude Codeの起動
 
-#### CLI版の場合
+CLI版の場合
 
 ```bash
 # WSL環境内でプロジェクトディレクトリに移動
@@ -169,35 +169,35 @@ cd your-zenn-project
 claude
 ```
 
-#### VSCode拡張機能の場合
+VSCode拡張機能の場合
 
 1. **VSCodeのサイドバーにClaude Codeアイコンが表示される**
 2. **アイコンをクリックしてClaude Codeパネルを開く**
 3. **初回は認証が必要**（Anthropic Consoleでの認証を推奨）
 
-### VSCode拡張機能の特徴
+VSCode拡張機能の特徴
 
 VSCode拡張機能版のClaude Codeには、CLI版にはない以下の特徴があります。
 
-#### 統合されたUI
+統合されたUI
 - **専用のサイドパネル**: チャット履歴が常に表示
 - **インラインコード提案**: エディタ内で直接コード提案を受けられる
 - **コンテキスト認識**: 開いているファイルの内容を自動的に認識
 
-#### 便利な機能
+便利な機能
 - **ファイル参照**: `@ファイル名` で特定のファイルを会話に含める
 - **選択範囲の送信**: コードを選択して右クリック → "Ask Claude Code"
 - **差分表示**: 提案された変更をdiff形式で確認
 - **ワンクリック適用**: 提案されたコードをクリック一つで適用
 
-#### ショートカットキー
+ショートカットキー
 - `Ctrl+Shift+C`: Claude Codeパネルを開く/閉じる
 - `Ctrl+K Ctrl+C`: 選択したコードについて質問
 - `Ctrl+K Ctrl+R`: 選択したコードのリファクタリング提案
 
-### VSCodeとの連携方法
+VSCodeとの連携方法
 
-#### CLI版とVSCodeの連携
+CLI版とVSCodeの連携
 
 VSCodeのターミナル内でClaude Codeを起動することで、エディタと連携しながら作業できます。
 
@@ -208,7 +208,7 @@ claude
 # これにより、ファイル編集とClaude Codeの対話を同じ画面で行える
 ```
 
-#### 拡張機能版の高度な連携
+拡張機能版の高度な連携
 
 1. **コンテキストメニューの活用**
    - コードを選択 → 右クリック → "Explain with Claude Code"
@@ -228,7 +228,7 @@ claude
 VSCode拡張機能版は、より直感的で効率的な開発体験を提供します。特に長時間の執筆作業では、統合されたUIの恩恵が大きくなります。
 :::
 
-### CLI版 vs VSCode拡張機能版の比較
+CLI版 vs VSCode拡張機能版の比較
 
 | 機能 | CLI版 | VSCode拡張機能版 |
 |-----|-------|-----------------|
@@ -244,9 +244,9 @@ VSCode拡張機能版は、より直感的で効率的な開発体験を提供�
 詳細なセットアップ方法は[Claude Code公式ドキュメント](https://docs.anthropic.com/ja/docs/claude-code/setup)を参照してください。
 :::
 
-## Step 8: GitHubリポジトリの作成とクローン
+Step 8: GitHubリポジトリの作成とクローン
 
-### GitHubでリポジトリを作成
+GitHubでリポジトリを作成
 
 1. **GitHub上でリポジトリを作成**
    - [GitHub](https://github.com) にログイン
@@ -255,7 +255,7 @@ VSCode拡張機能版は、より直感的で効率的な開発体験を提供�
    - 「Add a README file」をチェック
    - 「Create repository」をクリック
 
-### GitHub CLI を使用した場合（推奨）
+GitHub CLI を使用した場合（推奨）
 
 ```bash
 # GitHub CLIでリポジトリを作成してクローン
@@ -263,7 +263,7 @@ gh repo create my-zenn-content --public --clone
 cd my-zenn-content
 ```
 
-### 手動でクローンする場合
+手動でクローンする場合
 
 ```bash
 # WSL環境内で適切なディレクトリに移動
@@ -278,7 +278,7 @@ cd YOUR_REPO
 `YOUR_USERNAME`と`YOUR_REPO`は実際のGitHubユーザー名とリポジトリ名に置き換えてください。
 :::
 
-## Step 9: Zennプロジェクトの初期化とCLAUDE.md作成
+Step 9: Zennプロジェクトの初期化とCLAUDE.md作成
 
 リポジトリ内でZennプロジェクトを初期化し、Claude Codeをより効果的に使用するためのプロジェクトガイドファイルを作成します。
 
@@ -301,7 +301,7 @@ npx zenn init
 # CLAUDE.mdファイルを作成（次ページ参照）
 ```
 
-## Step 10: プレビュー環境の確認
+Step 10: プレビュー環境の確認
 
 ```bash
 # プレビューサーバーを起動
