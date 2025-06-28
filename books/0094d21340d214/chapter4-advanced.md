@@ -356,6 +356,7 @@ Human: この記事の読みやすさを向上させたいです。
 - 視覚的要素の配置アドバイス  
 - 読者体験の改善点
 - Zenn特有のMarkdown記法活用
+- **Mermaid図表の提案**: Zenn.devのmermaid.js 8.10.x準拠形式での図表作成
 
 ### パフォーマンス最適化
 
@@ -414,6 +415,40 @@ Claude Codeが自動で提案します。
 :::message
 Claude Codeは画像の最適化提案（ファイルサイズ、形式選択、alt text）も行うため、SEOに配慮した高品質な技術記事を効率的に作成できます。
 :::
+
+### Mermaid図表の効果的な活用
+
+Zenn.devではmermaid.js 8.10.x形式の図表が利用できます。Claude Codeは適切な記法で図表を自動生成できます。
+
+#### Claude Codeによる図表生成例
+
+```
+Human: システム構成を説明するmermaid図を作成してください。
+Zenn.dev形式に準拠した記法でお願いします。
+```
+
+Claude Codeが自動で生成する8.10.x準拠の図表：
+
+```mermaid
+graph TB
+    subgraph SystemId["システム構成"]
+        A[フロントエンド] --> B[API Gateway]
+        B --> C[マイクロサービス]
+    end
+    
+    classDef frontend fill:#e1f5fe
+    classDef backend fill:#f3e5f5
+    
+    class A frontend
+    class B,C backend
+```
+
+#### 推奨される図表パターン
+
+- **システム構成図**: アーキテクチャの全体像
+- **フローチャート**: プロセスや手順の可視化  
+- **シーケンス図**: 時系列での処理流れ
+- **クラス図**: オブジェクト関係の整理
 
 ## パフォーマンス比較：従来 vs AI駆動
 
