@@ -75,6 +75,51 @@ Zennは、エンジニアのための情報共有プラットフォームです�
 - **プレビュー機能**：ローカルで見た目を確認しながら執筆
 - **収益化**：有料記事・Bookの販売も可能
 
+### システム構成図
+
+以下は、Claude Code × GitHub × Zennを組み合わせた執筆ワークフローの全体像です。
+
+```mermaid
+graph TB
+    subgraph local["ローカル開発環境"]
+        A[エンジニア] -->|執筆依頼| B[Claude Code]
+        B -->|コンテンツ生成| C[Markdown記事]
+        A -->|編集・確認| D[VSCode]
+        D <--> C
+        C -->|プレビュー| E[Zenn CLI<br/>localhost:8000]
+    end
+    
+    subgraph github["GitHub"]
+        F[リポジトリ]
+        G[ブランチ管理]
+        H[Issue管理]
+        I[Pull Request]
+    end
+    
+    subgraph zenn["Zenn.dev"]
+        J[公開記事]
+        K[読者]
+    end
+    
+    C -->|git push| F
+    F -->|自動同期<br/>※Booksのみ| J
+    C -.->|手動コピー<br/>※Articles| J
+    J --> K
+    
+    A -->|企画| H
+    G -->|レビュー| I
+    
+    classDef localStyle fill:#e1f5fe,stroke:#01579b,stroke-width:2px
+    classDef githubStyle fill:#f3e5f5,stroke:#4a148c,stroke-width:2px
+    classDef zennStyle fill:#e8f5e9,stroke:#1b5e20,stroke-width:2px
+    
+    class A,B,C,D,E localStyle
+    class F,G,H,I githubStyle
+    class J,K zennStyle
+```
+
+このワークフローにより、AIの支援を受けながら効率的に記事を作成し、GitHubで管理しながら、Zennで公開することができます。
+
 #### GitHubとの連携メリット
 
 - **バージョン管理**：記事の変更履歴を追跡
