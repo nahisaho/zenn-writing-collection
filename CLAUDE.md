@@ -51,6 +51,41 @@ chapters:
 - Refer to Zenn's Markdown guide: https://zenn.dev/zenn/articles/markdown-guide
 - Zenn supports standard Markdown plus custom extensions for enhanced content
 
+### Mermaid Diagrams
+
+Zenn.dev uses **mermaid.js 8.10.x**. When creating mermaid diagrams, follow these compatibility guidelines:
+
+#### Subgraph Syntax (8.10.x compatible):
+```markdown
+```mermaid
+graph TB
+    subgraph SubgraphId["Display Name"]
+        A[Node A] --> B[Node B]
+    end
+```
+
+#### Styling (8.10.x compatible):
+```markdown
+```mermaid
+graph TB
+    A[Node A] --> B[Node B]
+    
+    classDef primaryClass fill:#ff9999
+    classDef secondaryClass fill:#99ff99
+    
+    class A primaryClass
+    class B secondaryClass
+```
+
+#### **DO NOT USE** (deprecated in 8.10.x):
+- `subgraph "Display Name"` (use identifier syntax instead)
+- `style A fill:#ff9999` (use classDef + class instead)
+
+#### Recommended Patterns:
+- Use identifier-based subgraph syntax
+- Define styles with `classDef` then apply with `class`
+- Test locally with `npx zenn preview` before publishing
+
 ## Content Management
 
 ### INDEX.md File Management
