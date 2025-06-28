@@ -1,0 +1,18 @@
+title: "教師と管理者のための Microsoft 365 完全導入マニュアル"
+summary: "教育現場でMicrosoft 365を導入・管理する教師や管理者向けの実践的ガイド。基本的な導入から運用管理、セキュリティ設定まで、段階的に解説します。"
+topics: ["microsoft365", "education", "teams", "管理", "教育"]
+published: true
+price: 0
+# 本に含めるチャプターを順番に並べましょう
+chapters:
+  - introduction
+  - chapter1-giga-school-dx
+  - chapter2-licensing
+  - chapter3-initial-setup
+  - chapter4-user-management
+  - chapter5-teams-setup
+  - chapter6-sharepoint-onedrive
+  - chapter7-security
+  - chapter8-monitoring
+  - chapter9-troubleshooting
+  - chapter10-best-practices
