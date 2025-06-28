@@ -113,17 +113,43 @@ Microsoft Learn Docs MCP Serverは、Microsoft公式ドキュメントへのリ�
 - **最適化されたチャンク**: 記事タイトル、URL、自己完結型コンテンツ抜粋で構成
 - **常時更新**: 最新のMicrosoft公式ドキュメントと同期
 
-### インストールと設定
+### Claude Codeへの追加方法
+
+Microsoft Learn Docs MCP Serverは、クラウドホスト型のサービスとして提供されており、Claude Codeに簡単に追加できます。
+
+#### 1. MCP Serverの追加コマンド
 
 ```bash
-# VS Code拡張機能経由でワンクリックインストール
-# または VS Code コマンドパレットから手動セットアップ
+# Claude CodeにMicrosoft Learn Docs MCPサーバーを追加
+claude mcp add microsoft-docs https://learn.microsoft.com/api/mcp
 ```
 
-**前提条件**
-- GitHub Copilot拡張機能
-- インターネット接続
-- VS Code環境
+このコマンドにより、Claude CodeがMicrosoft公式ドキュメントに直接アクセスできるようになります。
+
+#### 2. 設定の確認
+
+```bash
+# 追加されたMCPサーバーの確認
+claude mcp list
+```
+
+#### 3. 使用方法
+
+MCP Serverを追加すると、Claude Code内で以下のように使用できます：
+
+```
+# @記法でリソースを参照
+@microsoft-docs "Azure Functions" について最新のドキュメントから解説を作成してください
+
+# 直接質問
+Microsoft Graph APIの認証方法について、公式ドキュメントから最新情報を教えてください
+```
+
+**利点**
+- **エンタープライズセキュリティ**: セキュアな接続で公式ドキュメントにアクセス
+- **自動更新**: Microsoft側でドキュメントが更新されると即座に反映
+- **高品質なコンテンツ**: Microsoft公式の正確で信頼できる情報を取得
+- **セマンティック検索**: AIによる意味理解で最も関連性の高い情報を取得
 
 ### 技術記事執筆での活用例
 
@@ -179,14 +205,24 @@ Human: Microsoft 365のセキュリティ設定について、
 - 正確性確認：従来1-2時間 → ほぼ不要（**95%削減**）
 - 更新追従：従来月1-2日 → 30分程度（**95%削減**）
 
+### MCPプロトコルについて
+
+**Model Context Protocol (MCP)** は、LLMが外部ツールやデータソースにアクセスするための標準化されたプロトコルです。USB-Cポートのように、AIアプリケーションがさまざまなデータソースやツールに接続するための統一された方法を提供します。
+
+**主な特徴**:
+- **標準化されたインターフェース**: 異なるサービス間で一貫した接続方法
+- **セキュアな通信**: エンタープライズレベルのセキュリティ機能
+- **自動ツール統合**: MCPサーバーが提供するツールを自動的に利用可能
+- **リアルタイムデータアクセス**: 常に最新の情報を取得
+
 ### 実際の執筆フロー
 
 ```bash
 # 1. Claude Codeを起動
 claude
 
-# 2. Microsoft Learn MCP Server経由で情報取得
-# "Microsoft Graph APIの認証方法について最新ドキュメントから解説を作成"
+# 2. MCP Server経由でMicrosoft公式ドキュメントから情報取得
+# 例: "@microsoft-docs Azure Functions のベストプラクティスについて解説してください"
 
 # 3. 生成された内容をZenn記事として整形
 # 4. ローカルプレビューで確認
@@ -194,6 +230,11 @@ npx zenn preview
 
 # 5. 記事公開（Article: コピー&ペースト / Book: Git push）
 ```
+
+**セキュリティに関する注意事項**:
+:::message alert
+サードパーティのMCPサーバーは自己責任で使用してください。MCPサーバーを信頼していることを確認し、特にインターネットと通信するMCPサーバーを使用する際は注意してください。Microsoft Learn Docs MCP Serverは、Microsoft公式のサービスであり、安全に使用できます。
+:::
 
 :::message
 Microsoft Learn Docs MCP Serverの活用により、Microsoft製品に関する技術記事の執筆効率が劇的に向上し、常に最新で正確な情報に基づいた高品質なコンテンツを作成できるようになります。
