@@ -62,8 +62,8 @@ title: "第10章: トラブルシューティング"
 
 ### 診断ツールの活用
 ```powershell
-# Azure AD サインインログの確認
-Get-AzureADAuditSignInLogs -Filter "userPrincipalName eq 'user@school.edu'" | 
+# Microsoft Entra ID サインインログの確認
+Get-MgAuditLogSignIn -Filter "userPrincipalName eq 'user@school.edu'" | 
 Select-Object CreatedDateTime, Status, ConditionalAccessStatus
 ```
 

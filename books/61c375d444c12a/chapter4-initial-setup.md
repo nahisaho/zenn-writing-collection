@@ -15,7 +15,7 @@ Phase 1: 基盤構築
 └── 管理者アカウントの設定
 
 Phase 2: セキュリティ強化
-├── Azure AD Premium機能の設定
+├── Microsoft Entra ID Premium機能の設定
 ├── 条件付きアクセスの実装
 ├── 情報保護機能の設定
 └── デバイス管理の導入
@@ -111,11 +111,11 @@ $SecondaryAdmin = @{
 
 ## 4.3 セキュリティ基盤の構築
 
-### 4.3.1 Azure AD Premium P2の有効化
+### 4.3.1 Microsoft Entra ID Premium P2の有効化
 
 #### ライセンス割り当て
 ```powershell
-# Azure AD Premium P2 ライセンスの確認
+# Microsoft Entra ID Premium P2 ライセンスの確認
 Get-MsolAccountSku | Where-Object {$_.AccountSkuId -like "*AAD_PREMIUM_P2*"}
 
 # 管理者にライセンス割り当て
@@ -125,7 +125,7 @@ Set-MsolUserLicense -UserPrincipalName "admin@school.onmicrosoft.com" `
 
 #### Identity Protection の有効化
 ```
-Azure AD > セキュリティ > Identity Protection
+Microsoft Entra admin center > セキュリティ > Identity Protection
 
 有効化する機能:
 □ ユーザーリスクポリシー
@@ -395,11 +395,11 @@ $ApprovedApps = @{
 
 ## 4.6 ネットワークとハイブリッド接続
 
-### 4.6.1 Azure AD Connect の設定
+### 4.6.1 Microsoft Entra Connect の設定
 
 #### オンプレミスADとの同期設定
 ```powershell
-# Azure AD Connect の基本設定
+# Microsoft Entra Connect の基本設定
 $ConnectConfig = @{
     SyncMethod = "PasswordHashSync"  # パスワードハッシュ同期
     
@@ -527,7 +527,7 @@ Phase 1 確認項目:
 □ 教育機関資格の承認確認
 □ カスタムドメインの検証完了
 □ 管理者アカウントの2要素認証設定
-□ Azure AD Premium P2 ライセンス割り当て
+□ Microsoft Entra ID Premium P2 ライセンス割り当て
 □ 基本的な条件付きアクセスポリシー
 
 Phase 2 確認項目:  
@@ -608,7 +608,7 @@ done
 
 #### 問題3: オンプレミス同期の失敗
 ```powershell
-# Azure AD Connect の同期状況確認
+# Microsoft Entra Connect の同期状況確認
 Import-Module ADSync
 Get-ADSyncConnectorRunStatus
 Get-ADSyncServerConfiguration -Path "C:\Program Files\Microsoft Azure AD Sync\Bin\ADSyncConfig.psm1"

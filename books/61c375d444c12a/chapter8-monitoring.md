@@ -20,7 +20,7 @@ title: "第9章: 監視と分析"
    - SharePoint レポート
    - Exchange レポート
 
-4. **Azure AD レポート**
+4. **Microsoft Entra ID レポート**
    - サインインログ
    - 監査ログ
    - セキュリティレポート
@@ -254,7 +254,7 @@ $report = Invoke-RestMethod -Uri $uri -Headers $headers -Method Get
 2. **サーバー側ログ**
    - Exchange メッセージ追跡
    - SharePoint ULSログ
-   - Azure AD サインインログ
+   - Microsoft Entra ID サインインログ
 
 ## 7.10 ベストプラクティス
 
