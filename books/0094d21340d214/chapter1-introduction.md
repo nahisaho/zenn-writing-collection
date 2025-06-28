@@ -31,46 +31,36 @@ title: "第1章: なぜ今、AIペアプロで記事を書くのか"
 
 以下が本記事で紹介する技術記事執筆環境の全体像です。
 
-```mermaid
-graph TB
-    subgraph "Local Environment"
-        A[Claude Code] --> B[Zenn CLI]
-        B --> C[Local Preview]
-        A --> D[Git]
-        A --> E[Node.js]
-    end
-    
-    subgraph "Cloud Services"
-        F[GitHub Repository]
-        G[Zenn.dev Platform]
-    end
-    
-    subgraph "User Interface"
-        H[VSCode + Claude Extension]
-        I[Terminal]
-        J[Web Browser]
-    end
-    
-    subgraph "Content Flow"
-        K[Write Content] --> L[Preview Locally]
-        L --> M[Git Commit]
-        M --> N[Push to GitHub]
-        N --> O[Sync to Zenn]
-    end
-    
-    A -.->|AI Assistance| K
-    B --> L
-    D --> M
-    F --> N
-    F -.->|Manual Sync| G
-    C --> J
-    H -.->|Primary Interface| A
-    I -.->|Terminal Access| A
-    
-    style A fill:#ff9999
-    style F fill:#99ff99
-    style G fill:#ffcc99
+### 🏗️ ローカル環境
 ```
+Claude Code ←→ Zenn CLI → ローカルプレビュー
+     ↓              ↓
+   Git管理      Node.js環境
+```
+
+### ☁️ クラウドサービス
+```
+GitHub Repository ←→ Zenn.dev Platform
+   (バージョン管理)      (公開プラットフォーム)
+```
+
+### 💻 ユーザーインターフェース
+```
+VSCode + Claude拡張 ←→ ターミナル ←→ Webブラウザ
+  (統合開発環境)        (CLI操作)    (プレビュー確認)
+```
+
+### 📝 コンテンツフロー
+```
+1. 執筆 → 2. ローカルプレビュー → 3. Git コミット → 4. GitHub プッシュ → 5. Zenn同期
+   ↑                                                                        ↓
+   └─────────────────── AI支援による改善提案 ←─────────────────────────────────┘
+```
+
+**主要な連携ポイント**
+- **Claude Code**: 🤖 AI支援による執筆・校正
+- **GitHub**: 📊 バージョン管理・自動同期
+- **Zenn**: 📚 公開・コミュニティフィードバック
 
 ## Claude Code × GitHub × Zennワークフローの威力
 
