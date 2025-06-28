@@ -1,10 +1,8 @@
 ---
-title: "第5章: SharePoint と OneDrive の管理"
+title: "第7章: SharePoint と OneDrive の管理"
 ---
 
-# 第5章: SharePoint と OneDrive の管理
-
-## 5.1 SharePoint と OneDrive の違い
+## 7.1 SharePoint と OneDrive の違い
 
 ### 基本的な違い
 | 項目 | SharePoint | OneDrive |

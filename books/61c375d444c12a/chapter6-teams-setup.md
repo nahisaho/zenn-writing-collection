@@ -2,9 +2,7 @@
 title: "第6章: Microsoft Teams の設定と管理"
 ---
 
-# 第6章: Microsoft Teams の設定と管理
-
-## 4.1 Teams の基本構造
+## 6.1 Teams の基本構造
 
 ### 階層構造の理解
 ```

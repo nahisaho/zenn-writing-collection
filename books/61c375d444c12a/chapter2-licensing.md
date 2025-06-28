@@ -2,8 +2,6 @@
 title: "第2章: Microsoft 365の基本概念とライセンス"
 ---
 
-# 第2章: Microsoft 365の基本概念とライセンス
-
 ## 2.1 本章の概要
 
 教育機関がMicrosoft 365を成功させるためには、技術的な導入手順以前に、ライセンス体系と基本概念を正しく理解することが不可欠です。多くの学校でMicrosoft 365の導入が失敗する理由の一つに、組織の実際の要件とライセンスの機能が適切にマッチングできていないことが挙げられます。
@@ -72,6 +70,11 @@ Office 365 サービス群は、日常的な教育活動の基盤となるコミ
 | **Microsoft 365 A3** | 教職員 | サブスクリプション（有料） | デスクトップOffice、高度機能 |
 | **Microsoft 365 A5** | 教職員 | サブスクリプション（有料） | 全機能、高度分析・セキュリティ |
 
+**参考資料**:
+- [Microsoft 365 Education plans](https://www.microsoft.com/en-us/education/products/microsoft-365)
+- [Compare Microsoft 365 Education plans](https://www.microsoft.com/en/education/products/office/compare-microsoft-365-education-plans)
+- [Microsoft 365 Education service description | Microsoft Learn](https://learn.microsoft.com/en-us/office365/servicedescriptions/office-365-platform-service-description/microsoft-365-education)
+
 #### Student Use Benefit（SUB）について
 
 A3およびA5ライセンスには、Student Use Benefit（SUB）と呼ばれる重要な付帯サービスが含まれています。SUBは、教職員がA3またはA5ライセンスを保有している教育機関において、その学校に在籍する児童・生徒に対して、追加料金なしで同等のライセンス機能を提供する制度です。
@@ -101,29 +104,37 @@ Microsoft 365 A1 for Deviceは、デバイス単位でのライセンス形態�
 | 機能カテゴリ | A1 | A1 for Device | A3 | A5 |
 |-------------|----|----|----|----|
 | **Office アプリ** | | | | |
-| Office Online (Web版) | ✓ | ✗ | ✓ | ✓ |
+| Office Online (Web版) | ✓ | ✓ | ✓ | ✓ |
 | デスクトップOffice | ✗ | ✓ | ✓ | ✓ |
-| モバイルアプリ | ✓ | ✗ | ✓ | ✓ |
+| モバイルアプリ | ✓ | ✓ | ✓ | ✓ |
 | **コラボレーション** | | | | |
-| Teams (基本) | ✓ | ✗ | ✓ | ✓ |
-| Teams (高度機能) | ✗ | ✗ | ✓ | ✓ |
-| SharePoint Online | 1GB | ✗ | 無制限※ | 無制限※ |
-| OneDrive | 1TB | ✗ | 無制限※ | 無制限※ |
-| **セキュリティ** | | | | |
-| 基本認証 | ✓ | ✗ | ✓ | ✓ |
-| 多要素認証 | ✓ | ✗ | ✓ | ✓ |
-| 条件付きアクセス | ✗ | ✗ | ✓ | ✓ |
-| 高度脅威保護 | ✗ | ✗ | ✗ | ✓ |
-| **コンプライアンス** | | | | |
-| 基本監査 | ✓ | ✗ | ✓ | ✓ |
-| 高度監査 | ✗ | ✗ | ✗ | ✓ |
-| eDiscovery | ✗ | ✗ | 基本 | 高度 |
-| **分析・AI** | | | | |
-| 基本レポート | ✓ | ✗ | ✓ | ✓ |
+| Microsoft Teams | ✓ | ✓ | ✓ | ✓ |
+| SharePoint Online | ✓ | ✓ | ✓ | ✓ |
+| OneDrive for Business | ✓ | ✓ | ✓ | ✓ |
+| Exchange Online | ✓ | ✓ | ✓ | ✓ |
+| **教育ツール** | | | | |
+| OneNote Class Notebook | ✓ | ✓ | ✓ | ✓ |
+| Microsoft Forms | ✓ | ✓ | ✓ | ✓ |
+| Microsoft Sway | ✓ | ✓ | ✓ | ✓ |
+| Microsoft Stream | ✓ | ✓ | ✓ | ✓ |
+| Learning Accelerators | ✓ | ✓ | ✓ | ✓ |
+| **デバイス管理** | | | | |
+| Intune for Education | ✗ | ✓ | ✗ | ✗ |
+| Microsoft Intune (フル機能) | ✗ | ✓ | ✓ | ✓ |
+| Windows Autopilot | ✗ | ✓ | ✓ | ✓ |
+| Mobile Device Management | ✗ | ✓ | ✓ | ✓ |
+| **高度機能** | | | | |
+| Microsoft Bookings | ✗ | ✗ | ✓ | ✓ |
 | Power BI Pro | ✗ | ✗ | ✗ | ✓ |
-| Microsoft Viva | ✗ | ✗ | 一部 | ✓ |
+| Audio Conferencing | ✗ | ✗ | ✗ | ✓ |
+| Phone System | ✗ | ✗ | ✗ | ✓ |
 
 ※無制限: 教育機関向けプールストレージ制限適用（初期100TB + 有料ライセンスによる追加容量）
+
+**参考資料**: 
+- [Microsoft 365 Education service description | Microsoft Learn](https://learn.microsoft.com/en-us/office365/servicedescriptions/office-365-platform-service-description/microsoft-365-education)
+- [Office 365 Education service description | Microsoft Learn](https://learn.microsoft.com/en-us/office365/servicedescriptions/office-365-platform-service-description/office-365-education)
+- [Modern Work Plan Comparison-Education (PDF)](https://aka.ms/EDU-Plan-Comparison)
 
 ### 2.4.2 教育段階別推奨ライセンス
 
