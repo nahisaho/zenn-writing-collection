@@ -1,0 +1,12 @@
+title: "AIペアプロで爆速執筆！Claude Code × GitHub × Zennの最強タッグ"
+summary: "技術記事の執筆に悩むエンジニアのための革命的なワークフロー。Claude Code、GitHub、Zennを組み合わせた効率的な執筆環境の構築から実践的な活用方法まで、実際の執筆プロセスを通して解説します。"
+topics: ["claude", "ai", "github", "zenn", "vscode"]
+published: false
+price: 0 # 有料の場合200〜5000
+# 本に含めるチャプターを順番に並べましょう
+chapters:
+  - "chapter1-introduction"
+  - "chapter2-environment"
+  - "chapter3-workflow"
+  - "chapter4-advanced"
+  - "chapter5-conclusion"
