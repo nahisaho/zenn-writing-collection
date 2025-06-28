@@ -87,6 +87,7 @@ graph TB
         A -->|編集・確認| D[VSCode]
         D <--> C
         C -->|プレビュー| E[Zenn CLI<br/>localhost:8000]
+        B <-->|公式ドキュメント<br/>参照| L[Microsoft Learn<br/>MCP Server]
     end
     
     subgraph github["GitHub"]
@@ -101,6 +102,12 @@ graph TB
         K[読者]
     end
     
+    subgraph microsoft["Microsoft Learn"]
+        M[Azure Docs]
+        N[Microsoft 365 Docs]
+        O[Microsoft Learn]
+    end
+    
     C -->|git push| F
     F -->|自動同期<br/>※Booksのみ| J
     C -.->|手動コピー<br/>※Articles| J
@@ -108,14 +115,21 @@ graph TB
     
     A -->|企画| H
     G -->|レビュー| I
+    L -->|リアルタイム<br/>アクセス| M
+    L -->|リアルタイム<br/>アクセス| N
+    L -->|リアルタイム<br/>アクセス| O
     
     classDef localStyle fill:#e1f5fe,stroke:#01579b,stroke-width:2px
     classDef githubStyle fill:#f3e5f5,stroke:#4a148c,stroke-width:2px
     classDef zennStyle fill:#e8f5e9,stroke:#1b5e20,stroke-width:2px
+    classDef mcpStyle fill:#fff3e0,stroke:#e65100,stroke-width:2px
+    classDef microsoftStyle fill:#f1f8e9,stroke:#33691e,stroke-width:2px
     
     class A,B,C,D,E localStyle
     class F,G,H,I githubStyle
     class J,K zennStyle
+    class L mcpStyle
+    class M,N,O microsoftStyle
 ```
 
 このワークフローにより、AIの支援を受けながら効率的に記事を作成し、GitHubで管理しながら、Zennで公開することができます。
