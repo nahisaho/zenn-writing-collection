@@ -1,8 +1,8 @@
 ---
-title: "第4章: Microsoft Teams の設定と管理"
+title: "第6章: Microsoft Teams の設定と管理"
 ---
 
-# 第4章: Microsoft Teams の設定と管理
+# 第6章: Microsoft Teams の設定と管理
 
 ## 4.1 Teams の基本構造
 
