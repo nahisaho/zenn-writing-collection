@@ -2,8 +2,6 @@
 title: "第3章: 実践：Claude Codeを使用した記事執筆"
 ---
 
-# 実践：Claude Codeを使用した記事執筆
-
 
 ## Claude Codeの起動方法
 
