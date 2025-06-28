@@ -1,0 +1,298 @@
+# Zenn Content Index
+
+このファイルは、Zennの記事とブックのファイル名とタイトルの対応を管理します。
+
+## Articles (記事)
+
+| ファイル名 | タイトル | 状態 | 作成日 | 更新日 |
+|-----------|---------|------|--------|--------|
+| 05f48881652ef8.md | AIペアプロで爆速執筆！Claude Code × GitHub × Zennの最強タッグ | 下書き | 2025-06-28 | 2025-06-28 |
+
+## Books (本)
+
+| ディレクトリ名 | タイトル | 状態 | 作成日 | 更新日 |
+|---------------|---------|------|--------|--------|
+| - | 現在、ブックはありません | - | - | - |
+
+---
+
+## 使用方法
+
+### 新しいコンテンツ作成時のワークフロー
+
+1. **記事作成時**:
+   ```bash
+   npx zenn new:article
+   # → articles/{article-id}.md が作成される
+   ```
+   
+2. **本作成時**:
+   ```bash
+   npx zenn new:book
+   # → books/{book-id}/ ディレクトリが作成される
+   ```
+
+3. **このINDEX.mdを即座に更新**:
+   - 新しいエントリを該当セクションのテーブルに追加
+   - ファイル名/ディレクトリ名、タイトル、状態、作成日、更新日を記録
+   - 新規作成時は作成日 = 更新日
+
+### 状態管理
+
+- **下書き**: 執筆開始、`published: false`
+- **執筆中**: 作業進行中
+- **公開準備中**: レビュー・最終確認段階
+- **公開済み**: `published: true` で公開
+
+### 更新日の管理
+
+以下の場合に更新日を現在の日付に更新してください：
+
+- タイトルの変更
+- 状態の変更（下書き → 執筆中 → 公開準備中 → 公開済み）
+- 主要なコンテンツの改訂
+- ブックへの新章追加
+- 公開設定の変更（`published: true`）
+
+## コンテンツ管理の自動化
+
+### GitHub Issues駆動の企画管理
+
+記事のアイデア管理から執筆完了まで、Issues を活用した体系的な管理が可能です：
+
+```bash
+# 記事企画をIssueとして管理
+gh issue create --title "新記事企画: [記事タイトル]" \
+                --body "**目標読者**: [ターゲット]
+**想定文字数**: [文字数]
+**含む内容**: 
+- [項目1]
+- [項目2]"
+
+# ラベルで分類
+gh issue edit [issue-number] --add-label "記事企画,執筆予定"
+
+# 執筆ブランチとの連携
+git checkout -b feature/article-name
+gh issue comment [issue-number] --body "執筆開始: feature/article-name ブランチで作業中"
+```
+
+### 自動化されたレビューフロー
+
+プルリクエストベースでの品質管理：
+
+```bash
+# 記事完成後のプルリクエスト作成
+gh pr create --title "記事: [記事タイトル]" \
+             --body "## 概要
+[記事の概要]
+
+## チェックポイント
+- [ ] コード例の動作確認
+- [ ] 技術情報の正確性
+- [ ] 文章の読みやすさ
+- [ ] SEO対策"
+
+# Claude Codeによる品質レビュー
+# "このプルリクエストの記事をレビューして改善提案をしてください"
+```
+
+### Claude Code との連携
+
+INDEX.md の自動更新や管理にClaude Code を活用：
+
+```bash
+# Claude Code起動
+claude
+
+# INDEX.md更新の依頼例
+# "新しい記事 'article-id.md' のタイトルが '[タイトル]' です。INDEX.mdを更新してください"
+# "記事の状態を '執筆中' に更新して、更新日も今日の日付に変更してください"
+```
+
+**自動化の効果**:
+- 企画から公開までの透明性向上
+- 複数記事の並行管理
+- 品質の一貫性確保
+- 作業履歴の追跡可能性
+
+### 公開ワークフローの違い
+
+#### Articles（記事）の場合
+```bash
+# ローカルで執筆・プレビュー
+npx zenn preview
+
+# 完成後、手動でコピー&ペースト
+cat articles/[article-id].md  # 内容をコピー
+# → Zenn.dev で新規記事作成 → ペースト → 公開
+```
+
+#### Books（本）の場合  
+```bash
+# ローカルで執筆・プレビュー
+npx zenn preview
+
+# GitHubにpushで自動同期
+git add .
+git commit -m "Update book content"
+git push  # → 自動的にZenn.devに同期
+```
+
+:::message alert
+**重要**: ArticlesはGitHub連携ができないため、手動でのコピー&ペーストが必要です。Booksのみ自動同期に対応しています。
+:::
+
+## 画像ファイルの管理
+
+### ディレクトリ構造
+
+```
+/
+├── images/             # 画像ファイル用ディレクトリ
+│   ├── articles/       # 記事用画像
+│   │   ├── article1/   # 記事ごとのサブディレクトリ
+│   │   └── article2/
+│   └── books/          # ブック用画像
+│       ├── book1/      # ブックごとのサブディレクトリ
+│       └── book2/
+├── articles/
+├── books/
+└── ...
+```
+
+### 画像ファイルの追加手順
+
+#### 1. 画像ディレクトリの作成
+
+```bash
+# 記事用画像ディレクトリ作成
+mkdir -p images/articles/[記事ID]
+
+# ブック用画像ディレクトリ作成  
+mkdir -p images/books/[ブックID]
+```
+
+#### 2. 画像ファイルの配置
+
+```bash
+# 画像ファイルをコピー
+cp /path/to/image.png images/articles/[記事ID]/
+cp /path/to/diagram.jpg images/books/[ブックID]/
+
+# または直接作成
+# スクリーンショット、図表作成ツールから直接保存
+```
+
+#### 3. Markdownでの参照
+
+**記事（Articles）の場合**:
+```markdown
+# 相対パス（ローカルプレビュー用）
+![説明文](../images/articles/[記事ID]/image.png)
+
+# Zenn.dev での画像アップロード
+# 1. ローカル画像を確認
+# 2. Zenn.dev 記事エディタで画像アップロード
+# 3. 生成されたURLに置き換え
+![説明文](https://storage.googleapis.com/zenn-user-upload/...)
+```
+
+**ブック（Books）の場合**:
+```markdown
+# 相対パス（GitHub連携で自動同期）
+![説明文](../images/books/[ブックID]/diagram.png)
+```
+
+### 画像最適化のベストプラクティス
+
+#### ファイル形式の選択
+- **PNG**: スクリーンショット、UI画像、透明背景が必要な場合
+- **JPG**: 写真、グラデーション、ファイルサイズを抑えたい場合
+- **SVG**: ロゴ、アイコン、ベクター図形
+- **WebP**: 高品質かつ軽量（対応ブラウザ確認要）
+
+#### ファイルサイズ最適化
+```bash
+# ImageMagick を使用した圧縮例
+convert input.png -quality 85 -strip output.png
+convert input.jpg -quality 80 -strip output.jpg
+
+# 一括リサイズ
+mogrify -resize 800x600 images/articles/[記事ID]/*.png
+```
+
+#### 命名規則
+```
+# 推奨命名パターン
+[記事ID]_[連番]_[説明].png
+05f48881652ef8_01_setup-screen.png
+05f48881652ef8_02_result-comparison.png
+
+# または
+[記事ID]_[セクション]_[説明].png
+05f48881652ef8_environment_vscode-setup.png
+05f48881652ef8_demo_article-creation.png
+```
+
+### Claude Code での画像管理
+
+#### 画像追加の自動化
+
+```bash
+# Claude Code起動
+claude
+
+# 画像追加の依頼例
+# "新しい記事 '05f48881652ef8' にスクリーンショット 'setup-screen.png' を追加したいです。
+#  適切なディレクトリ構造を作成して、Markdownでの参照方法を教えてください。"
+```
+
+#### 画像付き記事の品質チェック
+
+```
+Human: この記事の画像について以下をチェックしてください：
+1. 画像パスの正確性
+2. alt テキストの適切性
+3. ファイルサイズの最適化提案
+4. 画像配置の改善案
+```
+
+### Articles と Books での違い
+
+#### Articles（記事）の場合
+- **ローカル**: 相対パスで画像参照
+- **Zenn.dev**: 手動で画像アップロード → URLに置き換え
+- **管理**: GitHubで履歴管理、Zenn.devで表示
+
+#### Books（本）の場合
+- **ローカル**: 相対パスで画像参照
+- **Zenn.dev**: GitHub連携により自動同期
+- **管理**: GitHubで完全管理
+
+:::message
+画像ファイルはGitでのバージョン管理対象となるため、適切なサイズに最適化してからコミットすることを推奨します。
+:::
+
+## 確認コマンド
+
+```bash
+# 記事一覧の確認
+npx zenn list:articles
+
+# ブック一覧の確認  
+npx zenn list:books
+```
+
+## ファイル構造
+
+```
+/
+├── articles/           # 記事ファイル（単一 .md ファイル）
+│   └── 05f48881652ef8.md
+├── books/             # ブックディレクトリ（フォルダ構造）
+├── INDEX.md           # このファイル（コンテンツ管理）
+├── CLAUDE.md          # Claude Code用のプロジェクトガイド
+├── package.json       # npm設定
+└── node_modules/      # 依存関係
+```

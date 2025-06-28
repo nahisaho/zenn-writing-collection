@@ -1,0 +1,23 @@
+{
+  "name": "zenn.dev",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hisahonakata/zenn.dev.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hisahonakata/zenn.dev/issues"
+  },
+  "homepage": "https://github.com/hisahonakata/zenn.dev#readme",
+  "description": "",
+  "dependencies": {
+    "zenn-cli": "^0.1.162"
+  }
+}
