@@ -33,25 +33,25 @@ title: "第1章: なぜ今、AIペアプロで記事を書くのか"
 
 ```mermaid
 graph TB
-    subgraph "Local Environment"
+    subgraph LocalEnv["Local Environment"]
         A[Claude Code] --> B[Zenn CLI]
         B --> C[Local Preview]
         A --> D[Git]
         A --> E[Node.js]
     end
     
-    subgraph "Cloud Services"
+    subgraph CloudServices["Cloud Services"]
         F[GitHub Repository]
         G[Zenn.dev Platform]
     end
     
-    subgraph "User Interface"
+    subgraph UserInterface["User Interface"]
         H[VSCode + Claude Extension]
         I[Terminal]
         J[Web Browser]
     end
     
-    subgraph "Content Flow"
+    subgraph ContentFlow["Content Flow"]
         K[Write Content] --> L[Preview Locally]
         L --> M[Git Commit]
         M --> N[Push to GitHub]
@@ -67,9 +67,13 @@ graph TB
     H -.->|Primary Interface| A
     I -.->|Terminal Access| A
     
-    style A fill:#ff9999
-    style F fill:#99ff99
-    style G fill:#ffcc99
+    classDef aiTool fill:#ff9999
+    classDef gitTool fill:#99ff99
+    classDef zennTool fill:#ffcc99
+    
+    class A aiTool
+    class F gitTool
+    class G zennTool
 ```
 
 ## Claude Code × GitHub × Zennワークフローの威力
