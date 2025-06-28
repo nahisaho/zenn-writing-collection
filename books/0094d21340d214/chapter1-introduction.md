@@ -27,55 +27,6 @@ title: "第1章: なぜ今、AIペアプロで記事を書くのか"
 
 この記事では、これらの課題を**Claude Code**、**GitHub**、**Zenn**の組み合わせで解決する方法を紹介します。実際に筆者がClaude Codeを使ってこの記事自体を執筆しながら、その驚くべき効率性をお見せします。
 
-## システム構成図
-
-以下が本記事で紹介する技術記事執筆環境の全体像です。
-
-```mermaid
-graph TB
-    subgraph LocalEnv["Local Environment"]
-        A[Claude Code] --> B[Zenn CLI]
-        B --> C[Local Preview]
-        A --> D[Git]
-        A --> E[Node.js]
-    end
-
-    subgraph CloudServices["Cloud Services"]
-        F[GitHub Repository]
-        G[Zenn.dev Platform]
-    end
-
-    subgraph UserInterface["User Interface"]
-        H[VSCode + Claude Extension]
-        I[Terminal]
-        J[Web Browser]
-    end
-
-    subgraph ContentFlow["Content Flow"]
-        K[Write Content] --> L[Preview Locally]
-        L --> M[Git Commit]
-        M --> N[Push to GitHub]
-        N --> O[Sync to Zenn]
-    end
-
-    A -.->|AI Assistance| K
-    B --> L
-    D --> M
-    F --> N
-    F -.->|Manual Sync| G
-    C --> J
-    H -.->|Primary Interface| A
-    I -.->|Terminal Access| A
-
-    classDef aiTool fill:#ff9999
-    classDef gitTool fill:#99ff99
-    classDef zennTool fill:#ffcc99
-
-    class A aiTool
-    class F gitTool
-    class G zennTool
-```
-
 
 ## Claude Code × GitHub × Zennワークフローの威力
 
