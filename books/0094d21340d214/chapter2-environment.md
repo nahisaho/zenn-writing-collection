@@ -371,7 +371,7 @@ npx zenn preview
 - [ ] Claude Code CLI版がインストールされている（`claude --version`で確認）
 - [ ] または Claude Code VSCode拡張機能がインストールされている
 - [ ] Claude Codeの認証が完了している
-- [ ] Microsoft Learn MCP Serverが利用可能（Claude Code組み込み）
+- [ ] Microsoft Learn MCP Serverを追加（オプション）
 - [ ] GitHubリポジトリが作成されている
 - [ ] リポジトリがローカルにクローンされている
 - [ ] CLAUDE.mdファイルが作成されている

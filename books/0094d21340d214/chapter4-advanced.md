@@ -38,13 +38,15 @@ npx zenn new:book
 ```
 Human: books/1234567890abcd/ 内にドラフト概要ファイルを作成してください。
 テーマ: 「React Server Componentsの実践ガイド」
+このドラフトファイルはZennにはアップロードされず、ローカルでの作業指針として使用します。
 ```
 
-Claude Codeが以下のドラフトファイルを作成します。
+Claude Codeが以下のドラフトファイルを作成します（このファイルはZennには公開されません）。
 
 ```markdown
 # books/1234567890abcd/DRAFT.md
 # [Draft] React Server Componentsの実践ガイド
+# ※このファイルはZennには公開されません。ローカルでの作業指針として使用します。
 
 ## 本のタイトル
 React Server Componentsの実践ガイド：Next.js 14で学ぶ現代的なReact開発
@@ -178,6 +180,7 @@ npx zenn new:book
 ```markdown
 # books/0094d21340d214/DRAFT.md
 # [Draft] AIペアプロで爆速執筆！Claude Code × GitHub × Zennの最強タッグ
+# ※このファイルはZennには公開されません。ローカルでの作業指針として使用します。
 
 ## 本のタイトル
 AIペアプロで爆速執筆！Claude Code × GitHub × Zennの最強タッグ
@@ -236,6 +239,7 @@ chapters:
 ```markdown
 # DRAFT.md
 # [Draft] {本のタイトル}
+# ※このファイルはZennには公開されません。ローカルでの作業指針として使用します。
 
 ## 本のタイトル
 {正式なタイトル}
@@ -394,33 +398,41 @@ Microsoft Learn Docs MCP Serverは、Microsoft公式ドキュメントへのリ�
 
 ### Claude Codeへの追加方法
 
-Microsoft Learn Docs MCP Serverは、Claude Codeに組み込まれているため、特別な設定は不要です。Claude Codeを使用する際に自動的に利用可能になります。
+Microsoft Learn Docs MCP Serverは、手動で追加する必要があります。以下の手順で設定します。
 
-#### 自動統合されたMCP Server
+#### MCP Serverの手動追加
 
-Claude Codeの最新版では、Microsoft Learn Docs MCP Serverが標準で統合されています。
+1. **MCPサーバーの追加コマンド**
 
 ```bash
-# Claude Codeを起動するだけで利用可能
-claude
-# Microsoft公式ドキュメントへのアクセス機能が自動で有効化
+# Claude CodeにMicrosoft Learn Docs MCPサーバーを追加
+claude mcp add @microsoft/docs https://learn.microsoft.com/api/mcp
 ```
 
-この統合により、Claude CodeがMicrosoft公式ドキュメントにリアルタイムでアクセスできるようになります。
+2. **設定の確認**
+
+```bash
+# 追加されたMCPサーバーの確認
+claude mcp list
+```
+
+3. **設定完了後**
+
+設定が完了すると、Claude CodeがMicrosoft公式ドキュメントにリアルタイムでアクセスできるようになります。
 
 #### 使用方法
 
-統合されたMicrosoft Learn MCP Serverは、Claude Code内で以下のように自然に使用できます。
+MCP Serverを追加した後は、Claude Code内で以下のように使用できます：
 
 ```
-# Microsoft製品に関する質問をすると自動で公式ドキュメントを参照
-Azure Functionsの最新のベストプラクティスについて解説してください
+# @microsoft/docs を明示的に指定
+@microsoft/docs Azure Functionsの最新のベストプラクティスについて解説してください
 
-# 具体的な技術情報を求める際も自動でアクセス
+# または通常の質問でMicrosoft製品について聞くと自動で参照
 Microsoft Graph APIの認証方法について、最新の手順を教えてください
 ```
 
-Claude Codeが自動的に最も関連性の高いMicrosoft公式ドキュメントから情報を取得し、回答に反映します。
+設定済みのMCP Serverにより、Claude Codeが最も関連性の高いMicrosoft公式ドキュメントから情報を取得し、回答に反映します。
 
 **利点**
 - **エンタープライズセキュリティ**: セキュアな接続で公式ドキュメントにアクセス
@@ -672,7 +684,7 @@ Human: この記事の読みやすさを向上させたいです。
 - 視覚的要素の配置アドバイス  
 - 読者体験の改善点
 - Zenn特有のMarkdown記法活用
-- **Mermaid図表の提案**: Zenn.devのmermaid.js 8.10.x準拠形式での図表作成
+- **Mermaid図表の提案**: Zenn.devのmermaid.js 11.1.1準拠形式での図表作成
 
 ### パフォーマンス最適化
 
@@ -734,7 +746,7 @@ Claude Codeは画像の最適化提案（ファイルサイズ、形式選択、
 
 ### Mermaid図表の効果的な活用
 
-Zenn.devではmermaid.js 8.10.x形式の図表が利用できます。Claude Codeは適切な記法で図表を自動生成できます。
+Zenn.devではmermaid.js 11.1.1形式(2025年6月時点)の図表が利用できます。Claude Codeは適切な記法で図表を自動生成できます。
 
 #### Claude Codeによる図表生成例
 
@@ -743,7 +755,7 @@ Human: システム構成を説明するmermaid図を作成してください。
 Zenn.dev形式に準拠した記法でお願いします。
 ```
 
-Claude Codeが自動で生成する8.10.x準拠の図表：
+Claude Codeが自動で生成する11.1.1準拠の図表：
 
 ```mermaid
 graph TB
