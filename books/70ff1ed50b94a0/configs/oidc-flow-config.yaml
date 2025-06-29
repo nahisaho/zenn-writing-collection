@@ -1,0 +1,37 @@
+# OpenID Connect Flow Configuration
+# From Chapter 4 - Authentication flow selection guidelines
+
+recommended_flows:
+  authorization_code_with_pkce:
+    applicable_to:
+      - single_page_applications
+      - mobile_applications
+      - new_web_applications
+    benefits:
+      - most_secure_authentication_flow
+      - supports_public_clients
+      - protection_against_code_interception_attacks
+    settings:
+      response_type: "code"
+      code_challenge_method: "S256"
+      grant_type: "authorization_code"
+
+  standard_authorization_code:
+    applicable_to:
+      - server_side_web_applications
+      - confidential_clients
+    benefits:
+      - strong_authentication_with_client_secret
+      - server_side_token_management
+    settings:
+      response_type: "code"
+      grant_type: "authorization_code"
+      client_authentication: "client_secret"
+
+  deprecated_implicit_flow:
+    status: "deprecated"
+    reasons:
+      - high_security_risks
+      - token_exposure_in_url_fragment
+      - no_refresh_token_support
+    alternative: "authorization_code_with_pkce"

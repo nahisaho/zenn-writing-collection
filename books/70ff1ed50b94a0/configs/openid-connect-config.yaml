@@ -1,0 +1,13 @@
+# OpenID Connect Configuration
+# From Chapter 1 - OpenID Connect application settings
+
+application_id: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+redirect_uri: https://your-app.com/callback
+supported_accounts: # シングルテナント/マルチテナント
+implicit_grant:
+  id_token: true
+  access_token: false
+api_permissions:
+  microsoft_graph:
+    - User.Read
+    - Mail.Read

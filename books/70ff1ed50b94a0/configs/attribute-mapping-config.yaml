@@ -1,0 +1,26 @@
+# SAML Attribute Mapping Configuration
+# From Chapter 3 - Claims and attribute mapping
+
+default_attributes:
+  name_id:
+    value: user.userprincipalname
+    format: "urn:oasis:names:tc:SAML:2.0:nameid-format:persistent"
+
+  basic_attributes:
+    - claim: "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress"
+      source: user.mail
+    - claim: "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/givenname"
+      source: user.givenname
+    - claim: "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/surname"
+      source: user.surname
+    - claim: "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name"
+      source: user.displayname
+
+# Japanese localization mapping
+japanese_mapping:
+  surname: user.surname  # 姓
+  given_name: user.givenname  # 名
+  department: user.department  # 部署
+  job_title: user.jobtitle  # 役職
+  employee_id: user.employeeid  # 従業員ID
+  phone_number: user.telephonenumber  # 電話番号

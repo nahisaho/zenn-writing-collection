@@ -6,6 +6,10 @@ title: "第1章：Microsoft Entra ID とシングルサインオン（SSO）の�
 
 本章では、Microsoft Entra IDとシングルサインオン（SSO）の基本概念から、実装に必要な認証プロトコルの選択方法まで、SSO開発の土台となる知識を体系的に解説します。
 
+> 💡 **実装サンプル**: 本書で解説する全ての実装例とサンプルコードは、GitHubリポジトリで公開しています。  
+> 📁 **GitHub**: [entra-id-sso-samples](https://github.com/nahisaho/entra-id-sso-samples)  
+> 実際のコードを参照しながら学習を進めてください。
+
 ## 1.1 Microsoft Entra ID（旧Azure AD）とは
 
 ### Microsoft Entra IDの概要
@@ -62,11 +66,22 @@ Microsoft Entra IDは、以下のような特徴を持っています。
 
 シングルサインオン（SSO）は、ユーザーが一度の認証で複数のアプリケーションやサービスにアクセスできるようにする仕組みです。
 
-```
-[ユーザー] → [認証] → [Microsoft Entra ID] → [トークン発行]
-                                ↓
-                        [アプリA] [アプリB] [アプリC]
-                        （すべてにアクセス可能）
+```mermaid
+graph TB
+    User[ユーザー] --> Auth[認証]
+    Auth --> EntraID[Microsoft Entra ID]
+    EntraID --> Token[トークン発行]
+    Token --> AppA[アプリA]
+    Token --> AppB[アプリB] 
+    Token --> AppC[アプリC]
+    
+    classDef userClass fill:#e1f5fe
+    classDef authClass fill:#f3e5f5
+    classDef appClass fill:#e8f5e8
+    
+    class User userClass
+    class Auth,EntraID,Token authClass
+    class AppA,AppB,AppC appClass
 ```
 
 ### SSOの動作原理
@@ -99,18 +114,39 @@ Microsoft Entra IDは、以下のような特徴を持っています。
 - ユーザーがIdP（Microsoft Entra ID）のポータルからアプリにアクセス
 - 企業ポータルからの利用に適している
 
+```mermaid
+graph LR
+    User[ユーザー] --> Portal[Microsoft Entra ID<br/>ポータル]
+    Portal --> Auth[認証済み]
+    Auth --> AppA[アプリA]
+    Auth --> AppB[アプリB]
+    Auth --> AppC[アプリC]
+    
+    classDef userClass fill:#e1f5fe
+    classDef idpClass fill:#f3e5f5
+    classDef appClass fill:#e8f5e8
+    
+    class User userClass
+    class Portal,Auth idpClass
+    class AppA,AppB,AppC appClass
+```
+
 **2. SP-Initiated SSO**
 - ユーザーがサービスプロバイダー（アプリ）から認証を開始
 - 直接アプリケーションURLにアクセスする場合に使用
 
-```
-# SP-Initiated SSOの流れ
-1. ユーザー → アプリケーション
-2. アプリケーション → Microsoft Entra ID（認証要求）
-3. Microsoft Entra ID → ユーザー（認証画面）
-4. ユーザー → Microsoft Entra ID（認証情報）
-5. Microsoft Entra ID → アプリケーション（トークン）
-6. アプリケーション → ユーザー（アクセス許可）
+```mermaid
+sequenceDiagram
+    participant User as ユーザー
+    participant App as アプリケーション
+    participant EntraID as Microsoft Entra ID
+    
+    User->>App: 1. アクセス要求
+    App->>EntraID: 2. 認証要求
+    EntraID->>User: 3. 認証画面表示
+    User->>EntraID: 4. 認証情報入力
+    EntraID->>App: 5. トークン送信
+    App->>User: 6. アクセス許可
 ```
 
 ## 1.3 認証プロトコルの比較（SAML、OAuth 2.0、OpenID Connect）
@@ -146,7 +182,11 @@ Microsoft Entra IDは、以下のような特徴を持っています。
 
 ### 使用シナリオ別の推奨プロトコル
 
-**SAML 2.0を選ぶべき場合**
+認証プロトコルの選択は、アプリケーションの特性、技術的要件、運用環境によって決定されます。以下では、具体的なシナリオと技術的考慮事項を詳しく解説します。
+
+#### SAML 2.0を選ぶべき場合
+
+**適用シナリオ**
 ```
 ✓ レガシーエンタープライズアプリケーションとの統合
 ✓ 既存のSAML実装がある環境
@@ -154,31 +194,125 @@ Microsoft Entra IDは、以下のような特徴を持っています。
 ✓ XML署名による強固なセキュリティが要求される
 ```
 
-**OAuth 2.0を選ぶべき場合**
+**詳細な選択理由と技術的背景**
+
+**1. エンタープライズ環境での実績**
+- **実績**: 15年以上のエンタープライズ導入実績
+- **対象**: ERP（SAP、Oracle）、CRM（Salesforce）、人事システム等
+- **メリット**: 企業の既存投資を活用しながら段階的なクラウド移行が可能
+
+**2. 高度な属性マッピング機能**
+- **複雑な組織構造への対応**: 部署階層、役職レベル、地域別権限など
+- **属性変換**: LDAP属性からアプリケーション固有属性への柔軟な変換
+- **条件付き属性送信**: ユーザーの所属や役割に応じた動的な属性制御
+
+**3. セキュリティ要件**
+- **XML署名・暗号化**: メッセージレベルでの改ざん防止と盗聴対策
+- **アサーション有効期限**: 細かな時間制御によるセキュリティ向上
+- **監査要件**: 金融・医療業界での厳格なログ要件に対応
+
+**具体的な導入例**
+- **大手製造業**: 全社ERP統合での部門別アクセス制御
+- **金融機関**: 勘定系システムとの統合における厳格な監査ログ
+- **教育機関**: 学務システムと学習管理システムの連携
+
+#### OAuth 2.0を選ぶべき場合
+
+**適用シナリオ**
 ```
 ✓ API認可のみが必要（ユーザー認証は不要）
 ✓ サードパーティAPIへのアクセス制御
 ✓ マイクロサービス間の認可
+✓ リソースサーバーへの細かなスコープ制御
 ```
 
-**OpenID Connectを選ぶべき場合**
+**詳細な選択理由と技術的背景**
+
+**1. APIファーストアーキテクチャ**
+- **目的**: リソースアクセスの認可に特化
+- **適用例**: REST API、GraphQL API、マイクロサービス間通信
+- **技術的優位性**: HTTPベースの軽量プロトコルでスケーラビリティが高い
+
+**2. 細かなスコープ制御**
+- **リソースレベル制御**: `/api/users/read`, `/api/orders/write` などの細かな権限
+- **時間制限付きアクセス**: 短時間のトークンでセキュリティリスクを最小化
+- **クライアント種別対応**: コンフィデンシャル/パブリッククライアントの区別
+
+**3. サードパーティ統合**
+- **外部サービス連携**: GitHub、Google Drive、Slack等のAPI利用
+- **開発者エコシステム**: OAuth 2.0対応のライブラリが豊富
+- **標準化のメリット**: RFC 6749準拠による相互運用性
+
+**具体的な導入例**
+- **SaaSプラットフォーム**: 顧客向けAPI提供での権限管理
+- **モバイルバックエンド**: iOS/Androidアプリからのサーバーリソースアクセス
+- **マイクロサービス**: サービス間認可でのスコープベース制御
+
+#### OpenID Connectを選ぶべき場合
+
+**適用シナリオ**
 ```
 ✓ 新規のWebアプリケーション開発
 ✓ モバイルアプリケーション
 ✓ シングルページアプリケーション（SPA）
 ✓ RESTful APIとの統合
+✓ ソーシャルログインとの連携
 ```
+
+**詳細な選択理由と技術的背景**
+
+**1. モダンWebアプリケーションの標準**
+- **技術的優位性**: OAuth 2.0の認可 + OpenID Connectの認証
+- **開発効率**: 標準ライブラリ（MSAL.js、passport-azure-ad等）の充実
+- **ユーザー体験**: シームレスなリダイレクトベース認証
+
+**2. モバイル・SPA対応**
+- **PKCE（Proof Key for Code Exchange）**: パブリッククライアントでの安全な認証
+- **トークンライフサイクル**: Access Token + Refresh Tokenによる継続的なアクセス
+- **ネイティブアプリ**: iOS/Android SDKとの親和性
+
+**3. マルチプラットフォーム対応**
+- **クロスプラットフォーム**: Web、モバイル、デスクトップアプリケーションで統一
+- **IDトークン標準**: JWT形式によるユーザー情報の標準化
+- **拡張性**: カスタムクレームによる柔軟な認証情報管理
+
+**具体的な導入例**
+- **スタートアップSaaS**: 高速開発での早期市場投入
+- **マルチテナントアプリ**: B2B SaaSでの顧客組織別認証
+- **ハイブリッドアプリ**: React Native、Xamarinでのクロスプラットフォーム開発
+
+#### 選択時の技術的考慮事項
+
+**セキュリティ要件による選択**
+- **最高レベル**: SAML 2.0（XML署名・暗号化）
+- **標準レベル**: OpenID Connect（JWT署名、HTTPS）
+- **API特化**: OAuth 2.0（スコープベース制御）
+
+**実装・運用コストによる選択**
+- **短期開発**: OpenID Connect（1-2週間）
+- **API認可のみ**: OAuth 2.0（1週間）
+- **エンタープライズ統合**: SAML 2.0（2-4週間）
+
+**技術スタック適合性**
+- **レガシーシステム**: SAML 2.0
+- **モダンWeb/モバイル**: OpenID Connect
+- **マイクロサービス**: OAuth 2.0
 
 ### 実装難易度とコスト
 
-```
-実装難易度（低 → 高）
-OpenID Connect < OAuth 2.0 < SAML 2.0
-
-必要な実装工数の目安：
-- OpenID Connect: 1-2週間
-- OAuth 2.0: 1週間（認可のみ）
-- SAML 2.0: 2-4週間
+```mermaid
+graph LR
+    subgraph Difficulty["実装難易度（低 → 高）"]
+        OIDC[OpenID Connect<br/>1-2週間] --> OAuth[OAuth 2.0<br/>1週間<br/>認可のみ] --> SAML[SAML 2.0<br/>2-4週間]
+    end
+    
+    classDef easy fill:#c8e6c9
+    classDef medium fill:#fff3e0
+    classDef hard fill:#ffcdd2
+    
+    class OIDC easy
+    class OAuth medium
+    class SAML hard
 ```
 
 ## 1.4 Microsoft Entra ID でサポートされる SSO 方式

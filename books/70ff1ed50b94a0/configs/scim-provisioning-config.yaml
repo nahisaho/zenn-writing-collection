@@ -1,0 +1,43 @@
+# SCIM Provisioning Configuration
+# From Chapter 6 - User provisioning and synchronization
+
+scim_resource_types:
+  user:
+    description: "ユーザーアカウント情報"
+    attributes:
+      - "基本属性（名前、メール、ユーザー名）"
+      - "拡張属性（部署、役職、マネージャー）"
+  
+  group:
+    description: "グループ情報"
+    attributes:
+      - "メンバーシップ管理"
+      - "ネストされたグループ"
+  
+  schema:
+    description: "リソースの構造定義"
+    attributes:
+      - "属性の型と制約"
+      - "拡張スキーマ"
+
+attribute_mappings:
+  standard_mappings:
+    userPrincipalName: userName
+    mail: "emails[type eq \"work\"].value"
+    displayName: displayName
+    givenName: name.givenName
+    surname: name.familyName
+    jobTitle: title
+    department: department
+    manager: manager
+    accountEnabled: active
+
+  custom_mappings:
+    extensionAttribute1: "urn:ietf:params:scim:schemas:extension:enterprise:2.0:User:employeeNumber"
+    extensionAttribute2: "urn:ietf:params:scim:schemas:extension:enterprise:2.0:User:division"
+
+scope_filters:
+  department_filter:
+    target_attribute_name: "department"
+    operator: "EQUALS"
+    values: ["Engineering", "Product", "Sales"]

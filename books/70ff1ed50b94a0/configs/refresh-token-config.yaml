@@ -1,0 +1,29 @@
+# Refresh Token Management Configuration
+# From Chapter 4 - Token lifecycle and security settings
+
+refresh_token_properties:
+  validity_period: "90日間"  # 90 days default
+  purpose: "アクセストークンの無音更新"  # Silent access token renewal
+  storage_location: "セキュアなストレージ（HttpOnly Cookie等）"  # Secure storage
+  rotation: "使用時に新しいトークンが発行される"  # New token issued on use
+
+token_storage_settings:
+  access_token:
+    storage: session_storage
+    expiry_margin: 300  # 5 minutes before expiry
+  
+  id_token:
+    storage: session_storage
+    validation_required: true
+  
+  refresh_token:
+    storage: http_only_cookie
+    secure: true
+    same_site: strict
+    max_age: 7776000  # 90 days in seconds
+
+security_settings:
+  https_required: true
+  secure_cookies: true
+  token_rotation: true
+  concurrent_session_limit: 5

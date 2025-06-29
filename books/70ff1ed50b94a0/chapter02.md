@@ -6,6 +6,10 @@ title: "第2章：開発環境の構築"
 
 本章では、Microsoft Entra IDとのSSO連携を実装するための開発環境を構築します。テナントの作成から開発ツールのセットアップまで、実際のコード作成に入る前に必要な準備作業をステップバイステップで解説します。
 
+> 💡 **自動化スクリプト**: 本章で解説する環境構築の多くは、GitHubリポジトリの自動化スクリプトで効率化できます。  
+> 📁 **参考ファイル**: [`azure-setup.sh`](https://github.com/nahisaho/entra-id-sso-samples/blob/main/azure-setup.sh)  
+> 🔧 **設定テンプレート**: [`configs/environment-variables.env`](https://github.com/nahisaho/entra-id-sso-samples/blob/main/configs/environment-variables.env)
+
 ## 2.1 Microsoft Entra ID テナントの作成と初期設定
 
 ### テナント作成の準備
@@ -58,6 +62,8 @@ URL: https://portal.azure.com
 ```
 
 ### Step 2: Azure CLIを使った自動化（オプション）
+
+> 💡 **自動化スクリプト**: Azure環境の自動セットアップスクリプトは `src/azure-setup.sh` を参照してください。
 
 ```bash
 # Azure CLIのインストール（Windows）

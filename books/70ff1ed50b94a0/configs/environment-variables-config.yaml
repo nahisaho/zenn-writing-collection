@@ -1,0 +1,30 @@
+# Environment Variables Configuration Template
+# From multiple chapters - Common environment variable settings
+
+microsoft_entra_id:
+  tenant_id: "your-tenant-id-here"
+  client_id: "your-client-id-here"
+  client_secret: "your-client-secret-here"
+
+application_settings:
+  base_url: "https://localhost:3000"
+  redirect_uri: "https://localhost:3000/auth/callback"
+  session_secret: "your-session-secret-here"
+
+scopes:
+  basic: "openid,profile,email,User.Read"
+  extended: "openid,profile,email,User.Read,Mail.Read,Calendars.Read"
+
+saml_specific:
+  idp_cert: |
+    -----BEGIN CERTIFICATE-----
+    MIIDBTCCAe2gAwIBAgIQY4RNIR0dX6dBZggnkhCRoDANBgkqhkiG9w0BAQsFADA7
+    ...
+    -----END CERTIFICATE-----
+  app_url: "https://myapp.example.com"
+
+security_settings:
+  session_timeout: 3600  # 1 hour
+  token_refresh_threshold: 300  # 5 minutes
+  max_login_attempts: 5
+  account_lockout_duration: 900  # 15 minutes

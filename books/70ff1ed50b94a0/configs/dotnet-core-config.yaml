@@ -1,0 +1,22 @@
+# .NET Core Microsoft Identity Configuration
+# From Chapter 4 - appsettings.json for .NET applications
+
+azure_ad:
+  instance: "https://login.microsoftonline.com/"
+  tenant_id: "your-tenant-id"
+  client_id: "your-client-id"
+  client_secret: "your-client-secret"
+  callback_path: "/signin-oidc"
+  signed_out_callback_path: "/signout-callback-oidc"
+
+graph_beta:
+  base_url: "https://graph.microsoft.com/v1.0"
+  scopes: "user.read"
+
+application_settings:
+  require_https: true
+  session_timeout: 1440  # 24 hours in minutes
+  cookie_settings:
+    secure: true
+    same_site: strict
+    http_only: true

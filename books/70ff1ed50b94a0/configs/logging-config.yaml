@@ -1,0 +1,10 @@
+# Logging Configuration for SAML
+# From Chapter 3 - Spring Boot logging settings
+
+logging:
+  level:
+    org.springframework.security.saml: DEBUG
+    org.opensaml: DEBUG
+    PROTOCOL_MESSAGE: DEBUG
+  pattern:
+    console: "%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n"

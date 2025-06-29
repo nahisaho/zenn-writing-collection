@@ -1,0 +1,39 @@
+# Just-In-Time (JIT) Provisioning Configuration
+# From Chapter 6 - JIT provisioning advantages and limitations
+
+jit_provisioning:
+  advantages:
+    - "リアルタイムでのユーザー作成"
+    - "SCIM エンドポイントの実装が不要"
+    - "シンプルな実装で開始可能"
+  
+  limitations:
+    - "初回ログイン時のみ動作"
+    - "バックグラウンドでの一括操作ができない"
+    - "ユーザー削除の自動化が困難"
+
+role_assignment_rules:
+  department_based:
+    Engineering: ["developer"]
+    Product: ["product_manager"]
+    Sales: ["sales_representative"]
+    HR: ["hr_specialist"]
+  
+  title_based:
+    manager_keywords: ["manager", "マネージャー", "部長", "課長"]
+    default_manager_role: "manager"
+  
+  default_roles:
+    - "user"  # All users get this base role
+
+attribute_sync_settings:
+  sync_on_login: true
+  sync_fields:
+    - email
+    - name
+    - department
+    - jobTitle
+    - manager
+  
+  change_detection: true
+  audit_logging: true

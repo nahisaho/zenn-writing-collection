@@ -6,6 +6,10 @@ title: "第10章：コンプライアンスと規制対応"
 
 本章では、Microsoft Entra IDを使用したSSO連携システムにおいて、各種法規制やコンプライアンス要件への対応方法について詳しく解説します。個人情報保護法、GDPR、業界固有の規制要件、そして監査証跡の管理について実践的なアプローチを提供します。
 
+> 💡 **コンプライアンス対応実装**: 本章で解説する規制対応に必要なセキュリティ実装とツールが利用できます。  
+> 🔒 **セキュリティユーティリティ**: [`security-utils.js`](https://github.com/nahisaho/entra-id-sso-samples/blob/main/security-utils.js)  
+> 📁 **全体リポジトリ**: [entra-id-sso-samples](https://github.com/nahisaho/entra-id-sso-samples) - コンプライアンス対応のベストプラクティス実装
+
 ## 10.1 個人情報保護法への対応
 
 ### 日本の個人情報保護法の概要

@@ -1,0 +1,10 @@
+# Spring Boot HTTPS Configuration
+# From Chapter 2 - HTTPS setup for local development
+
+server:
+  port: 8443
+  ssl:
+    enabled: true
+    key-store: classpath:localhost.p12
+    key-store-password: changeit
+    key-store-type: PKCS12

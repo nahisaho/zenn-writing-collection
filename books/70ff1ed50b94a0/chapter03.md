@@ -6,6 +6,11 @@ title: "第3章：SAML 2.0 による SSO 実装"
 
 本章では、SAML 2.0プロトコルを使用してMicrosoft Entra IDとのSSO連携を実装する方法を詳しく解説します。エンタープライズアプリケーションの登録から実際のコード実装まで、実践的な手順を追って説明します。
 
+> 💡 **SAML実装サンプル**: 本章で解説するSAML実装の完全なサンプルコードとツールが利用できます。  
+> 📁 **PHP実装**: [`saml-php-implementation.php`](https://github.com/nahisaho/entra-id-sso-samples/blob/main/saml-php-implementation.php)  
+> 🔧 **SAMLデバッガー**: [`saml-decoder.html`](https://github.com/nahisaho/entra-id-sso-samples/blob/main/saml-decoder.html)  
+> ⚙️ **Spring Boot設定**: [`configs/spring-boot-saml-config.yaml`](https://github.com/nahisaho/entra-id-sso-samples/blob/main/configs/spring-boot-saml-config.yaml)
+
 ## 3.1 SAML 2.0 プロトコルの基礎
 
 ### SAML 2.0の概要
@@ -597,47 +602,19 @@ function validateAssertion(assertion) {
 ### デバッグツールの活用
 
 **1. SAML デバッガーの使用**
-```html
-<!-- SAML応答をデコードするためのHTML -->
-<!DOCTYPE html>
-<html>
-<head>
-    <title>SAML Response Decoder</title>
-</head>
-<body>
-    <form method="post" action="/debug/saml">
-        <textarea name="SAMLResponse" rows="10" cols="80" 
-                  placeholder="Base64エンコードされたSAMLResponseを貼り付けてください"></textarea>
-        <br>
-        <input type="submit" value="デコード">
-    </form>
-    
-    <script>
-        function decodeSAMLResponse(base64Response) {
-            try {
-                const decoded = atob(base64Response);
-                const parser = new DOMParser();
-                const xmlDoc = parser.parseFromString(decoded, "text/xml");
-                
-                // XMLを整形して表示
-                const serializer = new XMLSerializer();
-                const formatted = serializer.serializeToString(xmlDoc);
-                
-                document.getElementById('output').innerHTML = 
-                    '<pre>' + escapeHtml(formatted) + '</pre>';
-            } catch (error) {
-                console.error('デコードエラー:', error);
-            }
-        }
-        
-        function escapeHtml(text) {
-            const div = document.createElement('div');
-            div.textContent = text;
-            return div.innerHTML;
-        }
-    </script>
-</body>
-</html>
+**SAML応答デコーダーツール**
+
+SAMLレスポンスのデバッグには、専用のデコーダーツールを使用します。完全な実装は `src/saml-decoder.html` を参照してください。
+
+このツールの主な機能：
+- Base64エンコードされたSAML応答のデコード
+- XMLの整形表示
+- クライアントサイドでの安全な処理
+- エラーハンドリング
+
+```bash
+# 使用方法
+# src/saml-decoder.htmlをブラウザで開き、SAMLResponseを貼り付けてデコード
 ```
 
 **2. ログ設定**
@@ -992,7 +969,10 @@ app.listen(3000, () => {
 }
 ```
 
-**index.php**
+**index.php** 
+
+> 💡 **参考実装**: 完全なPHP SAML実装は `src/saml-php-implementation.php` を参照してください。
+
 ```php
 <?php
 require_once 'vendor/autoload.php';

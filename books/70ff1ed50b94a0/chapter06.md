@@ -6,6 +6,10 @@ title: "第6章：ユーザープロビジョニングと同期"
 
 本章では、Microsoft Entra IDとアプリケーション間でのユーザープロビジョニングと同期について詳しく解説します。SCIMプロトコルを使用した自動プロビジョニングから、Just-In-Time（JIT）プロビジョニング、ユーザーライフサイクル管理まで、効率的なユーザー管理システムの構築方法を学びます。
 
+> 💡 **ユーザープロビジョニング実装サンプル**: 本章で解説するプロビジョニング機能の実装例が利用できます。  
+> 📁 **JITプロビジョニング**: [`jit-provisioning.js`](https://github.com/nahisaho/entra-id-sso-samples/blob/main/jit-provisioning.js)  
+> 🔄 **属性変換とSCIM対応**: ユーザー作成・更新・属性マッピングの完全な実装例
+
 ## 6.1 SCIM プロトコルによる自動プロビジョニング
 
 ### SCIM（System for Cross-domain Identity Management）の概要
@@ -288,6 +292,8 @@ public class JitProvisioningUserDetailsService implements SAMLUserDetailsService
 ```
 
 ### OpenID Connect での JIT プロビジョニング実装
+
+> 💡 **完全な実装**: JITプロビジョニングの詳細な実装は `src/jit-provisioning.js` を参照してください。
 
 ```javascript
 // Node.js Express での JIT プロビジョニング

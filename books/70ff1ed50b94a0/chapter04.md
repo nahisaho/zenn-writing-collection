@@ -6,6 +6,11 @@ title: "第4章：OpenID Connect による SSO 実装"
 
 本章では、OpenID Connect（OIDC）プロトコルを使用してMicrosoft Entra IDとのSSO連携を実装する方法を詳しく解説します。モダンなWebアプリケーションやSPAに適したOIDCの実装パターンから、実際のコード例まで実践的に説明します。
 
+> 💡 **OpenID Connect実装サンプル**: 本章で解説するOIDC + PKCE実装の完全なサンプルコードが利用できます。  
+> 📁 **JavaScript実装**: [`oidc-pkce-implementation.js`](https://github.com/nahisaho/entra-id-sso-samples/blob/main/oidc-pkce-implementation.js)  
+> ⚙️ **.NET設定**: [`configs/dotnet-oidc-config.yaml`](https://github.com/nahisaho/entra-id-sso-samples/blob/main/configs/dotnet-oidc-config.yaml)  
+> 🔒 **セキュリティユーティリティ**: [`security-utils.js`](https://github.com/nahisaho/entra-id-sso-samples/blob/main/security-utils.js)
+
 ## 4.1 OpenID Connect プロトコルの基礎
 
 ### OpenID Connect の概要
@@ -295,6 +300,8 @@ sequenceDiagram
 ### PKCEの実装
 
 **Step 1: Code Verifier と Code Challenge の生成**
+
+> 💡 **完全な実装**: OpenID Connect with PKCEの詳細な実装は `src/oidc-pkce-implementation.js` を参照してください。
 
 ```javascript
 // PKCE実装例（JavaScript）

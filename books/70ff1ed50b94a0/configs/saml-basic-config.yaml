@@ -1,0 +1,11 @@
+# SAML 2.0 Basic Configuration
+# From Chapter 1 - Basic SAML settings example
+
+entity_id: https://your-app.com/saml
+acs_url: https://your-app.com/saml/acs
+sign_on_url: https://your-app.com/login
+signing_certificate: X.509証明書
+claims_mapping:
+  - user.mail: email
+  - user.displayname: name
+  - user.objectid: uid

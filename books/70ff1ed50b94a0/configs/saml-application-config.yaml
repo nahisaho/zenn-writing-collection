@@ -1,0 +1,23 @@
+# SAML Application Registration Configuration
+# From Chapter 3 - Microsoft Entra ID SAML app settings
+
+basic_saml_settings:
+  identifier_entity_id: "https://myapp.example.com"
+  reply_url_acs: "https://myapp.example.com/saml/acs"
+  sign_on_url: "https://myapp.example.com/login"
+  relay_state: "https://myapp.example.com/dashboard"
+  logout_url: "https://myapp.example.com/saml/logout"
+
+# Environment-specific URLs
+environments:
+  development:
+    acs_url: "https://dev.myapp.com/saml/acs"
+    entity_id: "https://dev.myapp.com"
+
+  staging:
+    acs_url: "https://staging.myapp.com/saml/acs"
+    entity_id: "https://staging.myapp.com"
+
+  production:
+    acs_url: "https://myapp.com/saml/acs"
+    entity_id: "https://myapp.com"

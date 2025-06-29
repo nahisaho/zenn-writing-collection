@@ -1,0 +1,18 @@
+# Certificate Management Configuration
+# From Chapter 3 - Certificate lifecycle management
+
+certificate_schedule:
+  creation: "本番運用開始の30日前"  # 30 days before production
+  notification: "期限切れの90日前にアラート"  # Alert 90 days before expiry
+  renewal: "期限切れの30日前に新証明書に交換"  # Renew 30 days before expiry
+  deletion: "旧証明書は更新後30日で削除"  # Delete old certificate 30 days after renewal
+
+certificate_settings:
+  algorithm: RSA
+  key_size: 2048
+  validity_days: 365
+  country: JP
+  state: Tokyo
+  locality: Tokyo
+  organization: MyCompany
+  common_name: myapp.example.com

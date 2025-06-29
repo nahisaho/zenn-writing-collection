@@ -1,0 +1,39 @@
+# Test User Configuration
+# From Chapter 2 - Test user setup
+
+users:
+  user_1:
+    username: alice.developer@dev-sso-integration.onmicrosoft.com
+    display_name: Alice Developer
+    surname: Developer
+    given_name: Alice
+    job_title: Software Engineer
+    department: Engineering
+
+  user_2:
+    username: bob.manager@dev-sso-integration.onmicrosoft.com
+    display_name: Bob Manager
+    surname: Manager
+    given_name: Bob
+    job_title: Project Manager
+    department: Product
+
+# Security Groups
+groups:
+  group_1:
+    name: "SSO-Developers"
+    description: "SSO実装開発者グループ"
+    type: security
+    membership: assigned
+
+  group_2:
+    name: "SSO-Testers"
+    description: "SSOテストユーザーグループ"
+    type: security
+    membership: assigned
+
+  group_3:
+    name: "SSO-External-Users"
+    description: "外部ユーザー向けSSOグループ"
+    type: security
+    membership: assigned

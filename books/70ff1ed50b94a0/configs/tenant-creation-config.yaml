@@ -1,0 +1,13 @@
+# Microsoft Entra ID Tenant Creation Configuration
+# From Chapter 2 - Tenant creation settings
+
+organization_name: "Development SSO Integration"
+initial_domain_name: "dev-sso-integration"  # 一意である必要あり
+country_region: "日本"
+
+# Security settings
+security_settings:
+  multi_factor_authentication: true  # 管理者アカウントで有効化（必須）
+  security_defaults: true
+  password_policy: strong_password_required
+  signin_logging: true  # 監査用

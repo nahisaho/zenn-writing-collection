@@ -14,7 +14,7 @@
 |---------------|---------|------|--------|--------|
 | 0094d21340d214/ | AIペアプロで爆速執筆！Claude Code × GitHub × Zennの最強タッグ | 公開済み | 2025-06-28 | 2025-06-28 |
 | 61c375d444c12a/ | 教師と管理者のための Microsoft 365 完全導入マニュアル | 執筆中 | 2025-06-28 | 2025-06-28 |
-| 70ff1ed50b94a0/ | Microsoft Entra IDとの認証連携 - SSO実装パターン完全ガイド | 執筆中 | 2025-06-28 | 2025-06-29 |
+| 70ff1ed50b94a0/ | Microsoft Entra IDとの認証連携 - SSO実装パターン完全ガイド | 執筆中<br/>📁 [GitHub: entra-id-sso-samples](https://github.com/nahisaho/entra-id-sso-samples) | 2025-06-28 | 2025-06-29 |
 | 8a95596f59aced/ | AI時代のプレゼン革命！Presentation Zen原則に基づく自動プレゼンテーション作成ツール 'PrezenX' | 執筆中 | 2025-06-28 | 2025-06-28 |
 
 ---
