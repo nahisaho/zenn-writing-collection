@@ -298,7 +298,59 @@ echo "node_modules/" > .gitignore
 # Zennの必要なディレクトリ構造を作成
 npx zenn init
 
-# CLAUDE.mdファイルを作成（次ページ参照）
+# CLAUDE.mdファイルを作成（プロジェクト指示用）
+# INDEX.mdファイルを作成（コンテンツ管理用）
+```
+
+### CLAUDE.mdとINDEX.mdの作成
+
+このプロジェクトガイドファイルは、Claude Codeがより効果的に動作するために重要です。
+
+```bash
+# CLAUDE.md作成（基本テンプレート）
+cat > CLAUDE.md << 'EOF'
+# CLAUDE.md
+
+This file provides guidance to Claude Code when working with this Zenn content repository.
+
+## Repository Overview
+This is a Zenn.dev content management repository using Zenn CLI.
+
+## Common Commands
+- `npx zenn new:book` - Create a new book
+- `npx zenn new:article` - Create a new article
+- `npx zenn preview` - Start preview server
+- `npx zenn list:books` - List all books
+
+## Development Workflow
+1. Install dependencies: \`npm install\`
+2. **Create draft file**: Before creating Zenn files, create a draft file with book outline
+   - Include book title, summary, target audience, and table of contents
+   - This file is not uploaded to Zenn (local work only)
+3. Create books using: \`npx zenn new:book\`
+4. **IMPORTANT**: Always update INDEX.md when creating new content
+5. Edit markdown files in /books/
+6. Preview changes: \`npx zenn preview\`
+
+## Important Notes
+- Books support GitHub integration (auto-sync)
+- Articles require manual copy-paste to Zenn.dev
+- Always update INDEX.md when creating new content
+- Markdown files have 50,000 character limit
+EOF
+
+# INDEX.md作成（コンテンツ管理用）
+cat > INDEX.md << 'EOF'
+# INDEX.md - コンテンツ管理
+
+## Books
+| Directory Name | Title | Status | Created | Updated |
+|---------------|-------|--------|---------|---------|
+
+## Articles
+| File Name | Title | Status | Created | Updated |
+|-----------|-------|--------|---------|---------|
+EOF
 ```
 
 ## Step 10: プレビュー環境の確認
@@ -319,7 +371,9 @@ npx zenn preview
 - [ ] Claude Code CLI版がインストールされている（`claude --version`で確認）
 - [ ] または Claude Code VSCode拡張機能がインストールされている
 - [ ] Claude Codeの認証が完了している
+- [ ] Microsoft Learn MCP Serverが利用可能（Claude Code組み込み）
 - [ ] GitHubリポジトリが作成されている
 - [ ] リポジトリがローカルにクローンされている
 - [ ] CLAUDE.mdファイルが作成されている
+- [ ] INDEX.mdファイルが作成されている
 - [ ] プレビューサーバーが起動できる

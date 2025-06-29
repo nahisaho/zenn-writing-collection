@@ -71,9 +71,10 @@ Claude Codeは、Anthropic社が提供するAIペアプログラミングツー�
 Zennは、エンジニアのための情報共有プラットフォームです。
 
 - **Markdown形式**：エンジニアに馴染み深い記法で執筆
-- **GitHub連携**：記事をリポジトリで管理可能
+- **GitHub連携**：記事をリポジトリで管理可能（Booksのみ）
 - **プレビュー機能**：ローカルで見た目を確認しながら執筆
 - **収益化**：有料記事・Bookの販売も可能
+- **文字数制限**：Markdownファイルは最大50,000文字
 
 ### システム構成図
 
@@ -81,7 +82,7 @@ Zennは、エンジニアのための情報共有プラットフォームです�
 
 ```mermaid
 graph TB
-    subgraph local["ローカル開発環境"]
+    subgraph LocalEnv["ローカル開発環境"]
         A[エンジニア] -->|執筆依頼| B[Claude Code]
         B -->|コンテンツ生成| C[Markdown記事]
         A -->|編集・確認| D[VSCode]
@@ -90,19 +91,19 @@ graph TB
         B <-->|公式ドキュメント<br/>参照| L[Microsoft Learn<br/>MCP Server]
     end
     
-    subgraph github["GitHub"]
+    subgraph GitHubSys["GitHub"]
         F[リポジトリ]
         G[ブランチ管理]
         H[Issue管理]
         I[Pull Request]
     end
     
-    subgraph zenn["Zenn.dev"]
+    subgraph ZennSys["Zenn.dev"]
         J[公開記事]
         K[読者]
     end
     
-    subgraph microsoft["Microsoft Learn"]
+    subgraph MicrosoftSys["Microsoft Learn"]
         M[Azure Docs]
         N[Microsoft 365 Docs]
         O[Microsoft Learn]
