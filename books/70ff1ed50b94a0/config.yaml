@@ -1,0 +1,25 @@
+title: "Microsoft Entra IDとの認証連携 - SSO実装パターン完全ガイド"
+summary: |
+  本書は、Microsoft Entra ID（旧 Azure Active Directory）を使用してシングルサインオン（SSO）システムを開発するための実践的なガイドブックです。
+  SAML 2.0、OpenID Connect、OAuth 2.0 といった主要な認証プロトコルの実装方法から、セキュリティベストプラクティス、本番環境への展開まで、SSO システム開発に必要なすべての知識を体系的に解説します。
+  各章では具体的なコード例を交えながら、実際の開発プロジェクトで直面する課題とその解決方法を詳しく説明します。
+topics: ["azure", "entraid", "sso", "authentication", "security"]
+published: true
+price: 0 # 有料化する場合は 200〜5000 の間で設定
+chapters:
+  - "introduction"
+  - "chapter01"
+  - "chapter02"
+  - "chapter03"
+  - "chapter04"
+  - "chapter05"
+  - "chapter06"
+  - "chapter07"
+  - "chapter08"
+  - "chapter09"
+  - "chapter10"
+  - "conclusion"
+  - "appendix-glossary"
+  - "appendix-resources"
+  - "license"
+
