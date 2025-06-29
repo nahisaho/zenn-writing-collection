@@ -6,18 +6,37 @@ title: "第4章: より高度な活用テクニック"
 
 効率的なコンテンツ作成では、いきなりZenn記事の執筆を始めるのではなく、まず**概要（Draft）ファイル**を作成することが重要です。この概要はZennにはアップロードせず、ローカルでの作業指針として活用します。
 
-### 推奨ワークフロー：概要作成から始める
+### 推奨ワークフロー：プロジェクト作成→ドラフト→設定更新
 
-#### Step 1: 概要ファイル作成
+#### Step 1: Zennプロジェクトの作成
+
+まず、Zennのbookプロジェクトを作成します。
+
+```bash
+# Zennプロジェクトを作成
+npx zenn new:book
+
+# 出力例
+# created: books/1234567890abcd/
+#   ├── config.yaml
+#   └── example.md
+```
+
+この段階では、自動生成されたconfig.yamlはデフォルト設定のままです。
+
+#### Step 2: ドラフト概要の作成
+
+作成されたbookディレクトリ内で、ドラフト概要ファイルを作成します。
 
 ```
-Human: 新しい技術書の概要を作成してください。
+Human: books/1234567890abcd/ 内にドラフト概要ファイルを作成してください。
 テーマ: 「React Server Componentsの実践ガイド」
 ```
 
-Claude Codeが以下の要素を含む概要ファイルを作成します。
+Claude Codeが以下のドラフトファイルを作成します：
 
 ```markdown
+# books/1234567890abcd/DRAFT.md
 # [Draft] React Server Componentsの実践ガイド
 
 ## 本のタイトル
@@ -45,6 +64,17 @@ Next.js 14を使用して体系的に学べる実践ガイドです。
 7. デプロイメントとプロダクション運用
 8. トラブルシューティング
 
+## 章の構成（config.yaml用）
+chapters:
+  - "chapter01-introduction"
+  - "chapter02-setup"
+  - "chapter03-basic-patterns"
+  - "chapter04-data-state"
+  - "chapter05-performance"
+  - "chapter06-practical-app"
+  - "chapter07-deployment"
+  - "chapter08-troubleshooting"
+
 ## 各章の詳細
 ### 第1章: React Server Componentsとは
 - RSCの基本概念
@@ -56,30 +86,55 @@ Next.js 14を使用して体系的に学べる実践ガイドです。
 （以下、各章の詳細を続ける...）
 ```
 
-#### Step 2: 概要の確認・修正
+#### Step 3: ドラフトの確認・修正
 
 ```
-Human: この概要を確認して、以下の点を調整してください：
+Human: DRAFT.mdを確認して、以下の点を調整してください：
 - 想定読者をより初心者向けに変更
 - 第3章と第4章の内容を統合
 - 実践的なサンプルアプリケーションの章を追加
+- config.yamlのchapters配列も併せて更新
 ```
 
-#### Step 3: Zennプロジェクトの作成
+#### Step 4: config.yamlの更新
 
-概要が確定したら、Zennプロジェクトを作成します。
-
-```bash
-# 概要が完成してからZennプロジェクトを作成
-npx zenn new:book
-
-# 生成されたconfig.yamlを概要に基づいて更新
-```
-
-#### Step 4: 概要を参照した執筆
+ドラフトが確定したら、config.yamlをドラフト内容に基づいて更新します。
 
 ```
-Human: draft-rsc-guide.md の概要を参照して、
+Human: DRAFT.mdの内容を参照して、config.yamlを更新してください。
+タイトル、概要、章構成を反映してください。
+```
+
+Claude Codeが自動的にconfig.yamlを更新：
+
+```yaml
+title: "React Server Componentsの実践ガイド：Next.js 14で学ぶ現代的なReact開発"
+summary: "React Server Components（RSC）の基本概念から実践的な実装まで、Next.js 14を使用して体系的に学べる実践ガイド"
+topics: ["React", "Next.js", "Server Components", "パフォーマンス", "フロントエンド"]
+published: false
+price: 0
+chapters:
+  - "chapter01-introduction"
+  - "chapter02-setup"
+  - "chapter03-basic-patterns"
+  - "chapter04-data-state"
+  - "chapter05-performance"
+  - "chapter06-practical-app"
+  - "chapter07-deployment"
+  - "chapter08-troubleshooting"
+```
+
+#### Step 5: INDEX.mdの更新
+
+```
+Human: 新しいbookが作成されたので、INDEX.mdを更新してください。
+DRAFT.mdの情報を参照して適切に記載してください。
+```
+
+#### Step 6: ドラフトを参照した執筆
+
+```
+Human: DRAFT.mdの概要を参照して、
 第1章「React Server Componentsとは」の内容を執筆してください。
 想定読者と目次構成を意識した文章でお願いします。
 ```
@@ -92,13 +147,24 @@ Human: draft-rsc-guide.md の概要を参照して、
 4. **品質向上**: 体系的な構成による読みやすい文書
 5. **進捗管理**: 全体像が見えることで進捗状況を把握しやすい
 
-### 実践例：この記事における概要の活用
+### 実践例：この記事における実際のワークフロー
 
-実際に、この記事自体も概要作成から始まっています。
+実際に、この記事自体も推奨ワークフローに従って作成されています。
 
-#### 1. 概要ファイルの作成
+#### 1. Zennプロジェクトの作成
+
+```bash
+# このbookプロジェクトも最初はこのコマンドから始まりました
+npx zenn new:book
+# created: books/0094d21340d214/
+```
+
+#### 2. ドラフトファイルの作成
+
+プロジェクト作成後、以下のドラフトファイルを作成しました：
 
 ```markdown
+# books/0094d21340d214/DRAFT.md
 # [Draft] AIペアプロで爆速執筆！Claude Code × GitHub × Zennの最強タッグ
 
 ## 本のタイトル
@@ -109,9 +175,17 @@ Claude Code、GitHub、Zennを組み合わせた効率的な技術記事執筆�
 AI支援による執筆プロセスの革命的改善と、継続的なドキュメント管理の実現方法。
 
 ## 想定読者
-- 技術記事執筆に時間がかかっている エンジニア
+- 技術記事執筆に時間がかかっているエンジニア
 - ドキュメント管理に課題を抱えている開発者
-- AI ツールを活用した効率化に興味がある方
+- AIツールを活用した効率化に興味がある方
+
+## 章の構成（config.yaml用）
+chapters:
+  - "chapter1-introduction"
+  - "chapter2-environment"
+  - "chapter3-workflow"
+  - "chapter4-advanced"
+  - "chapter5-conclusion"
 
 ## 目次
 1. なぜ今、AIペアプロで記事を書くのか
@@ -121,33 +195,40 @@ AI支援による執筆プロセスの革命的改善と、継続的なドキュ
 5. まとめ：AI時代の新しい執筆スタイル
 ```
 
-#### 2. 概要に基づく執筆
+#### 3. config.yamlの更新
 
-この概要を基に、Claude Codeに以下のような指示を出しました：
+ドラフトを基にconfig.yamlを更新：
 
+```yaml
+title: "AIペアプロで爆速執筆！Claude Code × GitHub × Zennの最強タッグ"
+summary: "Claude Code、GitHub、Zennを組み合わせた効率的な技術記事執筆手法"
+topics: ["Claude", "AI", "GitHub", "Zenn", "執筆"]
+published: false
+price: 0
+chapters:
+  - "chapter1-introduction"
+  - "chapter2-environment"
+  - "chapter3-workflow"
+  - "chapter4-advanced"
+  - "chapter5-conclusion"
 ```
-Human: draft-ai-writing-guide.md の概要を参照して、
-第1章の内容を執筆してください。
-想定読者（技術記事執筆に課題を抱えるエンジニア）を意識し、
-彼らの痛み（時間がかかる、構成に悩む）から始めて、
-解決策（Claude Code × GitHub × Zenn）を提示する構成でお願いします。
-```
 
-#### 3. 一貫性のある文章品質
+#### 4. 一貫性のある文章品質
 
-概要で明確にした「想定読者」と「解決したい課題」により、全ての章で一貫した視点と文体を維持できています。
+このワークフローにより、全ての章で「想定読者」と「解決したい課題」を意識した一貫した視点と文体を維持できています。
 
-### 概要作成のテンプレート
+### ドラフトファイルのテンプレート
 
-効率的な概要作成のために、以下のテンプレートを活用できます。
+効率的なドラフト作成のために、以下のテンプレートを活用できます：
 
 ```markdown
+# DRAFT.md
 # [Draft] {本のタイトル}
 
 ## 本のタイトル
 {正式なタイトル}
 
-## 内容概要
+## 内容概要（summary用）
 {3-5行で本の内容と価値を説明}
 
 ## 想定読者
@@ -160,9 +241,19 @@ Human: draft-ai-writing-guide.md の概要を参照して、
 - {課題2}
 - {課題3}
 
+## 章の構成（config.yaml用）
+chapters:
+  - "{章ファイル名1}"
+  - "{章ファイル名2}"
+  - "{章ファイル名3}"
+
+## トピック（config.yaml用）
+topics: ["{トピック1}", "{トピック2}", "{トピック3}", "{トピック4}", "{トピック5}"]
+
 ## 目次
 1. {章タイトル1}
 2. {章タイトル2}
+3. {章タイトル3}
 ...
 
 ## 各章の詳細
@@ -172,13 +263,34 @@ Human: draft-ai-writing-guide.md の概要を参照して、
 - {含む内容3}
 
 ### 第2章: {章タイトル}
+- {含む内容1}
+- {含む内容2}
 ...
+
+## 価格設定
+price: {0: 無料, 200-5000: 有料}
 
 ## 執筆時の注意点
 - {特に気をつける点}
 - {文体や表現の方針}
 - {技術レベルの設定}
+- {文字数制限: 50,000文字以内}
 ```
+
+### Claude Codeでの自動化
+
+Claude Codeを使用すると、ドラフトからconfig.yamlへの情報転記を自動化できます：
+
+```
+Human: DRAFT.mdの内容を参照して、config.yamlを以下の要素で更新してください：
+- title: ドラフトの「本のタイトル」
+- summary: ドラフトの「内容概要」
+- topics: ドラフトの「トピック」配列
+- chapters: ドラフトの「章の構成」配列
+- price: ドラフトの「価格設定」
+```
+
+これにより、ドラフトとconfig.yamlの整合性を保ちながら効率的にプロジェクトを進められます。
 
 ## Web上の記事を参照した文章作成
 
