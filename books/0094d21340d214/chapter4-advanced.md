@@ -10,10 +10,17 @@ title: "第4章: より高度な活用テクニック"
 
 #### Step 1: Zennプロジェクトの作成
 
-まず、Zennのbookプロジェクトを作成します。
+Claude Codeに新しいbookプロジェクトの作成を依頼します。
+
+```
+Human: 新しいZennのbookプロジェクトを作成してください。
+テーマは「React Server Componentsの実践ガイド」です。
+```
+
+Claude Codeが自動的に以下を実行します：
 
 ```bash
-# Zennプロジェクトを作成
+# Claude Codeが実行するコマンド
 npx zenn new:book
 
 # 出力例
@@ -22,7 +29,7 @@ npx zenn new:book
 #   └── example.md
 ```
 
-この段階では、自動生成されたconfig.yamlはデフォルト設定のままです。
+この段階では、自動生成されたconfig.yamlはデフォルト設定のままです。Claude Codeは作成されたディレクトリ名を報告してくれます。
 
 #### Step 2: ドラフト概要の作成
 
@@ -33,7 +40,7 @@ Human: books/1234567890abcd/ 内にドラフト概要ファイルを作成して
 テーマ: 「React Server Componentsの実践ガイド」
 ```
 
-Claude Codeが以下のドラフトファイルを作成します：
+Claude Codeが以下のドラフトファイルを作成します。
 
 ```markdown
 # books/1234567890abcd/DRAFT.md
@@ -153,8 +160,13 @@ Human: DRAFT.mdの概要を参照して、
 
 #### 1. Zennプロジェクトの作成
 
+```
+Human: 新しいZennのbookプロジェクトを作成してください。
+「AIペアプロで爆速執筆」に関する技術書です。
+```
+
+Claude Codeが実行：
 ```bash
-# このbookプロジェクトも最初はこのコマンドから始まりました
 npx zenn new:book
 # created: books/0094d21340d214/
 ```
@@ -219,7 +231,7 @@ chapters:
 
 ### ドラフトファイルのテンプレート
 
-効率的なドラフト作成のために、以下のテンプレートを活用できます：
+効率的なドラフト作成のために、以下のテンプレートを活用できます。
 
 ```markdown
 # DRAFT.md
@@ -279,7 +291,7 @@ price: {0: 無料, 200-5000: 有料}
 
 ### Claude Codeでの自動化
 
-Claude Codeを使用すると、ドラフトからconfig.yamlへの情報転記を自動化できます：
+Claude Codeを使用すると、ドラフトからconfig.yamlへの情報転記を自動化できます。
 
 ```
 Human: DRAFT.mdの内容を参照して、config.yamlを以下の要素で更新してください：
