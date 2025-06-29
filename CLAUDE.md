@@ -81,7 +81,7 @@ graph TB
     class B secondaryClass
 ```
 
-#### **DO NOT USE** (deprecated in 8.10.x):
+#### **DO NOT USE** (deprecated in 11.1.1):
 - `subgraph "Display Name"` (use identifier syntax instead)
 - `style A fill:#ff9999` (use classDef + class instead)
 
