@@ -15,11 +15,14 @@ This is a Zenn.dev content management repository that uses Zenn CLI to manage te
 
 ### Development Workflow
 1. Install dependencies: `npm install`
-2. Create books using the command above
-3. **IMPORTANT**: Always update INDEX.md when creating new content
-4. Edit markdown files in `/books/`
-5. Preview changes: `npx zenn preview`
-6. Commit and push to GitHub to sync with Zenn.dev
+2. **Create draft file**: Before creating Zenn files, create a draft file with book outline
+   - Include book title, summary, target audience, and table of contents
+   - This file is not uploaded to Zenn (local work only)
+3. Create books using the command above
+4. **IMPORTANT**: Always update INDEX.md when creating new content
+5. Edit markdown files in `/books/`
+6. Preview changes: `npx zenn preview`
+7. Commit and push to GitHub to sync with Zenn.dev
 
 ## Content Structure
 
@@ -27,11 +30,11 @@ This is a Zenn.dev content management repository that uses Zenn CLI to manage te
 - Each book is a directory with unique ID
 - `config.yaml` defines book metadata and chapter order:
 ```yaml
-title: "本のタイトル"
-summary: "本の紹介文"
-topics: ["tag1", "tag2"] # 最大5つまで
+title: "Book Title"
+summary: "Book description"
+topics: ["tag1", "tag2"] # Maximum 5 tags
 published: false
-price: 0 # 0:無料、200-5000:有料
+price: 0 # 0: free, 200-5000: paid
 chapters:
   - "chapter1"
   - "chapter2"
@@ -50,6 +53,7 @@ chapters:
 
 - Refer to Zenn's Markdown guide: https://zenn.dev/zenn/articles/markdown-guide
 - Zenn supports standard Markdown plus custom extensions for enhanced content
+- **Character limit**: Markdown files have a maximum limit of 50,000 characters
 
 ### Mermaid Diagrams
 
@@ -93,24 +97,24 @@ When creating new books, ALWAYS update the INDEX.md file to maintain project org
 
 #### For New Books:
 ```markdown
-## Books (本)
-| ディレクトリ名 | タイトル | 状態 | 作成日 | 更新日 |
-|---------------|---------|------|--------|--------|
-| {book-id}/ | {本のタイトル} | 執筆中 | {作成日} | {作成日} |
+## Books
+| Directory Name | Title | Status | Created | Updated |
+|---------------|-------|--------|---------|---------|
+| {book-id}/ | {Book Title} | Writing | {Created Date} | {Created Date} |
 ```
 
 ### Workflow for Content Creation:
 1. Run `npx zenn new:book`
-2. **IMMEDIATELY update INDEX.md** with the new content information (作成日 = 更新日)
+2. **IMMEDIATELY update INDEX.md** with the new content information (Created = Updated)
 3. Edit the content files
 4. **Update INDEX.md whenever making significant changes**:
-   - Update 状態 as needed (執筆中 → 公開準備中 → 公開済み)
-   - Update 更新日 to current date
-   - Update タイトル if changed
+   - Update Status as needed (Writing → Preparing → Published)
+   - Update Updated date to current date
+   - Update Title if changed
 
-### When to Update 更新日:
+### When to Update Updated Date:
 - When changing book title
-- When changing publication status (状態)
+- When changing publication status
 - When making major content revisions
 - When adding new chapters to books
 - When publishing content (published: true)
@@ -121,6 +125,6 @@ When creating new books, ALWAYS update the INDEX.md file to maintain project org
 - Use `published: true` to make content public on Zenn.dev
 - Preview server hot-reloads on file changes
 - **CRITICAL**: Never forget to update INDEX.md when creating new content
-- **CRITICAL**: Always update 更新日 when making significant changes to content
+- **CRITICAL**: Always update Updated date when making significant changes to content
 - INDEX.md helps track all content and makes file management easier
-- 更新日 tracking helps identify recently modified content and maintenance needs
+- Updated date tracking helps identify recently modified content and maintenance needs
