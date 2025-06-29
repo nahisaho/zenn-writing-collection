@@ -1126,544 +1126,135 @@ class ScheduledLifecycleManager:
 
 ## 6.5 実装例：SCIM エンドポイントの開発
 
-本セクションでは、Microsoft Entra IDと連携するSCIM 2.0エンドポイントをPython/FastAPIで実装する方法を詳しく解説します。実運用で必要となるセキュリティ・パフォーマンス対策を含む包括的なガイドです。
+本セクションでは、Microsoft Entra IDと連携するSCIM 2.0エンドポイントをPython/FastAPIで実装する方法を解説します。
 
 ### Python/FastAPI による SCIM 実装
 
-Microsoft Entra IDと連携するSCIM 2.0エンドポイントをPython/FastAPIで実装する包括的なガイドです。
-
-**プロジェクト構成**
-```
-scim-server/
-├── src/main/java/com/example/scim/
-│   ├── ScimServerApplication.java
-│   ├── config/
-│   │   ├── SecurityConfig.java
-│   │   └── DatabaseConfig.java
-│   ├── controller/
-│   │   ├── UserController.java
-│   │   ├── GroupController.java
-│   │   └── SchemaController.java
-│   ├── model/
-│   │   ├── ScimUser.java
-│   │   ├── ScimGroup.java
-│   │   └── ScimResource.java
-│   ├── service/
-│   │   ├── UserService.java
-│   │   └── GroupService.java
-│   └── repository/
-│       ├── UserRepository.java
-│       └── GroupRepository.java
-├── src/main/resources/
-│   └── application.yml
-└── pom.xml
+**依存関係の設定**
+```python
+# requirements.txt
+fastapi==0.104.1
+uvicorn[standard]==0.24.0
+pydantic==2.5.0
+sqlalchemy==2.0.23
+psycopg2-binary==2.9.9
+python-jose[cryptography]==3.3.0
+passlib[bcrypt]==1.7.4
 ```
 
-**依存関係 (pom.xml)**
-```xml
-<?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0">
-    <modelVersion>4.0.0</modelVersion>
-    <groupId>com.example</groupId>
-    <artifactId>scim-server</artifactId>
-    <version>1.0.0</version>
-    <packaging>jar</packaging>
-    
-    <parent>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.2.0</version>
-        <relativePath/>
-    </parent>
-    
-    <dependencies>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-jpa</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-security</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-validation</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.postgresql</groupId>
-            <artifactId>postgresql</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-databind</artifactId>
-        </dependency>
-    </dependencies>
-</project>
+**基本的なSCIMユーザーモデル**
+```python
+from pydantic import BaseModel
+from typing import Optional, List
+from datetime import datetime
+
+class ScimUser(BaseModel):
+    id: Optional[str] = None
+    external_id: Optional[str] = None
+    user_name: str
+    display_name: Optional[str] = None
+    active: bool = True
+    emails: List[dict] = []
+    name: Optional[dict] = None
+    meta: Optional[dict] = None
+
+class ScimUserResponse(BaseModel):
+    schemas: List[str] = ["urn:ietf:params:scim:schemas:core:2.0:User"]
+    id: str
+    external_id: Optional[str] = None
+    user_name: str
+    display_name: Optional[str] = None
+    active: bool = True
+    emails: List[dict] = []
+    name: Optional[dict] = None
+    meta: dict
 ```
 
-**SCIM ユーザーモデル**
-```java
-package com.example.scim.model;
+**SCIM APIエンドポイント**
+```python
+from fastapi import FastAPI, HTTPException, Depends
+from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
+import uuid
 
-import jakarta.persistence.*;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
+app = FastAPI()
+security = HTTPBearer()
 
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+# 簡易ユーザーストレージ（実際の実装ではデータベースを使用）
+users_db = {}
 
-@Entity
-@Table(name = "scim_users")
-@JsonInclude(JsonInclude.Include.NON_NULL)
-public class ScimUser {
+@app.post("/scim/v2/Users", response_model=ScimUserResponse)
+async def create_user(user: ScimUser, credentials: HTTPAuthorizationCredentials = Depends(security)):
+    # トークン検証（省略）
     
-    @Id
-    @Column(name = "id")
-    private String id;
-    
-    @Column(name = "external_id")
-    @JsonProperty("externalId")
-    private String externalId;
-    
-    @Column(name = "user_name", unique = true, nullable = false)
-    @NotBlank
-    @JsonProperty("userName")
-    private String userName;
-    
-    @Column(name = "active")
-    private Boolean active = true;
-    
-    @Embedded
-    private Name name;
-    
-    @Column(name = "display_name")
-    @JsonProperty("displayName")
-    private String displayName;
-    
-    @ElementCollection
-    @CollectionTable(name = "user_emails", joinColumns = @JoinColumn(name = "user_id"))
-    private List<Email> emails = new ArrayList<>();
-    
-    @ElementCollection
-    @CollectionTable(name = "user_phone_numbers", joinColumns = @JoinColumn(name = "user_id"))
-    @JsonProperty("phoneNumbers")
-    private List<PhoneNumber> phoneNumbers = new ArrayList<>();
-    
-    @Embedded
-    @JsonProperty("urn:ietf:params:scim:schemas:extension:enterprise:2.0:User")
-    private EnterpriseUser enterpriseUser;
-    
-    @Column(name = "created")
-    private LocalDateTime created;
-    
-    @Column(name = "last_modified")
-    @JsonProperty("lastModified")
-    private LocalDateTime lastModified;
-    
-    @Column(name = "version")
-    private Long version = 1L;
-    
-    // コンストラクタ
-    public ScimUser() {
-        this.id = java.util.UUID.randomUUID().toString();
-        this.created = LocalDateTime.now();
-        this.lastModified = LocalDateTime.now();
-    }
-    
-    // SCIM レスポンス用メソッド
-    @JsonProperty("schemas")
-    public List<String> getSchemas() {
-        List<String> schemas = new ArrayList<>();
-        schemas.add("urn:ietf:params:scim:schemas:core:2.0:User");
-        if (enterpriseUser != null) {
-            schemas.add("urn:ietf:params:scim:schemas:extension:enterprise:2.0:User");
+    user_id = str(uuid.uuid4())
+    created_user = ScimUserResponse(
+        id=user_id,
+        external_id=user.external_id,
+        user_name=user.user_name,
+        display_name=user.display_name,
+        active=user.active,
+        emails=user.emails,
+        name=user.name,
+        meta={
+            "resourceType": "User",
+            "created": datetime.now().isoformat(),
+            "lastModified": datetime.now().isoformat(),
+            "location": f"/scim/v2/Users/{user_id}"
         }
-        return schemas;
-    }
+    )
     
-    @JsonProperty("meta")
-    public Meta getMeta() {
-        Meta meta = new Meta();
-        meta.setResourceType("User");
-        meta.setCreated(created);
-        meta.setLastModified(lastModified);
-        meta.setVersion("W/\"" + version + "\"");
-        meta.setLocation("/scim/v2/Users/" + id);
-        return meta;
-    }
+    users_db[user_id] = created_user
+    return created_user
+
+@app.get("/scim/v2/Users/{user_id}", response_model=ScimUserResponse)
+async def get_user(user_id: str, credentials: HTTPAuthorizationCredentials = Depends(security)):
+    if user_id not in users_db:
+        raise HTTPException(status_code=404, detail="User not found")
+    return users_db[user_id]
+
+@app.put("/scim/v2/Users/{user_id}", response_model=ScimUserResponse)
+async def update_user(user_id: str, user: ScimUser, credentials: HTTPAuthorizationCredentials = Depends(security)):
+    if user_id not in users_db:
+        raise HTTPException(status_code=404, detail="User not found")
     
-    // ゲッター・セッター（省略）
-    public String getId() { return id; }
-    public void setId(String id) { this.id = id; }
+    updated_user = users_db[user_id]
+    updated_user.user_name = user.user_name
+    updated_user.display_name = user.display_name
+    updated_user.active = user.active
+    updated_user.emails = user.emails
+    updated_user.name = user.name
+    updated_user.meta["lastModified"] = datetime.now().isoformat()
     
-    public String getUserName() { return userName; }
-    public void setUserName(String userName) { this.userName = userName; }
+    return updated_user
+
+@app.delete("/scim/v2/Users/{user_id}")
+async def delete_user(user_id: str, credentials: HTTPAuthorizationCredentials = Depends(security)):
+    if user_id not in users_db:
+        raise HTTPException(status_code=404, detail="User not found")
     
-    public Boolean getActive() { return active; }
-    public void setActive(Boolean active) { this.active = active; }
-    
-    // 埋め込みクラス
-    @Embeddable
-    public static class Name {
-        @Column(name = "formatted_name")
-        private String formatted;
-        
-        @Column(name = "family_name")
-        @JsonProperty("familyName")
-        private String familyName;
-        
-        @Column(name = "given_name")
-        @JsonProperty("givenName")
-        private String givenName;
-        
-        // ゲッター・セッター
-        public String getFormatted() { return formatted; }
-        public void setFormatted(String formatted) { this.formatted = formatted; }
-        
-        public String getFamilyName() { return familyName; }
-        public void setFamilyName(String familyName) { this.familyName = familyName; }
-        
-        public String getGivenName() { return givenName; }
-        public void setGivenName(String givenName) { this.givenName = givenName; }
-    }
-    
-    @Embeddable
-    public static class Email {
-        @Column(name = "email_value")
-        private String value;
-        
-        @Column(name = "email_type")
-        private String type = "work";
-        
-        @Column(name = "email_primary")
-        private Boolean primary = false;
-        
-        // ゲッター・セッター
-        public String getValue() { return value; }
-        public void setValue(String value) { this.value = value; }
-        
-        public String getType() { return type; }
-        public void setType(String type) { this.type = type; }
-        
-        public Boolean getPrimary() { return primary; }
-        public void setPrimary(Boolean primary) { this.primary = primary; }
-    }
-    
-    @Embeddable
-    public static class EnterpriseUser {
-        @Column(name = "employee_number")
-        @JsonProperty("employeeNumber")
-        private String employeeNumber;
-        
-        @Column(name = "cost_center")
-        @JsonProperty("costCenter")
-        private String costCenter;
-        
-        @Column(name = "organization")
-        private String organization;
-        
-        @Column(name = "department")
-        private String department;
-        
-        // ゲッター・セッター
-        public String getEmployeeNumber() { return employeeNumber; }
-        public void setEmployeeNumber(String employeeNumber) { this.employeeNumber = employeeNumber; }
-        
-        public String getDepartment() { return department; }
-        public void setDepartment(String department) { this.department = department; }
-    }
-}
+    del users_db[user_id]
+    return {"status": "deleted"}
 ```
 
-**SCIM ユーザーコントローラー**
-```java
-package com.example.scim.controller;
+**認証とセキュリティ**
+```python
+from jose import JWTError, jwt
+from fastapi import HTTPException, status
 
-import com.example.scim.model.ScimUser;
-import com.example.scim.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-
-import jakarta.validation.Valid;
-import java.util.List;
-import java.util.Map;
-
-@RestController
-@RequestMapping("/scim/v2/Users")
-public class UserController {
-    
-    @Autowired
-    private UserService userService;
-    
-    @GetMapping
-    public ResponseEntity<Map<String, Object>> getUsers(
-            @RequestParam(value = "filter", required = false) String filter,
-            @RequestParam(value = "startIndex", defaultValue = "1") int startIndex,
-            @RequestParam(value = "count", defaultValue = "20") int count,
-            @RequestParam(value = "attributes", required = false) String attributes,
-            @RequestParam(value = "excludedAttributes", required = false) String excludedAttributes) {
-        
-        try {
-            Map<String, Object> result = userService.getUsers(filter, startIndex, count, attributes, excludedAttributes);
-            return ResponseEntity.ok(result);
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(createErrorResponse(500, "Internal Server Error", e.getMessage()));
-        }
-    }
-    
-    @GetMapping("/{id}")
-    public ResponseEntity<?> getUser(
-            @PathVariable String id,
-            @RequestParam(value = "attributes", required = false) String attributes,
-            @RequestParam(value = "excludedAttributes", required = false) String excludedAttributes) {
-        
-        try {
-            ScimUser user = userService.getUserById(id);
-            if (user == null) {
-                return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                        .body(createErrorResponse(404, "Resource not found", "User " + id + " not found"));
-            }
-            return ResponseEntity.ok(user);
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(createErrorResponse(500, "Internal Server Error", e.getMessage()));
-        }
-    }
-    
-    @PostMapping
-    public ResponseEntity<?> createUser(@Valid @RequestBody ScimUser user) {
-        try {
-            // ユーザー名の重複チェック
-            if (userService.getUserByUserName(user.getUserName()) != null) {
-                return ResponseEntity.status(HttpStatus.CONFLICT)
-                        .body(createErrorResponse(409, "Uniqueness constraint violation", 
-                                "User with userName " + user.getUserName() + " already exists"));
-            }
-            
-            ScimUser createdUser = userService.createUser(user);
-            return ResponseEntity.status(HttpStatus.CREATED).body(createdUser);
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                    .body(createErrorResponse(400, "Invalid request", e.getMessage()));
-        }
-    }
-    
-    @PutMapping("/{id}")
-    public ResponseEntity<?> updateUser(@PathVariable String id, @Valid @RequestBody ScimUser user) {
-        try {
-            ScimUser existingUser = userService.getUserById(id);
-            if (existingUser == null) {
-                return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                        .body(createErrorResponse(404, "Resource not found", "User " + id + " not found"));
-            }
-            
-            user.setId(id);
-            ScimUser updatedUser = userService.updateUser(user);
-            return ResponseEntity.ok(updatedUser);
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                    .body(createErrorResponse(400, "Invalid request", e.getMessage()));
-        }
-    }
-    
-    @PatchMapping("/{id}")
-    public ResponseEntity<?> patchUser(@PathVariable String id, @RequestBody Map<String, Object> patchRequest) {
-        try {
-            ScimUser existingUser = userService.getUserById(id);
-            if (existingUser == null) {
-                return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                        .body(createErrorResponse(404, "Resource not found", "User " + id + " not found"));
-            }
-            
-            ScimUser updatedUser = userService.patchUser(id, patchRequest);
-            return ResponseEntity.ok(updatedUser);
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                    .body(createErrorResponse(400, "Invalid request", e.getMessage()));
-        }
-    }
-    
-    @DeleteMapping("/{id}")
-    public ResponseEntity<?> deleteUser(@PathVariable String id) {
-        try {
-            ScimUser existingUser = userService.getUserById(id);
-            if (existingUser == null) {
-                return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                        .body(createErrorResponse(404, "Resource not found", "User " + id + " not found"));
-            }
-            
-            userService.deleteUser(id);
-            return ResponseEntity.noContent().build();
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(createErrorResponse(500, "Internal Server Error", e.getMessage()));
-        }
-    }
-    
-    private Map<String, Object> createErrorResponse(int status, String scimType, String detail) {
-        return Map.of(
-                "schemas", List.of("urn:ietf:params:scim:api:messages:2.0:Error"),
-                "status", status,
-                "scimType", scimType,
-                "detail", detail
-        );
-    }
-}
+def verify_token(credentials: HTTPAuthorizationCredentials):
+    try:
+        token = credentials.credentials
+        # Microsoft Entra IDのトークン検証ロジック
+        payload = jwt.decode(token, options={"verify_signature": False})
+        return payload
+    except JWTError:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Invalid authentication credentials"
+        )
 ```
 
-**ユーザーサービス実装**
-```java
-package com.example.scim.service;
-
-import com.example.scim.model.ScimUser;
-import com.example.scim.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
-import java.time.LocalDateTime;
-import java.util.*;
-
-@Service
-@Transactional
-public class UserService {
-    
-    @Autowired
-    private UserRepository userRepository;
-    
-    public Map<String, Object> getUsers(String filter, int startIndex, int count, 
-                                       String attributes, String excludedAttributes) {
-        Pageable pageable = PageRequest.of(startIndex - 1, count);
-        Page<ScimUser> userPage;
-        
-        if (filter != null && !filter.isEmpty()) {
-            // 簡単なフィルター実装（例：userName eq "value"）
-            userPage = applyFilter(filter, pageable);
-        } else {
-            userPage = userRepository.findAll(pageable);
-        }
-        
-        List<ScimUser> users = userPage.getContent();
-        
-        Map<String, Object> response = new HashMap<>();
-        response.put("schemas", List.of("urn:ietf:params:scim:api:messages:2.0:ListResponse"));
-        response.put("totalResults", userPage.getTotalElements());
-        response.put("startIndex", startIndex);
-        response.put("itemsPerPage", users.size());
-        response.put("Resources", users);
-        
-        return response;
-    }
-    
-    public ScimUser getUserById(String id) {
-        return userRepository.findById(id).orElse(null);
-    }
-    
-    public ScimUser getUserByUserName(String userName) {
-        return userRepository.findByUserName(userName);
-    }
-    
-    public ScimUser createUser(ScimUser user) {
-        user.setId(UUID.randomUUID().toString());
-        user.setCreated(LocalDateTime.now());
-        user.setLastModified(LocalDateTime.now());
-        user.setVersion(1L);
-        return userRepository.save(user);
-    }
-    
-    public ScimUser updateUser(ScimUser user) {
-        user.setLastModified(LocalDateTime.now());
-        user.setVersion(user.getVersion() + 1);
-        return userRepository.save(user);
-    }
-    
-    public ScimUser patchUser(String id, Map<String, Object> patchRequest) {
-        ScimUser user = getUserById(id);
-        if (user == null) {
-            throw new RuntimeException("User not found");
-        }
-        
-        @SuppressWarnings("unchecked")
-        List<Map<String, Object>> operations = (List<Map<String, Object>>) patchRequest.get("Operations");
-        
-        for (Map<String, Object> operation : operations) {
-            String op = (String) operation.get("op");
-            String path = (String) operation.get("path");
-            Object value = operation.get("value");
-            
-            applyPatchOperation(user, op, path, value);
-        }
-        
-        return updateUser(user);
-    }
-    
-    public void deleteUser(String id) {
-        userRepository.deleteById(id);
-    }
-    
-    private Page<ScimUser> applyFilter(String filter, Pageable pageable) {
-        // 簡単なフィルター解析と適用
-        if (filter.contains("userName eq")) {
-            String userName = extractFilterValue(filter, "userName eq");
-            return userRepository.findByUserName(userName, pageable);
-        } else if (filter.contains("active eq")) {
-            boolean active = Boolean.parseBoolean(extractFilterValue(filter, "active eq"));
-            return userRepository.findByActive(active, pageable);
-        }
-        
-        return userRepository.findAll(pageable);
-    }
-    
-    private String extractFilterValue(String filter, String attribute) {
-        String[] parts = filter.split(attribute);
-        if (parts.length > 1) {
-            return parts[1].trim().replaceAll("\"", "");
-        }
-        return "";
-    }
-    
-    private void applyPatchOperation(ScimUser user, String op, String path, Object value) {
-        switch (op.toLowerCase()) {
-            case "replace":
-                switch (path) {
-                    case "active":
-                        user.setActive((Boolean) value);
-                        break;
-                    case "userName":
-                        user.setUserName((String) value);
-                        break;
-                    case "displayName":
-                        user.setDisplayName((String) value);
-                        break;
-                    // 他のパスの処理...
-                }
-                break;
-            case "add":
-                // 追加操作の実装
-                break;
-            case "remove":
-                // 削除操作の実装
-                break;
-        }
-    }
-}
-```
-
-この実装により、Microsoft Entra IDからの自動プロビジョニングが可能になり、ユーザーのライフサイクル管理が大幅に効率化されます。
+この実装により、Microsoft Entra IDからの自動プロビジョニングが可能になり、ユーザーのライフサイクル管理が効率化されます。
 
 ## まとめ
 
