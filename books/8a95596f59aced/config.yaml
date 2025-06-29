@@ -1,0 +1,15 @@
+title: "AI時代のプレゼン革命！Presentation Zen原則に基づく自動プレゼンテーション作成ツール 'PrezenX'"
+summary: "AIの力でプレゼンテーション作成を革新する！Presentation Zenの原則に基づいて、聴衆のペルソナ分析から最適なストーリーテリング、デザインまでを自動生成する次世代プレゼンツール「PrezenX」の設計・実装・活用方法を詳細解説。"
+topics: ["AI", "プレゼンテーション", "デザイン", "自動化", "ツール開発"]
+published: false
+price: 0 # 有料の場合200〜5000
+# 本に含めるチャプターを順番に並べましょう
+chapters:
+  - introduction
+  - presentation-zen-principles
+  - ai-personas-analysis
+  - storytelling-automation
+  - technical-implementation
+  - ui-ux-design
+  - case-studies
+  - future-roadmap
