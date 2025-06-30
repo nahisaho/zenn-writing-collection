@@ -1,0 +1,17 @@
+title: "Azure MCP Server 概念ガイド - MCPを使ったAzureリソース管理の可能性 (概念版)"
+summary: "Azure MCP Server（Model Context Protocol Server）の可能性と概念を探求するガイドブックです。現在の実装を超えて、MCPを活用したAI支援によるクラウド管理の理想的なシナリオと将来的な可能性を、包括的に解説します。※本書の内容の多くは現在未実装の概念的なものです。"
+topics: ["azure", "mcp", "automation", "cloud", "ai"]
+published: true
+price: 0 # 有料の場合200〜5000
+# 本に含めるチャプターを順番に並べましょう
+chapters:
+  - introduction
+  - disclaimer
+  - chapter1-introduction
+  - chapter2-setup
+  - chapter3-basic-operations
+  - chapter4-advanced-management
+  - chapter5-practical-examples
+  - chapter6-troubleshooting
+  - chapter7-best-practices
+  - appendix
