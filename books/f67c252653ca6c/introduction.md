@@ -19,7 +19,7 @@ Azure MCP Serverがパブリックプレビューとして公開された直後�
 - パフォーマンスと安定性の評価
 
 ### 機能の限界の把握
-Azure MCP Serverで**実際にできること**（2024年時点）：
+Azure MCP Serverで**実際にできること**（2025年6月時点）：
 - リソースグループとサブスクリプションの一覧表示
 - Azure Storage、Cosmos DB、PostgreSQLなど特定のサービスとの基本的な連携
 - Azure Monitor、Azure AI Search、Service Busなど限定されたサービスへのアクセス
@@ -164,5 +164,5 @@ Azure MCP Serverは、クラウド管理の未来を変える可能性を持つ�
 
 ---
 
-**2024年6月30日**  
-**著者**
+**2025年6月30日**  
+**中田 寿穂**
