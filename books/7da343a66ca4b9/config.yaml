@@ -10,7 +10,7 @@ chapters:
   - chapter02-bitlocker-technical
   - chapter03-security-risk-analysis
   - chapter04-powershell-script-design
-  - chapter05-script-implementation
+#  - chapter05-script-implementation
   - chapter06-automation-system
   - chapter07-operation-maintenance
   - chapter08-practical-deployment
