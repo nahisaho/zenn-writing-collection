@@ -1,0 +1,21 @@
+title: "知識ゼロからの学会講演準備 - AIと共に作る新世代のプレゼン資料作成"
+summary: "原子力計算科学の専門外講演依頼を受けた物理学者が、生成AIをフル活用して講演準備を進める実践的ドキュメンタリー。Deep Researchから資料作成まで、AIと共に歩む新時代の学習・準備プロセスを詳細に記録。"
+topics: ["AI", "講演", "プレゼンテーション", "原子力", "計算科学"]
+published: false
+price: 0 # 有料の場合200〜5000
+# 本に含めるチャプターを順番に並べましょう
+chapters:
+  - prologue
+  - chapter1
+  - chapter2
+  - chapter3
+  - chapter4
+  - chapter5
+  - chapter6
+  - chapter7
+  - chapter8
+  - chapter9
+  - chapter10
+  - chapter11
+  - epilogue
+
