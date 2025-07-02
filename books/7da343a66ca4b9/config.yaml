@@ -1,0 +1,16 @@
+title: "Windows 端末の完全初期化ガイド"
+summary: "Windows端末の初期化やAutopilot Resetを実行しても、BitLocker回復キーが残存していると過去のデータが復元される可能性があります。本書では、BitLocker回復キーを確実に削除するPowerShellスクリプトの開発から運用まで、IT管理者向けに包括的に解説します。"
+topics: ["windows", "bitlocker", "powershell", "security", "autopilot"]
+published: false
+price: 1500 # 有料の場合200〜5000
+# 本に含めるチャプターを順番に並べましょう
+chapters:
+  - introduction
+  - chapter01-background
+  - chapter02-bitlocker-technical
+  - chapter03-security-risk-analysis
+  - chapter04-powershell-script-design
+  - chapter05-script-implementation
+  - chapter06-automation-system
+  - chapter07-operation-maintenance
+  - chapter08-practical-deployment

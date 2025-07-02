@@ -20,19 +20,22 @@ Azure MCP Serverがパブリックプレビューとして公開された直後�
 
 ### 機能の限界の把握
 Azure MCP Serverで**実際にできること**（2025年6月時点）：
-- リソースグループとサブスクリプションの一覧表示
-- Azure Storage、Cosmos DB、PostgreSQLなど特定のサービスとの基本的な連携
-- Azure Monitor、Azure AI Search、Service Busなど限定されたサービスへのアクセス
+- リソースグループの一覧表示とアクセス
+- Azure AI Search: インデックスの一覧表示、スキーマ確認、クエリ実行
+- Azure Cosmos DB: アカウント、データベース、コンテナの管理、SQLクエリの実行
+- Azure Database for PostgreSQL: データベースとテーブルの一覧表示、スキーマ確認、サーバー設定の取得
+- Azure Data Explorer: クラスター、データベース、テーブルの管理、KQLクエリの実行
+- Azure Storage: ストレージアカウント、Blobコンテナ、テーブルの管理
+- Azure Monitor: Log Analyticsワークスペースの一覧表示、ログクエリ、メトリクスのクエリ
+- App Configuration、Key Vault、Azure RBAC、Service Busへのアクセス
 - Azure CLIコマンドの実行
-- Key Vaultキーの管理
 
 Azure MCP Serverで**現時点ではできないこと**：
 - 仮想マシンの作成・削除・詳細管理
 - ARMテンプレートの生成・デプロイ
 - 高度なコスト管理・分析
-- セキュリティポリシーの設定
-- ネットワークリソースの詳細管理
-- 本書で紹介している高度な自動化機能の多く
+- 複雑なネットワークリソースの詳細管理
+- 本書で紹介している一部の高度な自動化機能
 
 ### 継続的な検証と更新
 パブリックプレビュー期間中は機能追加や仕様変更が頻繁に行われるため、本書の内容も継続的に検証・更新を行っています。

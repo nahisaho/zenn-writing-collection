@@ -10,19 +10,17 @@ title: "免責事項と実際の機能について"
 
 ### 実際の機能との相違
 
-**本書の内容の大部分は、現在のAzure MCP Server（2024年12月時点）では実装されていない機能です。**
+**本書の内容の大部分は、現在のAzure MCP Server（2025年6月時点）では実装されていない機能です。**
 
 #### 現在実際に利用可能な機能
 - リソースグループの一覧表示
-- Azure Storage（アカウント、コンテナ、Blob、テーブル）の操作
-- Azure Cosmos DB（アカウント、データベース、コンテナ、ドキュメント）の操作
-- Azure Database for PostgreSQL の管理
-- Azure AI Search の操作
-- Azure Monitor のログ・メトリクス クエリ
-- Azure Service Bus の操作
-- Azure Key Vault キーの管理
-- Azure App Configuration の設定管理
-- Azure Data Explorer の操作
+- Azure Storage: ストレージアカウントの一覧表示、Blobコンテナの管理、Storageテーブルの一覧表示
+- Azure Cosmos DB: アカウントの一覧表示、データベースとコンテナの管理、アイテムの操作、SQLクエリの実行
+- Azure Database for PostgreSQL: データベースの一覧表示とクエリ、テーブルスキーマの取得、サーバー設定の確認
+- Azure AI Search: サービスの一覧表示、インデックスとスキーマの確認、検索クエリの実行
+- Azure Monitor: Log Analyticsワークスペースの一覧表示とログクエリ、メトリクスのクエリ
+- Azure Data Explorer: クラスターの一覧表示、データベースとテーブルの管理、KQLクエリの実行
+- Azure App Configuration、Azure Key Vault、Azure RBAC、Azure Service Bus へのアクセス
 - Azure CLI コマンドの実行
 
 #### 本書で説明しているが現在未実装の機能

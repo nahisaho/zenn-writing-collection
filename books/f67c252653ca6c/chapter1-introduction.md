@@ -67,25 +67,32 @@ graph TB
     B -->|Azure API| G
 ```
 
-**現在実際に利用可能な機能**（2024年時点）：
+**現在実際に利用可能な機能**（2025年6月時点）：
 
 1. **リソースグループ管理**
    - 一覧表示
 
 2. **ストレージ管理**
-   - Azure Storageアカウント、コンテナ、Blob、テーブルの一覧表示と基本操作
+   - Azure Storageアカウントの一覧表示
+   - Blobコンテナの管理
+   - Storageテーブルの一覧表示
+   - コンテナプロパティの取得
 
 3. **データベース管理**
-   - Azure Cosmos DB（アカウント、データベース、コンテナ、ドキュメント操作）
-   - Azure Database for PostgreSQL（サーバー、データベース、テーブル管理）
+   - Azure Cosmos DB: アカウントの一覧表示、データベースとコンテナの管理、アイテムの操作、SQLクエリの実行
+   - Azure Database for PostgreSQL: データベースの一覧表示とクエリ、テーブルスキーマの取得、サーバー設定の確認
+   - Azure Data Explorer: クラスターの一覧表示、データベースとテーブルの管理、テーブルスキーマとサンプルデータの取得、KQLクエリの実行
 
-4. **その他のサービス**
-   - Azure AI Search（検索サービス、インデックス、クエリ）
-   - Azure Monitor（ログとメトリクスのクエリ）
-   - Azure Service Bus（メッセージングサービス）
-   - Azure Key Vault（キー管理）
-   - Azure App Configuration（設定管理）
-   - Azure Data Explorer（クラスター、データベース、テーブル、クエリ）
+4. **検索とモニタリング**
+   - Azure AI Search: サービスの一覧表示、インデックスとスキーマの確認、検索クエリの実行
+   - Azure Monitor Log Analytics: ワークスペースの一覧表示、ログクエリの実行
+   - Azure Monitor Metrics: 時系列データのクエリ
+
+5. **その他のサービス**
+   - Azure App Configuration
+   - Azure Key Vault
+   - Azure RBAC
+   - Azure Service Bus
    - Azure CLI Extension（CLIコマンド実行）
 
 **本書で説明する機能のうち現在未実装のもの**：
