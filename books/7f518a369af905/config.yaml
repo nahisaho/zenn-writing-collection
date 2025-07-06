@@ -1,7 +1,7 @@
-title: "次世代校務DX基盤の教科書 3 (Draft): Microsoft 365 Education A5による段階的ゼロトラスト実現ロードマップ"
+title: "次世代校務DX基盤の教科書 3: Microsoft 365 Education A5による段階的ゼロトラスト実現ロードマップ"
 summary: "Microsoft 365で実現する児童生徒個人情報保護～NISTゼロトラストフレームワークによる教育データセキュリティの実践的手引き～"
 topics: ["microsoft365", "zerotrust", "security", "education", "privacy"]
-published: false
+published: true
 price: 0
 chapters:
   - executive_summary
