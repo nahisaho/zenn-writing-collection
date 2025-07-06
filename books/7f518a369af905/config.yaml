@@ -1,0 +1,31 @@
+title: "次世代校務DX基盤の教科書 3 (Draft)"
+summary: "Microsoft 365で実現する児童生徒個人情報保護～NISTゼロトラストフレームワークによる教育データセキュリティの実践的手引き～"
+topics: ["microsoft365", "zerotrust", "security", "education", "privacy"]
+published: false
+price: 0
+chapters:
+  - executive_summary
+  - introduction
+  - chapter01
+  - chapter02
+  - chapter03
+  - chapter04
+  - chapter05
+  - chapter06
+  - chapter07
+  - chapter08
+  - chapter09
+  - chapter10
+  - chapter11
+  - chapter12
+  - appendix-a
+  - appendix-b
+  - appendix-c
+  - appendix-d
+  - appendix-e
+  - appendix-f
+  - appendix-g
+  - appendix-h
+  - appendix-i
+  - appendix-j
+  - appendix-k
