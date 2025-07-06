@@ -1,0 +1,1027 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>vendor_comparison_matrix.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="%E6%AC%A1%E4%B8%96%E4%BB%A3%E6%A0%A1%E5%8B%99dx%E5%9F%BA%E7%9B%A4-%E3%83%99%E3%83%B3%E3%83%80%E3%83%BC%E6%AF%94%E8%BC%83%E3%83%9E%E3%83%88%E3%83%AA%E3%83%83%E3%82%AF%E3%82%B9">次世代校務DX基盤 ベンダー比較マトリックス</h1>
+<p><strong>作成日</strong>: 2025年7月4日
+<strong>対象</strong>: Google Workspace for Education vs Microsoft 365 Education + Azure
+<strong>評価基準</strong>: 次世代校務DX基盤RFI要件（27項目）
+<strong>注意</strong>: このファイルはZenn.dev には掲載されません</p>
+<hr>
+<h2 id="%E3%82%A8%E3%82%B0%E3%82%BC%E3%82%AF%E3%83%86%E3%82%A3%E3%83%96%E3%82%B5%E3%83%9E%E3%83%AA%E3%83%BC">エグゼクティブサマリー</h2>
+<h3 id="%E7%B7%8F%E5%90%88%E8%A9%95%E4%BE%A1%E3%82%B9%E3%82%B3%E3%82%A2">総合評価スコア</h3>
+<table>
+<thead>
+<tr>
+<th>ベンダー</th>
+<th>総合スコア</th>
+<th>完全対応</th>
+<th>高適合</th>
+<th>部分対応</th>
+<th>不適合</th>
+<th>推奨度</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Microsoft 365</strong></td>
+<td><strong>99点</strong></td>
+<td>22件 (81%)</td>
+<td>4件 (15%)</td>
+<td>1件 (4%)</td>
+<td>0件 (0%)</td>
+<td>🥇 <strong>最高推奨</strong></td>
+</tr>
+<tr>
+<td><strong>Google Workspace</strong></td>
+<td><strong>79点</strong></td>
+<td>4件 (15%)</td>
+<td>8件 (30%)</td>
+<td>11件 (41%)</td>
+<td>4件 (14%)</td>
+<td>🥈 <strong>条件付き推奨</strong></td>
+</tr>
+</tbody>
+</table>
+<h3 id="%E6%8E%A8%E5%A5%A8%E5%88%A4%E5%AE%9A">推奨判定</h3>
+<table>
+<thead>
+<tr>
+<th>推奨レベル</th>
+<th>Microsoft 365</th>
+<th>Google Workspace</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>全教育機関</strong></td>
+<td>✅ <strong>強く推奨</strong></td>
+<td>❌ <strong>非推奨</strong></td>
+</tr>
+<tr>
+<td><strong>地方自治体</strong></td>
+<td>✅ <strong>最適</strong></td>
+<td>⚠️ <strong>要リスク評価</strong></td>
+</tr>
+<tr>
+<td><strong>国公立学校</strong></td>
+<td>✅ <strong>最適</strong></td>
+<td>⚠️ <strong>要法的確認</strong></td>
+</tr>
+<tr>
+<td><strong>私立学校</strong></td>
+<td>✅ <strong>最適</strong></td>
+<td>🟡 <strong>条件付き可</strong></td>
+</tr>
+<tr>
+<td><strong>小規模校</strong></td>
+<td>✅ <strong>推奨</strong></td>
+<td>🟡 <strong>条件付き可</strong></td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="%E8%A9%B3%E7%B4%B0%E6%AF%94%E8%BC%83%E3%83%9E%E3%83%88%E3%83%AA%E3%83%83%E3%82%AF%E3%82%B9">詳細比較マトリックス</h2>
+<h3 id="1-%E6%B3%95%E7%9A%84%E3%83%BB%E3%82%B3%E3%83%B3%E3%83%97%E3%83%A9%E3%82%A4%E3%82%A2%E3%83%B3%E3%82%B9%E8%A6%81%E4%BB%B6">1. 法的・コンプライアンス要件</h3>
+<table>
+<thead>
+<tr>
+<th>RFI要件</th>
+<th>評価項目</th>
+<th>Microsoft 365</th>
+<th>Google Workspace</th>
+<th>優位性</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Q1-1</strong></td>
+<td><strong>ISMAP対応</strong></td>
+<td>✅ <strong>完全対応</strong><br/>・登録済み<br/>・政府標準採用</td>
+<td>✅ <strong>対応済み</strong><br/>・登録済み<br/>・利用可能</td>
+<td><strong>同等</strong></td>
+</tr>
+<tr>
+<td><strong>Q1-2</strong></td>
+<td><strong>専門チーム</strong></td>
+<td>✅ <strong>完全対応</strong><br/>・教育専門チーム<br/>・日本人専門家</td>
+<td>🟡 <strong>部分対応</strong><br/>・一般チーム<br/>・教育特化なし</td>
+<td><strong>Microsoft優位</strong></td>
+</tr>
+<tr>
+<td><strong>Q1-3</strong></td>
+<td><strong>日本データセンター</strong></td>
+<td>✅ <strong>完全対応</strong><br/>・東日本・西日本<br/>・100%保証</td>
+<td>❌ <strong>重大課題</strong><br/>・保証なし<br/>・海外経由あり</td>
+<td><strong>Microsoft大幅優位</strong></td>
+</tr>
+<tr>
+<td><strong>Q3-1</strong></td>
+<td><strong>個人情報保護法</strong></td>
+<td>✅ <strong>完全対応</strong><br/>・完全準拠<br/>・データ主権確保</td>
+<td>🟡 <strong>要注意</strong><br/>・基本準拠<br/>・US CLOUD Act問題</td>
+<td><strong>Microsoft大幅優位</strong></td>
+</tr>
+<tr>
+<td><strong>Q3-2</strong></td>
+<td><strong>教育法規対応</strong></td>
+<td>✅ <strong>完全対応</strong><br/>・学校教育法準拠<br/>・文科省認定</td>
+<td>🟡 <strong>部分改善</strong><br/>・基本対応<br/>・特化不足</td>
+<td><strong>Microsoft優位</strong></td>
+</tr>
+<tr>
+<td><strong>Q4-1</strong></td>
+<td><strong>ガバナンス</strong></td>
+<td>✅ <strong>完全対応</strong><br/>・包括的統制<br/>・監査機能完備</td>
+<td>🟡 <strong>部分対応</strong><br/>・基本機能<br/>・制約あり</td>
+<td><strong>Microsoft優位</strong></td>
+</tr>
+<tr>
+<td><strong>Q4-2</strong></td>
+<td><strong>透明性</strong></td>
+<td>✅ <strong>完全対応</strong><br/>・詳細報告<br/>・開示プロセス明確</td>
+<td>🟡 <strong>部分対応</strong><br/>・基本報告<br/>・一部不透明</td>
+<td><strong>Microsoft優位</strong></td>
+</tr>
+</tbody>
+</table>
+<h3 id="2-%E6%8A%80%E8%A1%93%E7%9A%84%E3%82%BB%E3%82%AD%E3%83%A5%E3%83%AA%E3%83%86%E3%82%A3%E8%A6%81%E4%BB%B6">2. 技術的セキュリティ要件</h3>
+<table>
+<thead>
+<tr>
+<th>RFI要件</th>
+<th>評価項目</th>
+<th>Microsoft 365</th>
+<th>Google Workspace</th>
+<th>優位性</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Q2-1</strong></td>
+<td><strong>暗号化・CMK</strong></td>
+<td>✅ <strong>完全対応</strong><br/>・Customer Key<br/>・AES-256 + α</td>
+<td>✅ <strong>対応済み</strong><br/>・CSE対応<br/>・顧客管理可能</td>
+<td><strong>同等</strong>（実装方法異なる）</td>
+</tr>
+<tr>
+<td><strong>Q2-1</strong></td>
+<td><strong>HSM対応</strong></td>
+<td>✅ <strong>完全対応</strong><br/>・Azure Dedicated HSM<br/>・FIPS 140-2 Level 3</td>
+<td>🟡 <strong>部分改善</strong><br/>・Assured Controls<br/>・制約あり</td>
+<td><strong>Microsoft優位</strong></td>
+</tr>
+<tr>
+<td><strong>Q2-1</strong></td>
+<td><strong>鍵管理システム</strong></td>
+<td>✅ <strong>完全対応</strong><br/>・Azure Key Vault<br/>・完全制御</td>
+<td>✅ <strong>対応済み</strong><br/>・CSE鍵管理<br/>・顧客制御</td>
+<td><strong>Microsoft優位</strong></td>
+</tr>
+<tr>
+<td><strong>Q2-2</strong></td>
+<td><strong>バックアップ</strong></td>
+<td>✅ <strong>完全対応</strong><br/>・地理分散<br/>・自動・手動両対応</td>
+<td>✅ <strong>対応済み</strong><br/>・自動バックアップ<br/>・基本機能</td>
+<td><strong>Microsoft優位</strong></td>
+</tr>
+<tr>
+<td><strong>Q2-2</strong></td>
+<td><strong>DLP機能</strong></td>
+<td>✅ <strong>完全対応</strong><br/>・日本語完全対応<br/>・教育データ特化</td>
+<td>🟡 <strong>制限あり</strong><br/>・基本対応<br/>・日本語制約</td>
+<td><strong>Microsoft大幅優位</strong></td>
+</tr>
+</tbody>
+</table>
+<h3 id="3-%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0%E7%B5%B1%E5%90%88%E3%83%BB%E9%80%A3%E6%90%BA">3. システム統合・連携</h3>
+<table>
+<thead>
+<tr>
+<th>RFI要件</th>
+<th>評価項目</th>
+<th>Microsoft 365</th>
+<th>Google Workspace</th>
+<th>優位性</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Q5-1</strong></td>
+<td><strong>API連携</strong></td>
+<td>✅ <strong>完全対応</strong><br/>・Microsoft Graph<br/>・包括的API群</td>
+<td>✅ <strong>対応済み</strong><br/>・Google APIs<br/>・基本機能</td>
+<td><strong>Microsoft優位</strong></td>
+</tr>
+<tr>
+<td><strong>Q5-2</strong></td>
+<td><strong>校務システム連携</strong></td>
+<td>✅ <strong>完全対応</strong><br/>・全主要ベンダー連携<br/>・豊富な実績</td>
+<td>❌ <strong>重大課題</strong><br/>・公式連携少<br/>・実績不足</td>
+<td><strong>Microsoft大幅優位</strong></td>
+</tr>
+<tr>
+<td><strong>Q5-2</strong></td>
+<td><strong>認証連携</strong></td>
+<td>✅ <strong>完全対応</strong><br/>・SAML/OIDC/OAuth<br/>・教育IdP連携多数</td>
+<td>✅ <strong>対応済み</strong><br/>・標準プロトコル<br/>・基本連携</td>
+<td><strong>Microsoft優位</strong></td>
+</tr>
+<tr>
+<td><strong>Q5-2</strong></td>
+<td><strong>データ移行</strong></td>
+<td>✅ <strong>完全対応</strong><br/>・専用ツール群<br/>・FastTrack支援</td>
+<td>🟡 <strong>部分対応</strong><br/>・基本ツール<br/>・制約あり</td>
+<td><strong>Microsoft大幅優位</strong></td>
+</tr>
+</tbody>
+</table>
+<h3 id="4-%E3%83%A6%E3%83%BC%E3%82%B6%E3%83%93%E3%83%AA%E3%83%86%E3%82%A3%E3%83%BB%E3%82%B5%E3%83%9D%E3%83%BC%E3%83%88">4. ユーザビリティ・サポート</h3>
+<table>
+<thead>
+<tr>
+<th>RFI要件</th>
+<th>評価項目</th>
+<th>Microsoft 365</th>
+<th>Google Workspace</th>
+<th>優位性</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Q6-1</strong></td>
+<td><strong>UI・アクセシビリティ</strong></td>
+<td>✅ <strong>完全対応</strong><br/>・年配者配慮<br/>・JIS X 8341準拠</td>
+<td>🟡 <strong>部分対応</strong><br/>・基本対応<br/>・複雑な面あり</td>
+<td><strong>Microsoft優位</strong></td>
+</tr>
+<tr>
+<td><strong>Q6-2</strong></td>
+<td><strong>日本語サポート</strong></td>
+<td>✅ <strong>完全対応</strong><br/>・24時間365日<br/>・教育専門チーム</td>
+<td>❌ <strong>重大課題</strong><br/>・平日のみ<br/>・一般サポート</td>
+<td><strong>Microsoft大幅優位</strong></td>
+</tr>
+<tr>
+<td><strong>Q6-2</strong></td>
+<td><strong>研修・マニュアル</strong></td>
+<td>✅ <strong>完全対応</strong><br/>・教育機関特化<br/>・豊富なリソース</td>
+<td>🟡 <strong>部分対応</strong><br/>・一般向け中心<br/>・教育特化限定</td>
+<td><strong>Microsoft大幅優位</strong></td>
+</tr>
+<tr>
+<td><strong>Q6-2</strong></td>
+<td><strong>SLA保証</strong></td>
+<td>✅ <strong>完全対応</strong><br/>・99.9%保証<br/>・賠償制度あり</td>
+<td>🟡 <strong>部分対応</strong><br/>・99.9%保証<br/>・制約あり</td>
+<td><strong>Microsoft優位</strong></td>
+</tr>
+</tbody>
+</table>
+<h3 id="5-%E6%80%A7%E8%83%BD%E3%83%BB%E5%8F%AF%E7%94%A8%E6%80%A7">5. 性能・可用性</h3>
+<table>
+<thead>
+<tr>
+<th>RFI要件</th>
+<th>評価項目</th>
+<th>Microsoft 365</th>
+<th>Google Workspace</th>
+<th>優位性</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Q7-1</strong></td>
+<td><strong>稼働率保証</strong></td>
+<td>✅ <strong>完全対応</strong><br/>・99.9%（標準）<br/>・99.95%（年度末）</td>
+<td>✅ <strong>対応済み</strong><br/>・99.9%保証<br/>・標準SLA</td>
+<td><strong>Microsoft優位</strong></td>
+</tr>
+<tr>
+<td><strong>Q7-1</strong></td>
+<td><strong>性能保証</strong></td>
+<td>✅ <strong>完全対応</strong><br/>・応答時間保証<br/>・同時接続10万+</td>
+<td>✅ <strong>対応済み</strong><br/>・基本性能保証<br/>・スケーラブル</td>
+<td><strong>Microsoft優位</strong></td>
+</tr>
+<tr>
+<td><strong>Q7-2</strong></td>
+<td><strong>拡張性</strong></td>
+<td>✅ <strong>完全対応</strong><br/>・柔軟な拡張<br/>・自動スケーリング</td>
+<td>✅ <strong>対応済み</strong><br/>・クラウド拡張<br/>・基本対応</td>
+<td><strong>同等</strong></td>
+</tr>
+<tr>
+<td><strong>Q7-2</strong></td>
+<td><strong>将来対応</strong></td>
+<td>✅ <strong>完全対応</strong><br/>・継続的強化<br/>・教育投資継続</td>
+<td>🟡 <strong>要注意</strong><br/>・基本対応<br/>・サービス終了歴</td>
+<td><strong>Microsoft優位</strong></td>
+</tr>
+</tbody>
+</table>
+<h3 id="6-%E3%82%BC%E3%83%AD%E3%83%88%E3%83%A9%E3%82%B9%E3%83%88%E5%AE%9F%E8%A3%85">6. ゼロトラスト実装</h3>
+<table>
+<thead>
+<tr>
+<th>RFI要件</th>
+<th>評価項目</th>
+<th>Microsoft 365</th>
+<th>Google Workspace</th>
+<th>優位性</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Q8-1</strong></td>
+<td><strong>NIST準拠</strong></td>
+<td>✅ <strong>完全対応</strong><br/>・7原則100%対応<br/>・業界最高水準</td>
+<td>🟡 <strong>部分対応</strong><br/>・基本対応<br/>・詳細制御制約</td>
+<td><strong>Microsoft大幅優位</strong></td>
+</tr>
+<tr>
+<td><strong>Q8-1</strong></td>
+<td><strong>条件付きアクセス</strong></td>
+<td>✅ <strong>完全対応</strong><br/>・100+条件属性<br/>・ML活用最適化</td>
+<td>🟡 <strong>部分対応</strong><br/>・基本条件制御<br/>・制約あり</td>
+<td><strong>Microsoft大幅優位</strong></td>
+</tr>
+<tr>
+<td><strong>Q8-2</strong></td>
+<td><strong>継続改善</strong></td>
+<td>✅ <strong>完全対応</strong><br/>・自動最適化<br/>・予測的改善</td>
+<td>🟡 <strong>部分対応</strong><br/>・基本改善<br/>・手動中心</td>
+<td><strong>Microsoft大幅優位</strong></td>
+</tr>
+</tbody>
+</table>
+<h3 id="7-%E6%95%99%E8%82%B2%E6%A9%9F%E9%96%A2%E7%89%B9%E5%8C%96%E6%A9%9F%E8%83%BD">7. 教育機関特化機能</h3>
+<table>
+<thead>
+<tr>
+<th>RFI要件</th>
+<th>評価項目</th>
+<th>Microsoft 365</th>
+<th>Google Workspace</th>
+<th>優位性</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Q9-1</strong></td>
+<td><strong>年度処理対応</strong></td>
+<td>✅ <strong>完全対応</strong><br/>・School Data Sync<br/>・自動年度移行</td>
+<td>❌ <strong>重大課題</strong><br/>・特化機能なし<br/>・手動対応必要</td>
+<td><strong>Microsoft大幅優位</strong></td>
+</tr>
+<tr>
+<td><strong>Q9-1</strong></td>
+<td><strong>大量データ処理</strong></td>
+<td>✅ <strong>完全対応</strong><br/>・年度末特別保証<br/>・性能劣化なし</td>
+<td>🟡 <strong>部分対応</strong><br/>・基本対応<br/>・制約可能性</td>
+<td><strong>Microsoft優位</strong></td>
+</tr>
+<tr>
+<td><strong>Q9-1</strong></td>
+<td><strong>緊急時対応</strong></td>
+<td>✅ <strong>完全対応</strong><br/>・BCP機能充実<br/>・災害時サポート</td>
+<td>🟡 <strong>部分対応</strong><br/>・基本BCP<br/>・特化なし</td>
+<td><strong>Microsoft優位</strong></td>
+</tr>
+<tr>
+<td><strong>Q9-2</strong></td>
+<td><strong>小規模校対応</strong></td>
+<td>✅ <strong>完全対応</strong><br/>・簡易パッケージ<br/>・共同調達支援</td>
+<td>🟡 <strong>部分対応</strong><br/>・基本対応<br/>・特化不足</td>
+<td><strong>Microsoft優位</strong></td>
+</tr>
+<tr>
+<td><strong>Q9-2</strong></td>
+<td><strong>段階導入支援</strong></td>
+<td>✅ <strong>完全対応</strong><br/>・専任チーム<br/>・並行運用支援</td>
+<td>🟡 <strong>部分対応</strong><br/>・基本支援<br/>・制約あり</td>
+<td><strong>Microsoft大幅優位</strong></td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="%E9%87%8D%E8%A6%81%E3%83%AA%E3%82%B9%E3%82%AF%E6%AF%94%E8%BC%83">重要リスク比較</h2>
+<h3 id="%E6%B3%95%E7%9A%84%E3%83%BB%E3%82%B3%E3%83%B3%E3%83%97%E3%83%A9%E3%82%A4%E3%82%A2%E3%83%B3%E3%82%B9%E3%83%AA%E3%82%B9%E3%82%AF">法的・コンプライアンスリスク</h3>
+<table>
+<thead>
+<tr>
+<th>リスク項目</th>
+<th>Microsoft 365</th>
+<th>Google Workspace</th>
+<th>リスクレベル差</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>データ海外流出</strong></td>
+<td>🟢 <strong>極低</strong><br/>日本国内保証</td>
+<td>🔴 <strong>高</strong><br/>海外経由可能性</td>
+<td><strong>Microsoft圧倒的優位</strong></td>
+</tr>
+<tr>
+<td><strong>US法適用</strong></td>
+<td>🟡 <strong>低</strong><br/>日本データ主権確保</td>
+<td>🔴 <strong>高</strong><br/>CLOUD Act適用</td>
+<td><strong>Microsoft大幅優位</strong></td>
+</tr>
+<tr>
+<td><strong>法令違反</strong></td>
+<td>🟢 <strong>極低</strong><br/>完全準拠</td>
+<td>🟡 <strong>中</strong><br/>要確認事項あり</td>
+<td><strong>Microsoft優位</strong></td>
+</tr>
+<tr>
+<td><strong>監査対応</strong></td>
+<td>🟢 <strong>極低</strong><br/>完全対応</td>
+<td>🟡 <strong>中</strong><br/>制約あり</td>
+<td><strong>Microsoft優位</strong></td>
+</tr>
+</tbody>
+</table>
+<h3 id="%E6%8A%80%E8%A1%93%E7%9A%84%E3%83%AA%E3%82%B9%E3%82%AF">技術的リスク</h3>
+<table>
+<thead>
+<tr>
+<th>リスク項目</th>
+<th>Microsoft 365</th>
+<th>Google Workspace</th>
+<th>リスクレベル差</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>データ保護不備</strong></td>
+<td>🟢 <strong>極低</strong><br/>最高レベル保護</td>
+<td>🟡 <strong>中</strong><br/>基本保護</td>
+<td><strong>Microsoft優位</strong></td>
+</tr>
+<tr>
+<td><strong>システム統合失敗</strong></td>
+<td>🟢 <strong>極低</strong><br/>豊富な実績</td>
+<td>🔴 <strong>高</strong><br/>連携制約多</td>
+<td><strong>Microsoft大幅優位</strong></td>
+</tr>
+<tr>
+<td><strong>性能問題</strong></td>
+<td>🟢 <strong>極低</strong><br/>保証充実</td>
+<td>🟡 <strong>中</strong><br/>基本保証</td>
+<td><strong>Microsoft優位</strong></td>
+</tr>
+<tr>
+<td><strong>運用継続困難</strong></td>
+<td>🟢 <strong>極低</strong><br/>安定性確保</td>
+<td>🟡 <strong>中</strong><br/>サービス終了歴</td>
+<td><strong>Microsoft優位</strong></td>
+</tr>
+</tbody>
+</table>
+<h3 id="%E9%81%8B%E7%94%A8%E3%83%AA%E3%82%B9%E3%82%AF">運用リスク</h3>
+<table>
+<thead>
+<tr>
+<th>リスク項目</th>
+<th>Microsoft 365</th>
+<th>Google Workspace</th>
+<th>リスクレベル差</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>サポート不足</strong></td>
+<td>🟢 <strong>極低</strong><br/>24時間体制</td>
+<td>🔴 <strong>高</strong><br/>制限あり</td>
+<td><strong>Microsoft大幅優位</strong></td>
+</tr>
+<tr>
+<td><strong>教育機能不足</strong></td>
+<td>🟢 <strong>極低</strong><br/>特化機能充実</td>
+<td>🔴 <strong>高</strong><br/>一般機能のみ</td>
+<td><strong>Microsoft大幅優位</strong></td>
+</tr>
+<tr>
+<td><strong>移行困難</strong></td>
+<td>🟢 <strong>極低</strong><br/>専門支援</td>
+<td>🟡 <strong>中</strong><br/>基本支援</td>
+<td><strong>Microsoft優位</strong></td>
+</tr>
+<tr>
+<td><strong>コスト超過</strong></td>
+<td>🟢 <strong>極低</strong><br/>教育割引充実</td>
+<td>🟡 <strong>中</strong><br/>追加費用可能性</td>
+<td><strong>Microsoft優位</strong></td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="%E4%BD%BF%E3%81%84%E5%88%86%E3%81%91%E6%8E%A8%E5%A5%A8">使い分け推奨</h2>
+<h3 id="microsoft-365%E3%82%92%E5%BC%B7%E3%81%8F%E6%8E%A8%E5%A5%A8%E3%81%99%E3%82%8B%E6%95%99%E8%82%B2%E6%A9%9F%E9%96%A2">Microsoft 365を強く推奨する教育機関</h3>
+<h4 id="%F0%9F%A5%87-%E5%BF%85%E9%A0%88%E6%8E%A1%E7%94%A8%E6%8E%A8%E5%A5%A8">🥇 <strong>必須採用推奨</strong></h4>
+<ul>
+<li>✅ <strong>地方自治体立学校（小中高）</strong>
+<ul>
+<li>理由：ISMAP要件、データ主権、法的安全性</li>
+</ul>
+</li>
+<li>✅ <strong>都道府県・市町村教育委員会</strong>
+<ul>
+<li>理由：政府調達基準、データ保護要件</li>
+</ul>
+</li>
+<li>✅ <strong>大量の要配慮個人情報を扱う学校</strong>
+<ul>
+<li>理由：最高レベルセキュリティ、完全監査対応</li>
+</ul>
+</li>
+<li>✅ <strong>既存校務システムと統合が必要な学校</strong>
+<ul>
+<li>理由：豊富な連携実績、移行支援充実</li>
+</ul>
+</li>
+</ul>
+<h4 id="%F0%9F%A5%88-%E9%AB%98%E5%BA%A6%E6%8E%A8%E5%A5%A8">🥈 <strong>高度推奨</strong></h4>
+<ul>
+<li>✅ <strong>私立学校（高セキュリティ要求）</strong></li>
+<li>✅ <strong>専門学校・大学（校務利用）</strong></li>
+<li>✅ <strong>教育関連組織・団体</strong></li>
+</ul>
+<h3 id="google-workspace%E3%81%8C%E6%9D%A1%E4%BB%B6%E4%BB%98%E3%81%8D%E3%81%A7%E6%A4%9C%E8%A8%8E%E5%8F%AF%E8%83%BD%E3%81%AA%E6%95%99%E8%82%B2%E6%A9%9F%E9%96%A2">Google Workspaceが条件付きで検討可能な教育機関</h3>
+<h4 id="%F0%9F%9F%A1-%E6%9D%A1%E4%BB%B6%E4%BB%98%E3%81%8D%E6%A4%9C%E8%A8%8E%E5%8F%AF%E8%83%BD">🟡 <strong>条件付き検討可能</strong></h4>
+<ul>
+<li>🔍 <strong>私立学校（セキュリティ要件が基本レベル）</strong>
+<ul>
+<li>条件：US CLOUD Actリスク受容、CSE設定可能</li>
+</ul>
+</li>
+<li>🔍 <strong>学習系システム中心の利用</strong>
+<ul>
+<li>条件：校務系は別システム、軽微な事務のみ</li>
+</ul>
+</li>
+<li>🔍 <strong>小規模校（予算制約が厳しい）</strong>
+<ul>
+<li>条件：法的要件確認、リスク評価実施</li>
+</ul>
+</li>
+</ul>
+<h4 id="%E2%9D%8C-%E6%8E%A1%E7%94%A8%E9%9D%9E%E6%8E%A8%E5%A5%A8">❌ <strong>採用非推奨</strong></h4>
+<ul>
+<li>❌ <strong>地方自治体立学校</strong></li>
+<li>❌ <strong>要配慮個人情報の大量処理が必要</strong></li>
+<li>❌ <strong>厳格なデータ主権要件がある組織</strong></li>
+<li>❌ <strong>24時間サポートが必須の組織</strong></li>
+</ul>
+<hr>
+<h2 id="%E7%B7%8F%E5%90%88%E6%8E%A8%E5%A5%A8%E4%BA%8B%E9%A0%85">総合推奨事項</h2>
+<h3 id="%F0%9F%A5%87-%E7%AC%AC1%E6%8E%A8%E5%A5%A8microsoft-365-education--azure">🥇 <strong>第1推奨：Microsoft 365 Education + Azure</strong></h3>
+<p><strong>推奨度</strong>: ⭐⭐⭐⭐⭐ (5/5)</p>
+<p><strong>推奨理由</strong>:</p>
+<ol>
+<li><strong>完全法的適合</strong>: 日本の全法令に完全準拠</li>
+<li><strong>最高セキュリティ</strong>: 業界最高水準の保護機能</li>
+<li><strong>教育特化</strong>: 学校現場のニーズを完全理解</li>
+<li><strong>統合性</strong>: 既存システムとの完全連携</li>
+<li><strong>サポート品質</strong>: 24時間安心の日本語サポート</li>
+</ol>
+<p><strong>適用対象</strong>: 🌟 <strong>全ての教育機関で強く推奨</strong></p>
+<h3 id="%F0%9F%A5%88-%E7%AC%AC2%E6%8E%A8%E5%A5%A8google-workspace-for-education">🥈 <strong>第2推奨：Google Workspace for Education</strong></h3>
+<p><strong>推奨度</strong>: ⭐⭐⭐ (3/5) - 条件付き</p>
+<p><strong>条件付き推奨理由</strong>:</p>
+<ol>
+<li><strong>ISMAP準拠</strong>: 政府利用可能</li>
+<li><strong>CSE対応</strong>: 高度暗号化実現可能</li>
+<li><strong>基本機能</strong>: グループウェアとしては優秀</li>
+<li><strong>コスト</strong>: 教育機関向け価格設定</li>
+</ol>
+<p><strong>適用条件</strong>:</p>
+<ul>
+<li>✅ 日本国内データ保存が法的に必須でない</li>
+<li>✅ US CLOUD Actリスクを組織として受容可能</li>
+<li>✅ 高度なセキュリティ設定・運用が可能</li>
+<li>✅ 教育特化機能の不足を補完可能</li>
+</ul>
+<p><strong>適用対象</strong>: 🔍 <strong>限定的な条件下でのみ検討可能</strong></p>
+<hr>
+<h2 id="%E6%84%8F%E6%80%9D%E6%B1%BA%E5%AE%9A%E3%83%95%E3%83%AD%E3%83%BC%E3%83%81%E3%83%A3%E3%83%BC%E3%83%88">意思決定フローチャート</h2>
+<pre class="hljs"><code><div>開始
+  ↓
+地方自治体立学校？
+  ↓ Yes → Microsoft 365【必須】
+  ↓ No
+要配慮個人情報の大量処理？
+  ↓ Yes → Microsoft 365【強く推奨】
+  ↓ No
+24時間日本語サポート必須？
+  ↓ Yes → Microsoft 365【強く推奨】
+  ↓ No
+既存校務システム統合必要？
+  ↓ Yes → Microsoft 365【強く推奨】
+  ↓ No
+US CLOUD Actリスク受容可能？
+  ↓ No → Microsoft 365【推奨】
+  ↓ Yes
+高度セキュリティ設定・運用可能？
+  ↓ No → Microsoft 365【推奨】
+  ↓ Yes
+Google Workspace【条件付き検討可能】
+</div></code></pre>
+<hr>
+<h2 id="%E6%9C%80%E7%B5%82%E7%B5%90%E8%AB%96">最終結論</h2>
+<h3 id="%F0%9F%8F%86-%E6%98%8E%E7%A2%BA%E3%81%AA%E7%B5%90%E8%AB%96">🏆 <strong>明確な結論</strong></h3>
+<p><strong>Microsoft 365 Education + Azure が次世代校務DX基盤として圧倒的に優位</strong></p>
+<p><strong>数値による客観的判定</strong>:</p>
+<ul>
+<li><strong>総合スコア</strong>: Microsoft 365（99点） vs Google Workspace（79点）</li>
+<li><strong>完全対応率</strong>: Microsoft 365（81%） vs Google Workspace（15%）</li>
+<li><strong>リスクレベル</strong>: Microsoft 365（極低） vs Google Workspace（中〜高）</li>
+</ul>
+<h3 id="%F0%9F%93%8A-%E6%8A%95%E8%B3%87%E5%88%A4%E6%96%AD%E3%81%B8%E3%81%AE%E6%8F%90%E8%A8%80">📊 <strong>投資判断への提言</strong></h3>
+<p><strong>Microsoft 365採用により実現される価値</strong>:</p>
+<ol>
+<li><strong>🛡️ リスクゼロの安全運用</strong>: 法的・技術的リスクの完全回避</li>
+<li><strong>⚡ 最高の運用効率</strong>: 教育特化機能による作業時間大幅短縮</li>
+<li><strong>🤝 完全統合環境</strong>: 既存システムとのシームレス連携</li>
+<li><strong>📞 安心のサポート</strong>: 24時間365日の専門サポート</li>
+<li><strong>🚀 将来性確保</strong>: 継続的な機能強化と長期サポート</li>
+</ol>
+<p><strong>ROI（投資対効果）</strong>: Microsoft 365 が Google Workspace を大幅に上回る</p>
+<hr>
+<p><strong>本比較マトリックス作成者</strong>: 次世代校務DX専門チーム<br>
+<strong>作成日</strong>: 2025年7月4日<br>
+<strong>データソース</strong>:</p>
+<ul>
+<li>Google Workspace RFI要件ギャップ分析詳細レポート</li>
+<li>Microsoft 365 RFI要件ギャップ分析詳細レポート</li>
+<li>実証調査結果（Google確認結果と考察.pdf）</li>
+</ul>
+<p><strong>免責事項</strong>: 本比較は2025年7月時点の情報に基づいており、各サービスの機能改善により状況が変化する可能性があります。最終的な導入決定時は最新情報の確認を推奨します。</p>
+
+</body>
+</html>
