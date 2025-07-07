@@ -1,0 +1,18 @@
+title: "経験が浅いエンジニアのための技術文書作成ガイド：Word脱却からオンライン発信まで"
+summary: "経験が浅いエンジニアやドキュメント作成に時間を取れないベテランエンジニアが、Word/PowerPointから脱却してVS Code・Claude Code・GitHub・Zennを活用し、技術的に正確で読みやすい文書を効率的に作成する実践ガイド。AI支援と Microsoft Learn MCP Serverによる知識補完で専門外分野でも正確な文書作成が可能。文書企画・ドラフト作成プロセスによるペルソナ分析で読者が求める文書を作成し、オンライン発信による技術者としてのブランディングまで実現できます。"
+topics: ["技術文書", "claude-code", "vscode", "github", "zenn"]
+published: true
+price: 0 # 有料の場合200〜5000
+# 本に含めるチャプターを順番に並べましょう
+chapters:
+  - preface
+  - chapter01-importance
+  - chapter02-environment-setup
+  - chapter03-first-document
+  - chapter04-role-specific-usage
+  - chapter05-business-department-usage
+  - chapter06-ai-advanced-writing
+  - chapter07-team-collaboration
+  - chapter08-online-publishing
+  - chapter09-summary
+

@@ -15,16 +15,64 @@ This is a Zenn.dev content management repository that uses Zenn CLI to manage te
 
 ### Development Workflow
 1. Install dependencies: `npm install`
-2. **Create draft file**: Before creating Zenn files, create a draft file with book outline
-   - Include book title, summary, target audience, and table of contents
-   - This file is not uploaded to Zenn (local work only)
-3. Create books using the command above
+2. Create books using `npx zenn new:book` command
+3. **Create draft file**: After creating the book directory, create a detailed draft file in the book directory
+   - Save as `draft-[book-title].md` in the `/books/{book-id}/` directory
+   - Include book title, summary, target audience, and complete table of contents
+   - **Chapter Structure**: Use hierarchical structure (章=Chapter, 節=Section, 項=Subsection)
+   - **Chapter Outlines**: Include purpose and detailed content overview for each chapter, section, and subsection
+   - This file is not uploaded to Zenn (local work only, for planning purposes)
 4. **IMPORTANT**: Always update INDEX.md when creating new content
 5. Edit markdown files in `/books/`
 6. Preview changes: `npx zenn preview`
 7. Commit and push to GitHub to sync with Zenn.dev
 
 ## Content Structure
+
+### Draft Files (Local Only)
+Draft files should be saved in the book directory as `draft-[book-title].md` and follow this structure for comprehensive planning:
+
+**File Location**: `/books/{book-id}/draft-[book-title].md`
+
+```markdown
+# Book Draft - [Book Title]
+
+## 基本情報
+- **タイトル**: [Book Title]
+- **対象読者**: [Target Audience]
+- **書籍概要**: [Book Overview]
+
+## 章構成 (Chapter Structure)
+
+### 第1章: [章タイトル]
+**目的**: [Chapter Purpose]
+**概要**: [Chapter Overview]
+
+#### 1.1 [節タイトル]
+**目的**: [Section Purpose]
+**内容**: [Section Content Overview]
+
+##### 1.1.1 [項タイトル]
+- [Subsection Content Point 1]
+- [Subsection Content Point 2]
+
+##### 1.1.2 [項タイトル]
+- [Subsection Content Point 1]
+- [Subsection Content Point 2]
+
+#### 1.2 [節タイトル]
+**目的**: [Section Purpose]
+**内容**: [Section Content Overview]
+
+### 第2章: [章タイトル]
+[Same structure as above]
+```
+
+**Benefits of saving draft in book directory**:
+- Keeps all project files together
+- Easy access during chapter creation
+- Maintains project organization
+- Draft file travels with the book when shared
 
 ### Books (`/books/`)
 - Each book is a directory with unique ID
@@ -40,6 +88,40 @@ chapters:
   - "chapter2"
 ```
 - Each chapter is a `.md` file in the book directory
+- **Chapter Hierarchy**: Use title=章, H1=節, H2=項 for consistent structure
+
+### Zenn Markdown Format Requirements
+**CRITICAL**: All Zenn book chapter files MUST start with a title using the `---` format:
+
+```markdown
+---
+title: "Chapter Title"
+---
+
+# Chapter Content Starts Here
+```
+
+**Important Guidelines**:
+- Every `.md` file in `/books/` directory MUST have the frontmatter title
+- The title in frontmatter should match the chapter title (章タイトル)
+- Do NOT use H1 (`#`) for the chapter title - use frontmatter title instead
+- Start content with H1 for section titles (節タイトル)
+- Use H2 for subsection titles (項タイトル)
+
+**Example Structure**:
+```markdown
+---
+title: "第1章: 環境構築と基本設定"
+---
+
+# VS Codeのセットアップ
+
+## VS Codeのインストールと基本設定
+
+### インストール手順
+
+## 執筆に必要な拡張機能
+```
 
 ## GitHub Integration
 
