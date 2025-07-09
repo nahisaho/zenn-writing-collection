@@ -406,7 +406,7 @@ Microsoft Learn Docs MCP Serverは、手動で追加する必要があります�
 
 ```bash
 # Claude CodeにMicrosoft Learn Docs MCPサーバーを追加
-claude mcp add @microsoft/docs https://learn.microsoft.com/api/mcp
+claude mcp add --transport http microsoft.docs.mcp https://learn.microsoft.com/api/mcp
 ```
 
 2. **設定の確認**
