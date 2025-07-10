@@ -25,7 +25,7 @@ title: "ライセンス"
 
 ## クレジット表示の例：
 
-> 「あなたの脳がAIに乗っ取られる前に」 by nahisaho は CC BY-NC 4.0 でライセンスされています。  
+> 「あなたの脳がAIに乗っ取られる前に」 by Hisaho Nakata は CC BY-NC 4.0 でライセンスされています。  
 > 原作：https://zenn.dev/nahisaho/books/8e3c4a16dfc454
 
 ---
