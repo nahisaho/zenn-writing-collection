@@ -1,0 +1,20 @@
+title: "教育機関向けMicrosoft365完全導入ガイド"
+summary: "教育機関がMicrosoft 365を導入する際に必要な全ての知識を網羅した実践的ガイド。計画立案から導入、運用まで、現場の管理者が直面する課題を解決する具体的な手順を解説します。"
+topics: ["microsoft365", "education", "azure", "teams", "security"]
+published: false
+price: 0 # 有料の場合200〜5000
+# 本に含めるチャプターを順番に並べましょう
+chapters:
+  - introduction
+  - chapter01
+  - chapter02-tenant-setup
+  - chapter03-azure-ad
+  - chapter04-user-license
+  - chapter05-exchange
+  - chapter06-sharepoint-onedrive
+  - chapter07-teams
+  - chapter08-security-compliance
+  - chapter09-device-management
+  - chapter10-monitoring
+  - chapter11-migration
+  - chapter12-operations
