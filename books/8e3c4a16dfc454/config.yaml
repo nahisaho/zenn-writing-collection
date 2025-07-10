@@ -1,0 +1,13 @@
+title: "あなたの脳がAIに乗っ取られる前に：認知負債から組織と子どもを守るMIT発・最新戦略"
+summary: "MIT研究チームが明らかにした衝撃の事実―ChatGPTを使い続けると脳の活動が低下する『認知負債』。ビジネスパーソンの創造性低下、子どもたちの思考力衰退が進む前に、今すぐ始めるべき対策を科学的エビデンスと共に解説。組織と教室で実践できる具体的メソッドを提供する、AI時代の必読書。"
+topics: ["AI", "生成AI", "働き方", "生産性", "認知科学"]
+published: true
+price: 0 # 有料の場合200〜5000
+# 本に含めるチャプターを順番に並べましょう
+chapters:
+  - chapter1-cognitive-debt
+  - chapter2-human-strengths
+  - chapter3-practical-framework
+  - chapter4-team-collaboration
+  - chapter5-future-coexistence
+  - epilogue
