@@ -1,0 +1,24 @@
+{
+  "name": "security-presentation-pptx",
+  "version": "1.0.0",
+  "description": "教育機関の情報セキュリティ危機と対策 PowerPoint生成",
+  "main": "create-pptx.js",
+  "scripts": {
+    "start": "node create-pptx.js",
+    "build": "node create-pptx.js",
+    "install-deps": "npm install pptxgenjs"
+  },
+  "dependencies": {
+    "pptxgenjs": "^3.12.0"
+  },
+  "keywords": [
+    "powerpoint",
+    "presentation",
+    "security",
+    "education",
+    "microsoft",
+    "pptx"
+  ],
+  "author": "Security Presentation Generator",
+  "license": "MIT"
+}

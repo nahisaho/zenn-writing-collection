@@ -1,0 +1,19 @@
+title: "認知的自律性を育む生成AI活用：学習者が主体となる新時代の学び"
+summary: "生成AIを活用しながら学習者の認知的自律性を育成し、適切な認知負荷を通じて深い学びを実現する実践的フレームワークを提示。前著『あなたの脳がAIに乗っ取られる前に』の発展的内容として、認知負荷理論に基づいた体系的なAI活用方法を解説します。"
+topics: ["ai", "education", "learning", "cognitive-science", "edtech"]
+published: false
+price: 0 # 有料の場合200〜5000
+# 本に含めるチャプターを順番に並べましょう
+chapters:
+  - prologue
+  - chapter1-cognitive-autonomy
+  - chapter2-cognitive-load-theory
+  - chapter3-spark-framework
+  - chapter4-scaffolding
+  - chapter5-metacognition
+  - chapter6-creativity-critical-thinking
+  - chapter7-age-specific-guide
+  - chapter8-implementation
+  - chapter9-future-ecosystem
+  - epilogue
+  - reference

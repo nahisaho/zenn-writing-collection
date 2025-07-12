@@ -1,0 +1,1378 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>教育機関の情報セキュリティ危機と対策</title>
+    
+    <!-- Reveal.js -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/dist/reveal.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/dist/theme/white.css">
+    
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.min.js"></script>
+    
+    <!-- Mermaid -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10.6.1/dist/mermaid.min.js"></script>
+    
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Custom Styles - Graphical Record + Fluent Design -->
+    <style>
+        :root {
+            --ms-blue: #0078d4;
+            --ms-dark-blue: #106ebe;
+            --ms-red: #d83b01;
+            --ms-green: #107c10;
+            --ms-yellow: #ffb900;
+            --ms-purple: #5c2d91;
+            --ms-gray-light: #f3f2f1;
+            --ms-gray: #605e5c;
+            --ms-gray-dark: #323130;
+            --ms-white: #ffffff;
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            --radius: 8px;
+        }
+
+        /* Base Reveal.js Overrides */
+        .reveal {
+            font-family: "Segoe UI", "Segoe UI Web (West European)", "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif;
+            background: var(--ms-white);
+            color: var(--ms-gray-dark);
+        }
+
+        .reveal .slides {
+            width: 1920px !important;
+            height: 1080px !important;
+        }
+
+        .reveal .slides section {
+            background: var(--ms-white);
+            padding: 60px;
+            text-align: left;
+            width: 100% !important;
+            height: 100% !important;
+            top: 0 !important;
+            display: flex !important;
+            flex-direction: column !important;
+            justify-content: flex-start !important;
+            overflow: hidden;
+        }
+
+        .reveal .slides section.center {
+            text-align: center;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Typography - Presentation Zen Style */
+        .reveal h1 {
+            font-size: 64px;
+            font-weight: 700;
+            color: var(--ms-blue);
+            margin-bottom: 40px;
+            text-align: center;
+            line-height: 1.1;
+            background: linear-gradient(45deg, var(--ms-blue), var(--ms-dark-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .reveal h2 {
+            font-size: 48px;
+            font-weight: 600;
+            color: var(--ms-blue);
+            margin-bottom: 40px;
+            text-align: center;
+            line-height: 1.2;
+        }
+
+        .reveal h3 {
+            font-size: 32px;
+            font-weight: 600;
+            color: var(--ms-gray-dark);
+            margin-bottom: 24px;
+            line-height: 1.3;
+        }
+
+        .reveal h4 {
+            font-size: 24px;
+            font-weight: 600;
+            color: var(--ms-gray);
+            margin-bottom: 20px;
+        }
+
+        .reveal p {
+            font-size: 20px;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .reveal ul, .reveal ol {
+            font-size: 18px;
+            line-height: 1.6;
+        }
+
+        /* Graphical Record Style Cards */
+        .gr-card {
+            background: var(--ms-white);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 40px;
+            margin: 20px 0;
+            border: 3px solid transparent;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .gr-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 6px;
+            background: linear-gradient(90deg, var(--ms-blue), var(--ms-dark-blue));
+            border-radius: var(--radius) var(--radius) 0 0;
+        }
+
+        .gr-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .gr-card.danger::before {
+            background: linear-gradient(90deg, var(--ms-red), #e74c3c);
+        }
+
+        .gr-card.success::before {
+            background: linear-gradient(90deg, var(--ms-green), #27ae60);
+        }
+
+        .gr-card.warning::before {
+            background: linear-gradient(90deg, var(--ms-yellow), #f39c12);
+        }
+
+        /* Big Impact Numbers - Graphical Record Style */
+        .gr-number {
+            font-size: 120px;
+            font-weight: 900;
+            text-align: center;
+            margin: 40px 0;
+            line-height: 1;
+            text-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            position: relative;
+        }
+
+        .gr-number.red {
+            color: var(--ms-red);
+        }
+
+        .gr-number.blue {
+            color: var(--ms-blue);
+        }
+
+        .gr-number.green {
+            color: var(--ms-green);
+        }
+
+        .gr-number::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60%;
+            height: 4px;
+            background: currentColor;
+            opacity: 0.3;
+            border-radius: 2px;
+        }
+
+        .gr-label {
+            font-size: 24px;
+            text-align: center;
+            color: var(--ms-gray);
+            margin-bottom: 30px;
+            font-weight: 500;
+        }
+
+        /* Icon Graphics */
+        .gr-icon {
+            font-size: 80px;
+            text-align: center;
+            margin: 30px 0;
+            display: block;
+        }
+
+        .gr-icon.danger {
+            color: var(--ms-red);
+        }
+
+        .gr-icon.warning {
+            color: var(--ms-yellow);
+        }
+
+        .gr-icon.success {
+            color: var(--ms-green);
+        }
+
+        .gr-icon.info {
+            color: var(--ms-blue);
+        }
+
+        /* Grid Layouts */
+        .gr-grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin: 40px 0;
+        }
+
+        .gr-grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        .gr-grid-4 {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 25px;
+            margin: 40px 0;
+        }
+
+        /* Stat Cards */
+        .gr-stat {
+            text-align: center;
+            padding: 30px;
+            background: var(--ms-white);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            border-left: 6px solid var(--ms-blue);
+            transition: all 0.3s ease;
+        }
+
+        .gr-stat:hover {
+            transform: scale(1.05);
+        }
+
+        .gr-stat-number {
+            font-size: 48px;
+            font-weight: 700;
+            color: var(--ms-red);
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .gr-stat-label {
+            font-size: 16px;
+            color: var(--ms-gray);
+            font-weight: 500;
+        }
+
+        /* Chart Containers */
+        .gr-chart {
+            background: var(--ms-white);
+            padding: 40px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            margin: 40px 0;
+            height: 600px;
+            position: relative;
+        }
+
+        .gr-chart h3 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: var(--ms-blue);
+        }
+
+        /* Highlight Boxes */
+        .gr-highlight {
+            background: linear-gradient(135deg, var(--ms-blue), var(--ms-dark-blue));
+            color: var(--ms-white);
+            padding: 50px;
+            border-radius: var(--radius);
+            margin: 40px 0;
+            text-align: center;
+            box-shadow: var(--shadow);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .gr-highlight::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: pulse 4s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1) rotate(0deg); opacity: 0.5; }
+            50% { transform: scale(1.1) rotate(180deg); opacity: 0.8; }
+        }
+
+        .gr-highlight h3 {
+            color: var(--ms-white);
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .gr-highlight p {
+            position: relative;
+            z-index: 1;
+            font-size: 18px;
+        }
+
+        /* Timeline */
+        .gr-timeline {
+            display: flex;
+            justify-content: space-between;
+            margin: 50px 0;
+            position: relative;
+        }
+
+        .gr-timeline::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--ms-red), var(--ms-yellow), var(--ms-green));
+            border-radius: 2px;
+            z-index: 0;
+        }
+
+        .gr-timeline-item {
+            flex: 1;
+            text-align: center;
+            padding: 40px 20px;
+            background: var(--ms-white);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            margin: 0 15px;
+            position: relative;
+            z-index: 1;
+            border-top: 6px solid;
+            transition: all 0.3s ease;
+        }
+
+        .gr-timeline-item:nth-child(1) { border-top-color: var(--ms-red); }
+        .gr-timeline-item:nth-child(2) { border-top-color: var(--ms-yellow); }
+        .gr-timeline-item:nth-child(3) { border-top-color: var(--ms-green); }
+
+        .gr-timeline-item:hover {
+            transform: translateY(-10px);
+        }
+
+        .gr-timeline-item h4 {
+            color: var(--ms-blue);
+            margin-bottom: 15px;
+        }
+
+        /* Comparison Table */
+        .gr-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 40px 0;
+            background: var(--ms-white);
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+
+        .gr-table th {
+            background: linear-gradient(135deg, var(--ms-blue), var(--ms-dark-blue));
+            color: var(--ms-white);
+            padding: 25px;
+            text-align: left;
+            font-size: 20px;
+            font-weight: 600;
+        }
+
+        .gr-table td {
+            padding: 20px 25px;
+            border-bottom: 1px solid var(--ms-gray-light);
+            font-size: 18px;
+            transition: background-color 0.3s ease;
+        }
+
+        .gr-table tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+
+        .gr-table tr:hover {
+            background-color: #e3f2fd;
+        }
+
+        /* Mermaid Styling */
+        .gr-diagram {
+            background: var(--ms-white);
+            padding: 40px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            margin: 40px 0;
+        }
+
+        /* Progress and Navigation */
+        .reveal .controls {
+            color: var(--ms-blue);
+            bottom: 40px;
+            right: 40px;
+        }
+
+        .reveal .progress {
+            color: var(--ms-blue);
+            height: 6px;
+        }
+
+        /* Slide Counter */
+        .slide-counter {
+            position: fixed;
+            top: 30px;
+            right: 30px;
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(10px);
+            padding: 12px 24px;
+            border-radius: 25px;
+            font-size: 16px;
+            color: var(--ms-gray);
+            box-shadow: var(--shadow);
+            z-index: 1000;
+            font-weight: 600;
+        }
+
+        /* Animations */
+        .fade-in {
+            animation: fadeIn 0.8s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .slide-up {
+            animation: slideUp 0.6s ease-out;
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .zoom-in {
+            animation: zoomIn 0.5s ease-out;
+        }
+
+        @keyframes zoomIn {
+            from { opacity: 0; transform: scale(0.8); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1400px) {
+            .gr-grid-4 { grid-template-columns: repeat(2, 1fr); }
+            .gr-timeline { flex-direction: column; }
+            .gr-timeline-item { margin: 15px 0; }
+        }
+
+        /* Special Elements */
+        .gr-arrow {
+            font-size: 60px;
+            color: var(--ms-blue);
+            text-align: center;
+            margin: 20px 0;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .gr-badge {
+            display: inline-block;
+            background: var(--ms-red);
+            color: var(--ms-white);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+            margin: 0 10px;
+            animation: blink 2s infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        /* Quote Style */
+        .gr-quote {
+            font-size: 28px;
+            font-style: italic;
+            text-align: center;
+            color: var(--ms-blue);
+            margin: 40px 0;
+            padding: 40px;
+            background: var(--ms-gray-light);
+            border-radius: var(--radius);
+            border-left: 6px solid var(--ms-blue);
+            position: relative;
+        }
+
+        .gr-quote::before {
+            content: '"';
+            font-size: 80px;
+            color: var(--ms-blue);
+            opacity: 0.3;
+            position: absolute;
+            top: 10px;
+            left: 20px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Slide Counter -->
+    <div class="slide-counter" id="slideCounter">1 / 18</div>
+    
+    <div class="reveal">
+        <div class="slides">
+            <!-- Slide 1: Title -->
+            <section class="center">
+                <i class="fas fa-shield-alt gr-icon danger"></i>
+                <h1>教育機関の情報セキュリティ危機</h1>
+                <div class="gr-highlight">
+                    <h3>なぜ今、Microsoft 365 A5が必要なのか</h3>
+                </div>
+                <div class="gr-number red">218件</div>
+                <div class="gr-label">2023年度の個人情報漏洩事故件数</div>
+                <span class="gr-badge">緊急</span>
+            </section>
+
+            <!-- Slide 2: Problem Statement -->
+            <section class="center">
+                <h2>なぜ今、この話題なのか？</h2>
+                <div class="gr-grid-2">
+                    <div class="gr-card danger">
+                        <i class="fas fa-exclamation-triangle gr-icon danger"></i>
+                        <h3>深刻化する脅威</h3>
+                        <p>教育機関への攻撃が急増し、他業種を上回る増加率を記録</p>
+                    </div>
+                    <div class="gr-card warning">
+                        <i class="fas fa-users gr-icon warning"></i>
+                        <h3>影響の甚大さ</h3>
+                        <p>児童生徒の未来に関わるセンシティブ情報の大量保有</p>
+                    </div>
+                </div>
+                <div class="gr-arrow">↓</div>
+                <div class="gr-quote">
+                    組織の存続に関わる必須対策が求められている
+                </div>
+            </section>
+
+            <!-- Slide 3: Current Crisis Recognition -->
+            <section>
+                <h2>看過できない現実</h2>
+                <div class="gr-card danger">
+                    <i class="fas fa-chart-line gr-icon danger"></i>
+                    <h3>🚨 教育機関の情報漏洩事故が急増</h3>
+                    <p>他業種と比較して突出した増加傾向を示している</p>
+                </div>
+                <div class="gr-grid-4">
+                    <div class="gr-stat">
+                        <span class="gr-stat-number">170件</span>
+                        <span class="gr-stat-label">2020年</span>
+                    </div>
+                    <div class="gr-stat">
+                        <span class="gr-stat-number">184件</span>
+                        <span class="gr-stat-label">2021年</span>
+                    </div>
+                    <div class="gr-stat">
+                        <span class="gr-stat-number">207件</span>
+                        <span class="gr-stat-label">2022年</span>
+                    </div>
+                    <div class="gr-stat">
+                        <span class="gr-stat-number">218件</span>
+                        <span class="gr-stat-label">2023年</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 4: Incident Trend -->
+            <section>
+                <h2>事故増加の深刻性</h2>
+                <div class="gr-chart">
+                    <h3>年度別事故件数推移</h3>
+                    <canvas id="incidentChart"></canvas>
+                </div>
+                <div class="gr-highlight">
+                    <div class="gr-number red">28.2%</div>
+                    <p>4年間の事故増加率<br>（他業種は横ばい〜減少）</p>
+                </div>
+            </section>
+
+            <!-- Slide 5: Cause Analysis -->
+            <section>
+                <h2>事故の真因分析</h2>
+                <div class="gr-grid-2">
+                    <div class="gr-chart" style="height: 500px;">
+                        <h3>2023年度 事故原因内訳</h3>
+                        <canvas id="causeChart"></canvas>
+                    </div>
+                    <div>
+                        <div class="gr-card danger">
+                            <h4>第1位</h4>
+                            <div class="gr-number red" style="font-size: 80px;">45.4%</div>
+                            <h3>紛失・置き忘れ</h3>
+                            <ul>
+                                <li>USBメモリ、書類の紛失</li>
+                                <li>公共交通機関での置き忘れ</li>
+                            </ul>
+                        </div>
+                        <div class="gr-card warning">
+                            <h4>第2位</h4>
+                            <div class="gr-number" style="color: var(--ms-yellow); font-size: 80px;">38.5%</div>
+                            <h3>誤送信・誤配布</h3>
+                            <ul>
+                                <li>メールの宛先間違い</li>
+                                <li>BCC設定ミス</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 6: Human Error Focus -->
+            <section class="center">
+                <h2>重要な発見</h2>
+                <i class="fas fa-user-times gr-icon danger"></i>
+                <div class="gr-number red">80%</div>
+                <div class="gr-label">以上が「人為的ミス」に起因</div>
+                <div class="gr-card danger">
+                    <h3>技術的対策だけでは解決できない</h3>
+                    <p>システムの問題ではなく、<strong>人間の行動</strong>が最大のリスク要因</p>
+                </div>
+                <div class="gr-arrow">↓</div>
+                <div class="gr-highlight">
+                    <h3>包括的なセキュリティ戦略が必要</h3>
+                </div>
+            </section>
+
+            <!-- Slide 7: Damage Scale -->
+            <section>
+                <h2>被害の深刻さ</h2>
+                <div class="gr-grid-2">
+                    <div class="gr-card info">
+                        <i class="fas fa-users gr-icon info"></i>
+                        <h3>平均被害者数</h3>
+                        <div class="gr-number blue">2,800人</div>
+                        <p>学校規模を超える影響範囲</p>
+                    </div>
+                    <div class="gr-card danger">
+                        <i class="fas fa-yen-sign gr-icon danger"></i>
+                        <h3>平均損害額</h3>
+                        <div class="gr-number red">6億円</div>
+                        <p>年間予算の5-15%相当</p>
+                    </div>
+                </div>
+                <div class="gr-grid-2">
+                    <div class="gr-card warning">
+                        <h3>対応期間</h3>
+                        <div class="gr-number" style="color: var(--ms-yellow);">8ヶ月</div>
+                        <p>長期的な業務影響</p>
+                    </div>
+                    <div class="gr-highlight">
+                        <h3>最大損害額</h3>
+                        <div class="gr-number">23億円</div>
+                        <p>教育委員会予算を圧迫</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 8: Financial Impact -->
+            <section class="center">
+                <h2>6億円の現実</h2>
+                <i class="fas fa-coins gr-icon danger"></i>
+                <div class="gr-number red">6億円</div>
+                <div class="gr-label">1件あたりの平均損害額</div>
+                <div class="gr-grid-3">
+                    <div class="gr-card">
+                        <h4>直接費用</h4>
+                        <ul>
+                            <li>調査・対応費用</li>
+                            <li>法的対応費用</li>
+                            <li>システム復旧費用</li>
+                        </ul>
+                    </div>
+                    <div class="gr-card">
+                        <h4>間接費用</h4>
+                        <ul>
+                            <li>業務停止による損失</li>
+                            <li>信頼回復のための費用</li>
+                            <li>人件費増加</li>
+                        </ul>
+                    </div>
+                    <div class="gr-card">
+                        <h4>長期的影響</h4>
+                        <ul>
+                            <li>保護者の信頼失墜</li>
+                            <li>職員のモチベーション低下</li>
+                            <li>入学者数への影響</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 9: Seasonal Risk -->
+            <section>
+                <h2>時期的特性</h2>
+                <div class="gr-card warning">
+                    <h3>高リスク期間</h3>
+                    <p>特定の時期に事故が集中して発生</p>
+                </div>
+                <div class="gr-grid-3">
+                    <div class="gr-stat">
+                        <i class="fas fa-calendar-alt gr-icon danger"></i>
+                        <span class="gr-stat-number">14.2%</span>
+                        <span class="gr-stat-label">7月（学期末・成績処理期）</span>
+                    </div>
+                    <div class="gr-stat">
+                        <i class="fas fa-calendar-alt gr-icon warning"></i>
+                        <span class="gr-stat-number">12.8%</span>
+                        <span class="gr-stat-label">12月（年度末準備期）</span>
+                    </div>
+                    <div class="gr-stat">
+                        <i class="fas fa-calendar-alt gr-icon info"></i>
+                        <span class="gr-stat-number">10.6%</span>
+                        <span class="gr-stat-label">4月（新年度混乱期）</span>
+                    </div>
+                </div>
+                <div class="gr-highlight">
+                    <h3>繁忙期ほど注意が必要</h3>
+                    <p>業務量増加時に人為的ミスが発生しやすい</p>
+                </div>
+            </section>
+
+            <!-- Slide 10: Sensitive Information -->
+            <section>
+                <h2>なぜ教育機関が狙われるのか</h2>
+                <div class="gr-diagram">
+                    <pre class="mermaid">
+                        graph TB
+                            A[教育機関] --> B[センシティブ情報の宝庫]
+                            A --> C[構造的脆弱性]
+                            
+                            B --> D[成績・評価記録<br/>→ 進学・就職への影響]
+                            B --> E[健康・医療情報<br/>→ 保険・雇用での差別リスク]
+                            B --> F[家庭環境情報<br/>→ 世帯全体への影響]
+                            B --> G[特別支援情報<br/>→ 生涯にわたる影響]
+                            
+                            C --> H[予算制約<br/>IT予算は全体の2-3%]
+                            C --> I[専門人材不足<br/>98%が他業務と兼任]
+                            C --> J[多様なアクセス環境<br/>在宅・BYOD等]
+                            
+                            classDef sensitive fill:#ffcccb,stroke:#d83b01,stroke-width:3px
+                            classDef vulnerable fill:#ffe4e1,stroke:#ffb900,stroke-width:3px
+                            classDef main fill:#e8f5e8,stroke:#107c10,stroke-width:3px
+                            
+                            class A main
+                            class B,D,E,F,G sensitive
+                            class C,H,I,J vulnerable
+                    </pre>
+                </div>
+            </section>
+
+            <!-- Slide 11: Structural Vulnerabilities -->
+            <section>
+                <h2>構造的脆弱性</h2>
+                <div class="gr-grid-2">
+                    <div class="gr-card danger">
+                        <i class="fas fa-wallet gr-icon danger"></i>
+                        <h3>予算制約</h3>
+                        <div class="gr-number red" style="font-size: 60px;">2-3%</div>
+                        <p>IT予算は全体の2-3%<br>（民間企業の1/3以下）</p>
+                    </div>
+                    <div class="gr-card warning">
+                        <i class="fas fa-user-cog gr-icon warning"></i>
+                        <h3>専門人材不足</h3>
+                        <div class="gr-number" style="color: var(--ms-yellow); font-size: 60px;">98%</div>
+                        <p>情報担当教員の98%が<br>他業務と兼任</p>
+                    </div>
+                </div>
+                <div class="gr-grid-2">
+                    <div class="gr-card info">
+                        <i class="fas fa-id-card gr-icon info"></i>
+                        <h3>規則的ID体系</h3>
+                        <p>学籍番号等の<br>推測可能なアカウント</p>
+                    </div>
+                    <div class="gr-card">
+                        <i class="fas fa-wifi gr-icon"></i>
+                        <h3>多様なアクセス環境</h3>
+                        <p>在宅勤務、BYOD等の<br>管理困難性</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 12: Current Security Limitations -->
+            <section>
+                <h2>従来対策の限界</h2>
+                <div class="gr-card danger">
+                    <i class="fas fa-shield-alt gr-icon danger"></i>
+                    <h3>境界防御の崩壊</h3>
+                    <div class="gr-grid-3">
+                        <div>
+                            <h4>ファイアウォール</h4>
+                            <div class="gr-arrow" style="color: var(--ms-red);">↓</div>
+                            <p>内部侵入後は無力</p>
+                        </div>
+                        <div>
+                            <h4>VPN</h4>
+                            <div class="gr-arrow" style="color: var(--ms-red);">↓</div>
+                            <p>パスワード認証のみでは脆弱</p>
+                        </div>
+                        <div>
+                            <h4>ウイルス対策</h4>
+                            <div class="gr-arrow" style="color: var(--ms-red);">↓</div>
+                            <p>未知の脅威に対応不可</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="gr-card warning">
+                    <i class="fas fa-users gr-icon warning"></i>
+                    <h3>人的対策の形骸化</h3>
+                    <ul>
+                        <li><strong>年1回の形式的研修</strong> → 定着率10%以下</li>
+                        <li><strong>非現実的な運用ルール</strong> → 現場で無視・回避</li>
+                        <li><strong>インシデント訓練不足</strong> → 実際の事故で混乱</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Slide 13: Why A5 is Necessary -->
+            <section>
+                <h2>Microsoft 365 A5による解決</h2>
+                <div class="gr-grid-2">
+                    <div class="gr-card warning">
+                        <h3>A3では不十分</h3>
+                        <i class="fas fa-times gr-icon danger"></i>
+                        <ul>
+                            <li>基本的な脅威検知のみ</li>
+                            <li>手動対応が中心</li>
+                            <li>内部脅威への対策不足</li>
+                            <li>データ保護機能が限定的</li>
+                        </ul>
+                    </div>
+                    <div class="gr-card success">
+                        <h3>A5による完全保護</h3>
+                        <i class="fas fa-check-circle gr-icon success"></i>
+                        <ul>
+                            <li>AI/ML による24時間監視</li>
+                            <li>自動的な脅威の封じ込め</li>
+                            <li>内部脅威の事前検知</li>
+                            <li>高度なデータ保護機能</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="gr-chart" style="height: 400px;">
+                    <h3>A3 vs A5 機能比較</h3>
+                    <canvas id="comparisonChart"></canvas>
+                </div>
+            </section>
+
+            <!-- Slide 14: A5 Features -->
+            <section>
+                <h2>A5の完全保護機能</h2>
+                <div class="gr-diagram">
+                    <pre class="mermaid">
+                        graph TB
+                            A[Microsoft 365 A5<br/>完全保護システム] --> B[自動化インシデント対応]
+                            A --> C[内部脅威対策]
+                            A --> D[高度データ保護]
+                            A --> E[コンプライアンス自動化]
+                            
+                            B --> F[AI/ML 24時間監視<br/>🤖 人工知能による監視]
+                            B --> G[自動脅威封じ込め<br/>⚡ 即座に隔離・対処]
+                            B --> H[検知時間: 3分以内<br/>🕐 超高速検知]
+                            
+                            C --> I[異常行動検知<br/>👁️ 不審な操作を発見]
+                            C --> J[リスクスコアリング<br/>📊 危険度を数値化]
+                            C --> K[予防的アクセス制限<br/>🚫 事前にブロック]
+                            
+                            D --> L[自動情報分類<br/>📁 重要度を自動判定]
+                            D --> M[暗号化・アクセス制御<br/>🔐 強固な保護]
+                            D --> N[外部共有自動ブロック<br/>🛡️ 漏洩を防止]
+                            
+                            E --> O[規制要件自動準拠<br/>📋 法令遵守を自動化]
+                            E --> P[監査証跡完全記録<br/>📝 全ての操作を記録]
+                            E --> Q[レポート自動生成<br/>📈 分析レポートを生成]
+                            
+                            classDef solution fill:#d4f4d4,stroke:#107c10,stroke-width:3px
+                            classDef feature fill:#e8f5e8,stroke:#107c10,stroke-width:2px
+                            classDef main fill:#0078d4,color:#fff,stroke:#106ebe,stroke-width:4px
+                            
+                            class A main
+                            class B,C,D,E solution
+                            class F,G,H,I,J,K,L,M,N,O,P,Q feature
+                    </pre>
+                </div>
+            </section>
+
+            <!-- Slide 15: ROI Analysis -->
+            <section>
+                <h2>投資対効果分析</h2>
+                <table class="gr-table">
+                    <thead>
+                        <tr>
+                            <th>項目</th>
+                            <th>A3</th>
+                            <th>A5</th>
+                            <th>差額の価値</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>月額費用/ユーザー</td>
+                            <td>862円</td>
+                            <td>1,611円</td>
+                            <td><strong>+749円</strong></td>
+                        </tr>
+                        <tr>
+                            <td>事故防止率</td>
+                            <td>40-50%</td>
+                            <td><strong>90-95%</strong></td>
+                            <td><span style="color: var(--ms-green);">+50%</span></td>
+                        </tr>
+                        <tr>
+                            <td>対応時間削減</td>
+                            <td>30%</td>
+                            <td><strong>80%</strong></td>
+                            <td><span style="color: var(--ms-green);">+50%</span></td>
+                        </tr>
+                        <tr>
+                            <td>人員削減効果</td>
+                            <td>0.5人分</td>
+                            <td><strong>2.0人分</strong></td>
+                            <td><span style="color: var(--ms-green);">+1.5人分</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="gr-highlight">
+                    <h3>ROI試算（1,000人規模）</h3>
+                    <div class="gr-number blue">3.6ヶ月</div>
+                    <p>投資回収期間</p>
+                </div>
+            </section>
+
+            <!-- Slide 16: Implementation Strategy -->
+            <section>
+                <h2>段階的移行戦略</h2>
+                <div class="gr-timeline">
+                    <div class="gr-timeline-item">
+                        <i class="fas fa-rocket gr-icon danger"></i>
+                        <h4>フェーズ1</h4>
+                        <div class="gr-number" style="font-size: 40px; color: var(--ms-red);">3ヶ月</div>
+                        <h3>高リスク領域から開始</h3>
+                        <ul style="text-align: left; font-size: 16px;">
+                            <li>管理職・情報担当者へのA5展開</li>
+                            <li>重要データの特定と保護</li>
+                            <li>基本的な自動化設定</li>
+                        </ul>
+                    </div>
+                    <div class="gr-timeline-item">
+                        <i class="fas fa-expand-arrows-alt gr-icon warning"></i>
+                        <h4>フェーズ2</h4>
+                        <div class="gr-number" style="font-size: 40px; color: var(--ms-yellow);">6ヶ月</div>
+                        <h3>中核業務への拡大</h3>
+                        <ul style="text-align: left; font-size: 16px;">
+                            <li>全教職員へのA5展開</li>
+                            <li>高度な脅威対策の有効化</li>
+                            <li>インシデント対応体制確立</li>
+                        </ul>
+                    </div>
+                    <div class="gr-timeline-item">
+                        <i class="fas fa-check-circle gr-icon success"></i>
+                        <h4>フェーズ3</h4>
+                        <div class="gr-number" style="font-size: 40px; color: var(--ms-green);">12ヶ月</div>
+                        <h3>全面展開と最適化</h3>
+                        <ul style="text-align: left; font-size: 16px;">
+                            <li>生徒アカウントへの展開検討</li>
+                            <li>継続的な改善サイクル確立</li>
+                            <li>完全自動化の実現</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 17: Urgency -->
+            <section class="center">
+                <h2>今すぐ行動すべき理由</h2>
+                <div class="gr-number red">1.7日</div>
+                <div class="gr-label">に1件の事故が発生</div>
+                <div class="gr-grid-2">
+                    <div class="gr-card danger">
+                        <i class="fas fa-exclamation-triangle gr-icon danger"></i>
+                        <h3>事故は「いつ起きるか」の問題</h3>
+                        <p>あなたの組織が次の被害者になる可能性</p>
+                    </div>
+                    <div class="gr-card info">
+                        <i class="fas fa-calculator gr-icon info"></i>
+                        <h3>事故対応コスト</h3>
+                        <div class="gr-number blue" style="font-size: 80px;">100倍</div>
+                        <p>予防コストの100倍以上</p>
+                    </div>
+                </div>
+                <div class="gr-highlight">
+                    <h3>説明責任と信頼</h3>
+                    <p>保護者・地域への説明責任<br>一度失った信頼の回復は困難</p>
+                </div>
+            </section>
+
+            <!-- Slide 18: Call to Action -->
+            <section class="center">
+                <h1>決断の時です</h1>
+                <div class="gr-highlight">
+                    <h3>教育機関の情報セキュリティは</h3>
+                    <div class="gr-number">必須要件</div>
+                    <p>「できればやる」ものではなく<br>「やらなければ組織が存続できない」</p>
+                </div>
+                <div class="gr-grid-2">
+                    <div class="gr-card success">
+                        <i class="fas fa-shield-alt gr-icon success"></i>
+                        <h3>Microsoft 365 A5への投資は</h3>
+                        <p><strong>児童生徒の未来と組織の信頼を守る戦略的投資</strong></p>
+                    </div>
+                    <div class="gr-card info">
+                        <i class="fas fa-play gr-icon info"></i>
+                        <h3>今すぐ行動を開始</h3>
+                        <p><strong>次の被害者にならないために</strong></p>
+                    </div>
+                </div>
+                <div class="gr-arrow">↓</div>
+                <div class="gr-number blue">行動開始</div>
+            </section>
+        </div>
+    </div>
+
+    <!-- Reveal.js Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/dist/reveal.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/plugin/notes/notes.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/plugin/markdown/markdown.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/plugin/highlight/highlight.js"></script>
+
+    <script>
+        // Initialize Reveal.js
+        Reveal.initialize({
+            hash: true,
+            transition: 'slide',
+            transitionSpeed: 'default',
+            backgroundTransition: 'fade',
+            controls: true,
+            progress: true,
+            center: false,
+            touch: true,
+            loop: false,
+            rtl: false,
+            shuffle: false,
+            fragments: true,
+            fragmentInURL: false,
+            embedded: false,
+            help: true,
+            showNotes: false,
+            autoPlayMedia: null,
+            preloadIframes: null,
+            autoSlide: 0,
+            autoSlideStoppable: true,
+            mouseWheel: false,
+            hideInactiveCursor: true,
+            hideCursorTime: 5000,
+            hideAddressBar: true,
+            previewLinks: false,
+            viewDistance: 3,
+            mobileViewDistance: 2,
+            width: 1920,
+            height: 1080,
+            margin: 0.04,
+            minScale: 0.2,
+            maxScale: 2.0,
+            plugins: [RevealMarkdown, RevealHighlight, RevealNotes]
+        });
+
+        // Initialize Mermaid
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'default',
+            themeVariables: {
+                primaryColor: '#0078d4',
+                primaryTextColor: '#ffffff',
+                primaryBorderColor: '#106ebe',
+                lineColor: '#323130',
+                secondaryColor: '#f2f2f2',
+                tertiaryColor: '#e8e8e8'
+            }
+        });
+
+        // Chart.js configurations
+        Chart.defaults.font.family = 'Segoe UI';
+        Chart.defaults.font.size = 18;
+        Chart.defaults.color = '#323130';
+
+        // Update slide counter
+        function updateSlideCounter() {
+            const currentSlide = Reveal.getIndices().h + 1;
+            const totalSlides = Reveal.getTotalSlides();
+            document.getElementById('slideCounter').textContent = `${currentSlide} / ${totalSlides}`;
+        }
+
+        // Listen for slide changes
+        Reveal.on('slidechanged', updateSlideCounter);
+        Reveal.on('ready', updateSlideCounter);
+
+        // Initialize charts when slides are shown
+        Reveal.on('slidechanged', function(event) {
+            const slideIndex = event.indexh;
+            
+            if (slideIndex === 3) { // Incident trend chart
+                setTimeout(() => initIncidentChart(), 200);
+            } else if (slideIndex === 4) { // Cause chart
+                setTimeout(() => initCauseChart(), 200);
+            } else if (slideIndex === 12) { // Comparison chart
+                setTimeout(() => initComparisonChart(), 200);
+            }
+        });
+
+        // Initialize charts on first load
+        Reveal.on('ready', function() {
+            setTimeout(() => {
+                initIncidentChart();
+                initCauseChart();
+                initComparisonChart();
+            }, 500);
+        });
+
+        // Incident trend chart
+        function initIncidentChart() {
+            const ctx = document.getElementById('incidentChart');
+            if (!ctx || ctx.chart) return;
+            
+            ctx.chart = new Chart(ctx.getContext('2d'), {
+                type: 'line',
+                data: {
+                    labels: ['2020年', '2021年', '2022年', '2023年'],
+                    datasets: [{
+                        label: '事故件数',
+                        data: [170, 184, 207, 218],
+                        borderColor: '#d83b01',
+                        backgroundColor: 'rgba(216, 59, 1, 0.1)',
+                        borderWidth: 6,
+                        pointRadius: 12,
+                        pointHoverRadius: 15,
+                        fill: true,
+                        tension: 0.4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            grid: { color: 'rgba(50, 49, 48, 0.1)' },
+                            ticks: { 
+                                font: { size: 16 },
+                                color: '#323130'
+                            }
+                        },
+                        x: {
+                            grid: { color: 'rgba(50, 49, 48, 0.1)' },
+                            ticks: { 
+                                font: { size: 16 },
+                                color: '#323130'
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            backgroundColor: 'rgba(0, 120, 212, 0.9)',
+                            titleColor: '#ffffff',
+                            bodyColor: '#ffffff',
+                            titleFont: { size: 16 },
+                            bodyFont: { size: 14 }
+                        }
+                    }
+                }
+            });
+        }
+
+        // Cause breakdown chart
+        function initCauseChart() {
+            const ctx = document.getElementById('causeChart');
+            if (!ctx || ctx.chart) return;
+            
+            ctx.chart = new Chart(ctx.getContext('2d'), {
+                type: 'doughnut',
+                data: {
+                    labels: ['紛失・置き忘れ', '誤送信・誤配布', '不正アクセス', 'その他'],
+                    datasets: [{
+                        data: [45.4, 38.5, 8.7, 7.4],
+                        backgroundColor: ['#d83b01', '#ffb900', '#107c10', '#5c2d91'],
+                        borderWidth: 0,
+                        hoverOffset: 20
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                padding: 30,
+                                usePointStyle: true,
+                                font: { size: 16 },
+                                color: '#323130'
+                            }
+                        },
+                        tooltip: {
+                            backgroundColor: 'rgba(0, 120, 212, 0.9)',
+                            titleColor: '#ffffff',
+                            bodyColor: '#ffffff',
+                            titleFont: { size: 16 },
+                            bodyFont: { size: 14 },
+                            callbacks: {
+                                label: function(context) {
+                                    return context.label + ': ' + context.parsed + '%';
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        // A3 vs A5 comparison chart
+        function initComparisonChart() {
+            const ctx = document.getElementById('comparisonChart');
+            if (!ctx || ctx.chart) return;
+            
+            ctx.chart = new Chart(ctx.getContext('2d'), {
+                type: 'radar',
+                data: {
+                    labels: ['事故防止率', '対応時間削減', '人員削減効果', 'コスト効率', 'セキュリティレベル'],
+                    datasets: [{
+                        label: 'A3',
+                        data: [45, 30, 25, 60, 50],
+                        borderColor: '#ffb900',
+                        backgroundColor: 'rgba(255, 185, 0, 0.2)',
+                        pointBackgroundColor: '#ffb900',
+                        pointBorderColor: '#fff',
+                        borderWidth: 4,
+                        pointRadius: 10
+                    }, {
+                        label: 'A5',
+                        data: [92, 80, 85, 90, 95],
+                        borderColor: '#107c10',
+                        backgroundColor: 'rgba(16, 124, 16, 0.2)',
+                        pointBackgroundColor: '#107c10',
+                        pointBorderColor: '#fff',
+                        borderWidth: 4,
+                        pointRadius: 10
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        r: {
+                            angleLines: { display: true, color: 'rgba(50, 49, 48, 0.1)' },
+                            grid: { color: 'rgba(50, 49, 48, 0.1)' },
+                            pointLabels: { 
+                                font: { size: 16 },
+                                color: '#323130'
+                            },
+                            ticks: {
+                                beginAtZero: true,
+                                max: 100,
+                                stepSize: 20,
+                                display: false
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                padding: 30,
+                                usePointStyle: true,
+                                font: { size: 18 },
+                                color: '#323130'
+                            }
+                        },
+                        tooltip: {
+                            backgroundColor: 'rgba(0, 120, 212, 0.9)',
+                            titleColor: '#ffffff',
+                            bodyColor: '#ffffff'
+                        }
+                    }
+                }
+            });
+        }
+
+        // Add smooth animations for elements
+        Reveal.on('slidechanged', function(event) {
+            const slide = event.currentSlide;
+            const animatedElements = slide.querySelectorAll('.gr-card, .gr-stat, .gr-timeline-item');
+            
+            animatedElements.forEach((element, index) => {
+                element.style.opacity = '0';
+                element.style.transform = 'translateY(30px)';
+                
+                setTimeout(() => {
+                    element.style.transition = 'all 0.6s ease';
+                    element.style.opacity = '1';
+                    element.style.transform = 'translateY(0)';
+                }, index * 100);
+            });
+        });
+
+        // Add number counting animation
+        function animateNumbers() {
+            const numbers = document.querySelectorAll('.gr-number');
+            numbers.forEach(number => {
+                const text = number.textContent;
+                if (text.match(/^\d+/)) {
+                    const finalNumber = parseInt(text.match(/^\d+/)[0]);
+                    let currentNumber = 0;
+                    const increment = finalNumber / 50;
+                    
+                    const timer = setInterval(() => {
+                        currentNumber += increment;
+                        if (currentNumber >= finalNumber) {
+                            currentNumber = finalNumber;
+                            clearInterval(timer);
+                        }
+                        number.textContent = Math.floor(currentNumber) + text.replace(/^\d+/, '');
+                    }, 30);
+                }
+            });
+        }
+
+        // Trigger animations on slide change
+        Reveal.on('slidechanged', function(event) {
+            setTimeout(animateNumbers, 500);
+        });
+    </script>
+</body>
+</html>
