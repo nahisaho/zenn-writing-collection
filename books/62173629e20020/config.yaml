@@ -15,4 +15,5 @@ chapters:
   - chapter8
   - chapter9
   - chapter10
+  - appendix
 toc_depth: 3  # 目次の表示段階を指定。1〜3の範囲で設定可能。省略した場合は2
