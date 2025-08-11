@@ -1,0 +1,16 @@
+title: "大学職員のための生成AI利活用ガイド（初級者編）：Microsoft 365 Copilot Chat完全活用マニュアル"
+summary: "Microsoft 365 Copilot Chatに特化した大学職員向け実践ガイド。日常業務から学生支援まで、安全で効果的なAI活用方法を段階的に習得。豊富な具体例とプロンプトテンプレート集付き。"
+topics: ["copilot", "生成AI", "大学職員", "microsoft365", "業務効率化"]
+published: true 
+price: 0
+chapters:
+  - chapter00-introduction
+  - chapter01-foundations
+  - chapter02-dependency-risks
+  - chapter03-basic-operations
+  - chapter04-practical-applications
+  - chapter05-student-support
+  - chapter06-communication
+  - chapter07-information-management
+  - chapter08-best-practices
+  - appendix-microsoft-learn

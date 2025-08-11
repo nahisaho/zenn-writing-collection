@@ -1,0 +1,16 @@
+title: "大学教員のための生成AI利活用ガイド（初級者編）：Microsoft 365 Copilot Chat完全活用マニュアル"
+summary: "教育・研究活動を支える責任あるAI活用の実践ガイド。大学教員向けに特化し、学術的誠実性を維持しながらMicrosoft 365 Copilot Chatを安全・効果的に活用する方法を体系的に解説。認知負債対策、研究倫理配慮、教育の質向上を重視した健全なAI活用を実現します。"
+topics: ["生成AI", "大学教員", "教育DX", "研究支援", "Microsoft365"]
+published: true
+price: 0 # 有料の場合200〜5000
+# 本に含めるチャプターを順番に並べましょう
+chapters:
+  - chapter00-introduction
+  - chapter01-foundations
+  - chapter02-dependency-risks
+  - chapter03-basic-operations
+  - chapter04-educational-applications
+  - chapter05-research-applications
+  - chapter06-academic-communication
+  - chapter07-continuous-improvement
+  - chapter08-appendix
