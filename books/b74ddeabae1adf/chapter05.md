@@ -4,7 +4,7 @@ title: "第5章: 経済性分析と市場展望 - 投資動向から将来予測
 
 # 経済性分析と市場展望：投資動向から将来予測まで
 
-第4章で検討した技術的課題と規制対応を踏まえて、本章では原子力分野における生成AI技術の**経済性分析**と**市場展望**を包括的に分析する[^1]。AI技術の急速な進歩と商用化の進展により、原子力AI市場は2024年に転換点を迎え、投資規模・市場規模ともに急激な拡大を示している。
+第4章で検討した技術的課題と規制対応を踏まえて、本章では原子力分野における生成AI技術の**経済性分析**と**市場展望**を包括的に分析する[^66]。AI技術の急速な進歩と商用化の進展により、原子力AI市場は2024年に転換点を迎え、投資規模・市場規模ともに急激な拡大を示している。
 
 原子力学会会員および原子力産業関係者にとって、これらの経済データと市場予測は、投資判断、事業戦略の策定、技術開発の方向性決定において重要な参考情報となる。特に、定量的な投資収益性分析、市場規模予測、新たなビジネスモデルの展望について詳細に検討する。
 
@@ -14,7 +14,7 @@ title: "第5章: 経済性分析と市場展望 - 投資動向から将来予測
 
 ### 2024年：歴史的な投資急拡大
 
-2024年の原子力AI分野へのベンチャーキャピタル投資は**8.28億ドル**に達し、前年（2.7億ドル）の約**307%増**という驚異的な成長を記録した[^2]。これは原子力産業史上最大のAI関連投資規模であり、AI技術全体への投資が年間1,000億ドルを超える中で[^3]、原子力特化分野も急速な成長を示している。
+2024年の原子力AI分野へのベンチャーキャピタル投資は**8.28億ドル**に達し、前年（2.7億ドル）の約**307%増**という驚異的な成長を記録した[^67]。これは原子力産業史上最大のAI関連投資規模であり、AI技術全体への投資が年間1,000億ドルを超える中で[^68]、原子力特化分野も急速な成長を示している。
 
 **投資規模の推移**
 ```
@@ -64,7 +64,7 @@ title: "第5章: 経済性分析と市場展望 - 投資動向から将来予測
 
 ### 総投資規模42億ドルの戦略的意義
 
-技術大手企業（Big Tech）による原子力AI分野への戦略的投資は2024年に**総額42億ドル**に達し、この分野の発展を牽引している[^4]。これらの投資は単なる財務投資ではなく、**AI電力需要の急増**、**クラウドインフラの拡充**、そして**次世代エネルギー戦略**の一環として位置づけられている。
+技術大手企業（Big Tech）による原子力AI分野への戦略的投資は2024年に**総額42億ドル**に達し、この分野の発展を牽引している[^69]。これらの投資は単なる財務投資ではなく、**AI電力需要の急増**、**クラウドインフラの拡充**、そして**次世代エネルギー戦略**の一環として位置づけられている。
 
 ### Microsoft：最大の投資家（16億ドル）
 
@@ -231,7 +231,7 @@ Amazon原子力投資ポートフォリオ:
 
 ### 市場成長の全体像
 
-原子力AI市場は急速な成長軌道にあり、複数の独立した調査機関が一致して高い成長率を予測している。2024年の約42億ドルから2030年の120億ドルへと**年平均成長率（CAGR）19.8%**で成長し、さらに2035年には**280億ドル**に達する見通しである[^5]。
+原子力AI市場は急速な成長軌道にあり、複数の独立した調査機関が一致して高い成長率を予測している。2024年の約42億ドルから2030年の120億ドルへと**年平均成長率（CAGR）19.8%**で成長し、さらに2035年には**280億ドル**に達する見通しである[^70]。
 
 ### 詳細市場予測（2024-2035年）
 
@@ -526,20 +526,20 @@ Nuclear AIaaSの構成:
 
 **参考文献**
 
-[^1]: International Energy Agency, "Nuclear Power and Secure Energy Transitions: From Today's Challenges to Tomorrow's Clean Energy Systems," World Energy Outlook Special Report (2022).
+[^66]: International Energy Agency, "Nuclear Power and Secure Energy Transitions: From Today's Challenges to Tomorrow's Clean Energy Systems," World Energy Outlook Special Report (2022).
 
-[^2]: Pitchbook, "Nuclear Technology Venture Capital Report 2024," Private Market Research (2024).
+[^67]: Pitchbook, "Nuclear Technology Venture Capital Report 2024," Private Market Research (2024).
 
-[^3]: "Startup Funding Regained Its Footing In 2024 As AI Became The Star Of The Show," Crunchbase News, January 2025.
+[^68]: "Startup Funding Regained Its Footing In 2024 As AI Became The Star Of The Show," Crunchbase News, January 2025.
 URL: https://news.crunchbase.com/venture/global-funding-data-analysis-ai-eoy-2024/
 
-[^4]: "AI investments make up 33% of total U.S. venture capital funding in 2024," Tech Startups, October 30, 2024.
+[^69]: "AI investments make up 33% of total U.S. venture capital funding in 2024," Tech Startups, October 30, 2024.
 URL: https://techstartups.com/2024/10/30/ai-investments-make-up-33-of-total-u-s-venture-capital-funding-in-2024/
 
-[^5]: McKinsey & Company, "The State of AI in Nuclear Energy: Market Analysis and Growth Projections," Energy Insights (2024).
+[^70]: McKinsey & Company, "The State of AI in Nuclear Energy: Market Analysis and Growth Projections," Energy Insights (2024).
 
-[^6]: BloombergNEF, "Nuclear AI Market Outlook 2024," New Energy Finance Research (2024).
+[^71]: BloombergNEF, "Nuclear AI Market Outlook 2024," New Energy Finance Research (2024).
 
-[^7]: Wood Mackenzie, "Artificial Intelligence in Nuclear Power: Market Opportunities and Investment Analysis," Power & Renewables Research (2024).
+[^72]: Wood Mackenzie, "Artificial Intelligence in Nuclear Power: Market Opportunities and Investment Analysis," Power & Renewables Research (2024).
 
-[^8]: PwC, "Nuclear Energy Digital Transformation: AI Investment Trends and Economic Impact Analysis," Energy Utilities & Mining Practice (2024).
+[^73]: PwC, "Nuclear Energy Digital Transformation: AI Investment Trends and Economic Impact Analysis," Energy Utilities & Mining Practice (2024).
