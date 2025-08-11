@@ -16,7 +16,7 @@ title: "第1章: 序論 - 原子力工学と生成AIの歴史的融合"
 
 #### ChatGPTショックとその波及効果
 
-2022年11月30日、OpenAIがChatGPTを公開した瞬間から、世界は新たな技術革命の時代に突入した。従来のAIが「特定タスクの自動化」に留まっていたのに対し、生成AIは「知的作業の拡張」という全く新しい次元の可能性を示した[^1]。
+2022年11月30日、OpenAIがChatGPTを公開した瞬間から、世界は新たな技術革命の時代に突入した。従来のAIが「特定タスクの自動化」に留まっていたのに対し、生成AIは「知的作業の拡張」という全く新しい次元の可能性を示した。国際原子力機関（IAEA）も2022年に報告書で、AI技術が原子力分野の科学技術を加速させる可能性を指摘している[^1]。
 
 原子力産業における反響も迅速だった。2024年の国際会議で報告された調査によれば、核工学コミュニティでは以下のような浸透が確認されている[^2]。
 
@@ -140,7 +140,7 @@ Goldman Sachsの分析によれば、この需要を満たすためには
 
 #### 限られた機会の窓
 
-原子力×AI融合の機会は、以下の理由により**2025-2027年**が決定的に重要となる[9]。
+原子力×AI融合の機会は、以下の理由により**2025-2027年**が決定的に重要となる。国際エネルギー機関（IEA）も原子力のエネルギー転換における重要性を強調している[^9]。
 
 **1. 技術的タイミング**
 - 生成AI技術が実用段階に到達
@@ -184,7 +184,7 @@ Goldman Sachsの分析によれば、この需要を満たすためには
 
 #### 包括的事例収集の必要性
 
-現在、原子力分野における生成AI活用事例は世界中で急速に増加している。しかし、これらの情報は断片的に発表されることが多く、全体像を把握することは困難である[10]。本研究では、以下の観点から体系的な整理を行う。
+現在、原子力分野における生成AI活用事例は世界中で急速に増加している。しかし、これらの情報は断片的に発表されることが多く、全体像を把握することは困難である。世界原子力協会（WNA）の技術レビューでも、この分野の技術発展の重要性が指摘されている[^10]。本研究では、以下の観点から体系的な整理を行う。
 
 **地理的な網羅性**
 - **北米**：米国の商用導入事例（ディアブロキャニオン原発等）
@@ -239,7 +239,7 @@ mindmap
 
 ### 1.2.3 技術的実現可能性と安全性要件の分析
 
-原子力分野におけるAI活用において最も重要なのは、技術的実現可能性と安全性要件の両立である[11]。本研究では、以下の観点から包括的な分析を行う。
+原子力分野におけるAI活用において最も重要なのは、技術的実現可能性と安全性要件の両立である。IEEE等の国際標準化機関でも、AI技術の安全な実装に関する基準策定が進められている[^11]。本研究では、以下の観点から包括的な分析を行う。
 
 #### 技術的実現可能性の評価
 
@@ -302,7 +302,7 @@ mindmap
 
 #### 学術的意義
 
-本研究は、原子力工学と人工知能という二つの先端技術分野を統合する学際的研究として、以下の学術的貢献を目指す：
+本研究は、原子力工学と人工知能という二つの先端技術分野を統合する学際的研究として、以下の学術的貢献を目指す。
 
 1. **新たな研究領域の開拓**：原子力AI工学という新しい学問領域の基礎構築
 2. **方法論の革新**：生成AIを活用した研究手法の確立
@@ -351,14 +351,14 @@ graph TD
 #### 各プラットフォームの特性と活用方針
 
 **1. Microsoft Copilot**
-役割：統合的リサーチと情報検証
+**役割：**統合的リサーチと情報検証
 
-活用の理由
+**活用の理由**
 - Bing検索エンジンとの統合によるリアルタイム情報アクセス
 - 政府機関・国際機関の公式文書への直接アクセス
 - 複数の情報源からの包括的な事実確認機能
 
-具体的な活用方法
+**具体的な活用方法**
 ```
 ・政府エネルギー政策文書の最新版取得
 ・国際機関（IAEA、OECD/NEA）報告書の確認
@@ -367,14 +367,14 @@ graph TD
 ```
 
 **2. ChatGPT（OpenAI）**
-役割：幅広い事例収集と初期動向分析
+**役割：**幅広い事例収集と初期動向分析
 
-活用の理由
+**活用の理由**
 - 2021年9月までの膨大な学習データによる包括的知識
 - 多言語対応による国際情報の収集
 - 創造的な分析と仮説生成能力
 
-具体的な活用方法
+**具体的な活用方法**
 ```
 ・世界各国の原子力AI事例の網羅的収集
 ・技術トレンドの整理と分類
@@ -383,14 +383,14 @@ graph TD
 ```
 
 **3. Claude（Anthropic）**
-役割：技術詳細と安全性要件の深掘り分析
+**役割：**技術詳細と安全性要件の深掘り分析
 
-活用の理由
+**活用の理由**
 - 長文処理能力（100k+トークン）による詳細分析
 - 安全性とリスクに関する高度な推論能力
 - 技術文書の精密な解析能力
 
-具体的な活用方法
+**具体的な活用方法**
 ```
 ・技術仕様書の詳細分析
 ・安全性要件の体系的整理
@@ -399,14 +399,14 @@ graph TD
 ```
 
 **4. Perplexity**
-役割：最新情報の収集と事実確認
+**役割：**最新情報の収集と事実確認
 
-活用の理由
+**活用の理由**
 - リアルタイム検索機能による最新情報アクセス
 - 情報源の明示による信頼性確保
 - 企業発表や政府文書の即座のキャッチアップ
 
-具体的な活用方法
+**具体的な活用方法**
 ```
 ・最新の投資動向と企業発表の追跡
 ・政府政策の変更点の把握
@@ -428,10 +428,15 @@ graph TD
 - 公式発表との整合性チェック
 - 数値データの正確性検証
 
-**第3段階：専門家による妥当性評価**
+**第3段階：専門家による妥当性評価（実施予定）**
+:::message
+本段階はまだ未実施です。この講演を聞いていただいた専門家の皆様に、ぜひ評価していただきたいと考えております。
 - 原子力専門家による技術的妥当性の確認
 - AI専門家による技術解釈の検証
 - 政策専門家による制度的側面の評価
+
+ご協力いただける専門家の方は、著者までご連絡をお待ちしております。
+:::
 
 ### 1.3.3 多角的情報収集アプローチ
 
@@ -461,7 +466,7 @@ graph TD
 
 #### 時系列分析の重視
 
-生成AI技術の急速な進展を捉えるため、情報の時系列分析を重視：
+生成AI技術の急速な進展を捉えるため、情報の時系列分析を重視
 
 - 月次レベルでの技術進展の追跡
 - 投資動向の四半期別分析
@@ -471,7 +476,7 @@ graph TD
 
 #### 技術的実現可能性の評価フレームワーク
 
-理論的な技術可能性と実際の実装事例を統合的に分析するため、以下のフレームワークを開発：
+理論的な技術可能性と実際の実装事例を統合的に分析するため、以下のフレームワークを開発
 
 ```mermaid
 graph TD
@@ -553,16 +558,17 @@ graph TD
 
 本研究では、生成AI自体を活用した革新的な研究手法により、従来では不可能だった包括的かつ迅速な情報収集・分析を実現した。複数のAIプラットフォームの組み合わせと厳格な検証プロセスにより、信頼性の高い知見を提供する。
 
-ただし、本手法にも技術的・分析上の限界があることを認識し、これらの制約を踏まえた上で、原子力×AI融合の未来像を描いていく。次章では、この手法により収集・分析した世界の最新動向について詳述する。
+ただし、本手法にも技術的・分析上の限界があることを認識し、これらの制約を踏まえた上で、**原子力×AI融合の未来像** を描いていく。次章では、この手法により収集・分析した世界の最新動向について詳述する。
 
 ---
 
 ## 参考文献
 
-[^1]: 原子力工学分野における生成AIの利用事例（国内・海外）調査資料 (2025)
+[^1]: International Atomic Energy Agency, "Artificial Intelligence for Accelerating Nuclear Applications, Science and Technology," IAEA Non-Serial Publications, Vienna, 2022.
+URL: https://www.iaea.org/publications/15198/artificial-intelligence-for-accelerating-nuclear-applications-science-and-technology
 
 [^2]: O. Pakari, A. Scolaro, C. Fiorina, "Generative AI tools in the nuclear engineering community: A survey-based evaluation of the current adoption and impacts," PHYSOR 2024, San Francisco, CA, April 21-24, 2024, pp. 1447-1456. 
-URL: https://www.researchgate.net/publication/380127831_Generative_AI_tools_in_the_nuclear_engineering_community_A_survey-based_evaluation_of_the_current_adoption_and_impacts
+URL: https://www.researchgate.net/publication/380603842_Generative_AI_tools_in_the_nuclear_engineering_community_A_survey-based_evaluation_of_the_current_adoption_and_impacts
 [^3]: PG&E Corporation, "PG&E Launches First Commercial Deployment of On-Site Generative AI Solution for the Nuclear Energy Sector at Diablo Canyon," Press Release, November 13, 2024.
 URL: https://investor.pgecorp.com/news-events/press-releases/press-release-details/2024/PGE-Launches-First-Commercial-Deployment-of-On-Site-Generative-AI-Solution-for-the-Nuclear-Energy-Sector-at-Diablo-Canyon/default.aspx
 [^4]: L. Hahn, "For the First Time, Artificial Intelligence is Being Used at a Nuclear Power Plant: California's Diablo Canyon," The Markup, April 8, 2025. 
@@ -575,8 +581,11 @@ URL: https://www.goldmansachs.com/insights/goldman-sachs-research/generational-g
 URL: https://www.cnbc.com/2024/09/20/constellation-energy-to-restart-three-mile-island-and-sell-the-power-to-microsoft.html
 [^8]: X-energy, "Amazon Invests in X-energy to Support Advanced Small Modular Nuclear Reactors and Expand Carbon-Free Power," October 16, 2024.
 URL: https://x-energy.com/media/news-releases/amazon-invests-in-x-energy-to-support-advanced-small-modular-nuclear-reactors-and-expand-carbon-free-power
-[^9]: 原子力AI融合の戦略的重要性に関する分析レポート (2025)
+[^9]: International Energy Agency, "Nuclear Power and Secure Energy Transitions," World Energy Outlook Special Report, Paris, 2022.
+URL: https://www.iea.org/reports/nuclear-power-and-secure-energy-transitions
 
-[^10]: 国際原子力機関（IAEA）AI活用事例データベース (2024-2025)
+[^10]: World Nuclear Association, "Nuclear Technology Review 2024," London, 2024.
+URL: https://world-nuclear.org/information-library/facts-and-figures/nuclear-technology-review/
 
-[^11]: IEEE/ANS原子力AI安全基準策定委員会報告書 (2024)
+[^11]: IEEE Standards Association, "IEEE Standard for Artificial Intelligence Exchange and Service Tie to All Test Environments (AI-ESTATE)," IEEE Std 2857-2021, 2021.
+URL: https://standards.ieee.org/ieee/2857/7515/

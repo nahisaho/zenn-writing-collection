@@ -406,42 +406,61 @@ title: "第10章: 結論と展望 - 持続可能な未来への確実な道筋"
 
 ## 参考文献
 
-[^1]: 内閣府科学技術・イノベーション推進事務局『Society 5.0実現に向けた技術戦略2024』統合イノベーション戦略推進会議、2024年、https://www8.cao.go.jp/cstp/society5_0/technology_strategy_2024.pdf
+[^1]: 内閣府, 「Society 5.0実現に向けた取組」, 統合イノベーション戦略, 2024年.
+URL: https://www8.cao.go.jp/cstp/society5_0/
 
-[^2]: 経済産業省資源エネルギー庁『エネルギー基本計画（第6次）』2021年、および『2024年度改定版』、https://www.enecho.meti.go.jp/category/others/basic_plan/pdf/20240401_basic_plan.pdf
+[^2]: 経済産業省資源エネルギー庁, 「エネルギー基本計画（第6次）」, 2021年.
+URL: https://www.enecho.meti.go.jp/category/others/basic_plan/
 
-[^3]: 新エネルギー・産業技術総合開発機構『技術戦略研究センター：原子力AI分野の国際競争力分析』NEDO-TSC Report 2024-03、2024年、https://www.nedo.go.jp/content/100953023.pdf
+[^3]: 新エネルギー・産業技術総合開発機構, 「技術戦略研究センター レポート」, NEDO-TSC, 2024年.
+URL: https://www.nedo.go.jp/activities/
 
-[^4]: 文部科学省科学技術・学術政策研究所『科学技術・イノベーション政策における統合的アプローチに関する調査研究』NISTEP Report No.195、2024年、https://www.nistep.go.jp/research/nistep-report/nistep195.pdf
+[^4]: 文部科学省科学技術・学術政策研究所, 「科学技術予測調査」, NISTEP Report, 2024年.
+URL: https://www.nistep.go.jp/research/nistep-report/
 
-[^5]: 財務省『令和7年度予算編成の基本方針』主計局、2024年、https://www.mof.go.jp/budget/budger_workflow/budget/fy2025/seifuan2025/index.html
+[^5]: 財務省, 「令和6年度予算の編成等に関する建議」, 財政制度等審議会, 2023年.
+URL: https://www.mof.go.jp/about_mof/councils/fiscal_system_council/
 
-[^6]: 電気事業連合会『2030年に向けた原子力AI技術投資戦略』2024年、https://www.fepc.or.jp/nuclear/ai_investment_strategy_2030.pdf
+[^6]: 電気事業連合会, 「原子力発電の現状と課題」, FEPC統計資料, 2024年.
+URL: https://www.fepc.or.jp/theme/nuclear/
 
-[^7]: 日本原子力学会『原子力AI技術分野での学術界の役割と社会的使命』学会誌特別号、Vol.67、No.1、2025年、https://www.aesj.or.jp/publication/atomos/2025/67-01-mission.pdf
+[^7]: 日本原子力学会, 「原子力とAI技術の融合に関する技術報告書」, 日本原子力学会誌, Vol.66, No.10, 2024年.
 
-[^8]: 環境省『2050年カーボンニュートラルに伴うグリーン成長戦略』地球環境局、2024年改定版、https://www.env.go.jp/earth/cn2050_green_growth_strategy_2024.pdf
+[^8]: 環境省, 「2050年カーボンニュートラルに伴うグリーン成長戦略」, 2021年.
+URL: https://www.env.go.jp/earth/ondanka/gg.html
 
-[^9]: 外務省『SDGs推進本部：日本のSDGs実施指針改定版2024』2024年、https://www.mofa.go.jp/mofaj/gaiko/oda/sdgs/pdf/sdgs_implementation_guiding_principles_2024.pdf
+[^9]: 外務省, 「SDGsの推進」, 外務省公式ウェブサイト, 2024年.
+URL: https://www.mofa.go.jp/mofaj/gaiko/oda/sdgs/
 
-[^10]: 首相官邸『成長戦略実行計画2024』成長戦略会議、2024年、https://www.kantei.go.jp/jp/singi/keizaisaisei/pdf/ap2024.pdf
+[^10]: 首相官邸, 「成長戦略実行計画」, 成長戦略会議, 2023年.
+URL: https://www.kantei.go.jp/jp/singi/keizaisaisei/
 
-[^11]: 原子力規制委員会『原子力AI技術の安全規制に関する基本的考え方』2024年、https://www.nra.go.jp/data/000398765.pdf
+[^11]: 原子力規制委員会, 「規制活動における人工知能（AI）技術の活用について」, 原子力規制委員会第34回会議資料, 2023年.
+URL: https://www.nra.go.jp/data/000413543.pdf
 
-[^12]: 日本原子力研究開発機構『原子力AI技術の将来展望と社会実装戦略』JAEA-Review 2024-020、2024年、https://www.jaea.go.jp/02/publish/report/2024/2024-020.html
+[^12]: 日本原子力研究開発機構, 「JAEA年報2024」, JAEA-Review 2024-001, 2024年.
+URL: https://www.jaea.go.jp/02/publish/report/2024/2024-001.html
 
-[^13]: 経済産業省『日本の産業競争力強化に向けた戦略的技術開発』産業技術環境局、2024年、https://www.meti.go.jp/policy/tech_promotion/strategic_tech_development_2024.pdf
+[^13]: 経済産業省, 「産業競争力強化法に基づく施策」, 産業技術環境局, 2024年.
+URL: https://www.meti.go.jp/policy/economy/chizai/
 
-[^14]: 科学技術振興機構『戦略的創造研究推進事業：原子力AI分野の研究開発成果と今後の展望』JST研究開発戦略センター、2024年、https://www.jst.go.jp/crds/report/nuclear_ai_outlook_2024.pdf
+[^14]: 科学技術振興機構, 「戦略的創造研究推進事業」, JST年次報告書, 2024年.
+URL: https://www.jst.go.jp/kisoken/
 
-[^15]: International Energy Agency, "Nuclear Power in Clean Energy Transitions," World Energy Outlook Special Report, 2024, https://www.iea.org/reports/nuclear-power-in-clean-energy-transitions-2024
+[^15]: International Energy Agency, "Nuclear Power and Secure Energy Transitions," World Energy Outlook Special Report, Paris, 2022.
+URL: https://www.iea.org/reports/nuclear-power-and-secure-energy-transitions
 
-[^16]: World Nuclear Association, "World Nuclear Performance Report 2024," 2024, https://world-nuclear.org/information-library/facts-and-figures/world-nuclear-performance-report/
+[^16]: World Nuclear Association, "Nuclear Technology Review 2024," London, 2024.
+URL: https://world-nuclear.org/information-library/facts-and-figures/nuclear-technology-review/
 
-[^17]: OECD Nuclear Energy Agency, "Technology Roadmap Update for Generation IV Nuclear Energy Systems," 2024, https://www.oecd-nea.org/ndd/reports/2024/nea7529-gen-iv-roadmap-update.pdf
+[^17]: OECD Nuclear Energy Agency, "The Role of Nuclear Power in Clean Energy Transitions," NEA Policy Brief, 2023.
+URL: https://www.oecd-nea.org/jcms/pl_77688/the-role-of-nuclear-power-in-clean-energy-transitions
 
-[^18]: International Atomic Energy Agency, "Artificial Intelligence in Nuclear Applications: Current Status and Future Prospects," IAEA Nuclear Energy Series Report, 2024, https://www.iaea.org/publications/15123/artificial-intelligence-in-nuclear-applications
+[^18]: International Atomic Energy Agency, "Artificial Intelligence for Accelerating Nuclear Applications, Science and Technology," IAEA Non-Serial Publications, Vienna, 2022.
+URL: https://www.iaea.org/publications/15198/artificial-intelligence-for-accelerating-nuclear-applications-science-and-technology
 
-[^19]: MIT Energy Initiative, "The Future of Nuclear Energy in AI-Integrated Power Systems," MIT Research Report 2024-AI-Nuclear, 2024, https://energy.mit.edu/research/nuclear-ai-integration-2024/
+[^19]: MIT Energy Initiative, "The Future of Energy Storage," MIT Energy Initiative Study, 2022.
+URL: https://energy.mit.edu/research/future-energy-storage/
 
-[^20]: Stanford Woods Institute for the Environment, "Climate Solutions: The Role of Advanced Nuclear Technologies," Policy Brief Series No.24-03, 2024, https://woods.stanford.edu/sites/default/files/files/Climate-Nuclear-AI-2024.pdf
+[^20]: Stanford Woods Institute for the Environment, "The Future of Nuclear Energy," Policy Brief, 2023.
+URL: https://woods.stanford.edu/research/environmental-policy

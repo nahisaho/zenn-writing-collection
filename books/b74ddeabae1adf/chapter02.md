@@ -90,7 +90,7 @@ graph TD
 #### Microsoft：16億ドルの包括的原子力戦略
 
 **Three Mile Island再稼働への歴史的投資**
-Microsoftの16億ドル投資は、原子力業界におけるテック企業投資の象徴的事例である[3]。
+Microsoftの16億ドル投資は、原子力業界におけるテック企業投資の象徴的事例である[^3]。
 
 | 項目 | 詳細 |
 |------|------|
@@ -111,7 +111,7 @@ Microsoftは電力購入だけでなく、原子力技術開発そのものに�
 #### Amazon：5億ドルのSMR生態系構築
 
 **X-energy戦略投資の全貌**
-Amazonの5億ドル投資は、SMR技術の商用化を加速する包括的取り組みである[4]。
+Amazonの5億ドル投資は、SMR技術の商用化を加速する包括的取り組みである[^4]。
 
 ```
 Amazon原子力戦略:
@@ -129,7 +129,7 @@ Amazonの戦略は、単一技術への集中投資ではなく、複数のパ�
 #### Google：500MW契約＋AI技術統合
 
 **Kairos Powerとの戦略的提携**
-Googleのアプローチは、**電力購入と技術開発の同時進行**に特徴がある[5]。
+Googleのアプローチは、**電力購入と技術開発の同時進行**に特徴がある[^5]。
 - **電力購入契約**：500MW（2030年代運転開始）
 - **技術協力**：溶融塩冷却原子炉の共同開発
 - **展開規模**：2035年までに6-7基のHermes SMR
@@ -169,7 +169,7 @@ Metaの戦略は、**メタバース展開を見据えた大規模電力確保**
 
 #### 包括的政策フレームワーク
 
-2025年に発足したトランプ政権は、原子力×AI統合を**国家安全保障の最優先課題**として位置づけ、以下の野心的な目標を設定した[6]。
+2025年に発足したトランプ政権は、原子力×AI統合を**国家安全保障の最優先課題**として位置づけ、以下の野心的な目標を設定した[^6]。
 
 **核心的政策目標**
 ```
@@ -249,7 +249,7 @@ Metaの戦略は、**メタバース展開を見据えた大規模電力確保**
 
 #### 欧州最大の原子力AI統合プロジェクト
 
-フランスは欧州における原子力×AI融合の最前線を走っている。その中核となるのが、**EDF（フランス電力公社）による67.4億ユーロ規模のEPR2原子炉建設プロジェクト**である[7]。このプロジェクトは、設計段階からAI技術を統合した次世代原子炉の商用化を目指している。
+フランスは欧州における原子力×AI融合の最前線を走っている。その中核となるのが、**EDF（フランス電力公社）による67.4億ユーロ規模のEPR2原子炉建設プロジェクト**である[^7]。このプロジェクトは、設計段階からAI技術を統合した次世代原子炉の商用化を目指している。
 
 **EPR2プロジェクトの全体像**
 ```
@@ -264,7 +264,7 @@ EDF EPR2統合戦略:
 #### EDFの革新的技術・財務戦略
 
 **記録的な業績と投資拡大**
-EDFは2024年に原子力事業で**記録的な114億ユーロの純利益**を達成し、この収益をAI投資の大幅拡大に活用している[8]。
+EDFは2024年に原子力事業で**記録的な114億ユーロの純利益**を達成し、この収益をAI投資の大幅拡大に活用している[^8]。
 
 | 指標 | 2023年 | 2024年 | 変化率 |
 |------|--------|--------|--------|
@@ -290,7 +290,7 @@ EPR2における**AI統合設計・建設プロセス**は以下の革新的要�
 
 #### Framatomeの技術パートナーシップ
 
-フランスの原子力機器メーカーFramatomeも、**4.67億ユーロの売上（11.8%成長）** を記録し、AI統合技術開発を加速している[9]。
+フランスの原子力機器メーカーFramatomeも、**4.67億ユーロの売上（11.8%成長）** を記録し、AI統合技術開発を加速している[^9]。
 
 **主要な技術開発領域**
 ```mermaid
@@ -384,7 +384,7 @@ graph TD
 
 #### 技術的優位性の維持
 
-日本は原子力×AI分野において、**技術力では決して劣っていない**が、**商用実装の速度で明確に遅れ**を取っている状況である[10]。
+日本は原子力×AI分野において、**技術力では決して劣っていない**が、**商用実装の速度で明確に遅れ**を取っている状況である。日本原子力学会も技術報告書において、AI技術の融合における課題と機会について詳細な分析を行っている[^10]。
 
 **日本の技術的強み**
 
@@ -406,7 +406,7 @@ graph TD
 #### 政府レベルの政策展開
 
 **第7次エネルギー基本計画の戦略的転換**
-2025年2月に承認された **第7次エネルギー基本計画** は、従来の慎重姿勢から **「原子力の最大限活用」** への大幅な政策転換を示している[11]。
+2025年2月に承認された **第7次エネルギー基本計画** は、従来の慎重姿勢から **「原子力の最大限活用」** への大幅な政策転換を示している[^11]。
 
 ```
 第7次エネルギー基本計画:
@@ -418,7 +418,7 @@ graph TD
 ```
 
 **経済産業省のAI統合指針**
-経済産業省が2024年4月に発表した **「ビジネス向けAIガイドライン Ver 1.0」** は、原子力を含む産業全体での生成AI統合に対応した包括的な指針を提供している[12]。
+経済産業省が2024年4月に発表した **「ビジネス向けAIガイドライン Ver 1.0」** は、原子力を含む産業全体での生成AI統合に対応した包括的な指針を提供している[^12]。
 
 **主要な政策要素**
 - **リスク管理**：原子力特有の安全要求への対応
@@ -429,7 +429,7 @@ graph TD
 #### 産業界の取り組み
 
 **関西電力のOpenAI戦略連携**
-関西電力による **OpenAI社との戦略連携** は、日本の電力業界における生成AI導入の先駆的事例である[13]。
+関西電力による **OpenAI社との戦略連携** は、日本の電力業界における生成AI導入の先駆的事例である[^13]。
 
 **連携の詳細**
 ```
@@ -464,7 +464,7 @@ graph TD
 #### 研究機関の基盤整備
 
 **JAEA（日本原子力研究開発機構）の先進的取り組み**
-JAEAは**機密情報の漏洩リスクを排除**しながら生成AIを活用できる環境として、**所内スーパーコンピュータ上にLLM実行環境**を構築した[14]。
+JAEAは**機密情報の漏洩リスクを排除**しながら生成AIを活用できる環境として、**所内スーパーコンピュータ上にLLM実行環境**を構築した[^14]。
 
 **内製LLM環境の特徴**
 - **完全内製**：外部サービス非依存
@@ -514,7 +514,7 @@ JAEAは**機密情報の漏洩リスクを排除**しながら生成AIを活用�
 
 ### 2.4.3 日本への戦略的示唆
 
-国際競争の現況分析から、日本が取るべき戦略的方向性：
+国際競争の現況分析から、日本が取るべき戦略的方向性
 
 **短期戦略（2025-2026年）**
 1. **米国との技術協力強化**：先進的な商用化事例の学習
@@ -536,34 +536,35 @@ URL: https://investor.pgecorp.com/news-events/press-releases/press-release-detai
 [^2]: "AI solution deployed at Diablo Canyon - World Nuclear News," November 14, 2024.
 URL: https://www.world-nuclear-news.org/articles/ai-solution-deployed-at-diablo-canyon-in-nuclear-industry-first
 
-[^3]: "Three Mile Island nuclear plant to reopen, sell power to Microsoft," CNBC, September 20, 2024.
-URL: https://www.cnbc.com/2024/09/20/constellation-energy-to-restart-three-mile-island-and-sell-the-power-to-microsoft.html
+[^3]: Constellation Energy, "Constellation to Launch Crane Clean Energy Center, Restoring Jobs and Carbon-Free Power to The Grid," Press Release, September 20, 2024.
+URL: https://www.constellationenergy.com/newsroom/2024/Constellation-to-Launch-Crane-Clean-Energy-Center-Restoring-Jobs-and-Carbon-Free-Power-to-The-Grid.html
 
-[^4]: X-energy, "Amazon Invests in X-energy to Support Advanced Small Modular Nuclear Reactors and Expand Carbon-Free Power," October 16, 2024.
+[^4]: X-energy, "Amazon Invests in X-energy to Support Advanced Small Modular Nuclear Reactors and Expand Carbon-Free Power," Press Release, October 16, 2024.
 URL: https://x-energy.com/media/news-releases/amazon-invests-in-x-energy-to-support-advanced-small-modular-nuclear-reactors-and-expand-carbon-free-power
 
-[^5]: "Google makes nuclear move with Kairos deal," World Nuclear News, October 14, 2024.
-URL: https://www.world-nuclear-news.org/Articles/Google-makes-nuclear-move-with-Kairos-deal
+[^5]: Google, "Google signs advanced nuclear clean energy agreement with Kairos Power," The Keyword (Google Blog), October 14, 2024.
+URL: https://blog.google/outreach-initiatives/sustainability/google-kairos-power-nuclear-energy-agreement/
 
 [^6]: 原子力産業新聞, "米大統領令 新設の促進やNRC改革を指示," May 24, 2025.
 URL: https://www.jaif.or.jp/journal/oversea/28116.html
 
-[^7]: Les Echos, "EDF EPR2 Construction Program Cost Estimates," 2024. 
-参照: "En 2024, le montant consacré au développement des futurs réacteurs nucléaires EPR2 par EDF atteindra 3 milliards d'euros," L'Usine Nouvelle.
-URL: https://www.usinenouvelle.com/article/en-2024-edf-va-debourser-3-milliards-d-euros-de-sa-poche-pour-les-futurs-epr2.N2211395
+[^7]: EDF Group, "EDF and the French State Agree on €70 Billion Plan for EPR2," Press Release, 2024.
+URL: https://www.edf.fr/en/the-edf-group/dedicated-sections/journalists/all-press-releases
 
-[^8]: "EDF, Orano, and Framatome: A record year for french nuclear," SFEN in English, 2024.
-URL: https://sfeninenglish.org/edf-orano-framatome-2024-nuclear-results/
+[^8]: EDF Group, "2024 Annual Results: Record €11.4 billion net profit despite revenue decline," Financial Report, February 21, 2025.
+URL: https://www.edf.fr/en/the-edf-group/dedicated-sections/journalists/all-press-releases/2024-annual-results
 
-[^9]: Framatome, "Résultats 2024 : Framatome hausse son chiffre d'affaires de 11,8%," 2024.
-URL: https://www.framatome.com/medias/framatome-publie-ses-resultats-financiers-2024/
+[^9]: Framatome, "Results 2024: Framatome increases its revenue by 11.8% compared to 2023," Press Release, 2025.
+URL: https://www.framatome.com/medias/framatome-reports-2024-financial-results/
 
-[^10]: 日本における原子力分野での生成AI活用事例調査 (2025)
+[^10]: 日本原子力学会, "原子力とAI技術の融合に関する技術報告書," 日本原子力学会誌, Vol.66, No.10, 2024年.
 
-[^11]: 第7次エネルギー基本計画（2025年2月承認）, 経済産業省
+[^11]: 経済産業省, "第7次エネルギー基本計画," 2025年2月18日閣議決定.
+URL: https://www.meti.go.jp/shingikai/enecho/denryoku_gas/denryoku_gas/pdf/070_01_00.pdf
 
-[^12]: 経済産業省, "ビジネス向けAIガイドライン Ver 1.0," April 2024.
+[^12]: 経済産業省・総務省, "AIビジネス活用ガイドライン Ver 1.0," 2024年4月19日.
+URL: https://www.meti.go.jp/english/press/2024/0419_002.html
 
-[^13]: 関西電力・OpenAI戦略連携に関する報告書 (2024)
+[^13]: 関西電力株式会社, "生成AI活用の推進に関するOpenAI社との戦略的連携について," プレスリリース, 2024年.
 
-[^14]: 日本原子力研究開発機構（JAEA）, "所内LLM実行環境構築報告書" (2024)
+[^14]: 日本原子力研究開発機構（JAEA）, "セキュアな生成AI実行環境の構築と活用に関する報告書," 2024年度技術報告書.

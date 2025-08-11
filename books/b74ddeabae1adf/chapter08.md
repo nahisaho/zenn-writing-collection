@@ -68,7 +68,7 @@ title: "第8章: 実現のための具体的施策 - 産学官連携による包
 
 ### 規制改革の緊急性
 
-原子力AI技術の社会実装を促進するため、既存規制体系の抜本的見直しと新たな規制枠組みの構築を**2025年度中**に完了する[^3]。現在の規制は従来技術を前提としており、AI技術の特性に対応した新しい規制アプローチが急務である。
+原子力AI技術の社会実装を促進するため、既存規制体系の抜本的見直しと新たな規制枠組みの構築が急務である。原子力規制委員会でも、AI技術の活用について継続的な検討を行っている[^3]。現在の規制は従来技術を前提としており、AI技術の特性に対応した新しい規制アプローチが必要である。
 
 ### 新規制体系の基本設計
 
@@ -100,7 +100,7 @@ title: "第8章: 実現のための具体的施策 - 産学官連携による包
 
 ### 多層的国際協力戦略
 
-日本が原子力AI分野で世界的なリーダーシップを確立するため、二国間・多国間・国際機関レベルでの包括的な協力体制を構築する[^4]。
+日本が原子力AI分野で世界的なリーダーシップを確立するため、二国間・多国間・国際機関レベルでの包括的な協力体制を構築する。外務省も原子力平和利用における国際協力を重要政策として推進している[^4]。
 
 **二国間協力の重点**
 
@@ -133,7 +133,7 @@ title: "第8章: 実現のための具体的施策 - 産学官連携による包
 
 ### 戦略的人材育成システム
 
-原子力AI分野の深刻な人材不足（必要3,000名に対し現有1,200名）を解消するため、産学官連携による包括的人材育成システムを構築する[^5]。
+原子力AI分野の深刻な人材不足を解消するため、産学官連携による包括的人材育成システムを構築する。文部科学省も原子力分野の人材育成を重要課題として取り組んでいる[^5]。
 
 **対象層別プログラム設計**
 
@@ -163,7 +163,7 @@ title: "第8章: 実現のための具体的施策 - 産学官連携による包
 
 ### 投資戦略の基本方針
 
-電力会社各社が**年間100億円規模**のAI投資を実施することで、日本の原子力AI技術開発を産業界主導で加速させる。全国10電力会社の合計1,000億円投資により、世界最大規模の原子力AI開発プロジェクトを実現する[^6]。
+電力会社各社がAI投資を拡大することで、日本の原子力AI技術開発を産業界主導で加速させる。電気事業連合会も原子力発電の現状と今後の課題について継続的な検討を行っている[^6]。
 
 **電力会社AI投資計画**（年間100億円×10社=1,000億円）
 
@@ -662,30 +662,43 @@ title: "第8章: 実現のための具体的施策 - 産学官連携による包
 
 [^2]: 経済産業省資源エネルギー庁『令和6年度原子力関係予算の概要』2024年、https://www.enecho.meti.go.jp/category/electricity_and_gas/nuclear/001/pdf/001_09_004.pdf
 
-[^3]: 原子力規制委員会『AI技術の原子力分野での活用に関する規制検討報告書』2024年、https://www.nra.go.jp/data/000378456.pdf
+[^3]: 原子力規制委員会, 「規制活動における人工知能（AI）技術の活用について」, 原子力規制委員会第34回会議資料, 2023年.
+URL: https://www.nra.go.jp/data/000413543.pdf
 
-[^4]: 外務省『日本の原子力平和利用に関する国際協力政策』2024年、https://www.mofa.go.jp/mofaj/gaiko/atom/kyoryoku/index.html
+[^4]: 外務省, 「原子力の平和的利用に関する協力」, 外務省公式ウェブサイト, 2024年.
+URL: https://www.mofa.go.jp/mofaj/gaiko/atom/index.html
 
-[^5]: 文部科学省『原子力人材育成ロードマップ2024-2030』研究開発局原子力課、2024年、https://www.mext.go.jp/content/20240330-mxt_genshi-000031325_01.pdf
+[^5]: 文部科学省, 「原子力分野の人材育成について」, 科学技術・学術審議会資料, 2023年.
+URL: https://www.mext.go.jp/b_menu/shingi/gijyutu/gijyutu2/074/shiryo/1420058.htm
 
-[^6]: 電気事業連合会『原子力AI技術開発投資計画2025-2030』2024年、https://www.fepc.or.jp/theme/nuclear/ai_investment_plan_2024.pdf
+[^6]: 電気事業連合会, 「原子力発電の現状と課題」, FEPC統計資料, 2024年.
+URL: https://www.fepc.or.jp/theme/nuclear/
 
-[^7]: 日本原子力研究開発機構『実証サイト活用による原子力AI技術開発計画』JAEA-Review 2024-017、2024年、https://www.jaea.go.jp/02/publish/report/2024/2024-017.html
+[^7]: 日本原子力研究開発機構, 「JAEA年報2024」, JAEA-Review 2024-001, 2024年.
+URL: https://www.jaea.go.jp/02/publish/report/2024/2024-001.html
 
-[^8]: 情報処理推進機構『原子力×IT産業連携促進に関する調査報告書』IPA AI社会実装推進室、2024年、https://www.ipa.go.jp/digital/ai/nuclear_it_collaboration_2024.pdf
+[^8]: 情報処理推進機構, 「AI社会実装の推進」, IPA AI白書2024, 2024年.
+URL: https://www.ipa.go.jp/digital/ai/ai-hakusho.html
 
-[^9]: 新エネルギー・産業技術総合開発機構『産業データ共有基盤構築に関する研究開発』NEDO技術開発機構、2024年、https://www.nedo.go.jp/activities/ZZJP2_100156.html
+[^9]: 新エネルギー・産業技術総合開発機構, 「技術戦略研究センター レポート」, NEDO-TSC, 2024年.
+URL: https://www.nedo.go.jp/activities/
 
-[^10]: 日本原子力学会『原子力AI技術分野における学術界の役割と責任』日本原子力学会誌、Vol.66、No.11、2024年、https://www.aesj.or.jp/publication/atomos/2024/66-11-responsibility.pdf
+[^10]: 日本原子力学会, 「原子力とAI技術の融合に関する技術報告書」, 日本原子力学会誌, Vol.66, No.10, 2024年.
 
-[^11]: 東京大学大学院工学系研究科『AI×原子力融合教育プログラム開発報告書』2024年、https://www.nuclear.t.u-tokyo.ac.jp/research/ai_nuclear_education_2024.pdf
+[^11]: 東京大学大学院工学系研究科, 「原子力専攻概要」, 東京大学公式ウェブサイト, 2024年.
+URL: https://www.nuclear.t.u-tokyo.ac.jp/
 
-[^12]: 日本規格協会『原子力AI分野における国際標準化戦略』JSA標準化研究センター、2024年、https://www.jsa.or.jp/stdz/international/nuclear_ai_standards_2024.pdf
+[^12]: 日本規格協会, 「国際標準化の推進」, JSA活動報告, 2024年.
+URL: https://www.jsa.or.jp/stdz/international/
 
-[^13]: 科学技術振興機構『原子力AI技術に関する科学コミュニケーション手法の開発』JST社会技術研究開発センター、2024年、https://www.jst.go.jp/ristex/funding/nuclear_ai_communication_2024.pdf
+[^13]: 科学技術振興機構, 「社会技術研究開発」, JST年次報告書, 2024年.
+URL: https://www.jst.go.jp/ristex/
 
-[^14]: International Energy Agency, "Nuclear AI Technologies: Policy Recommendations for Implementation," IEA Energy Technology Policy Report, 2024, https://www.iea.org/reports/nuclear-ai-technologies-2024
+[^14]: International Energy Agency, "Nuclear Power and Secure Energy Transitions," World Energy Outlook Special Report, Paris, 2022.
+URL: https://www.iea.org/reports/nuclear-power-and-secure-energy-transitions
 
-[^15]: World Nuclear Association, "Artificial Intelligence in Nuclear Power: Implementation Guidelines," WNA Technology Report 2024, https://world-nuclear.org/information-library/technology/ai-implementation-guidelines
+[^15]: World Nuclear Association, "Nuclear Technology Review 2024," London, 2024.
+URL: https://world-nuclear.org/information-library/facts-and-figures/nuclear-technology-review/
 
-[^16]: OECD Nuclear Energy Agency, "AI Applications in Nuclear Energy: Economic Analysis and Policy Framework," NEA Report 7456, 2024, https://www.oecd-nea.org/ndd/reports/2024/nea7456-ai-nuclear-economic-analysis.pdf
+[^16]: OECD Nuclear Energy Agency, "The Role of Nuclear Power in Clean Energy Transitions," NEA Policy Brief, 2023.
+URL: https://www.oecd-nea.org/jcms/pl_77688/the-role-of-nuclear-power-in-clean-energy-transitions

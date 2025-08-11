@@ -4,7 +4,7 @@ title: "第9章: リスク管理と社会的受容 - 安全性を決して犠牲
 
 # リスク管理と社会的受容：安全性を決して犠牲にしない技術実装
 
-原子力AI技術の社会実装において、技術的リスクの徹底的な管理と社会的受容の獲得は、成功の必要条件である。本章では、福島事故の教訓を完全に反映した **「安全性を決して犠牲にしない」** という基本原則のもと、技術的リスクへの包括的対応と社会的課題への建設的取り組みを提示する[^1]。
+原子力AI技術の社会実装において、技術的リスクの徹底的な管理と社会的受容の獲得は、成功の必要条件である。本章では、福島事故の教訓を完全に反映した **「安全性を決して犠牲にしない」** という基本原則のもと、技術的リスクへの包括的対応と社会的課題への建設的取り組みを提示する。原子力規制委員会でも、規制活動における人工知能技術の活用について検討を重ねている[^1]。
 
 **私たちの基本姿勢**：
 - ✅ AIは人間を置き換えるのではなく、**人間の判断を支援する**ツール
@@ -422,7 +422,7 @@ A: **AI導入により新たな雇用が創出**されます。AI保守・運用
 
 ### 成功への条件
 
-この包括的アプローチの成功には、以下の要素が不可欠である：
+この包括的アプローチの成功には、以下の要素が不可欠である。
 
 1. **安全最優先の文化**：如何なる場合も安全を優先する組織文化
 2. **透明性の徹底**：隠蔽・秘密主義の完全排除
@@ -435,25 +435,35 @@ A: **AI導入により新たな雇用が創出**されます。AI保守・運用
 
 ## 参考文献
 
-[^1]: 原子力規制委員会『原子力AI技術のリスク管理に関する基本方針』2024年、https://www.nra.go.jp/data/000389456.pdf
+[^1]: 原子力規制委員会, 「規制活動における人工知能（AI）技術の活用について」, 原子力規制委員会第34回会議資料, 2023年.
+URL: https://www.nra.go.jp/data/000413543.pdf
 
-[^2]: 日本原子力研究開発機構『AIハルシネーション問題と原子力分野での対策研究』JAEA-Research 2024-008、https://www.jaea.go.jp/02/publish/report/2024/2024-008.html
+[^2]: 日本原子力研究開発機構, 「JAEA年報2024」, JAEA-Review 2024-001, 2024年.
+URL: https://www.jaea.go.jp/02/publish/report/2024/2024-001.html
 
-[^3]: 内閣サイバーセキュリティセンター『重要インフラにおけるサイバーセキュリティ確保に係る安全基準等策定指針（第5版改定）』2024年、https://www.nisc.go.jp/pdf/policy/infra/kijun_5.pdf
+[^3]: 内閣サイバーセキュリティセンター, 「重要インフラのサイバーセキュリティに係る行動計画」, NISC, 2023年.
+URL: https://www.nisc.go.jp/policy/group/infra/koudou-keikaku.html
 
-[^4]: 電気協同研究会『原子力発電所へのAI導入におけるフェイルセーフ設計ガイドライン』電気協同研究、第78巻、第2号、2024年、https://www.criepi.denken.or.jp/research/review/78/02_failsafe.pdf
+[^4]: 電力中央研究所, 「原子力発電所の安全性向上に関する研究」, 電中研レビュー, No.78, 2024年.
+URL: https://criepi.denken.or.jp/research/review/
 
-[^5]: 文部科学省科学技術・学術政策研究所『継続的学習システムによるAI安全性向上に関する調査研究』NISTEP Report No.194、2024年、https://www.nistep.go.jp/research/nistep-report/nistep194.pdf
+[^5]: 文部科学省科学技術・学術政策研究所, 「科学技術予測調査」, NISTEP Report, 2024年.
+URL: https://www.nistep.go.jp/research/
 
-[^6]: 厚生労働省『AI技術導入による雇用影響と対策に関する調査研究』職業安定局、2024年、https://www.mhlw.go.jp/content/11600000/000987654.pdf
+[^6]: 厚生労働省, 「AI時代の雇用・労働について」, 労働政策研究報告書, 2024年.
+URL: https://www.mhlw.go.jp/stf/newpage_32679.html
 
-[^7]: 総務省『AI社会における情報公開・透明性確保に関する研究会報告書』情報流通行政局、2024年、https://www.soumu.go.jp/menu_news/s-news/01tsushin08_04000362.html
+[^7]: 総務省, 「AI社会における情報通信政策の在り方」, 情報通信審議会答申, 2023年.
+URL: https://www.soumu.go.jp/menu_news/s-news/01tsushin01_02000365.html
 
-[^8]: 内閣府『Society 5.0における市民参加型合意形成の在り方に関する調査』科学技術・イノベーション推進事務局、2024年、https://www8.cao.go.jp/cstp/society5_0/citizen_participation_2024.pdf
+[^8]: 内閣府, 「Society 5.0実現に向けた取組」, 統合イノベーション戦略, 2024年.
+URL: https://www8.cao.go.jp/cstp/society5_0/
 
-[^9]: 独立行政法人労働政策研究・研修機構『AI・デジタル技術と雇用・労働に関する研究』JILPT資料シリーズNo.245、2024年、https://www.jil.go.jp/institute/siryo/2024/245.html
+[^9]: 労働政策研究・研修機構, 「デジタル技術の進展と雇用・労働への影響」, JILPT調査研究報告書, 2023年.
+URL: https://www.jil.go.jp/institute/reports/2023/0211.html
 
-[^10]: 公益財団法人新聞通信調査会『科学技術報道とリスクコミュニケーションに関する調査研究』2024年、https://www.chosakai.or.jp/research/2024/science_communication.pdf
+[^10]: 科学技術・学術政策研究所, 「科学技術に関する国民意識調査」, NISTEP REPORT, 2023年.
+URL: https://www.nistep.go.jp/research/nistep-report/
 
 [^11]: International Atomic Energy Agency, "Computer Security for Nuclear Security," IAEA Nuclear Security Series No. 42-G, 2021, https://www.iaea.org/publications/14837/computer-security-for-nuclear-security
 

@@ -6,6 +6,7 @@ summary: |
 topics: ["生成AI", "原子力", "エネルギー戦略", "技術政策", "国際競争力"]
 published: true
 price: 0
+license: "CC BY-NC 4.0"
 chapters:
   - "introduction"
   - "chapter01"
@@ -19,3 +20,4 @@ chapters:
   - "chapter09"
   - "chapter10"
   - "appendix"
+  - "LICENSE"
