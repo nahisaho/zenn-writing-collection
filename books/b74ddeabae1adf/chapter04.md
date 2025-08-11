@@ -4,7 +4,7 @@ title: "第4章: 技術的課題と解決アプローチ - 安全性確保から
 
 # 技術的課題と解決アプローチ：安全性確保から規制対応まで
 
-第3章で分析した先端技術の実装と成果を受けて、本章では原子力分野における生成AI技術導入に伴う**技術的課題**と**規制上の課題**、そしてそれらに対する**体系的な解決アプローチ**を詳細に検討する[^1]。
+第3章で分析した先端技術の実装と成果を受けて、本章では原子力分野における生成AI技術導入に伴う**技術的課題**と**規制上の課題**、そしてそれらに対する**体系的な解決アプローチ**を詳細に検討する[^38]。
 
 原子力産業特有の高度な安全要求、厳格な規制環境、そして社会的責任の重大性により、AI技術の導入は他産業と比較して格段に高いハードルを越える必要がある。これらの課題を克服することで、原子力分野でのAI活用はより安全で信頼性の高いものとなり、産業全体の発展に貢献できる。
 
@@ -14,7 +14,7 @@ title: "第4章: 技術的課題と解決アプローチ - 安全性確保から
 
 ### 課題の本質と原子力への影響
 
-生成AIモデル、特に大規模言語モデル（LLM）や深層学習システムは、その内部動作が「ブラックボックス」となりやすい特性を持つ。原子力安全においては、**あらゆる判断に明確な根拠が必要**であり、システムの判断根拠が説明できないことは致命的な問題となる[^2]。
+生成AIモデル、特に大規模言語モデル（LLM）や深層学習システムは、その内部動作が「ブラックボックス」となりやすい特性を持つ。原子力安全においては、**あらゆる判断に明確な根拠が必要**であり、システムの判断根拠が説明できないことは致命的な問題となる[^39]。
 
 ```
 説明可能性の技術的要求:
@@ -36,7 +36,7 @@ title: "第4章: 技術的課題と解決アプローチ - 安全性確保から
 
 **1. Explainable AI（XAI）技術の統合実装**
 
-原子力分野では、複数のXAI技術を組み合わせた多層的な説明システムが必要である[^3]。
+原子力分野では、複数のXAI技術を組み合わせた多層的な説明システムが必要である[^40]。
 
 :::message
 **XAI（Explainable Artificial Intelligence）技術の定義と重要性**
@@ -74,7 +74,7 @@ XAIは以下の3つの原則に従う：
 
 **2. 階層的説明システムの構築**
 
-異なるステークホルダーに対して適切なレベルの説明を提供する[^4]。
+異なるステークホルダーに対して適切なレベルの説明を提供する[^41]。
 
 | ステークホルダー | 説明レベル | 要求される内容 |
 |-----------------|------------|----------------|
@@ -102,7 +102,7 @@ XAIは以下の3つの原則に従う：
 
 ### 深層防護とAIの統合
 
-原子力安全の基本原則である **深層防護（Defense in Depth）** をAIシステムに適用した統合的アプローチが不可欠である[^5]。
+原子力安全の基本原則である **深層防護（Defense in Depth）** をAIシステムに適用した統合的アプローチが不可欠である[^42]。
 
 ```
 深層防護の各層でのAI活用:
@@ -150,7 +150,7 @@ XAIは以下の3つの原則に従う：
 
 ### 多重性・多様性・独立性の確保
 
-原子力安全の三原則をAIシステムに適用[^6]
+原子力安全の三原則をAIシステムに適用[^43]
 
 **多重性（Redundancy）**
 - 同一機能の複数AI実装（N+1冗長構成）
@@ -171,7 +171,7 @@ XAIは以下の3つの原則に従う：
 
 ### AI特有のV&V要素
 
-従来のソフトウェアと異なり、AIシステムには**動的な学習・適応能力**があるため、新たなV&V方法論が必要である[^7]。
+従来のソフトウェアと異なり、AIシステムには**動的な学習・適応能力**があるため、新たなV&V方法論が必要である[^44]。
 
 ```
 AI統合V&Vフレームワーク:
@@ -218,7 +218,7 @@ AI統合V&Vフレームワーク:
 
 ### Physics-Informed AI の実装
 
-原子力システムでは、AIの判断が物理法則に矛盾してはならない。 **Physics-Informed Neural Networks（PINNs）** の活用により、物理制約を満たすAIシステムを構築する[^8]。
+原子力システムでは、AIの判断が物理法則に矛盾してはならない。 **Physics-Informed Neural Networks（PINNs）** の活用により、物理制約を満たすAIシステムを構築する[^45]。
 
 **基本方程式の統合**
 ```
@@ -254,7 +254,7 @@ AI統合V&Vフレームワーク:
 
 ### 歴史的転換点：NRC-ONR-CNSC三者協力
 
-2024年9月5日、**世界初の原子力AI規制に関する国際協力**として、米国NRC（原子力規制委員会）、英国ONR（原子力規制庁）、カナダCNSC（原子力安全委員会）による**三者共同原則文書**「Considerations for developing artificial intelligence systems in nuclear applications」が発表された[^9]。
+2024年9月5日、**世界初の原子力AI規制に関する国際協力**として、米国NRC（原子力規制委員会）、英国ONR（原子力規制庁）、カナダCNSC（原子力安全委員会）による**三者共同原則文書**「Considerations for developing artificial intelligence systems in nuclear applications」が発表された[^46]。
 
 ### 三者共同原則の核心要素
 
@@ -286,7 +286,7 @@ NRC-ONR-CNSC共同原則（2024年9月）:
 
 **3段階承認プロセスの確立**
 
-三者合意により、AI導入における標準的な承認プロセスが確立された[^10]。
+三者合意により、AI導入における標準的な承認プロセスが確立された[^47]。
 
 | 段階 | 期間 | 評価内容 | 承認基準 |
 |------|------|----------|----------|
@@ -298,7 +298,7 @@ NRC-ONR-CNSC共同原則（2024年9月）:
 
 ### 従来規制体系の限界
 
-原子力規制の伝統的アプローチは**決定論的システム**を前提としているが、AIシステムは本質的に**確率論的**であり、**動的に変化する**特性を持つ[^11]。
+原子力規制の伝統的アプローチは**決定論的システム**を前提としているが、AIシステムは本質的に**確率論的**であり、**動的に変化する**特性を持つ[^48]。
 
 **従来規制 vs AI技術の相違点**
 
@@ -342,7 +342,7 @@ AI専用規制ガイドライン:
 
 **IEEE 1633改訂：AI対応電気・電子機器要件**
 
-IEEE Nuclear Standards Committee（NSC）による改訂作業が進行中[^12]。
+IEEE Nuclear Standards Committee（NSC）による改訂作業が進行中[^49]。
 
 - **IEEE 1633-2025改訂版**（2025年6月完了予定）
   - AI統合システムの安全要件
@@ -359,7 +359,7 @@ IEEE Nuclear Standards Committee（NSC）による改訂作業が進行中[^12]�
 
 **ISO 19443改訂：原子力AI品質管理システム**
 
-ISO/TC 85（原子力技術）による品質管理標準の拡張[^13]。
+ISO/TC 85（原子力技術）による品質管理標準の拡張[^50]。
 
 - AI開発プロセス管理要件
 - AI運用管理・性能監視要件
@@ -372,7 +372,7 @@ ISO/TC 85（原子力技術）による品質管理標準の拡張[^13]。
 
 ### AI時代のセキュリティパラダイムシフト
 
-原子力AIシステムは、従来のサイバーセキュリティに加えて**AI特有の新たな脅威**に対応する必要がある[^14]。
+原子力AIシステムは、従来のサイバーセキュリティに加えて**AI特有の新たな脅威**に対応する必要がある[^51]。
 
 ```
 原子力AIセキュリティの脅威分類:
@@ -560,33 +560,33 @@ graph TD
 
 **参考文献**
 
-[^1]: O. Pakari, A. Scolaro, C. Fiorina, "Generative AI tools in the nuclear engineering community: A survey-based evaluation of the current adoption and impacts," PHYSOR 2024, San Francisco, CA, April 21-24, 2024, pp. 1447-1456.
+[^38]: O. Pakari, A. Scolaro, C. Fiorina, "Generative AI tools in the nuclear engineering community: A survey-based evaluation of the current adoption and impacts," PHYSOR 2024, San Francisco, CA, April 21-24, 2024, pp. 1447-1456.
 
-[^2]: D. Gunning, M. Stefik, J. Choi, T. Miller, S. Stumpf, G. Yang, "XAI—Explainable artificial intelligence," Science Robotics, Vol. 4, No. 37, eaay7120 (2019).
+[^39]: D. Gunning, M. Stefik, J. Choi, T. Miller, S. Stumpf, G. Yang, "XAI—Explainable artificial intelligence," Science Robotics, Vol. 4, No. 37, eaay7120 (2019).
 
-[^3]: S. M. Lundberg, S. Lee, "A unified approach to interpreting model predictions," Advances in Neural Information Processing Systems, Vol. 30, pp. 4765-4774 (2017).
+[^40]: S. M. Lundberg, S. Lee, "A unified approach to interpreting model predictions," Advances in Neural Information Processing Systems, Vol. 30, pp. 4765-4774 (2017).
 
-[^4]: 原子力AI説明可能性技術ガイドライン, 日本原子力学会 (2024).
+[^41]: 原子力AI説明可能性技術ガイドライン, 日本原子力学会 (2024).
 
-[^5]: International Atomic Energy Agency, "Defence in Depth in Nuclear Safety," INSAG-10, Vienna (1996).
+[^42]: International Atomic Energy Agency, "Defence in Depth in Nuclear Safety," INSAG-10, Vienna (1996).
 
-[^6]: International Atomic Energy Agency, "Application of the Single Failure Criterion," Safety Guide No. NS-G-1.2, Vienna (2000).
+[^43]: International Atomic Energy Agency, "Application of the Single Failure Criterion," Safety Guide No. NS-G-1.2, Vienna (2000).
 
-[^7]: IEEE Standard for Software Verification and Validation, IEEE Std 1012-2016, IEEE Computer Society (2017).
+[^44]: IEEE Standard for Software Verification and Validation, IEEE Std 1012-2016, IEEE Computer Society (2017).
 
-[^8]: M. Raissi, P. Perdikaris, G. Karniadakis, "Physics-informed neural networks: A deep learning framework for solving forward and inverse problems involving nonlinear partial differential equations," Journal of Computational Physics, Vol. 378, pp. 686-707 (2019).
+[^45]: M. Raissi, P. Perdikaris, G. Karniadakis, "Physics-informed neural networks: A deep learning framework for solving forward and inverse problems involving nonlinear partial differential equations," Journal of Computational Physics, Vol. 378, pp. 686-707 (2019).
 
-[^9]: NRC, ONR, CNSC, "Considerations for developing artificial intelligence systems in nuclear applications," Trilateral Principles Paper, September 5, 2024.
+[^46]: NRC, ONR, CNSC, "Considerations for developing artificial intelligence systems in nuclear applications," Trilateral Principles Paper, September 5, 2024.
 URL: https://www.onr.org.uk/news/all-news/2024/09/new-paper-shares-international-principles-for-regulating-ai-in-the-nuclear-sector/
 
-[^10]: "Guidelines drawn up for AI use in nuclear sector," World Nuclear News, September 5, 2024.
+[^47]: "Guidelines drawn up for AI use in nuclear sector," World Nuclear News, September 5, 2024.
 URL: https://www.world-nuclear-news.org/articles/guidelines-drawn-up-for-ai-use-in-nuclear-sector
 
-[^11]: "UK, US, and Canada Release Trilateral Principles for AI Use in Nuclear Sector," BABL AI, September 2024.
+[^48]: "UK, US, and Canada Release Trilateral Principles for AI Use in Nuclear Sector," BABL AI, September 2024.
 URL: https://babl.ai/uk-us-and-canada-release-trilateral-principles-for-ai-use-in-nuclear-sector/
 
-[^12]: IEEE Standards Association, "Nuclear Standards Committee AI Working Group Reports" (2024).
+[^49]: IEEE Standards Association, "Nuclear Standards Committee AI Working Group Reports" (2024).
 
-[^13]: International Organization for Standardization, "Quality assurance programmes for nuclear installations," ISO 19443:2018, Geneva (2018).
+[^50]: International Organization for Standardization, "Quality assurance programmes for nuclear installations," ISO 19443:2018, Geneva (2018).
 
-[^14]: International Atomic Energy Agency, "Computer Security at Nuclear Facilities," Nuclear Security Series No. 17, Vienna (2011).
+[^51]: International Atomic Energy Agency, "Computer Security at Nuclear Facilities," Nuclear Security Series No. 17, Vienna (2011).

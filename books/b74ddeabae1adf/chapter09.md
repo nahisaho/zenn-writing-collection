@@ -4,7 +4,7 @@ title: "第9章: リスク管理と社会的受容 - 安全性を決して犠牲
 
 # リスク管理と社会的受容：安全性を決して犠牲にしない技術実装
 
-原子力AI技術の社会実装において、技術的リスクの徹底的な管理と社会的受容の獲得は、成功の必要条件である。本章では、福島事故の教訓を完全に反映した **「安全性を決して犠牲にしない」** という基本原則のもと、技術的リスクへの包括的対応と社会的課題への建設的取り組みを提示する。原子力規制委員会でも、規制活動における人工知能技術の活用について検討を重ねている[^1]。
+原子力AI技術の社会実装において、技術的リスクの徹底的な管理と社会的受容の獲得は、成功の必要条件である。本章では、福島事故の教訓を完全に反映した **「安全性を決して犠牲にしない」** という基本原則のもと、技術的リスクへの包括的対応と社会的課題への建設的取り組みを提示する。原子力規制委員会でも、規制活動における人工知能技術の活用について検討を重ねている[^114]。
 
 **私たちの基本姿勢**：
 - ✅ AIは人間を置き換えるのではなく、**人間の判断を支援する**ツール
@@ -23,7 +23,7 @@ title: "第9章: リスク管理と社会的受容 - 安全性を決して犠牲
 
 ### 幻覚問題の深刻性認識
 
-AIの「幻覚（ハルシネーション）」とは、AIが実際には存在しない情報や誤った推論結果を、あたかも確実であるかのように提示する現象である。原子力分野では、誤った判断が重大事故につながる可能性があるため、この問題への徹底した対策が必要不可欠である[^2]。
+AIの「幻覚（ハルシネーション）」とは、AIが実際には存在しない情報や誤った推論結果を、あたかも確実であるかのように提示する現象である。原子力分野では、誤った判断が重大事故につながる可能性があるため、この問題への徹底した対策が必要不可欠である[^115]。
 
 **具体的な危険例**：
 - 🚫 存在しない運転手順書を「参照」として提示
@@ -79,7 +79,7 @@ AIの「幻覚（ハルシネーション）」とは、AIが実際には存在�
 
 ### 多層防護セキュリティアーキテクチャ
 
-原子力施設のAI化に伴い、サイバーセキュリティリスクが飛躍的に増大する。国家安全保障にも関わる重要インフラとして、最高水準のセキュリティ対策が必要である[^3]。
+原子力施設のAI化に伴い、サイバーセキュリティリスクが飛躍的に増大する。国家安全保障にも関わる重要インフラとして、最高水準のセキュリティ対策が必要である[^116]。
 
 **物理的セキュリティ層**
 - **施設アクセス制御**
@@ -124,7 +124,7 @@ AIの「幻覚（ハルシネーション）」とは、AIが実際には存在�
 
 ### 多重・多様な安全機能設計
 
-原子力AIシステムにおいては、如何なる故障や異常が発生しても安全側に動作するフェイルセーフ機能の実装が必要不可欠である[^4]。
+原子力AIシステムにおいては、如何なる故障や異常が発生しても安全側に動作するフェイルセーフ機能の実装が必要不可欠である[^117]。
 
 **基本安全原則**
 - **深層防護（Defense in Depth）**
@@ -162,7 +162,7 @@ AIの「幻覚（ハルシネーション）」とは、AIが実際には存在�
 
 ### 学習・適応型安全システム
 
-技術の急速な進歩と新たなリスクの出現に対応するため、継続的学習・改善・適応が可能な動的システムの構築が重要である[^5]。
+技術の急速な進歩と新たなリスクの出現に対応するため、継続的学習・改善・適応が可能な動的システムの構築が重要である[^118]。
 
 **継続的学習・適応機能**
 - **運用データからの学習**
@@ -209,13 +209,13 @@ A: **説明可能AI（XAI）技術**により、AIの判断理由を専門家に
 A: **定期的な手動訓練**と**段階的なAI活用**により、運転員の技能維持・向上を図ります。AIは運転員の能力を奪うのではなく、より高度な判断に集中できるよう支援します。
 
 **Q5: 雇用が奪われるのではないですか？**
-A: **AI導入により新たな雇用が創出**されます。AI保守・運用、データ分析、システム統合など、高度なスキルを活かせる仕事が生まれます[^6]。
+A: **AI導入により新たな雇用が創出**されます。AI保守・運用、データ分析、システム統合など、高度なスキルを活かせる仕事が生まれます[^119]。
 
 ## 9.2.2 透明性の高い情報公開
 
 ### 多層的情報公開戦略
 
-原子力AI技術の社会実装において、市民の理解と信頼を得るためには、透明性を最優先とした包括的な情報公開体制の構築が不可欠である[^7]。
+原子力AI技術の社会実装において、市民の理解と信頼を得るためには、透明性を最優先とした包括的な情報公開体制の構築が不可欠である[^120]。
 
 **基本情報（全市民向け）**
 - **原子力AI技術の基本概念・仕組み**
@@ -267,7 +267,7 @@ A: **AI導入により新たな雇用が創出**されます。AI保守・運用
 
 ### 包括的市民参加・対話戦略
 
-原子力AI技術の社会実装には、技術的な安全性確保だけでなく、市民との信頼関係構築と持続的な対話プロセスが不可欠である[^8]。
+原子力AI技術の社会実装には、技術的な安全性確保だけでなく、市民との信頼関係構築と持続的な対話プロセスが不可欠である[^121]。
 
 **対話・参加の基本原則**
 - **包括性・多様性の確保**
@@ -306,7 +306,7 @@ A: **AI導入により新たな雇用が創出**されます。AI保守・運用
 
 ### 雇用転換・創出戦略
 
-原子力AI技術の導入は労働市場に大きな変革をもたらし、既存雇用への影響と新たな雇用創出の両面を有する。包括的な雇用政策と人材転換支援が必要である[^9]。
+原子力AI技術の導入は労働市場に大きな変革をもたらし、既存雇用への影響と新たな雇用創出の両面を有する。包括的な雇用政策と人材転換支援が必要である[^122]。
 
 **雇用影響の分析・予測**
 - **現状雇用構造（約5万人）**
@@ -361,7 +361,7 @@ A: **AI導入により新たな雇用が創出**されます。AI保守・運用
 
 ### メディア連携・協力戦略
 
-原子力AI技術に関する正確で公正な情報伝達には、メディアとの信頼関係構築と建設的な協力関係が不可欠である[^10]。
+原子力AI技術に関する正確で公正な情報伝達には、メディアとの信頼関係構築と建設的な協力関係が不可欠である[^123]。
 
 **メディア・報道機関との関係構築**
 - **信頼関係・長期パートナーシップ構築**
@@ -435,44 +435,44 @@ A: **AI導入により新たな雇用が創出**されます。AI保守・運用
 
 ## 参考文献
 
-[^1]: 原子力規制委員会, 「規制活動における人工知能（AI）技術の活用について」, 原子力規制委員会第34回会議資料, 2023年.
+[^114]: 原子力規制委員会, 「規制活動における人工知能（AI）技術の活用について」, 原子力規制委員会第34回会議資料, 2023年.
 URL: https://www.nra.go.jp/data/000413543.pdf
 
-[^2]: 日本原子力研究開発機構, 「JAEA年報2024」, JAEA-Review 2024-001, 2024年.
+[^115]: 日本原子力研究開発機構, 「JAEA年報2024」, JAEA-Review 2024-001, 2024年.
 URL: https://www.jaea.go.jp/02/publish/report/2024/2024-001.html
 
-[^3]: 内閣サイバーセキュリティセンター, 「重要インフラのサイバーセキュリティに係る行動計画」, NISC, 2023年.
+[^116]: 内閣サイバーセキュリティセンター, 「重要インフラのサイバーセキュリティに係る行動計画」, NISC, 2023年.
 URL: https://www.nisc.go.jp/policy/group/infra/koudou-keikaku.html
 
-[^4]: 電力中央研究所, 「原子力発電所の安全性向上に関する研究」, 電中研レビュー, No.78, 2024年.
+[^117]: 電力中央研究所, 「原子力発電所の安全性向上に関する研究」, 電中研レビュー, No.78, 2024年.
 URL: https://criepi.denken.or.jp/research/review/
 
-[^5]: 文部科学省科学技術・学術政策研究所, 「科学技術予測調査」, NISTEP Report, 2024年.
+[^118]: 文部科学省科学技術・学術政策研究所, 「科学技術予測調査」, NISTEP Report, 2024年.
 URL: https://www.nistep.go.jp/research/
 
-[^6]: 厚生労働省, 「AI時代の雇用・労働について」, 労働政策研究報告書, 2024年.
+[^119]: 厚生労働省, 「AI時代の雇用・労働について」, 労働政策研究報告書, 2024年.
 URL: https://www.mhlw.go.jp/stf/newpage_32679.html
 
-[^7]: 総務省, 「AI社会における情報通信政策の在り方」, 情報通信審議会答申, 2023年.
+[^120]: 総務省, 「AI社会における情報通信政策の在り方」, 情報通信審議会答申, 2023年.
 URL: https://www.soumu.go.jp/menu_news/s-news/01tsushin01_02000365.html
 
-[^8]: 内閣府, 「Society 5.0実現に向けた取組」, 統合イノベーション戦略, 2024年.
+[^121]: 内閣府, 「Society 5.0実現に向けた取組」, 統合イノベーション戦略, 2024年.
 URL: https://www8.cao.go.jp/cstp/society5_0/
 
-[^9]: 労働政策研究・研修機構, 「デジタル技術の進展と雇用・労働への影響」, JILPT調査研究報告書, 2023年.
+[^122]: 労働政策研究・研修機構, 「デジタル技術の進展と雇用・労働への影響」, JILPT調査研究報告書, 2023年.
 URL: https://www.jil.go.jp/institute/reports/2023/0211.html
 
-[^10]: 科学技術・学術政策研究所, 「科学技術に関する国民意識調査」, NISTEP REPORT, 2023年.
+[^123]: 科学技術・学術政策研究所, 「科学技術に関する国民意識調査」, NISTEP REPORT, 2023年.
 URL: https://www.nistep.go.jp/research/nistep-report/
 
-[^11]: International Atomic Energy Agency, "Computer Security for Nuclear Security," IAEA Nuclear Security Series No. 42-G, 2021, https://www.iaea.org/publications/14837/computer-security-for-nuclear-security
+[^124]: International Atomic Energy Agency, "Computer Security for Nuclear Security," IAEA Nuclear Security Series No. 42-G, 2021, https://www.iaea.org/publications/14837/computer-security-for-nuclear-security
 
-[^12]: OECD Nuclear Energy Agency, "The Safety of Nuclear Installations: NEA Committee on the Safety of Nuclear Installations," 2024, https://www.oecd-nea.org/jcms/pl_15000/the-safety-of-nuclear-installations
+[^125]: OECD Nuclear Energy Agency, "The Safety of Nuclear Installations: NEA Committee on the Safety of Nuclear Installations," 2024, https://www.oecd-nea.org/jcms/pl_15000/the-safety-of-nuclear-installations
 
-[^13]: World Nuclear Association, "Safety of Nuclear Power Reactors," 2024, https://world-nuclear.org/information-library/safety-and-security/safety-of-plants/safety-of-nuclear-power-reactors/
+[^126]: World Nuclear Association, "Safety of Nuclear Power Reactors," 2024, https://world-nuclear.org/information-library/safety-and-security/safety-of-plants/safety-of-nuclear-power-reactors/
 
-[^14]: Institute of Electrical and Electronics Engineers, "IEEE Standard for Artificial Intelligence Exchange and Service Tie to All Test Environments (AI-ESTATE)," IEEE Std 2857-2021, https://standards.ieee.org/ieee/2857/7515/
+[^127]: Institute of Electrical and Electronics Engineers, "IEEE Standard for Artificial Intelligence Exchange and Service Tie to All Test Environments (AI-ESTATE)," IEEE Std 2857-2021, https://standards.ieee.org/ieee/2857/7515/
 
-[^15]: International Organization for Standardization, "ISO/IEC 23053:2022 Framework for AI systems using machine learning," https://www.iso.org/standard/74429.html
+[^128]: International Organization for Standardization, "ISO/IEC 23053:2022 Framework for AI systems using machine learning," https://www.iso.org/standard/74429.html
 
-[^16]: Nuclear Energy Agency, "Stakeholder Involvement Techniques: Short Guide and Annotated Bibliography," NEA/RWM/R(2015)1, 2015, https://www.oecd-nea.org/rwm/reports/2015/rwm-r2015-1.pdf
+[^129]: Nuclear Energy Agency, "Stakeholder Involvement Techniques: Short Guide and Annotated Bibliography," NEA/RWM/R(2015)1, 2015, https://www.oecd-nea.org/rwm/reports/2015/rwm-r2015-1.pdf
