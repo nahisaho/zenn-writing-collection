@@ -1,6 +1,8 @@
-# ライセンス
+---
+title: "ライセンス"
+---
 
-## Creative Commons Attribution-NonCommercial 4.0 International License
+# Creative Commons Attribution-NonCommercial 4.0 International License
 
 Copyright (c) 2025 著者
 
