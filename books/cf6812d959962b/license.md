@@ -53,7 +53,7 @@ title: "ライセンス"
 『理工系教員のための生成AI活用ガイド：認知負債を防ぎ、教育の質を高める実践的アプローチ』
 著者: Hisaho Nakata
 ライセンス: CC BY-NC 4.0
-出典: https://zenn.dev/[book-url]
+出典: https://zenn.dev/cf6812d959962b
 ```
 
 ### 免責事項
