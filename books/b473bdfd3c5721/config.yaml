@@ -1,0 +1,25 @@
+title: "高校教員のための生成AI利活用ガイドブック：認知負債を防ぎ、教育の質を高める実践的アプローチ"
+summary: "高校教員が生成AIを安全かつ効果的に活用するための包括的ガイド。認知負債の概念を中心に、全教科対応の実践的手法を提供。プロンプト設計から授業改善まで段階的に学習できる。"
+topics: ["教育", "生成AI", "高校", "授業設計", "認知負債"]
+published: false
+price: 0
+chapters:
+  - "introduction"
+  - "chapter01-current-situation"
+  - "chapter02-cognitive-debt"
+  - "chapter03-educational-foundation"
+  - "chapter04-prompt-engineering"
+  - "chapter05-lesson-design"
+  - "chapter06-curriculum-evaluation"
+  - "chapter07-material-development"
+  - "chapter08-subject-specific-guide"
+  - "chapter09-student-guidance"
+  - "chapter10-measurement-improvement"
+  - "chapter11-risk-management-ethics"
+  - "chapter12-future-prospects"
+  - "conclusion"
+  - "appendix-a"
+  - "appendix-b-measurement-toolkit"
+  - "appendix-c-troubleshooting-guide"
+  - "reference"
+  - "license"
