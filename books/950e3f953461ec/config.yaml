@@ -1,0 +1,17 @@
+title: "高校教員のための生成AI利活用ガイド（初級者編）"
+summary: "高校教育現場での生成AI活用を実践的にサポート。授業準備から実践、校務効率化まで、教育の質を高めながら働き方改革を実現する方法を体系的に解説。生徒への適切な指導法やリスク管理も含め、責任ある教育DXを推進します。"
+topics: ["生成AI", "高校教育", "教育DX", "授業改善", "働き方改革"]
+published: true
+price: 0 # 有料の場合200〜5000
+# 本に含めるチャプターを順番に並べましょう
+chapters:
+  - chapter01-introduction
+  - chapter02-ai-basics
+  - chapter03-getting-started
+  - chapter04-lesson-preparation
+  - chapter05-classroom-practice
+  - chapter06-administrative-work
+  - chapter07-student-guidance
+  - chapter08-risk-management
+  - chapter09-practical-examples
+  - chapter10-future-prospects

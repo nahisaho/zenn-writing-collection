@@ -1,0 +1,21 @@
+title: "理工系教員のための生成AI活用ガイド：認知負債を防ぎ、教育の質を高める実践的アプローチ"
+summary: "理工系教員が生成AIを活用する際の認知負債リスクを理解し、教育の質を維持・向上させながら効率的にAIを活用するための実践的指南書。教育理論に基づいた活用方法、プロンプト設計、授業設計、研究支援まで網羅的に解説。"
+topics: ["教育", "AI", "生成AI", "認知負債", "理工系"]
+published: false
+price: 0 # 有料の場合200〜5000
+# 本に含めるチャプターを順番に並べましょう
+chapters:
+  - introduction
+  - chapter01
+  - chapter02
+  - chapter03
+  - chapter04
+  - chapter05
+  - chapter06
+  - chapter07
+  - chapter08
+  - chapter09
+  - chapter10
+  - chapter11
+  - chapter12
+  - appendix
