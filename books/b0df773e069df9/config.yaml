@@ -1,0 +1,28 @@
+title: "地域公共政策士のための生成AI入門"
+summary: "沖縄の地域特性を踏まえた地域公共政策士として必要な生成AI活用スキルを体系的に学ぶ教科書。認知負債を避けた健全なAI活用を基盤とし、離島特性や観光産業、基地問題等の沖縄特有課題への対応を含む産官学民連携やセクター間調整に生成AIを活用する方法を、演習とケーススタディを通じて実践的に習得。琉球大学の混合クラス（学部生×自治体職員）での効果的な学習を目指した構成。"
+topics: ["生成AI", "地域政策", "沖縄", "公共政策", "AI活用"]
+published: true
+price: 0
+# 本に含めるチャプターを順番に並べましょう
+chapters:
+  - introduction
+  - chapter01
+  - chapter02
+  - chapter03
+  - chapter04
+  - chapter05
+  - chapter06
+  - chapter07
+  - chapter08
+  - chapter09
+  - chapter10
+  - chapter11
+  - chapter12
+  - appendix-tourism-plan
+  - appendix-paper-a
+  - appendix-paper-b
+  - appendix-paper-c
+  - appendix-d
+  - appendix-e
+  - appendix-f
+  - license
