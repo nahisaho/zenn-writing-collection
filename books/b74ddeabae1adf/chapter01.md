@@ -20,8 +20,8 @@ title: "第1章: 序論 - 原子力工学と生成AIの歴史的融合"
 
 原子力産業における反響も迅速だった。2024年の国際会議で報告された調査によれば、核工学コミュニティでは以下のような浸透が確認されている[^2]。
 
-- **専門職の60-70%** が何らかの生成AIツールを使用経験あり
-- **学生では90%以上** という驚異的な採用率
+- 原子力工学コミュニティにおいて生成AIツールの採用が急速に進展
+- 特に**学生層での採用率が顕著に高い**ことが確認されている
 - 業務効率の加速効果は平均で **約5%**（先進的ユーザーは80-100%の生産性向上を報告）
 
 #### 技術進化のスピード
@@ -32,7 +32,7 @@ title: "第1章: 序論 - 原子力工学と生成AIの歴史的融合"
 2023年3月：GPT-4リリース（マルチモーダル対応）
 2023年11月：GPT-4 Turbo（128kトークン対応）
 2024年5月：GPT-4o（リアルタイム音声・画像処理）
-2025年：原子力専用LLM（FERMI、bertha™）の実用化
+2024-2025年：原子力専用LLM（Atomic CanyonのFERMIモデル等）の実用化
 ```
 
 特筆すべきは、汎用AIから**原子力特化型AI**への進化が、わずか2年で実現したことだ。これは、技術の成熟速度が従来の産業技術とは根本的に異なることを示している。
@@ -44,7 +44,7 @@ title: "第1章: 序論 - 原子力工学と生成AIの歴史的融合"
 原子力発電所は、世界で最も厳格に文書化された産業施設である。その規模は想像を絶する[^3][^4]。
 
 - 米国連邦・州規制により**数十億ページ**に及ぶ技術文書の管理が義務化
-- ディアブロキャニオン原発だけで**40年間に20億ページ**の文書が蓄積
+- ディアブロキャニオン原発だけで**約20億ページ**の文書が蓄積
 - 年間**15,000時間**を文書検索に費やす（時給150ドルで計算すると225万ドル/年）
 
 :::message
@@ -184,7 +184,7 @@ Goldman Sachsの分析によれば、この需要を満たすためには
 
 #### 包括的事例収集の必要性
 
-現在、原子力分野における生成AI活用事例は世界中で急速に増加している。しかし、これらの情報は断片的に発表されることが多く、全体像を把握することは困難である。世界原子力協会（WNA）の技術レビューでも、この分野の技術発展の重要性が指摘されている[^10]。本研究では、以下の観点から体系的な整理を行う。
+現在、原子力分野における生成AI活用事例は世界中で急速に増加している。しかし、これらの情報は断片的に発表されることが多く、全体像を把握することは困難である。国際原子力機関（IAEA）等でも、AI技術の原子力分野への応用の重要性が指摘されている[^10]。本研究では、以下の観点から体系的な整理を行う。
 
 **地理的な網羅性**
 - **北米**：米国の商用導入事例（ディアブロキャニオン原発等）
@@ -239,7 +239,7 @@ mindmap
 
 ### 1.2.3 技術的実現可能性と安全性要件の分析
 
-原子力分野におけるAI活用において最も重要なのは、技術的実現可能性と安全性要件の両立である。IEEE等の国際標準化機関でも、AI技術の安全な実装に関する基準策定が進められている[^11]。本研究では、以下の観点から包括的な分析を行う。
+原子力分野におけるAI活用において最も重要なのは、技術的実現可能性と安全性要件の両立である。IEEE等の国際標準化機関において、AIシステムの検証・妥当性確認手法の標準化が検討されている[^11]。本研究では、以下の観点から包括的な分析を行う。
 
 #### 技術的実現可能性の評価
 
@@ -284,9 +284,9 @@ mindmap
 本研究の最終目標は、実効性のある政策提言と具体的な実行計画を策定することである。
 
 #### 短期計画（2025-2026年）
-- AI原子力推進本部の設置
+- 原子力AI推進組織の設置検討
 - パイロットプロジェクトの開始
-- 規制サンドボックス制度の導入
+- AI技術導入に向けた規制枠組みの整備
 
 #### 中期計画（2027-2029年）
 - 商用展開の本格化
@@ -370,7 +370,7 @@ graph TD
 **役割：** 幅広い事例収集と初期動向分析
 
 **活用の理由**
-- 2021年9月までの膨大な学習データによる包括的知識
+- 学習データによる包括的知識（モデルにより2021年9月〜2023年12月のカットオフ日）
 - 多言語対応による国際情報の収集
 - 創造的な分析と仮説生成能力
 
@@ -533,13 +533,14 @@ graph TD
 本研究手法には以下の限界があることを明記する。
 
 **生成AIの制約**
-- 学習データのカットオフ日による最新情報の欠如
+- 一部モデルでは学習データのカットオフ日による制約（ただし検索統合型は除く）
 - 幻覚（Hallucination）現象による誤情報の混入可能性
 - 技術的専門性の深度における限界
 
 **情報アクセスの制約**
 - 機密性の高い技術情報への限定的アクセス
 - 非公開データの利用不可
+- リアルタイム検索統合型でも一部の限定的情報には制約
 - 言語的制約による情報収集範囲の限定
 
 #### 分析上の制約
@@ -584,8 +585,8 @@ URL: https://x-energy.com/media/news-releases/amazon-invests-in-x-energy-to-supp
 [^9]: International Energy Agency, "Nuclear Power and Secure Energy Transitions," World Energy Outlook Special Report, Paris, 2022.
 URL: https://www.iea.org/reports/nuclear-power-and-secure-energy-transitions
 
-[^10]: World Nuclear Association, "Nuclear Technology Review 2024," London, 2024.
-URL: https://world-nuclear.org/information-library/facts-and-figures/nuclear-technology-review/
+[^10]: International Atomic Energy Agency, "Artificial Intelligence for Accelerating Nuclear Applications, Science and Technology," IAEA Non-Serial Publications, Vienna, 2022.
+URL: https://www.iaea.org/publications/15198/artificial-intelligence-for-accelerating-nuclear-applications-science-and-technology
 
-[^11]: IEEE Standards Association, "IEEE Standard for Artificial Intelligence Exchange and Service Tie to All Test Environments (AI-ESTATE)," IEEE Std 2857-2021, 2021.
-URL: https://standards.ieee.org/ieee/2857/7515/
+[^11]: IEEE Standards Association, "IEEE Standard for Software Verification and Validation," IEEE Std 1012-2016, 2016; IEEE Standards Association, "IEEE Standard for Artificial Intelligence Exchange and Service Tie to All Test Environments (AI-ESTATE)," IEEE Std 1232-2002, 2002.
+URL: https://standards.ieee.org/ieee/1012/5321/
