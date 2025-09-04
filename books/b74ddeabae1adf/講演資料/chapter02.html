@@ -1,0 +1,1232 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>第2章: 世界の最新動向 - 三極構造の形成と競争激化</title>
+    <style>
+        /* Microsoft Fluent Design System Colors */
+        :root {
+            --fluent-blue: #0078d4;
+            --fluent-light-blue: #106ebe;
+            --fluent-dark-blue: #005a9e;
+            --fluent-accent: #0078d4;
+            --fluent-bg: #f3f2f1;
+            --fluent-white: #ffffff;
+            --fluent-light-gray: #f8f8f8;
+            --fluent-gray: #edebe9;
+            --fluent-dark-gray: #323130;
+            --fluent-text: #323130;
+            --fluent-shadow: 0 1.6px 3.6px 0 rgba(0,0,0,.132), 0 0.3px 0.9px 0 rgba(0,0,0,.108);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', 'Yu Gothic UI', 'Meiryo UI', sans-serif;
+            background: linear-gradient(135deg, #ffffff 0%, #f5f5f5 100%);
+            color: var(--fluent-text);
+            line-height: 1.6;
+        }
+
+        .presentation-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .slide {
+            background: var(--fluent-white);
+            border-radius: 8px;
+            box-shadow: var(--fluent-shadow);
+            margin-bottom: 40px;
+            padding: 60px;
+            min-height: 675px; /* 16:9 ratio for 1200px width */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+            border: 1px solid var(--fluent-gray);
+        }
+
+        .slide-header {
+            background: var(--fluent-blue);
+            color: var(--fluent-white);
+            padding: 20px 60px;
+            margin: -60px -60px 40px -60px;
+            border-radius: 8px 8px 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .slide-number {
+            font-size: 18px;
+            opacity: 0.9;
+        }
+
+        h1 {
+            font-size: 42px;
+            font-weight: 600;
+            color: var(--fluent-blue);
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        h2 {
+            font-size: 32px;
+            font-weight: 600;
+            color: var(--fluent-blue);
+            margin-bottom: 25px;
+            border-bottom: 3px solid var(--fluent-blue);
+            padding-bottom: 10px;
+        }
+
+        h3 {
+            font-size: 26px;
+            font-weight: 500;
+            color: var(--fluent-dark-blue);
+            margin-bottom: 20px;
+        }
+
+        h4 {
+            font-size: 22px;
+            font-weight: 500;
+            color: var(--fluent-text);
+            margin-bottom: 15px;
+        }
+
+        p, li {
+            font-size: 20px;
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+
+        ul, ol {
+            margin-left: 30px;
+            margin-bottom: 20px;
+        }
+
+        li {
+            margin-bottom: 10px;
+            padding-left: 5px;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, var(--fluent-light-blue) 0%, var(--fluent-blue) 100%);
+            color: var(--fluent-white);
+            padding: 30px;
+            border-radius: 8px;
+            margin: 25px 0;
+            box-shadow: var(--fluent-shadow);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin: 30px 0;
+        }
+
+        .stat-card {
+            background: var(--fluent-light-gray);
+            padding: 25px;
+            border-radius: 8px;
+            text-align: center;
+            border: 2px solid var(--fluent-gray);
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover {
+            border-color: var(--fluent-blue);
+            transform: translateY(-2px);
+            box-shadow: var(--fluent-shadow);
+        }
+
+        .stat-number {
+            font-size: 36px;
+            font-weight: 700;
+            color: var(--fluent-blue);
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 16px;
+            color: var(--fluent-text);
+            margin-top: 8px;
+        }
+
+        .company-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 25px 0;
+            background: var(--fluent-white);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: var(--fluent-shadow);
+        }
+
+        .company-table th {
+            background: var(--fluent-blue);
+            color: var(--fluent-white);
+            padding: 20px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 18px;
+        }
+
+        .company-table td {
+            padding: 18px 20px;
+            border-bottom: 1px solid var(--fluent-gray);
+            font-size: 16px;
+        }
+
+        .company-table tbody tr:hover {
+            background: var(--fluent-light-gray);
+        }
+
+        .region-comparison {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin: 30px 0;
+        }
+
+        .region-card {
+            background: var(--fluent-light-gray);
+            border-radius: 8px;
+            padding: 30px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .region-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--fluent-shadow);
+        }
+
+        .region-card h3 {
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid;
+        }
+
+        .region-card.usa h3 { border-bottom-color: #d32f2f; color: #d32f2f; }
+        .region-card.europe h3 { border-bottom-color: #1976d2; color: #1976d2; }
+        .region-card.asia h3 { border-bottom-color: #388e3c; color: #388e3c; }
+
+        .performance-chart {
+            background: var(--fluent-light-gray);
+            border-radius: 8px;
+            padding: 30px;
+            margin: 25px 0;
+        }
+
+        .chart-bar {
+            display: flex;
+            align-items: center;
+            margin: 15px 0;
+        }
+
+        .chart-label {
+            width: 150px;
+            font-size: 16px;
+            font-weight: 500;
+        }
+
+        .chart-fill {
+            height: 25px;
+            border-radius: 4px;
+            margin: 0 15px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .architecture-diagram {
+            background: var(--fluent-light-gray);
+            border-radius: 8px;
+            padding: 30px;
+            margin: 25px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            line-height: 1.4;
+        }
+
+        .navigation {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: var(--fluent-white);
+            border-radius: 50px;
+            padding: 15px 25px;
+            box-shadow: var(--fluent-shadow);
+            border: 1px solid var(--fluent-gray);
+            z-index: 1000;
+        }
+
+        .nav-button {
+            background: var(--fluent-blue);
+            color: var(--fluent-white);
+            border: none;
+            padding: 12px 20px;
+            margin: 0 5px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background 0.3s ease;
+        }
+
+        .nav-button:hover {
+            background: var(--fluent-dark-blue);
+        }
+
+        .nav-button:disabled {
+            background: var(--fluent-gray);
+            cursor: not-allowed;
+        }
+
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--fluent-blue) 0%, var(--fluent-light-blue) 100%);
+            transition: width 0.3s ease;
+            z-index: 1001;
+        }
+
+        @media (max-width: 768px) {
+            .slide {
+                padding: 30px;
+                margin-bottom: 20px;
+            }
+            
+            .slide-header {
+                margin: -30px -30px 20px -30px;
+                padding: 15px 30px;
+            }
+            
+            h1 { font-size: 28px; }
+            h2 { font-size: 24px; }
+            h3 { font-size: 20px; }
+            p, li { font-size: 16px; }
+            
+            .region-comparison {
+                grid-template-columns: 1fr;
+            }
+            
+            .navigation {
+                bottom: 15px;
+                right: 15px;
+                padding: 10px 15px;
+            }
+        }
+
+        /* プリント用スタイル */
+        @media print {
+            .navigation, .progress-bar {
+                display: none;
+            }
+            
+            .slide {
+                break-inside: avoid;
+                page-break-inside: avoid;
+                margin-bottom: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="progress-bar" id="progressBar"></div>
+    
+    <div class="presentation-container">
+        <!-- スライド 1: タイトルスライド -->
+        <div class="slide" data-slide="1">
+            <div class="slide-header">
+                <h2>第2章: 世界の最新動向</h2>
+                <div class="slide-number">1 / 12</div>
+            </div>
+            <div style="text-align: center; padding: 60px 0;">
+                <h1 style="font-size: 48px; margin-bottom: 40px;">三極構造の形成と<br>競争激化</h1>
+                <div class="region-comparison" style="margin: 50px 0;">
+                    <div class="region-card usa">
+                        <h3>米国</h3>
+                        <p style="font-size: 18px;">商用化実装での<br>圧倒的リーダーシップ</p>
+                    </div>
+                    <div class="region-card europe">
+                        <h3>欧州</h3>
+                        <p style="font-size: 18px;">協調的イノベーション<br>と規制調和</p>
+                    </div>
+                    <div class="region-card asia">
+                        <h3>アジア</h3>
+                        <p style="font-size: 18px;">技術自立と<br>輸出志向の台頭</p>
+                    </div>
+                </div>
+                <div class="highlight-box">
+                    <p style="font-size: 22px; margin: 0;">実験段階を超えて本格的な商用導入期に突入</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- スライド 2: ディアブロキャニオン原発の革命 -->
+        <div class="slide" data-slide="2">
+            <div class="slide-header">
+                <h2>世界初：ディアブロキャニオン原発の商用AI導入</h2>
+                <div class="slide-number">2 / 12</div>
+            </div>
+            
+            <h3>2024年11月：原子力業界の歴史が変わった</h3>
+            
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px;">
+                <div>
+                    <h4>技術アーキテクチャ</h4>
+                    <div class="architecture-diagram">
+<pre>ハードウェア仕様：
+├── GPU: NVIDIA H100 × 8台
+│   ├── メモリ: 80GB HBM3 per GPU
+│   ├── 演算能力: 約30 teraflops
+│   └── 総演算能力: 約240 teraflops
+├── AIモデル: FERMI
+│   ├── 原子力特化言語モデル
+│   ├── 学習基盤: ORNL Frontier
+│   └── データ: NRC ADAMS 5,300万ページ
+└── セキュリティ: 完全エアギャップ環境</pre>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4>驚異的な性能指標</h4>
+                    <table class="company-table">
+                        <thead>
+                            <tr>
+                                <th>指標</th>
+                                <th>従来</th>
+                                <th>AI導入後</th>
+                                <th>改善率</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>文書検索時間</td>
+                                <td>15,000時間/年</td>
+                                <td>秒単位</td>
+                                <td style="color: #d32f2f; font-weight: bold;">99.9%短縮</td>
+                            </tr>
+                            <tr>
+                                <td>検索精度（上位10件）</td>
+                                <td>60-70%</td>
+                                <td>98%</td>
+                                <td style="color: #d32f2f; font-weight: bold;">40%向上</td>
+                            </tr>
+                            <tr>
+                                <td>年間コスト削減</td>
+                                <td>-</td>
+                                <td>225万ドル</td>
+                                <td style="color: #d32f2f; font-weight: bold;">-</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="highlight-box">
+                <h4 style="color: white; margin-bottom: 15px;">実際の活用例</h4>
+                <p style="margin: 0;">コンクリート構造物の交換プロジェクトで、従来は設計基準、メンテナンス履歴、NRC基準の個別調査に数日を要していたが、統合検索により<strong>数秒で関連情報を取得</strong>できるようになった。</p>
+            </div>
+        </div>
+
+        <!-- スライド 3: 技術大手の巨額投資 -->
+        <div class="slide" data-slide="3">
+            <div class="slide-header">
+                <h2>技術大手の巨額投資戦略</h2>
+                <div class="slide-number">3 / 12</div>
+            </div>
+            
+            <h3>GAFAM各社の前例のない大規模投資</h3>
+            
+            <table class="company-table">
+                <thead>
+                    <tr>
+                        <th>企業</th>
+                        <th>投資額</th>
+                        <th>容量</th>
+                        <th>戦略的焦点</th>
+                        <th>目標時期</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Microsoft</strong></td>
+                        <td style="color: #d32f2f; font-weight: bold;">16億ドル</td>
+                        <td>835MW</td>
+                        <td>Three Mile Island再稼働</td>
+                        <td>2028年</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Amazon</strong></td>
+                        <td style="color: #d32f2f; font-weight: bold;">5億ドル</td>
+                        <td>5GW</td>
+                        <td>X-energy SMR開発</td>
+                        <td>2039年</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Google</strong></td>
+                        <td>非公開</td>
+                        <td>500MW</td>
+                        <td>Kairos Power契約</td>
+                        <td>2030年代</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Meta</strong></td>
+                        <td>調達中</td>
+                        <td>1-4GW</td>
+                        <td>原子力RFP発行</td>
+                        <td>2030年代初頭</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <span class="stat-number">20年</span>
+                    <div class="stat-label">Microsoft契約期間</div>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">100%</span>
+                    <div class="stat-label">AIデータセンター専用電源</div>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">6-7基</span>
+                    <div class="stat-label">Google Hermes SMR展開</div>
+                </div>
+            </div>
+
+            <div class="highlight-box">
+                <h4 style="color: white; margin-bottom: 15px;">パラダイムシフト</h4>
+                <p style="margin: 10px 0;"><strong>従来：</strong> 電力は「コスト」</p>
+                <p style="margin: 10px 0;"><strong>現在：</strong> 電力は「戦略資源」</p>
+                <p style="margin: 0;"><strong>将来：</strong> 電力は「技術競争力の源泉」</p>
+            </div>
+        </div>
+
+        <!-- スライド 4: トランプ政権の原子力AI統合政策 -->
+        <div class="slide" data-slide="4">
+            <div class="slide-header">
+                <h2>トランプ政権の原子力AI統合政策</h2>
+                <div class="slide-number">4 / 12</div>
+            </div>
+            
+            <h3>国家戦略の全面展開</h3>
+            
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px;">
+                <div>
+                    <h4>2050年原子力ビジョン</h4>
+                    <div class="architecture-diagram">
+<pre>包括的政策フレームワーク:
+├── 容量4倍増: 100GW → 400GW
+├── AI統合: 全新設炉でAI標準装備
+├── SMR加速: 30ヶ月以内の連邦施設配備
+└── 輸出戦略: アメリカ技術の世界展開</pre>
+                    </div>
+                    
+                    <h4>具体的政策手段</h4>
+                    <ul>
+                        <li><strong>大統領令</strong>：先進原子炉技術展開</li>
+                        <li><strong>NRC改革</strong>：18ヶ月以内最終認可決定</li>
+                        <li><strong>連邦施設指定</strong>：16施設を統合拠点化</li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4>予算・投資の大幅拡大</h4>
+                    <table class="company-table">
+                        <thead>
+                            <tr>
+                                <th>項目</th>
+                                <th>2024年度</th>
+                                <th>2025年度</th>
+                                <th>増加率</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>NRC AI関連予算</td>
+                                <td>73万ドル</td>
+                                <td style="color: #d32f2f; font-weight: bold;">443万ドル</td>
+                                <td style="color: #d32f2f; font-weight: bold;">607%</td>
+                            </tr>
+                            <tr>
+                                <td>DOE核エネルギー局</td>
+                                <td>-</td>
+                                <td style="color: #d32f2f; font-weight: bold;">13.7億ドル</td>
+                                <td>-</td>
+                            </tr>
+                            <tr>
+                                <td>SMR開発支援</td>
+                                <td>5億ドル</td>
+                                <td style="color: #d32f2f; font-weight: bold;">20億ドル</td>
+                                <td style="color: #d32f2f; font-weight: bold;">300%</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="highlight-box">
+                <p style="font-size: 22px; margin: 0;">原子力×AI統合を<strong>国家安全保障の最優先課題</strong>として位置づけ</p>
+            </div>
+        </div>
+
+        <!-- スライド 5: 欧州の協調的イノベーション -->
+        <div class="slide" data-slide="5">
+            <div class="slide-header">
+                <h2>欧州：協調的イノベーションと規制調和</h2>
+                <div class="slide-number">5 / 12</div>
+            </div>
+            
+            <h3>フランスEDF：67.4億ユーロのEPR2プロジェクト</h3>
+            
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px;">
+                <div>
+                    <h4>EPR2統合戦略</h4>
+                    <div class="architecture-diagram">
+<pre>EDF EPR2統合戦略:
+├── 総投資額: 67.4億ユーロ（約11兆円）
+├── 建設計画: 6基のEPR2原子炉
+├── AI統合: 設計・建設・運転の全工程
+├── 展開サイト: Penly、Gravelines、Bugey
+└── 運転開始: 2030年代前半～中期</pre>
+                    </div>
+                    
+                    <h4>記録的業績（2024年）</h4>
+                    <div class="stats-grid" style="grid-template-columns: repeat(3, 1fr);">
+                        <div class="stat-card">
+                            <span class="stat-number">114億</span>
+                            <div class="stat-label">ユーロ純利益</div>
+                        </div>
+                        <div class="stat-card">
+                            <span class="stat-number">119%</span>
+                            <div class="stat-label">前年比利益増</div>
+                        </div>
+                        <div class="stat-card">
+                            <span class="stat-number">22.4億</span>
+                            <div class="stat-label">ユーロ設備投資</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4>AI技術活用計画</h4>
+                    
+                    <h5>設計段階</h5>
+                    <ul style="font-size: 16px;">
+                        <li>最適化アルゴリズムの炉心設計応用</li>
+                        <li>デジタルツイン技術による設計検証</li>
+                        <li>機械学習による材料劣化予測</li>
+                    </ul>
+                    
+                    <h5>建設段階</h5>
+                    <ul style="font-size: 16px;">
+                        <li>ロボティクス＋AI施工自動化</li>
+                        <li>画像認識による品質検査</li>
+                        <li>AI最適化工程管理</li>
+                    </ul>
+                    
+                    <h5>Framatomeパートナーシップ</h5>
+                    <ul style="font-size: 16px;">
+                        <li><strong>46.76億ユーロ売上</strong>（11.8%成長）</li>
+                        <li>設計・製造・検査・保守のAI統合</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="highlight-box">
+                <p style="font-size: 20px; margin: 0;"><strong>欧州の独自アプローチ：</strong> 規制調和、持続可能性、国際協調を重視した責任あるイノベーション</p>
+            </div>
+        </div>
+
+        <!-- スライド 6: アジア太平洋の急速な台頭 -->
+        <div class="slide" data-slide="6">
+            <div class="slide-header">
+                <h2>アジア：技術自立と輸出志向の台頭</h2>
+                <div class="slide-number">6 / 12</div>
+            </div>
+            
+            <h3>第三の極として急速に台頭</h3>
+            
+            <div class="region-comparison">
+                <div class="stat-card">
+                    <h4 style="color: #388e3c; margin-bottom: 15px;">韓国</h4>
+                    <p style="font-size: 16px; text-align: left;">
+                        <strong>APR1400輸出実績</strong><br>
+                        • UAE バラカ原発成功実績<br>
+                        • AI統合APR1400+開発中<br>
+                        • パッケージ型輸出モデル
+                    </p>
+                </div>
+                
+                <div class="stat-card">
+                    <h4 style="color: #388e3c; margin-bottom: 15px;">中国</h4>
+                    <p style="font-size: 16px; text-align: left;">
+                        <strong>国家主導大規模投資</strong><br>
+                        • 第四世代炉AI統合開発<br>
+                        • Huawei等との技術協力<br>
+                        • 一帯一路政策との連携
+                    </p>
+                </div>
+                
+                <div class="stat-card">
+                    <h4 style="color: #388e3c; margin-bottom: 15px;">日本</h4>
+                    <p style="font-size: 16px; text-align: left;">
+                        <strong>技術力高いが商用遅れ</strong><br>
+                        • 世界最高水準の安全文化<br>
+                        • 豊富な運転経験（1,500炉年）<br>
+                        • 第7次エネルギー基本計画
+                    </p>
+                </div>
+            </div>
+
+            <h3>アジア太平洋市場のポテンシャル</h3>
+            <div class="performance-chart">
+                <h4>2030年市場規模予測</h4>
+                <div class="chart-bar">
+                    <div class="chart-label">新設炉建設</div>
+                    <div class="chart-fill" style="width: 80%; background: #1976d2;">約500億ドル/年</div>
+                </div>
+                <div class="chart-bar">
+                    <div class="chart-label">運転・保守</div>
+                    <div class="chart-fill" style="width: 60%; background: #388e3c;">約200億ドル/年</div>
+                </div>
+                <div class="chart-bar">
+                    <div class="chart-label">燃料・廃棄物</div>
+                    <div class="chart-fill" style="width: 50%; background: #f57c00;">約150億ドル/年</div>
+                </div>
+                <div class="chart-bar">
+                    <div class="chart-label">AI統合システム</div>
+                    <div class="chart-fill" style="width: 30%; background: #d32f2f;">約50億ドル/年</div>
+                </div>
+            </div>
+
+            <div class="highlight-box">
+                <p style="font-size: 20px; margin: 0;">アジア太平洋地域は世界の原子力市場の<strong>60%以上</strong>を占める最大の成長市場</p>
+            </div>
+        </div>
+
+        <!-- スライド 7: 日本の現状分析 -->
+        <div class="slide" data-slide="7">
+            <div class="slide-header">
+                <h2>日本の現状：技術力はあるが商用実装で遅れ</h2>
+                <div class="slide-number">7 / 12</div>
+            </div>
+            
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px;">
+                <div>
+                    <h3 style="color: #388e3c;">技術的強み</h3>
+                    
+                    <h4>世界最高水準の安全文化</h4>
+                    <ul>
+                        <li>福島事故後の徹底的安全重視</li>
+                        <li>多層防護概念の深い理解</li>
+                        <li>リスク評価・管理手法の高度化</li>
+                    </ul>
+                    
+                    <h4>豊富な運転経験</h4>
+                    <ul>
+                        <li><strong>54基</strong>の原子炉運転実績</li>
+                        <li>累計<strong>1,500炉年以上</strong>の経験</li>
+                        <li>高い設備利用率維持技術</li>
+                    </ul>
+                    
+                    <h4>先進的研究開発力</h4>
+                    <ul>
+                        <li>JAEA の基礎研究力</li>
+                        <li>電力会社の実証研究能力</li>
+                        <li>メーカーの技術開発力</li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 style="color: #d32f2f;">政策・産業の動向</h3>
+                    
+                    <h4>第7次エネルギー基本計画</h4>
+                    <div class="architecture-diagram" style="font-size: 12px;">
+<pre>戦略的転換（2025年2月承認）:
+├── 基本方針: 原子力の最大限活用
+├── 2040年目標: 20-22%の電源構成
+├── 先端技術: AI等革新技術活用推進
+├── 投資目標: 年間2,000億円規模
+└── 国際協力: アジア市場リーダーシップ</pre>
+                    </div>
+                    
+                    <h4>主要企業の取り組み</h4>
+                    <ul style="font-size: 16px;">
+                        <li><strong>三菱重工：</strong>TOMONI統合プラットフォーム</li>
+                        <li><strong>日立GE：</strong>BWRX-300 AIデジタルツイン</li>
+                        <li><strong>東芝ES：</strong>AI原子力施設管理システム</li>
+                    </ul>
+                    
+                    <h4>JAEA の先進的取り組み</h4>
+                    <ul style="font-size: 16px;">
+                        <li>所内スーパーコンピュータ上のLLM環境</li>
+                        <li>完全内製で機密保持確保</li>
+                        <li>放射線マップ作成AI（30%精度向上）</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="highlight-box">
+                <p style="font-size: 20px; margin: 0;"><strong>現状認識：</strong> 技術力では決して劣っていないが、商用実装の速度で明確に遅れを取っている</p>
+            </div>
+        </div>
+
+        <!-- スライド 8: 三極構造の戦略的含意 -->
+        <div class="slide" data-slide="8">
+            <div class="slide-header">
+                <h2>三極構造の戦略的含意</h2>
+                <div class="slide-number">8 / 12</div>
+            </div>
+            
+            <h3>各地域の競争優位性の源泉</h3>
+            
+            <table class="company-table">
+                <thead>
+                    <tr>
+                        <th>地域</th>
+                        <th>主要強み</th>
+                        <th>戦略的焦点</th>
+                        <th>成功要因</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>米国</strong></td>
+                        <td>商用化速度、投資規模</td>
+                        <td>技術覇権確保</td>
+                        <td>産官学連携の効率性</td>
+                    </tr>
+                    <tr>
+                        <td><strong>欧州</strong></td>
+                        <td>規制調和、持続可能性</td>
+                        <td>責任あるイノベーション</td>
+                        <td>国際協調の実効性</td>
+                    </tr>
+                    <tr>
+                        <td><strong>アジア</strong></td>
+                        <td>技術自立、輸出志向</td>
+                        <td>市場拡大と技術移転</td>
+                        <td>国家戦略の一貫性</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>今後の競争構図</h3>
+            
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 25px; margin: 30px 0;">
+                <div class="stat-card">
+                    <h4 style="color: #0078d4; margin-bottom: 15px;">2025-2027年</h4>
+                    <div style="text-align: left;">
+                        <p style="font-size: 16px; margin: 5px 0;"><strong>技術確立期</strong></p>
+                        <ul style="font-size: 14px; margin: 0;">
+                            <li>米国：商用化モデル確立</li>
+                            <li>欧州：規制枠組完成</li>
+                            <li>アジア：技術追い上げ</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="stat-card">
+                    <h4 style="color: #0078d4; margin-bottom: 15px;">2028-2030年</h4>
+                    <div style="text-align: left;">
+                        <p style="font-size: 16px; margin: 5px 0;"><strong>市場拡大期</strong></p>
+                        <ul style="font-size: 14px; margin: 0;">
+                            <li>グローバル本格競争</li>
+                            <li>技術標準化主導権争い</li>
+                            <li>新興国市場競争</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="stat-card">
+                    <h4 style="color: #0078d4; margin-bottom: 15px;">変動要因</h4>
+                    <div style="text-align: left;">
+                        <ul style="font-size: 14px; margin: 0;">
+                            <li>AI電力需要急変化（年率15-20%）</li>
+                            <li>SMR商用化による技術変化</li>
+                            <li>地政学的供給チェーン再編</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- スライド 9: 米国の成功要因詳細分析 -->
+        <div class="slide" data-slide="9">
+            <div class="slide-header">
+                <h2>米国成功要因の詳細分析</h2>
+                <div class="slide-number">9 / 12</div>
+            </div>
+            
+            <h3>なぜ米国が圧倒的リーダーシップを確立できたのか</h3>
+            
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px;">
+                <div class="stat-card">
+                    <h4 style="color: #d32f2f; margin-bottom: 15px;">産官学連携の効率性</h4>
+                    <ul style="text-align: left; font-size: 16px; margin: 0;">
+                        <li>政府政策と民間投資の完璧な連携</li>
+                        <li>規制当局の迅速対応</li>
+                        <li>研究機関の実用化志向</li>
+                        <li>ORNL Frontierスパコン活用</li>
+                    </ul>
+                </div>
+                
+                <div class="stat-card">
+                    <h4 style="color: #d32f2f; margin-bottom: 15px;">市場メカニズム活用</h4>
+                    <ul style="text-align: left; font-size: 16px; margin: 0;">
+                        <li>競争原理による技術革新加速</li>
+                        <li>投資リスクの適切な分散</li>
+                        <li>スケールメリット最大化</li>
+                        <li>GAFAMの巨額投資</li>
+                    </ul>
+                </div>
+                
+                <div class="stat-card">
+                    <h4 style="color: #d32f2f; margin-bottom: 15px;">国家安全保障統合</h4>
+                    <ul style="text-align: left; font-size: 16px; margin: 0;">
+                        <li>エネルギー安全保障の戦略的位置づけ</li>
+                        <li>技術覇権確保への強い意志</li>
+                        <li>国際標準化への積極関与</li>
+                        <li>トランプ政権の政策転換</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3>国立研究所の先端研究</h3>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin: 30px 0;">
+                <div>
+                    <h4>オークリッジ国立研究所（ORNL）</h4>
+                    <ul>
+                        <li><strong>Frontierスーパーコンピュータ</strong>での大規模AI学習</li>
+                        <li><strong>原子力特化LLM</strong>の開発とライセンス化</li>
+                        <li><strong>デジタルツイン技術</strong>との統合研究</li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4>アイダホ国立研究所（INL）</h4>
+                    <ul>
+                        <li><strong>Microsoft連携</strong>による認可プロセス革新</li>
+                        <li><strong>SMR統合AI</strong>の実証研究</li>
+                        <li><strong>サイバーセキュリティ対策</strong>の高度化</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="highlight-box">
+                <p style="font-size: 20px; margin: 0;">米国の成功は偶然ではなく、構造的要因による必然的結果</p>
+            </div>
+        </div>
+
+        <!-- スライド 10: 欧州の独自戦略 -->
+        <div class="slide" data-slide="10">
+            <div class="slide-header">
+                <h2>欧州の独自戦略：協調と規制調和</h2>
+                <div class="slide-number">10 / 12</div>
+            </div>
+            
+            <h3>米国とは対照的なアプローチ</h3>
+            
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px;">
+                <div>
+                    <h4>ドイツ：廃炉AI技術のリーダー</h4>
+                    <ul>
+                        <li><strong>ロボティクス</strong>による危険区域作業自動化</li>
+                        <li><strong>AI画像解析</strong>による構造物状態診断</li>
+                        <li><strong>最適化アルゴリズム</strong>による廃棄物分別</li>
+                        <li><strong>プロジェクト管理AI</strong>による工程最適化</li>
+                    </ul>
+                    
+                    <h4>英国：SMR×AI統合開発</h4>
+                    <ul>
+                        <li><strong>Rolls-Royce SMRプログラム</strong></li>
+                        <li>AI支援設計による開発期間短縮</li>
+                        <li>モジュラー製造でのAI品質管理</li>
+                        <li>運転・保守の完全自動化制御</li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4>EU規制枠組みとイノベーション促進</h4>
+                    
+                    <h5>AI Act（AI規制法）</h5>
+                    <ul style="font-size: 16px;">
+                        <li>原子力分野高リスクAI用途への特別要件</li>
+                        <li>透明性とアカウンタビリティ確保</li>
+                        <li>段階的導入による安全性確保</li>
+                    </ul>
+                    
+                    <h5>Horizon Europe研究プログラム</h5>
+                    <ul style="font-size: 16px;">
+                        <li>原子力×AI融合研究への大規模資金投入</li>
+                        <li>国際協力による知識共有促進</li>
+                        <li>中小企業の参入支援</li>
+                    </ul>
+                    
+                    <div class="performance-chart">
+                        <h5>Framatome業績（2024年）</h5>
+                        <div class="chart-bar">
+                            <div class="chart-label">売上成長</div>
+                            <div class="chart-fill" style="width: 70%; background: #1976d2;">11.8%</div>
+                        </div>
+                        <div class="chart-bar">
+                            <div class="chart-label">売上額</div>
+                            <div class="chart-fill" style="width: 90%; background: #388e3c;">46.76億ユーロ</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="highlight-box">
+                <p style="font-size: 20px; margin: 0;"><strong>欧州の価値提案：</strong> 規制調和、持続可能性、国際協調を重視した責任あるイノベーション</p>
+            </div>
+        </div>
+
+        <!-- スライド 11: 日本への戦略的示唆 -->
+        <div class="slide" data-slide="11">
+            <div class="slide-header">
+                <h2>日本への戦略的示唆</h2>
+                <div class="slide-number">11 / 12</div>
+            </div>
+            
+            <h3>国際競争分析から導かれる戦略的方向性</h3>
+            
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px;">
+                <div>
+                    <h4 style="color: #388e3c;">短期戦略（2025-2026年）</h4>
+                    
+                    <div class="stat-card">
+                        <h5 style="margin-bottom: 15px;">1. 米国との技術協力強化</h5>
+                        <ul style="text-align: left; font-size: 16px; margin: 0;">
+                            <li>SMR技術開発での連携</li>
+                            <li>AI統合標準策定への参画</li>
+                            <li>Microsoftとの協業検討</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <h5 style="margin-bottom: 15px;">2. 欧州との規制調和</h5>
+                        <ul style="text-align: left; font-size: 16px; margin: 0;">
+                            <li>IAEA AI-原子力シンポジウム積極参画</li>
+                            <li>EU AI Actとの整合性確保</li>
+                            <li>国際標準化への貢献</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <h5 style="margin-bottom: 15px;">3. アジア市場での差別化</h5>
+                        <ul style="text-align: left; font-size: 16px; margin: 0;">
+                            <li>高温ガス炉技術での優位性確立</li>
+                            <li>韓国・中国との協力関係構築</li>
+                            <li>ASEAN市場への戦略的進出</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 style="color: #0078d4;">中長期戦略（2027年以降）</h4>
+                    
+                    <div class="stat-card">
+                        <h5 style="margin-bottom: 15px;">1. 独自技術領域の確立</h5>
+                        <ul style="text-align: left; font-size: 16px; margin: 0;">
+                            <li>世界最高水準の安全文化をAIで体系化</li>
+                            <li>福島廃炉経験のAI技術化</li>
+                            <li>高経年化対応AIシステム開発</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <h5 style="margin-bottom: 15px;">2. アジア統合戦略</h5>
+                        <ul style="text-align: left; font-size: 16px; margin: 0;">
+                            <li>地域リーダーとしての地位確立</li>
+                            <li>技術移転・人材育成支援</li>
+                            <li>アジア原子力AI標準の策定</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <h5 style="margin-bottom: 15px;">3. グローバル標準貢献</h5>
+                        <ul style="text-align: left; font-size: 16px; margin: 0;">
+                            <li>安全・品質面でのベンチマーク提供</li>
+                            <li>国際機関での主導的役割</li>
+                            <li>日本発の技術標準の国際化</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="highlight-box">
+                <p style="font-size: 22px; margin: 0;">日本は<strong>追いつく</strong>のではなく、<strong>独自の価値</strong>で差別化する戦略が必要</p>
+            </div>
+        </div>
+
+        <!-- スライド 12: まとめ -->
+        <div class="slide" data-slide="12">
+            <div class="slide-header">
+                <h2>まとめ：三極構造下での競争激化</h2>
+                <div class="slide-number">12 / 12</div>
+            </div>
+            
+            <div style="text-align: center; padding: 40px 0;">
+                <h3 style="font-size: 32px; margin-bottom: 40px;">世界は実験段階を超えて本格商用導入期へ</h3>
+                
+                <div class="region-comparison">
+                    <div class="stat-card">
+                        <h4 style="color: #d32f2f; margin-bottom: 15px;">米国の戦略</h4>
+                        <p style="font-size: 16px; margin: 0;">技術覇権確保<br>GAFAM巨額投資<br>政府政策総動員</p>
+                    </div>
+                    <div class="stat-card">
+                        <h4 style="color: #1976d2; margin-bottom: 15px;">欧州の戦略</h4>
+                        <p style="font-size: 16px; margin: 0;">責任あるイノベーション<br>規制調和重視<br>持続可能性追求</p>
+                    </div>
+                    <div class="stat-card">
+                        <h4 style="color: #388e3c; margin-bottom: 15px;">アジアの戦略</h4>
+                        <p style="font-size: 16px; margin: 0;">技術自立推進<br>輸出志向強化<br>市場拡大狙い</p>
+                    </div>
+                </div>
+
+                <div style="margin: 40px 0;">
+                    <h4 style="color: #0078d4; margin-bottom: 20px;">競争の本質的変化</h4>
+                    <div style="display: flex; justify-content: center; gap: 40px;">
+                        <div style="background: #f8f8f8; padding: 20px; border-radius: 8px;">
+                            <p style="font-size: 18px; margin: 0;"><strong>2024年まで：</strong> 技術実証競争</p>
+                        </div>
+                        <div style="background: #e3f2fd; padding: 20px; border-radius: 8px; border: 2px solid #0078d4;">
+                            <p style="font-size: 18px; margin: 0;"><strong>2025年以降：</strong> 商用化・市場獲得競争</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="highlight-box" style="margin: 40px auto; max-width: 800px;">
+                    <h4 style="color: white; font-size: 24px; margin-bottom: 20px;">日本の課題と機会</h4>
+                    <p style="font-size: 20px; margin-bottom: 15px;">技術力では劣らない日本が、商用化競争で遅れをとっている現実</p>
+                    <p style="font-size: 18px; margin: 0;">次章では、この競争構造の中で日本が取るべき具体的戦略を詳述</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="navigation">
+        <button class="nav-button" id="prevBtn" onclick="changeSlide(-1)">◀ 前へ</button>
+        <span id="slideInfo">1 / 12</span>
+        <button class="nav-button" id="nextBtn" onclick="changeSlide(1)">次へ ▶</button>
+    </div>
+
+    <script>
+        let currentSlide = 1;
+        const totalSlides = 12;
+
+        function updateSlideVisibility() {
+            const slides = document.querySelectorAll('.slide');
+            slides.forEach((slide, index) => {
+                if (index + 1 === currentSlide) {
+                    slide.style.display = 'flex';
+                    slide.scrollIntoView({ behavior: 'smooth' });
+                } else {
+                    slide.style.display = 'none';
+                }
+            });
+
+            // Update navigation
+            document.getElementById('slideInfo').textContent = `${currentSlide} / ${totalSlides}`;
+            document.getElementById('prevBtn').disabled = currentSlide === 1;
+            document.getElementById('nextBtn').disabled = currentSlide === totalSlides;
+
+            // Update progress bar
+            const progress = (currentSlide / totalSlides) * 100;
+            document.getElementById('progressBar').style.width = `${progress}%`;
+        }
+
+        function changeSlide(direction) {
+            const newSlide = currentSlide + direction;
+            if (newSlide >= 1 && newSlide <= totalSlides) {
+                currentSlide = newSlide;
+                updateSlideVisibility();
+            }
+        }
+
+        function goToSlide(slideNumber) {
+            if (slideNumber >= 1 && slideNumber <= totalSlides) {
+                currentSlide = slideNumber;
+                updateSlideVisibility();
+            }
+        }
+
+        // キーボードナビゲーション
+        document.addEventListener('keydown', function(e) {
+            switch(e.key) {
+                case 'ArrowRight':
+                case ' ':
+                    e.preventDefault();
+                    changeSlide(1);
+                    break;
+                case 'ArrowLeft':
+                    e.preventDefault();
+                    changeSlide(-1);
+                    break;
+                case 'Home':
+                    e.preventDefault();
+                    goToSlide(1);
+                    break;
+                case 'End':
+                    e.preventDefault();
+                    goToSlide(totalSlides);
+                    break;
+                default:
+                    // 数字キー (1-9) でスライド移動
+                    const num = parseInt(e.key);
+                    if (!isNaN(num) && num >= 1 && num <= Math.min(9, totalSlides)) {
+                        e.preventDefault();
+                        goToSlide(num);
+                    }
+                    break;
+            }
+        });
+
+        // タッチナビゲーション
+        let startX = 0;
+        document.addEventListener('touchstart', function(e) {
+            startX = e.touches[0].clientX;
+        });
+
+        document.addEventListener('touchend', function(e) {
+            const endX = e.changedTouches[0].clientX;
+            const diff = startX - endX;
+            
+            if (Math.abs(diff) > 50) { // 最小スワイプ距離
+                if (diff > 0) {
+                    changeSlide(1); // 右スワイプで次のスライド
+                } else {
+                    changeSlide(-1); // 左スワイプで前のスライド
+                }
+            }
+        });
+
+        // 初期化
+        updateSlideVisibility();
+
+        // ページ読み込み完了時にフォーカスを設定
+        document.addEventListener('DOMContentLoaded', function() {
+            document.body.focus();
+        });
+    </script>
+</body>
+</html>

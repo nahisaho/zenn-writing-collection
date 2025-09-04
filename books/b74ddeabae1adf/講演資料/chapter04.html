@@ -1,0 +1,1251 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>第4章: 技術的課題と解決アプローチ - 安全性確保から規制対応まで</title>
+    <style>
+        /* Microsoft Fluent Design System Colors */
+        :root {
+            --fluent-blue: #0078d4;
+            --fluent-light-blue: #106ebe;
+            --fluent-dark-blue: #005a9e;
+            --fluent-accent: #0078d4;
+            --fluent-bg: #f3f2f1;
+            --fluent-white: #ffffff;
+            --fluent-light-gray: #f8f8f8;
+            --fluent-gray: #edebe9;
+            --fluent-dark-gray: #323130;
+            --fluent-text: #323130;
+            --fluent-shadow: 0 1.6px 3.6px 0 rgba(0,0,0,.132), 0 0.3px 0.9px 0 rgba(0,0,0,.108);
+            --warning-red: #d13438;
+            --success-green: #107c10;
+            --alert-orange: #ff8c00;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', 'Yu Gothic UI', 'Meiryo UI', sans-serif;
+            background: linear-gradient(135deg, #ffffff 0%, #f5f5f5 100%);
+            color: var(--fluent-text);
+            line-height: 1.6;
+        }
+
+        .presentation-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .slide {
+            background: var(--fluent-white);
+            border-radius: 8px;
+            box-shadow: var(--fluent-shadow);
+            margin-bottom: 40px;
+            padding: 60px;
+            min-height: 675px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+            border: 1px solid var(--fluent-gray);
+        }
+
+        .slide-header {
+            background: var(--fluent-blue);
+            color: var(--fluent-white);
+            padding: 20px 60px;
+            margin: -60px -60px 40px -60px;
+            border-radius: 8px 8px 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .slide-number {
+            font-size: 18px;
+            opacity: 0.9;
+        }
+
+        h1 {
+            font-size: 42px;
+            font-weight: 600;
+            color: var(--fluent-blue);
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        h2 {
+            font-size: 32px;
+            font-weight: 600;
+            color: var(--fluent-blue);
+            margin-bottom: 25px;
+            border-bottom: 3px solid var(--fluent-blue);
+            padding-bottom: 10px;
+        }
+
+        h3 {
+            font-size: 26px;
+            font-weight: 500;
+            color: var(--fluent-dark-blue);
+            margin-bottom: 20px;
+        }
+
+        h4 {
+            font-size: 22px;
+            font-weight: 500;
+            color: var(--fluent-text);
+            margin-bottom: 15px;
+        }
+
+        p, li {
+            font-size: 20px;
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+
+        ul, ol {
+            margin-left: 30px;
+            margin-bottom: 20px;
+        }
+
+        li {
+            margin-bottom: 10px;
+            padding-left: 5px;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, var(--fluent-light-blue) 0%, var(--fluent-blue) 100%);
+            color: var(--fluent-white);
+            padding: 30px;
+            border-radius: 8px;
+            margin: 25px 0;
+            box-shadow: var(--fluent-shadow);
+        }
+
+        .warning-box {
+            background: linear-gradient(135deg, var(--warning-red) 0%, #b71c1c 100%);
+            color: var(--fluent-white);
+            padding: 25px;
+            border-radius: 8px;
+            margin: 20px 0;
+            box-shadow: var(--fluent-shadow);
+        }
+
+        .success-box {
+            background: linear-gradient(135deg, var(--success-green) 0%, #2e7d32 100%);
+            color: var(--fluent-white);
+            padding: 25px;
+            border-radius: 8px;
+            margin: 20px 0;
+            box-shadow: var(--fluent-shadow);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 25px 0;
+        }
+
+        .stat-card {
+            background: var(--fluent-light-gray);
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            border: 2px solid var(--fluent-gray);
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover {
+            border-color: var(--fluent-blue);
+            transform: translateY(-2px);
+            box-shadow: var(--fluent-shadow);
+        }
+
+        .stat-card.critical {
+            border-color: var(--warning-red);
+            background: #ffebee;
+        }
+
+        .stat-card.important {
+            border-color: var(--alert-orange);
+            background: #fff3e0;
+        }
+
+        .stat-card.good {
+            border-color: var(--success-green);
+            background: #e8f5e8;
+        }
+
+        .stat-number {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--fluent-blue);
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 14px;
+            color: var(--fluent-text);
+            margin-top: 8px;
+        }
+
+        .challenge-comparison {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin: 25px 0;
+        }
+
+        .challenge-card {
+            background: var(--fluent-light-gray);
+            border-radius: 8px;
+            padding: 25px;
+            border: 2px solid var(--fluent-gray);
+        }
+
+        .challenge-card.problem {
+            border-color: var(--warning-red);
+            background: #ffebee;
+        }
+
+        .challenge-card.solution {
+            border-color: var(--success-green);
+            background: #e8f5e8;
+        }
+
+        .company-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 25px 0;
+            background: var(--fluent-white);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: var(--fluent-shadow);
+            font-size: 16px;
+        }
+
+        .company-table th {
+            background: var(--fluent-blue);
+            color: var(--fluent-white);
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 16px;
+        }
+
+        .company-table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid var(--fluent-gray);
+            font-size: 14px;
+        }
+
+        .company-table tbody tr:hover {
+            background: var(--fluent-light-gray);
+        }
+
+        .architecture-diagram {
+            background: var(--fluent-light-gray);
+            border-radius: 8px;
+            padding: 25px;
+            margin: 20px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+            line-height: 1.4;
+            border-left: 4px solid var(--fluent-blue);
+        }
+
+        .security-layer {
+            background: var(--fluent-light-gray);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 15px 0;
+            border-left: 4px solid var(--warning-red);
+        }
+
+        .defense-strategy {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 15px;
+            margin: 25px 0;
+        }
+
+        .defense-item {
+            background: var(--fluent-light-gray);
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            border: 2px solid var(--fluent-gray);
+            transition: all 0.3s ease;
+        }
+
+        .defense-item:hover {
+            border-color: var(--fluent-blue);
+            transform: translateY(-2px);
+        }
+
+        .defense-item h5 {
+            font-size: 16px;
+            margin-bottom: 8px;
+            color: var(--fluent-dark-blue);
+        }
+
+        .timeline-container {
+            background: var(--fluent-light-gray);
+            border-radius: 8px;
+            padding: 25px;
+            margin: 20px 0;
+        }
+
+        .timeline-item {
+            display: flex;
+            align-items: center;
+            margin: 15px 0;
+            padding: 15px;
+            background: var(--fluent-white);
+            border-radius: 6px;
+            border-left: 4px solid var(--fluent-blue);
+        }
+
+        .timeline-date {
+            font-weight: bold;
+            color: var(--fluent-blue);
+            min-width: 120px;
+        }
+
+        .navigation {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: var(--fluent-white);
+            border-radius: 50px;
+            padding: 15px 25px;
+            box-shadow: var(--fluent-shadow);
+            border: 1px solid var(--fluent-gray);
+            z-index: 1000;
+        }
+
+        .nav-button {
+            background: var(--fluent-blue);
+            color: var(--fluent-white);
+            border: none;
+            padding: 12px 20px;
+            margin: 0 5px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background 0.3s ease;
+        }
+
+        .nav-button:hover {
+            background: var(--fluent-dark-blue);
+        }
+
+        .nav-button:disabled {
+            background: var(--fluent-gray);
+            cursor: not-allowed;
+        }
+
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--fluent-blue) 0%, var(--fluent-light-blue) 100%);
+            transition: width 0.3s ease;
+            z-index: 1001;
+        }
+
+        @media (max-width: 768px) {
+            .slide {
+                padding: 30px;
+                margin-bottom: 20px;
+            }
+            
+            .slide-header {
+                margin: -30px -30px 20px -30px;
+                padding: 15px 30px;
+            }
+            
+            h1 { font-size: 28px; }
+            h2 { font-size: 24px; }
+            h3 { font-size: 20px; }
+            p, li { font-size: 16px; }
+            
+            .challenge-comparison {
+                grid-template-columns: 1fr;
+            }
+            
+            .defense-strategy {
+                grid-template-columns: 1fr;
+            }
+            
+            .navigation {
+                bottom: 15px;
+                right: 15px;
+                padding: 10px 15px;
+            }
+        }
+
+        @media print {
+            .navigation, .progress-bar {
+                display: none;
+            }
+            
+            .slide {
+                break-inside: avoid;
+                page-break-inside: avoid;
+                margin-bottom: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="progress-bar" id="progressBar"></div>
+    
+    <div class="presentation-container">
+        <!-- スライド 1: タイトルスライド -->
+        <div class="slide" data-slide="1">
+            <div class="slide-header">
+                <h2>第4章: 技術的課題と解決アプローチ</h2>
+                <div class="slide-number">1 / 12</div>
+            </div>
+            <div style="text-align: center; padding: 60px 0;">
+                <h1 style="font-size: 48px; margin-bottom: 40px;">安全性確保から<br>規制対応まで</h1>
+                <div class="stats-grid" style="margin: 50px 0;">
+                    <div class="stat-card critical">
+                        <span class="stat-number">説明可能性</span>
+                        <div class="stat-label">ブラックボックス問題</div>
+                    </div>
+                    <div class="stat-card important">
+                        <span class="stat-number">安全性保証</span>
+                        <div class="stat-label">深層防護との統合</div>
+                    </div>
+                    <div class="stat-card important">
+                        <span class="stat-number">検証・妥当性</span>
+                        <div class="stat-label">AI特有のV&V方法論</div>
+                    </div>
+                    <div class="stat-card critical">
+                        <span class="stat-number">規制協調</span>
+                        <div class="stat-label">国際標準化の推進</div>
+                    </div>
+                </div>
+                <div class="highlight-box">
+                    <p style="font-size: 22px; margin: 0;">原子力特有の高度な安全要求と厳格な規制環境における AI技術導入の課題と解決策</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- スライド 2: 説明可能性の確保 -->
+        <div class="slide" data-slide="2">
+            <div class="slide-header">
+                <h2>説明可能性の確保：ブラックボックス問題</h2>
+                <div class="slide-number">2 / 12</div>
+            </div>
+            
+            <div class="challenge-comparison">
+                <div class="challenge-card problem">
+                    <h4 style="color: var(--warning-red); margin-bottom: 15px;">🚨 課題の本質</h4>
+                    <ul style="font-size: 16px;">
+                        <li><strong>ブラックボックス性</strong>：LLMの内部動作が不透明</li>
+                        <li><strong>判断根拠不明</strong>：なぜその結論に至ったかが説明不可</li>
+                        <li><strong>規制要求</strong>：あらゆる判断に明確な根拠が必要</li>
+                        <li><strong>運転員の信頼</strong>：理解できないAIは信頼されない</li>
+                    </ul>
+                </div>
+                
+                <div class="challenge-card solution">
+                    <h4 style="color: var(--success-green); margin-bottom: 15px;">✅ 解決アプローチ</h4>
+                    <ul style="font-size: 16px;">
+                        <li><strong>XAI技術統合</strong>：SHAP、LIME、注意機構可視化</li>
+                        <li><strong>階層的説明</strong>：ステークホルダー別の説明レベル</li>
+                        <li><strong>リアルタイム生成</strong>：事前計算と段階的詳細化</li>
+                        <li><strong>標準化推進</strong>：NRC-ミシガン大学協業（50万ドル）</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3>XAI（説明可能AI）技術の実装</h3>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <span class="stat-number">SHAP</span>
+                    <div class="stat-label">ゲーム理論ベース特徴量評価</div>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">LIME</span>
+                    <div class="stat-label">局所的説明・モデル非依存</div>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">注意機構</span>
+                    <div class="stat-label">Transformer重み可視化</div>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">階層説明</span>
+                    <div class="stat-label">技術者・運転員・規制向け</div>
+                </div>
+            </div>
+
+            <div class="warning-box">
+                <h4 style="color: white; margin-bottom: 15px;">⚠️ 原子力安全での重要性</h4>
+                <p style="margin: 0; font-size: 18px;">透明性がなければ、安全管理者はリスク予測や危険検知においてAIに依存することを躊躇し、責任問題や結果の誤解を恐れることになる</p>
+            </div>
+        </div>
+
+        <!-- スライド 3: 深層防護とAIの統合 -->
+        <div class="slide" data-slide="3">
+            <div class="slide-header">
+                <h2>深層防護とAIの統合</h2>
+                <div class="slide-number">3 / 12</div>
+            </div>
+            
+            <h3>原子力安全の基本原則「深層防護」をAIシステムに適用</h3>
+            
+            <div class="defense-strategy">
+                <div class="defense-item" style="border-color: #4caf50; background: #e8f5e8;">
+                    <h5>第1層</h5>
+                    <p style="font-size: 14px; margin: 0;">異常発生防止<br><strong>予知保全AI</strong><br>運転最適化AI</p>
+                </div>
+                <div class="defense-item" style="border-color: #2196f3; background: #e3f2fd;">
+                    <h5>第2層</h5>
+                    <p style="font-size: 14px; margin: 0;">異常早期検知<br><strong>異常検知AI</strong><br>パターン認識AI</p>
+                </div>
+                <div class="defense-item" style="border-color: #ff9800; background: #fff3e0;">
+                    <h5>第3層</h5>
+                    <p style="font-size: 14px; margin: 0;">事故拡大防止<br><strong>制御支援AI</strong><br>シナリオ予測AI</p>
+                </div>
+                <div class="defense-item" style="border-color: #9c27b0; background: #f3e5f5;">
+                    <h5>第4層</h5>
+                    <p style="font-size: 14px; margin: 0;">影響緩和<br><strong>事故対応AI</strong><br>緩和策AI</p>
+                </div>
+                <div class="defense-item" style="border-color: #f44336; background: #ffebee;">
+                    <h5>第5層</h5>
+                    <p style="font-size: 14px; margin: 0;">放出時対応<br><strong>環境評価AI</strong><br>対応支援AI</p>
+                </div>
+            </div>
+
+            <h3>2024年安全標準の進展</h3>
+            <div class="timeline-container">
+                <div class="timeline-item">
+                    <div class="timeline-date">2024年1月</div>
+                    <div><strong>ISO/IEC 5469:2024</strong>：AI機能安全の国際標準公開</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">2024年7月</div>
+                    <div><strong>EU AI Act</strong>：安全重要システムでの透明性・説明責任要求</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">2024年9月</div>
+                    <div><strong>英米加三国協力</strong>：原子力AI安全原則の共同発表</div>
+                </div>
+            </div>
+
+            <div class="success-box">
+                <h4 style="color: white; margin-bottom: 15px;">✅ フェイルセーフ設計の3レベル</h4>
+                <p style="font-size: 16px; margin: 5px 0;"><strong>レベル1：</strong>自己診断による異常検出</p>
+                <p style="font-size: 16px; margin: 5px 0;"><strong>レベル2：</strong>安全側への自動移行</p>
+                <p style="font-size: 16px; margin: 0;"><strong>レベル3：</strong>完全手動制御への切替</p>
+            </div>
+        </div>
+
+        <!-- スライド 4: 検証・妥当性確認（V&V）方法論 -->
+        <div class="slide" data-slide="4">
+            <div class="slide-header">
+                <h2>検証・妥当性確認（V&V）方法論</h2>
+                <div class="slide-number">4 / 12</div>
+            </div>
+            
+            <h3>AI特有のV&V要素</h3>
+            
+            <div class="architecture-diagram">
+<pre>AI統合V&Vフレームワーク:
+├── データ品質の検証
+│   ├── 訓練データの代表性・完全性
+│   ├── バイアスの検出と定量化
+│   ├── データの時間的・空間的カバレッジ
+│   └── データ品質メトリクスの継続監視
+├── モデル性能の検証
+│   ├── 精度・再現率・F値の多角的評価
+│   ├── ロバスト性テスト：ノイズ・攻撃への耐性
+│   ├── エッジケース対応：境界条件での性能
+│   └── 不確実性定量化：予測信頼区間の評価
+├── 統合システムの妥当性確認
+│   ├── 既存システムとの相互作用テスト
+│   ├── 性能要求の充足性確認
+│   ├── 運用シナリオでの総合動作確認
+│   └── 非機能要件の検証：レスポンス時間等
+└── 継続的V&V
+    ├── オンライン性能モニタリング
+    ├── 概念ドリフト検出と対応
+    ├── 定期的なモデル再評価・再訓練
+    └── V&V結果の長期トレンド分析</pre>
+            </div>
+
+            <h3>段階的検証アプローチ</h3>
+            <div class="stats-grid">
+                <div class="stat-card good">
+                    <span class="stat-number">Phase 1</span>
+                    <div class="stat-label">データ・モデル検証（開発段階）</div>
+                </div>
+                <div class="stat-card important">
+                    <span class="stat-number">Phase 2</span>
+                    <div class="stat-label">システム統合検証（統合段階）</div>
+                </div>
+                <div class="stat-card critical">
+                    <span class="stat-number">Phase 3</span>
+                    <div class="stat-label">運用時検証（運用段階）</div>
+                </div>
+            </div>
+
+            <div class="highlight-box">
+                <p style="font-size: 20px; margin: 0;">従来のソフトウェアV&V標準（IEC 60880、IEEE 1012）とAI機能安全標準（ISO/IEC 5469:2024）を統合した新しいV&V手法が開発中</p>
+            </div>
+        </div>
+
+        <!-- スライド 5: Physics-Informed AI の実装 -->
+        <div class="slide" data-slide="5">
+            <div class="slide-header">
+                <h2>Physics-Informed AI：物理法則との整合性</h2>
+                <div class="slide-number">5 / 12</div>
+            </div>
+            
+            <h3>PINNs（Physics-Informed Neural Networks）技術</h3>
+            
+            <div class="challenge-comparison">
+                <div class="challenge-card">
+                    <h4 style="color: var(--fluent-blue); margin-bottom: 15px;">技術の核心要素</h4>
+                    <ul style="font-size: 16px;">
+                        <li><strong>偏微分方程式統合</strong>：物理法則を損失関数に直接組込み</li>
+                        <li><strong>境界条件強制</strong>：初期・境界条件の自動遵守</li>
+                        <li><strong>連続性保証</strong>：時空間での解の連続性確保</li>
+                        <li><strong>保存則統合</strong>：エネルギー・運動量保存の厳密保証</li>
+                    </ul>
+                </div>
+                
+                <div class="challenge-card">
+                    <h4 style="color: var(--fluent-blue); margin-bottom: 15px;">統合物理法則</h4>
+                    <ul style="font-size: 16px;">
+                        <li><strong>中性子拡散方程式</strong>：臨界性・反応度制約</li>
+                        <li><strong>熱伝導方程式</strong>：エネルギー保存則遵守</li>
+                        <li><strong>応力-ひずみ関係</strong>：構造力学制約</li>
+                        <li><strong>システム動力学</strong>：制御系動的応答</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="architecture-diagram">
+<pre>損失関数の統合例:
+L_total = L_data + λ_physics * L_physics + λ_boundary * L_boundary
+
+L_physics = ||∇·(D∇φ) - Σₐφ + νΣₓφ||²  (中性子拡散方程式)
+L_boundary = ||φ(boundary) - φ_boundary||²  (境界条件)
+L_data = ||φ_pred - φ_observed||²  (観測データ適合)</pre>
+            </div>
+
+            <h3>基本方程式の統合範囲</h3>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <span class="stat-number">中性子物理</span>
+                    <div class="stat-label">拡散方程式・反応度制約</div>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">熱流動</span>
+                    <div class="stat-label">熱伝導・エネルギー保存</div>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">構造力学</span>
+                    <div class="stat-label">応力-ひずみ・材料特性</div>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">システム動力学</span>
+                    <div class="stat-label">制御系・物質収支</div>
+                </div>
+            </div>
+
+            <div class="success-box">
+                <h4 style="color: white; margin-bottom: 15px;">🎯 2024年PIML研究動向</h4>
+                <p style="margin: 0; font-size: 18px;">核物理・熱流動・構造力学の統合解析において、従来困難な複合物理現象の高精度予測が実現し、次世代原子炉設計効率化に大きく貢献</p>
+            </div>
+        </div>
+
+        <!-- スライド 6: 国際規制協調の進展 -->
+        <div class="slide" data-slide="6">
+            <div class="slide-header">
+                <h2>国際規制協調：歴史的転換点</h2>
+                <div class="slide-number">6 / 12</div>
+            </div>
+            
+            <h3>2024年9月5日：世界初の原子力AI規制国際協力</h3>
+            
+            <div class="success-box">
+                <h4 style="color: white; margin-bottom: 15px;">🤝 NRC-ONR-CNSC三者共同原則</h4>
+                <p style="font-size: 18px; margin: 10px 0;">米国NRC（原子力規制委員会）</p>
+                <p style="font-size: 18px; margin: 10px 0;">英国ONR（原子力規制庁）</p>
+                <p style="font-size: 18px; margin: 0;">カナダCNSC（原子力安全委員会）</p>
+            </div>
+
+            <div class="architecture-diagram">
+<pre>三者共同原則の核心要素:
+├── 基本理念
+│   ├── 安全第一原則
+│   ├── 段階的技術導入
+│   └── 革新と安全のバランス
+├── 共通課題
+│   ├── AI故障の影響管理
+│   └── AI自律性レベルの適切設定
+├── 人的・組織要因
+│   └── 人間-AI協調における信頼関係最適化
+├── 安全解析
+│   └── 原子力応用でのAI安全ケース考慮事項
+└── 継続協力
+    ├── 技術動向の共同監視
+    └── 新興課題への協調対応</pre>
+            </div>
+
+            <h3>段階的実装アプローチの国際標準化</h3>
+            <div class="stats-grid">
+                <div class="stat-card good">
+                    <span class="stat-number">概念段階</span>
+                    <div class="stat-label">基本適用性評価・影響分析</div>
+                </div>
+                <div class="stat-card important">
+                    <span class="stat-number">詳細設計段階</span>
+                    <div class="stat-label">V&V計画・人間-AI協調設計</div>
+                </div>
+                <div class="stat-card critical">
+                    <span class="stat-number">実装段階</span>
+                    <div class="stat-label">実運用環境での安全性実証</div>
+                </div>
+            </div>
+
+            <div class="highlight-box">
+                <p style="font-size: 20px; margin: 0;">英国ONRが世界初の原子力AI規制サンドボックスを実施（2022年11月、£170,950助成）し、安全な環境でのAI技術規制方法を検討</p>
+            </div>
+        </div>
+
+        <!-- スライド 7: AI専用規制ガイドラインの必要性 -->
+        <div class="slide" data-slide="7">
+            <div class="slide-header">
+                <h2>AI専用規制ガイドラインの必要性</h2>
+                <div class="slide-number">7 / 12</div>
+            </div>
+            
+            <h3>従来規制 vs AI技術の本質的相違</h3>
+            
+            <table class="company-table">
+                <thead>
+                    <tr>
+                        <th>観点</th>
+                        <th>従来規制の前提</th>
+                        <th>AI技術の特性</th>
+                        <th>必要な対応</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>動作特性</strong></td>
+                        <td>決定論的<br>（同一入力→同一出力）</td>
+                        <td style="color: var(--warning-red);">確率論的<br>（統計的予測）</td>
+                        <td>確率的評価手法</td>
+                    </tr>
+                    <tr>
+                        <td><strong>システム変化</strong></td>
+                        <td>静的<br>（設計固定）</td>
+                        <td style="color: var(--warning-red);">動的<br>（学習・適応）</td>
+                        <td>継続的監視・更新</td>
+                    </tr>
+                    <tr>
+                        <td><strong>検証可能性</strong></td>
+                        <td>網羅的テスト可能</td>
+                        <td style="color: var(--warning-red);">完全テスト困難</td>
+                        <td>統計的検証手法</td>
+                    </tr>
+                    <tr>
+                        <td><strong>透明性</strong></td>
+                        <td>理解可能な設計</td>
+                        <td style="color: var(--warning-red);">ブラックボックス</td>
+                        <td>説明可能性確保</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>AI専用ガイドラインの要素</h3>
+            <div class="stats-grid">
+                <div class="stat-card critical">
+                    <span class="stat-number">安全機能分類</span>
+                    <div class="stat-label">Safety-Related～Administrative</div>
+                </div>
+                <div class="stat-card important">
+                    <span class="stat-number">開発プロセス</span>
+                    <div class="stat-label">仕様明確化・データ品質保証</div>
+                </div>
+                <div class="stat-card important">
+                    <span class="stat-number">運用管理</span>
+                    <div class="stat-label">性能監視・人間監督確保</div>
+                </div>
+                <div class="stat-card critical">
+                    <span class="stat-number">セキュリティ</span>
+                    <div class="stat-label">データ保護・攻撃防御</div>
+                </div>
+            </div>
+
+            <div class="warning-box">
+                <h4 style="color: white; margin-bottom: 15px;">⚠️ 規制パラダイムの根本的転換</h4>
+                <p style="margin: 0; font-size: 18px;">決定論的システム前提の従来規制では、確率論的・動的変化するAI技術の適切な規制は不可能</p>
+            </div>
+        </div>
+
+        <!-- スライド 8: サイバーセキュリティ脅威分析 -->
+        <div class="slide" data-slide="8">
+            <div class="slide-header">
+                <h2>サイバーセキュリティ対策の高度化</h2>
+                <div class="slide-number">8 / 12</div>
+            </div>
+            
+            <h3>AI時代の新たなセキュリティ脅威</h3>
+            
+            <div class="challenge-comparison">
+                <div class="challenge-card">
+                    <h4 style="color: var(--fluent-blue); margin-bottom: 15px;">従来型サイバー脅威</h4>
+                    <ul style="font-size: 16px;">
+                        <li><strong>ネットワーク侵入</strong>：マルウェア感染</li>
+                        <li><strong>データ攻撃</strong>：窃取・改ざん・破壊</li>
+                        <li><strong>サービス妨害</strong>：DoS/DDoS攻撃</li>
+                        <li><strong>内部脅威</strong>：特権濫用</li>
+                    </ul>
+                </div>
+                
+                <div class="challenge-card problem">
+                    <h4 style="color: var(--warning-red); margin-bottom: 15px;">🚨 AI特有の新興脅威</h4>
+                    <ul style="font-size: 16px;">
+                        <li><strong>敵対的攻撃</strong>：入力データ改ざん・誤分類誘導</li>
+                        <li><strong>モデル盗用</strong>：訓練データ逆推定・IP盗用</li>
+                        <li><strong>データポイズニング</strong>：悪意データ混入・バックドア</li>
+                        <li><strong>プライバシー侵害</strong>：会員推論・属性推論攻撃</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3>多層防護セキュリティアーキテクチャ</h3>
+            <div class="defense-strategy">
+                <div class="defense-item">
+                    <h5>物理セキュリティ層</h5>
+                    <p style="font-size: 12px; margin: 0;">物理的隔離<br>アクセス制御</p>
+                </div>
+                <div class="defense-item">
+                    <h5>ネットワーク層</h5>
+                    <p style="font-size: 12px; margin: 0;">エアギャップ<br>セグメンテーション</p>
+                </div>
+                <div class="defense-item">
+                    <h5>システム層</h5>
+                    <p style="font-size: 12px; margin: 0;">OS強化<br>ミドルウェア</p>
+                </div>
+                <div class="defense-item">
+                    <h5>AI専用層</h5>
+                    <p style="font-size: 12px; margin: 0;">AI攻撃検知<br>防御機能</p>
+                </div>
+                <div class="defense-item">
+                    <h5>運用監視層</h5>
+                    <p style="font-size: 12px; margin: 0;">24時間監視<br>インシデント対応</p>
+                </div>
+            </div>
+
+            <h3>AI特有の防御技術</h3>
+            <div class="stats-grid">
+                <div class="stat-card good">
+                    <span class="stat-number">敵対的訓練</span>
+                    <div class="stat-label">頑健性向上・防御的蒸留</div>
+                </div>
+                <div class="stat-card good">
+                    <span class="stat-number">入力検証</span>
+                    <div class="stat-label">統計的異常検知・制約検証</div>
+                </div>
+                <div class="stat-card good">
+                    <span class="stat-number">モデル防御</span>
+                    <div class="stat-label">信頼度評価・不確実性定量化</div>
+                </div>
+            </div>
+
+            <div class="security-layer">
+                <h4>TEMPEST・電磁波セキュリティ</h4>
+                <p style="font-size: 16px; margin: 0;">NSA仕様：1kHz-10GHz範囲で最小100dB挿入損失要求。RED/BLACK概念による機密・非機密情報処理の物理的分離</p>
+            </div>
+        </div>
+
+        <!-- スライド 9: エアギャップ設計と多層防護 -->
+        <div class="slide" data-slide="9">
+            <div class="slide-header">
+                <h2>エアギャップ設計と多層防護</h2>
+                <div class="slide-number">9 / 12</div>
+            </div>
+            
+            <h3>物理的分離による防護原則</h3>
+            
+            <div class="architecture-diagram">
+<pre>エアギャップ防護の基本原則:
+├── 物理的分離
+│   ├── ネットワーク・通信の物理遮断
+│   ├── 専用設備配置
+│   └── 隔離エリアの設定
+├── 電磁波対策
+│   ├── TEMPEST要求準拠
+│   ├── 電磁波漏洩防止
+│   └── シールドルーム設置
+├── データ統制
+│   ├── 持込・持出の厳格管理
+│   ├── 暗号化・デジタル署名
+│   └── ログ・監査証跡記録
+└── 人的管理
+    ├── 身元調査・セキュリティクリアランス
+    ├── 最小権限原則
+    └── 継続監視・アクセス制御</pre>
+            </div>
+
+            <h3>セキュリティ監視体制</h3>
+            <div class="stats-grid">
+                <div class="stat-card critical">
+                    <span class="stat-number">24時間365日</span>
+                    <div class="stat-label">継続セキュリティ監視</div>
+                </div>
+                <div class="stat-card important">
+                    <span class="stat-number">SIEM統合</span>
+                    <div class="stat-label">ログ・イベント統合分析</div>
+                </div>
+                <div class="stat-card important">
+                    <span class="stat-number">AI異常検知</span>
+                    <div class="stat-label">行動分析・パターン検出</div>
+                </div>
+                <div class="stat-card good">
+                    <span class="stat-number">迅速対応</span>
+                    <div class="stat-label">インシデント対応・復旧</div>
+                </div>
+            </div>
+
+            <div class="warning-box">
+                <h4 style="color: white; margin-bottom: 15px;">👥 SOC運用の課題</h4>
+                <p style="margin: 0; font-size: 18px;">平均的なSOC（Security Operation Center）には最低11名のフルタイム専門家が必要。グローバルなセキュリティ人材不足が深刻化</p>
+            </div>
+
+            <h3>2024-2025年セキュリティ技術進展</h3>
+            <div class="timeline-container">
+                <div class="timeline-item">
+                    <div class="timeline-date">2024年6月</div>
+                    <div><strong>韓国KHNP</strong>：量子鍵配送（QKD）本格導入決定</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">2024年8月</div>
+                    <div><strong>NIST標準化</strong>：Post-Quantum FIPS 203/204/205策定完了</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">2024-2025年</div>
+                    <div><strong>量子通信実証</strong>：Purdue大学・ORNL・東芝による世界初原子炉内実証成功</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- スライド 10: 国際標準化の動向 -->
+        <div class="slide" data-slide="10">
+            <div class="slide-header">
+                <h2>国際標準化の動向</h2>
+                <div class="slide-number">10 / 12</div>
+            </div>
+            
+            <h3>IEEE標準化の状況</h3>
+            
+            <div class="challenge-comparison">
+                <div class="challenge-card">
+                    <h4 style="color: var(--fluent-blue); margin-bottom: 15px;">IEEE PES NPEC担当範囲</h4>
+                    <ul style="font-size: 16px;">
+                        <li><strong>既存標準見直し</strong>：AI技術進展を考慮した電気・電子機器要件</li>
+                        <li><strong>AI安全性評価</strong>：IEEE 2863等の応用検討</li>
+                        <li><strong>サイバーセキュリティ</strong>：AI特有脅威対応要件</li>
+                        <li><strong>品質保証</strong>：AIシステム開発・運用標準化</li>
+                    </ul>
+                </div>
+                
+                <div class="challenge-card">
+                    <h4 style="color: var(--fluent-blue); margin-bottom: 15px;">関連既存標準</h4>
+                    <ul style="font-size: 16px;">
+                        <li><strong>IEEE 2863</strong>：組織のAIガバナンス推奨実践</li>
+                        <li><strong>IEEE 7010</strong>：AI・自律システムの人間影響測定</li>
+                        <li><strong>IEEE 2857</strong>：無線スマートユーティリティFAN標準</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3>ISO/IEC標準の動向</h3>
+            <div class="timeline-container">
+                <div class="timeline-item">
+                    <div class="timeline-date">2018年</div>
+                    <div><strong>ISO 19443</strong>：原子力品質管理システム標準</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">2023年</div>
+                    <div><strong>ISO/IEC 42001</strong>：世界初のAI管理システム標準</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">2024年</div>
+                    <div><strong>ISO/IEC 5469</strong>：AI機能安全標準策定</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">2024年</div>
+                    <div><strong>ISO 19443 Amendment 1</strong>：気候変動対応追加</div>
+                </div>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-card good">
+                    <span class="stat-number">ISO/TC 85</span>
+                    <div class="stat-label">原子力技術標準化</div>
+                </div>
+                <div class="stat-card good">
+                    <span class="stat-number">ISO/IEC JTC 1/SC 42</span>
+                    <div class="stat-label">人工知能標準化</div>
+                </div>
+                <div class="stat-card important">
+                    <span class="stat-number">統合検討</span>
+                    <div class="stat-label">原子力分野AI標準適用方法</div>
+                </div>
+            </div>
+
+            <div class="highlight-box">
+                <p style="font-size: 20px; margin: 0;">原子力・AI両分野の標準化機関が連携し、原子力特有要求を満たすAI標準の策定が進行中</p>
+            </div>
+        </div>
+
+        <!-- スライド 11: 統合アプローチの実装 -->
+        <div class="slide" data-slide="11">
+            <div class="slide-header">
+                <h2>課題解決への統合アプローチ</h2>
+                <div class="slide-number">11 / 12</div>
+            </div>
+            
+            <h3>多面的リスク管理の重要性</h3>
+            
+            <div class="stats-grid" style="grid-template-columns: repeat(4, 1fr);">
+                <div class="stat-card critical">
+                    <span class="stat-number">技術的リスク</span>
+                    <div class="stat-label">AI性能・信頼性・物理法則整合性</div>
+                </div>
+                <div class="stat-card important">
+                    <span class="stat-number">規制・標準</span>
+                    <div class="stat-label">規制要求適合・国際標準整合</div>
+                </div>
+                <div class="stat-card important">
+                    <span class="stat-number">セキュリティ</span>
+                    <div class="stat-label">サイバー脅威・データ保護</div>
+                </div>
+                <div class="stat-card good">
+                    <span class="stat-number">運用・組織</span>
+                    <div class="stat-label">人間-AI協調・人材育成</div>
+                </div>
+            </div>
+
+            <h3>今後の技術開発方向</h3>
+            <div class="challenge-comparison">
+                <div class="challenge-card solution">
+                    <h4 style="color: var(--success-green); margin-bottom: 15px;">✅ 技術的優先事項</h4>
+                    <ol style="font-size: 16px;">
+                        <li><strong>説明可能AI（XAI）実用化</strong><br>リアルタイム説明生成・品質評価</li>
+                        <li><strong>自律品質管理システム</strong><br>AI自己監視・予知保全高度化</li>
+                        <li><strong>量子技術統合</strong><br>量子機械学習・量子暗号活用</li>
+                    </ol>
+                </div>
+                
+                <div class="challenge-card">
+                    <h4 style="color: var(--fluent-blue); margin-bottom: 15px;">🎯 標準化・規制整備</h4>
+                    <ul style="font-size: 16px;">
+                        <li><strong>IEEE/ISO/IEC標準</strong>：策定推進</li>
+                        <li><strong>規制ガイドライン</strong>：各国協調化</li>
+                        <li><strong>相互認証制度</strong>：検討・準備</li>
+                        <li><strong>国際協力体制</strong>：継続強化</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="architecture-diagram">
+<pre>統合戦略の重点領域:
+├── 技術的信頼性
+│   ├── AI性能劣化・概念ドリフト継続監視
+│   └── 説明可能性・透明性確保
+├── 規制適合性  
+│   ├── 承認プロセス効率化
+│   └── 国際標準整合性確保
+├── セキュリティ対応
+│   ├── AI特有脅威防御
+│   └── データ保護・プライバシー確保
+└── 運用最適化
+    ├── 人間-AI協調最適化
+    └── 組織能力・人材育成継続</pre>
+            </div>
+
+            <div class="success-box">
+                <h4 style="color: white; margin-bottom: 15px;">🎯 統合アプローチの本質</h4>
+                <p style="margin: 0; font-size: 18px;">個別課題解決ではなく、技術・規制・セキュリティの三位一体統合リスク管理フレームワークによる持続可能なAI導入戦略</p>
+            </div>
+        </div>
+
+        <!-- スライド 12: まとめ -->
+        <div class="slide" data-slide="12">
+            <div class="slide-header">
+                <h2>まとめ：安全性確保から規制対応まで</h2>
+                <div class="slide-number">12 / 12</div>
+            </div>
+            
+            <div style="text-align: center; padding: 40px 0;">
+                <h3 style="font-size: 32px; margin-bottom: 40px;">原子力AI導入成功の鍵</h3>
+                
+                <div class="stats-grid" style="margin: 40px 0;">
+                    <div class="stat-card critical" style="background: linear-gradient(135deg, #f44336 0%, #d32f2f 100%); color: white;">
+                        <span class="stat-number" style="color: white;">説明可能性</span>
+                        <div class="stat-label" style="color: white;">XAI技術・階層的説明システム</div>
+                    </div>
+                    <div class="stat-card important" style="background: linear-gradient(135deg, #ff9800 0%, #f57c00 100%); color: white;">
+                        <span class="stat-number" style="color: white;">深層防護統合</span>
+                        <div class="stat-label" style="color: white;">5層防護・フェイルセーフ設計</div>
+                    </div>
+                    <div class="stat-card good" style="background: linear-gradient(135deg, #4caf50 0%, #388e3c 100%); color: white;">
+                        <span class="stat-number" style="color: white;">物理法則統合</span>
+                        <div class="stat-label" style="color: white;">PINNs・Physics-Informed AI</div>
+                    </div>
+                    <div class="stat-card" style="background: linear-gradient(135deg, #2196f3 0%, #1976d2 100%); color: white;">
+                        <span class="stat-number" style="color: white;">国際規制協調</span>
+                        <div class="stat-label" style="color: white;">英米加三国協力・標準化推進</div>
+                    </div>
+                </div>
+
+                <div style="margin: 40px 0;">
+                    <h4 style="color: #0078d4; margin-bottom: 20px;">課題解決の体系的アプローチ</h4>
+                    <div style="display: flex; justify-content: center; gap: 40px; flex-wrap: wrap;">
+                        <div style="background: #e3f2fd; padding: 20px; border-radius: 8px; border: 2px solid #2196f3;">
+                            <p style="font-size: 16px; margin: 0; color: #1976d2; font-weight: bold;">技術的課題：説明可能性・安全性・V&V</p>
+                        </div>
+                        <div style="background: #fff3e0; padding: 20px; border-radius: 8px; border: 2px solid #ff9800;">
+                            <p style="font-size: 16px; margin: 0; color: #f57c00; font-weight: bold;">規制課題：国際協調・AI専用ガイドライン</p>
+                        </div>
+                        <div style="background: #ffebee; padding: 20px; border-radius: 8px; border: 2px solid #f44336;">
+                            <p style="font-size: 16px; margin: 0; color: #d32f2f; font-weight: bold;">セキュリティ：AI特有脅威・多層防護</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="highlight-box" style="margin: 40px auto; max-width: 800px;">
+                    <h4 style="color: white; font-size: 24px; margin-bottom: 20px;">統合戦略の重要性</h4>
+                    <p style="font-size: 20px; margin-bottom: 15px;">技術・規制・セキュリティの三位一体アプローチ</p>
+                    <p style="font-size: 18px; margin: 0;">次章では、これらの技術基盤による経済効果と投資動向を詳述</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="navigation">
+        <button class="nav-button" id="prevBtn" onclick="changeSlide(-1)">◀ 前へ</button>
+        <span id="slideInfo">1 / 12</span>
+        <button class="nav-button" id="nextBtn" onclick="changeSlide(1)">次へ ▶</button>
+    </div>
+
+    <script>
+        let currentSlide = 1;
+        const totalSlides = 12;
+
+        function updateSlideVisibility() {
+            const slides = document.querySelectorAll('.slide');
+            slides.forEach((slide, index) => {
+                if (index + 1 === currentSlide) {
+                    slide.style.display = 'flex';
+                    slide.scrollIntoView({ behavior: 'smooth' });
+                } else {
+                    slide.style.display = 'none';
+                }
+            });
+
+            // Update navigation
+            document.getElementById('slideInfo').textContent = `${currentSlide} / ${totalSlides}`;
+            document.getElementById('prevBtn').disabled = currentSlide === 1;
+            document.getElementById('nextBtn').disabled = currentSlide === totalSlides;
+
+            // Update progress bar
+            const progress = (currentSlide / totalSlides) * 100;
+            document.getElementById('progressBar').style.width = `${progress}%`;
+        }
+
+        function changeSlide(direction) {
+            const newSlide = currentSlide + direction;
+            if (newSlide >= 1 && newSlide <= totalSlides) {
+                currentSlide = newSlide;
+                updateSlideVisibility();
+            }
+        }
+
+        function goToSlide(slideNumber) {
+            if (slideNumber >= 1 && slideNumber <= totalSlides) {
+                currentSlide = slideNumber;
+                updateSlideVisibility();
+            }
+        }
+
+        // キーボードナビゲーション
+        document.addEventListener('keydown', function(e) {
+            switch(e.key) {
+                case 'ArrowRight':
+                case ' ':
+                    e.preventDefault();
+                    changeSlide(1);
+                    break;
+                case 'ArrowLeft':
+                    e.preventDefault();
+                    changeSlide(-1);
+                    break;
+                case 'Home':
+                    e.preventDefault();
+                    goToSlide(1);
+                    break;
+                case 'End':
+                    e.preventDefault();
+                    goToSlide(totalSlides);
+                    break;
+                default:
+                    const num = parseInt(e.key);
+                    if (!isNaN(num) && num >= 1 && num <= Math.min(9, totalSlides)) {
+                        e.preventDefault();
+                        goToSlide(num);
+                    }
+                    break;
+            }
+        });
+
+        // タッチナビゲーション
+        let startX = 0;
+        document.addEventListener('touchstart', function(e) {
+            startX = e.touches[0].clientX;
+        });
+
+        document.addEventListener('touchend', function(e) {
+            const endX = e.changedTouches[0].clientX;
+            const diff = startX - endX;
+            
+            if (Math.abs(diff) > 50) {
+                if (diff > 0) {
+                    changeSlide(1);
+                } else {
+                    changeSlide(-1);
+                }
+            }
+        });
+
+        // 初期化
+        updateSlideVisibility();
+
+        // ページ読み込み完了時にフォーカスを設定
+        document.addEventListener('DOMContentLoaded', function() {
+            document.body.focus();
+        });
+    </script>
+</body>
+</html>

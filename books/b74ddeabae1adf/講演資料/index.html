@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>原子力分野における生成AI利用の世界動向と日本の戦略的課題</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #ffffff 0%, #f5f5f5 100%);
+            color: #323130;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .presentation-container {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .slide {
+            width: 100vw;
+            height: 100vh;
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+            position: relative;
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+        }
+
+        .slide.active {
+            display: flex;
+        }
+
+        .slide-content {
+            max-width: 1200px;
+            width: 100%;
+            height: 80%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            animation: slideUp 0.8s ease-out;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: #0078d4;
+            margin-bottom: 1.5rem;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            line-height: 1.2;
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            font-weight: 600;
+            color: #323130;
+            margin-bottom: 2rem;
+            line-height: 1.3;
+        }
+
+        h3 {
+            font-size: 2rem;
+            font-weight: 500;
+            color: #0078d4;
+            margin-bottom: 1.5rem;
+        }
+
+        .subtitle {
+            font-size: 1.5rem;
+            color: #605e5c;
+            margin-bottom: 3rem;
+            font-weight: 400;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 1rem;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.08);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.12);
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            width: 100%;
+            max-width: 1200px;
+        }
+
+        .grid-2 {
+            grid-template-columns: 1fr 1fr;
+        }
+
+        .grid-3 {
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        .flex-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            max-width: 1200px;
+            gap: 2rem;
+        }
+
+        .stat-box {
+            text-align: center;
+            padding: 1.5rem;
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 700;
+            color: #0078d4;
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 1.2rem;
+            color: #605e5c;
+            margin-top: 0.5rem;
+        }
+
+        .highlight {
+            color: #0078d4;
+            font-weight: 600;
+        }
+
+        .icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: #0078d4;
+        }
+
+        .navigation {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            display: flex;
+            gap: 1rem;
+            z-index: 1000;
+        }
+
+        .nav-btn {
+            background: #0078d4;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 16px rgba(0,120,212,0.3);
+        }
+
+        .nav-btn:hover {
+            background: #106ebe;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,120,212,0.4);
+        }
+
+        .nav-btn:disabled {
+            background: #a19f9d;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .slide-counter {
+            position: fixed;
+            bottom: 2rem;
+            left: 2rem;
+            background: rgba(255,255,255,0.9);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: 500;
+            color: #323130;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+            z-index: 1000;
+        }
+
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 4px;
+            background: #0078d4;
+            transition: width 0.3s ease;
+            z-index: 1000;
+        }
+
+        .bullet-point {
+            display: flex;
+            align-items: flex-start;
+            margin: 1rem 0;
+            text-align: left;
+        }
+
+        .bullet-point::before {
+            content: "▶";
+            color: #0078d4;
+            font-weight: bold;
+            margin-right: 0.8rem;
+            margin-top: 0.2rem;
+            font-size: 1.2rem;
+        }
+
+        .large-text {
+            font-size: 1.4rem;
+            line-height: 1.6;
+        }
+
+        .center-content {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+        }
+
+        .flow-diagram {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            width: 100%;
+            margin: 2rem 0;
+        }
+
+        .flow-step {
+            flex: 1;
+            text-align: center;
+            position: relative;
+        }
+
+        .flow-step:not(:last-child)::after {
+            content: "→";
+            position: absolute;
+            right: -2rem;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 2rem;
+            color: #0078d4;
+            font-weight: bold;
+        }
+
+        .chapter-title {
+            background: linear-gradient(45deg, #0078d4, #40e0d0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-size: 2.8rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .slide {
+                padding: 1rem;
+            }
+            
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            h2 {
+                font-size: 2rem;
+            }
+            
+            .grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .flex-row {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="presentation-container">
+        <div class="progress-bar" id="progressBar"></div>
+        
+        <!-- Slide 1: Title -->
+        <div class="slide active">
+            <div class="slide-content center-content">
+                <h1>原子力分野における<br>生成AI利用の世界動向と<br>日本の戦略的課題</h1>
+                <p class="subtitle">Nuclear AI Technology Revolution: Japan's Strategic Path to Energy Security and Climate Solutions</p>
+                <div class="card" style="margin-top: 3rem;">
+                    <p class="large-text">Microsoft、Google、Amazonが数千億円を投じる<br><span class="highlight">原子力AI市場の革命的成長</span>と<br>日本の競争力強化戦略</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 2: Overview -->
+        <div class="slide">
+            <div class="slide-content">
+                <h2>書籍の全体構成</h2>
+                <div class="grid grid-3">
+                    <div class="card">
+                        <div class="icon">🌍</div>
+                        <h3>世界動向分析</h3>
+                        <div class="bullet-point">米国：商用運用開始</div>
+                        <div class="bullet-point">韓国・中国：国家戦略</div>
+                        <div class="bullet-point">技術競争の激化</div>
+                    </div>
+                    <div class="card">
+                        <div class="icon">⚡</div>
+                        <h3>技術・経済分析</h3>
+                        <div class="bullet-point">実用化事例の検証</div>
+                        <div class="bullet-point">投資動向の把握</div>
+                        <div class="bullet-point">課題と解決策</div>
+                    </div>
+                    <div class="card">
+                        <div class="icon">🇯🇵</div>
+                        <h3>日本の戦略提言</h3>
+                        <div class="bullet-point">現状分析と課題</div>
+                        <div class="bullet-point">包括的行動計画</div>
+                        <div class="bullet-point">実現への道筋</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 3: Chapter 1-2 World Trends -->
+        <div class="slide">
+            <div class="slide-content">
+                <h2 class="chapter-title">第1-2章: 世界の最新動向</h2>
+                <div class="grid grid-2">
+                    <div class="card">
+                        <h3>🇺🇸 米国の先行</h3>
+                        <div class="stat-box">
+                            <span class="stat-number">世界初</span>
+                            <span class="stat-label">ディアブロキャニオン原発<br>商用AI運用開始</span>
+                        </div>
+                        <div class="bullet-point">Microsoft：Three Mile Island 16億ドル</div>
+                        <div class="bullet-point">Google：Kairos Power 500MW</div>
+                        <div class="bullet-point">Amazon：X-Energy 5億ドル</div>
+                    </div>
+                    <div class="card">
+                        <h3>🌏 アジアの国家戦略</h3>
+                        <div class="bullet-point">韓国：K-AI 원전 프로젝트</div>
+                        <div class="bullet-point">中国：国家主導の集中投資</div>
+                        <div class="bullet-point">インド：安全性重視の慎重展開</div>
+                        <div class="stat-box">
+                            <span class="stat-number">三極構造</span>
+                            <span class="stat-label">米国・中国・欧州による<br>技術覇権競争</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 4: Chapter 3-4 Technology -->
+        <div class="slide">
+            <div class="slide-content">
+                <h2 class="chapter-title">第3-4章: 先端技術と課題解決</h2>
+                <div class="flow-diagram">
+                    <div class="flow-step">
+                        <div class="card">
+                            <div class="icon">🔍</div>
+                            <h3>予知保全</h3>
+                            <p>機器故障の事前検知<br>メンテナンス最適化</p>
+                        </div>
+                    </div>
+                    <div class="flow-step">
+                        <div class="card">
+                            <div class="icon">⚠️</div>
+                            <h3>異常検知</h3>
+                            <p>リアルタイム監視<br>安全性の向上</p>
+                        </div>
+                    </div>
+                    <div class="flow-step">
+                        <div class="card">
+                            <div class="icon">⚙️</div>
+                            <h3>運転最適化</h3>
+                            <p>効率向上<br>コスト削減</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="card" style="margin-top: 2rem;">
+                    <h3>技術的課題と解決アプローチ</h3>
+                    <div class="grid grid-2">
+                        <div>
+                            <div class="bullet-point">安全性確保：多重防護システム</div>
+                            <div class="bullet-point">規制対応：段階的承認プロセス</div>
+                        </div>
+                        <div>
+                            <div class="bullet-point">人材育成：専門技術者の養成</div>
+                            <div class="bullet-point">標準化：国際基準の策定</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 5: Chapter 5 Economics -->
+        <div class="slide">
+            <div class="slide-content">
+                <h2 class="chapter-title">第5章: 経済性分析と市場展望</h2>
+                <div class="flex-row">
+                    <div class="card">
+                        <h3>投資動向</h3>
+                        <div class="stat-box">
+                            <span class="stat-number">数千億円</span>
+                            <span class="stat-label">大手IT企業の投資額</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-number">6.5%</span>
+                            <span class="stat-label">年平均成長率<br>(2025-2034)</span>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <h3>市場予測</h3>
+                        <div class="bullet-point">データセンター需要の急激な増加</div>
+                        <div class="bullet-point">原子力：24/7安定電源の価値</div>
+                        <div class="bullet-point">AI需要：2030年まで160%増加</div>
+                        <div class="stat-box">
+                            <span class="stat-number">2030年</span>
+                            <span class="stat-label">商用展開本格化</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 6: Chapter 6 Japan Analysis -->
+        <div class="slide">
+            <div class="slide-content">
+                <h2 class="chapter-title">第6章: 日本の現状分析</h2>
+                <div class="grid grid-2">
+                    <div class="card">
+                        <h3>✅ 技術的優位性</h3>
+                        <div class="bullet-point">50年間の原子力技術蓄積</div>
+                        <div class="bullet-point">世界トップ3の製造実績</div>
+                        <div class="bullet-point">福島事故を踏まえた安全技術</div>
+                        <div class="bullet-point">米国との戦略的協力</div>
+                        <div class="stat-box">
+                            <span class="stat-number">400社</span>
+                            <span class="stat-label">専門サプライチェーン</span>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <h3>⚠️ 構造的課題</h3>
+                        <div class="bullet-point">総合競争力：38位に低下</div>
+                        <div class="bullet-point">技術優位：32→7技術に減少</div>
+                        <div class="bullet-point">公衆受容：16%支持・26%反対</div>
+                        <div class="bullet-point">国際競争：中国57/64技術でリード</div>
+                        <div class="stat-box">
+                            <span class="stat-number">信頼回復</span>
+                            <span class="stat-label">最重要課題</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 7: Chapter 7-8 Strategy -->
+        <div class="slide">
+            <div class="slide-content">
+                <h2 class="chapter-title">第7-8章: 戦略的提言と具体的施策</h2>
+                <div class="card">
+                    <h3>包括的推進体制</h3>
+                    <div class="grid grid-3">
+                        <div>
+                            <h4>🏛️ 政府の役割</h4>
+                            <div class="bullet-point">第7次エネルギー基本計画実行</div>
+                            <div class="bullet-point">AI対応規制整備</div>
+                            <div class="bullet-point">国際協力推進</div>
+                        </div>
+                        <div>
+                            <h4>🏭 産業界の役割</h4>
+                            <div class="bullet-point">技術開発・実証</div>
+                            <div class="bullet-point">戦略的投資拡大</div>
+                            <div class="bullet-point">人材育成・確保</div>
+                        </div>
+                        <div>
+                            <h4>🎓 学術界の役割</h4>
+                            <div class="bullet-point">世界最高水準研究</div>
+                            <div class="bullet-point">専門人材育成</div>
+                            <div class="bullet-point">社会対話促進</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card" style="margin-top: 2rem;">
+                    <h3>段階的実現戦略</h3>
+                    <div class="flow-diagram">
+                        <div class="flow-step">
+                            <div class="stat-number">2025-2030</div>
+                            <div class="stat-label">基盤構築期<br>実証・人材育成</div>
+                        </div>
+                        <div class="flow-step">
+                            <div class="stat-number">2030-2035</div>
+                            <div class="stat-label">商用展開期<br>競争力強化</div>
+                        </div>
+                        <div class="flow-step">
+                            <div class="stat-number">2035-2040</div>
+                            <div class="stat-label">国際展開期<br>技術リーダー</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 8: Chapter 9 Risk Management -->
+        <div class="slide">
+            <div class="slide-content">
+                <h2 class="chapter-title">第9章: リスク管理と社会的受容</h2>
+                <div class="grid grid-2">
+                    <div class="card">
+                        <h3>🛡️ 多層的安全システム</h3>
+                        <div class="bullet-point">Human-in-the-loop原則</div>
+                        <div class="bullet-point">AI故障時フェイルセーフ</div>
+                        <div class="bullet-point">段階的実証アプローチ</div>
+                        <div class="bullet-point">継続的監視・評価</div>
+                    </div>
+                    <div class="card">
+                        <h3>🤝 社会的受容向上</h3>
+                        <div class="bullet-point">透明性確保・情報公開</div>
+                        <div class="bullet-point">継続的市民対話</div>
+                        <div class="bullet-point">科学的根拠提示</div>
+                        <div class="bullet-point">実績積み重ねによる信頼構築</div>
+                    </div>
+                </div>
+                <div class="card" style="margin-top: 2rem;">
+                    <h3>統合的リスク管理フレームワーク</h3>
+                    <div class="flex-row">
+                        <div class="stat-box">
+                            <div class="icon">⚙️</div>
+                            <div class="stat-label">技術的リスク<br>多重防護・検証</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="icon">💰</div>
+                            <div class="stat-label">経済的リスク<br>段階的投資</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="icon">👥</div>
+                            <div class="stat-label">社会的リスク<br>対話・合意形成</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 9: Chapter 10 Conclusion -->
+        <div class="slide">
+            <div class="slide-content">
+                <h2 class="chapter-title">第10章: 結論と展望</h2>
+                <div class="card">
+                    <h3>持続可能な未来への道筋</h3>
+                    <div class="grid grid-2">
+                        <div>
+                            <h4>🎯 実現可能な目標</h4>
+                            <div class="bullet-point">技術競争力の段階的強化</div>
+                            <div class="bullet-point">国際協力による優位性確保</div>
+                            <div class="bullet-point">社会受容性の着実な向上</div>
+                        </div>
+                        <div>
+                            <h4>🚀 成功の3要件</h4>
+                            <div class="bullet-point">技術的卓越性の追求</div>
+                            <div class="bullet-point">経済的合理性の確保</div>
+                            <div class="bullet-point">社会的受容性の獲得</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card" style="margin-top: 2rem;">
+                    <h3>協力的行動への呼びかけ</h3>
+                    <p class="large-text">原子力AI技術は、持続可能な未来実現のための<br><span class="highlight">重要な技術的選択肢</span></p>
+                    <p class="large-text" style="margin-top: 1rem;">多様なステークホルダーの建設的協力により<br>段階的信頼構築・成果共有・継続評価を通じた<br><span class="highlight">現実的な前進</span>を目指す</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 10: Key Messages -->
+        <div class="slide">
+            <div class="slide-content">
+                <h2>核心メッセージ</h2>
+                <div class="grid">
+                    <div class="card">
+                        <div class="icon">⚡</div>
+                        <h3>技術革新の確実性</h3>
+                        <div class="bullet-point">AI統合による効率・安全性向上</div>
+                        <div class="bullet-point">大手IT企業の実践的投資</div>
+                        <div class="bullet-point">2030年代商用展開本格化</div>
+                    </div>
+                    <div class="card">
+                        <div class="icon">🏆</div>
+                        <h3>日本の競争優位性</h3>
+                        <div class="bullet-point">50年技術蓄積・製造実績</div>
+                        <div class="bullet-point">世界最高水準の安全文化</div>
+                        <div class="bullet-point">米国との戦略的協力関係</div>
+                    </div>
+                    <div class="card">
+                        <div class="icon">🎯</div>
+                        <h3>現実的実現戦略</h3>
+                        <div class="bullet-point">段階的・継続評価アプローチ</div>
+                        <div class="bullet-point">多層的リスク管理</div>
+                        <div class="bullet-point">社会的信頼の着実な構築</div>
+                    </div>
+                </div>
+                <div class="card" style="margin-top: 3rem;">
+                    <h2 class="highlight">原子力AI技術による持続可能な未来の実現</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="slide-counter" id="slideCounter">1 / 10</div>
+    
+    <div class="navigation">
+        <button class="nav-btn" id="prevBtn" onclick="changeSlide(-1)">← 前へ</button>
+        <button class="nav-btn" id="nextBtn" onclick="changeSlide(1)">次へ →</button>
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+
+        function updateSlide() {
+            slides.forEach(slide => slide.classList.remove('active'));
+            slides[currentSlide].classList.add('active');
+            
+            document.getElementById('slideCounter').textContent = `${currentSlide + 1} / ${totalSlides}`;
+            document.getElementById('progressBar').style.width = `${(currentSlide + 1) / totalSlides * 100}%`;
+            
+            document.getElementById('prevBtn').disabled = currentSlide === 0;
+            document.getElementById('nextBtn').disabled = currentSlide === totalSlides - 1;
+        }
+
+        function changeSlide(direction) {
+            const newSlide = currentSlide + direction;
+            if (newSlide >= 0 && newSlide < totalSlides) {
+                currentSlide = newSlide;
+                updateSlide();
+            }
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+                changeSlide(-1);
+            } else if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ') {
+                e.preventDefault();
+                changeSlide(1);
+            } else if (e.key === 'Home') {
+                currentSlide = 0;
+                updateSlide();
+            } else if (e.key === 'End') {
+                currentSlide = totalSlides - 1;
+                updateSlide();
+            }
+        });
+
+        // Touch/Swipe support
+        let startX = 0;
+        let endX = 0;
+
+        document.addEventListener('touchstart', (e) => {
+            startX = e.touches[0].clientX;
+        });
+
+        document.addEventListener('touchend', (e) => {
+            endX = e.changedTouches[0].clientX;
+            handleSwipe();
+        });
+
+        function handleSwipe() {
+            const threshold = 50;
+            const diff = startX - endX;
+
+            if (Math.abs(diff) > threshold) {
+                if (diff > 0) {
+                    changeSlide(1); // Swipe left - next slide
+                } else {
+                    changeSlide(-1); // Swipe right - previous slide
+                }
+            }
+        }
+
+        // Initialize
+        updateSlide();
+
+        // Auto-advance (optional - uncomment to enable)
+        // setInterval(() => {
+        //     if (currentSlide < totalSlides - 1) {
+        //         changeSlide(1);
+        //     } else {
+        //         currentSlide = 0;
+        //         updateSlide();
+        //     }
+        // }, 30000); // 30 seconds per slide
+    </script>
+</body>
+</html>

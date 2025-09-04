@@ -1,0 +1,1479 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>第3章: 先端技術と実用化事例 - 商用導入から産業変革まで</title>
+    <style>
+        /* Microsoft Fluent Design System Colors */
+        :root {
+            --fluent-blue: #0078d4;
+            --fluent-light-blue: #106ebe;
+            --fluent-dark-blue: #005a9e;
+            --fluent-accent: #0078d4;
+            --fluent-bg: #f3f2f1;
+            --fluent-white: #ffffff;
+            --fluent-light-gray: #f8f8f8;
+            --fluent-gray: #edebe9;
+            --fluent-dark-gray: #323130;
+            --fluent-text: #323130;
+            --fluent-shadow: 0 1.6px 3.6px 0 rgba(0,0,0,.132), 0 0.3px 0.9px 0 rgba(0,0,0,.108);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', 'Yu Gothic UI', 'Meiryo UI', sans-serif;
+            background: linear-gradient(135deg, #ffffff 0%, #f5f5f5 100%);
+            color: var(--fluent-text);
+            line-height: 1.6;
+        }
+
+        .presentation-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .slide {
+            background: var(--fluent-white);
+            border-radius: 8px;
+            box-shadow: var(--fluent-shadow);
+            margin-bottom: 40px;
+            padding: 60px;
+            min-height: 675px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+            border: 1px solid var(--fluent-gray);
+        }
+
+        .slide-header {
+            background: var(--fluent-blue);
+            color: var(--fluent-white);
+            padding: 20px 60px;
+            margin: -60px -60px 40px -60px;
+            border-radius: 8px 8px 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .slide-number {
+            font-size: 18px;
+            opacity: 0.9;
+        }
+
+        h1 {
+            font-size: 42px;
+            font-weight: 600;
+            color: var(--fluent-blue);
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        h2 {
+            font-size: 32px;
+            font-weight: 600;
+            color: var(--fluent-blue);
+            margin-bottom: 25px;
+            border-bottom: 3px solid var(--fluent-blue);
+            padding-bottom: 10px;
+        }
+
+        h3 {
+            font-size: 26px;
+            font-weight: 500;
+            color: var(--fluent-dark-blue);
+            margin-bottom: 20px;
+        }
+
+        h4 {
+            font-size: 22px;
+            font-weight: 500;
+            color: var(--fluent-text);
+            margin-bottom: 15px;
+        }
+
+        p, li {
+            font-size: 20px;
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+
+        ul, ol {
+            margin-left: 30px;
+            margin-bottom: 20px;
+        }
+
+        li {
+            margin-bottom: 10px;
+            padding-left: 5px;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, var(--fluent-light-blue) 0%, var(--fluent-blue) 100%);
+            color: var(--fluent-white);
+            padding: 30px;
+            border-radius: 8px;
+            margin: 25px 0;
+            box-shadow: var(--fluent-shadow);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 25px 0;
+        }
+
+        .stat-card {
+            background: var(--fluent-light-gray);
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            border: 2px solid var(--fluent-gray);
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover {
+            border-color: var(--fluent-blue);
+            transform: translateY(-2px);
+            box-shadow: var(--fluent-shadow);
+        }
+
+        .stat-number {
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--fluent-blue);
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 14px;
+            color: var(--fluent-text);
+            margin-top: 8px;
+        }
+
+        .company-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 25px 0;
+            background: var(--fluent-white);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: var(--fluent-shadow);
+            font-size: 16px;
+        }
+
+        .company-table th {
+            background: var(--fluent-blue);
+            color: var(--fluent-white);
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 16px;
+        }
+
+        .company-table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid var(--fluent-gray);
+            font-size: 14px;
+        }
+
+        .company-table tbody tr:hover {
+            background: var(--fluent-light-gray);
+        }
+
+        .architecture-diagram {
+            background: var(--fluent-light-gray);
+            border-radius: 8px;
+            padding: 25px;
+            margin: 20px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+            line-height: 1.4;
+        }
+
+        .performance-chart {
+            background: var(--fluent-light-gray);
+            border-radius: 8px;
+            padding: 25px;
+            margin: 20px 0;
+        }
+
+        .chart-bar {
+            display: flex;
+            align-items: center;
+            margin: 12px 0;
+        }
+
+        .chart-label {
+            width: 140px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .chart-fill {
+            height: 20px;
+            border-radius: 4px;
+            margin: 0 15px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 12px;
+            min-width: 80px;
+        }
+
+        .tech-comparison {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin: 25px 0;
+        }
+
+        .before-after {
+            background: var(--fluent-light-gray);
+            border-radius: 8px;
+            padding: 25px;
+            margin: 20px 0;
+        }
+
+        .before-after h4 {
+            margin-bottom: 15px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid;
+        }
+
+        .before-after.before h4 {
+            border-bottom-color: #d32f2f;
+            color: #d32f2f;
+        }
+
+        .before-after.after h4 {
+            border-bottom-color: #388e3c;
+            color: #388e3c;
+        }
+
+        .case-study {
+            background: #e3f2fd;
+            border-left: 4px solid var(--fluent-blue);
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .navigation {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: var(--fluent-white);
+            border-radius: 50px;
+            padding: 15px 25px;
+            box-shadow: var(--fluent-shadow);
+            border: 1px solid var(--fluent-gray);
+            z-index: 1000;
+        }
+
+        .nav-button {
+            background: var(--fluent-blue);
+            color: var(--fluent-white);
+            border: none;
+            padding: 12px 20px;
+            margin: 0 5px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background 0.3s ease;
+        }
+
+        .nav-button:hover {
+            background: var(--fluent-dark-blue);
+        }
+
+        .nav-button:disabled {
+            background: var(--fluent-gray);
+            cursor: not-allowed;
+        }
+
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--fluent-blue) 0%, var(--fluent-light-blue) 100%);
+            transition: width 0.3s ease;
+            z-index: 1001;
+        }
+
+        .maturity-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 15px;
+            margin: 25px 0;
+        }
+
+        .maturity-item {
+            background: var(--fluent-light-gray);
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            border: 2px solid var(--fluent-gray);
+            transition: all 0.3s ease;
+        }
+
+        .maturity-item.high {
+            border-color: #4caf50;
+            background: #e8f5e8;
+        }
+
+        .maturity-item.medium {
+            border-color: #ff9800;
+            background: #fff3e0;
+        }
+
+        .maturity-item.low {
+            border-color: #f44336;
+            background: #ffebee;
+        }
+
+        @media (max-width: 768px) {
+            .slide {
+                padding: 30px;
+                margin-bottom: 20px;
+            }
+            
+            .slide-header {
+                margin: -30px -30px 20px -30px;
+                padding: 15px 30px;
+            }
+            
+            h1 { font-size: 28px; }
+            h2 { font-size: 24px; }
+            h3 { font-size: 20px; }
+            p, li { font-size: 16px; }
+            
+            .tech-comparison {
+                grid-template-columns: 1fr;
+            }
+            
+            .maturity-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .navigation {
+                bottom: 15px;
+                right: 15px;
+                padding: 10px 15px;
+            }
+        }
+
+        @media print {
+            .navigation, .progress-bar {
+                display: none;
+            }
+            
+            .slide {
+                break-inside: avoid;
+                page-break-inside: avoid;
+                margin-bottom: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="progress-bar" id="progressBar"></div>
+    
+    <div class="presentation-container">
+        <!-- スライド 1: タイトルスライド -->
+        <div class="slide" data-slide="1">
+            <div class="slide-header">
+                <h2>第3章: 先端技術と実用化事例</h2>
+                <div class="slide-number">1 / 14</div>
+            </div>
+            <div style="text-align: center; padding: 60px 0;">
+                <h1 style="font-size: 48px; margin-bottom: 40px;">商用導入から<br>産業変革まで</h1>
+                <div class="stats-grid" style="margin: 50px 0;">
+                    <div class="stat-card" style="background: linear-gradient(135deg, #4caf50 0%, #388e3c 100%); color: white;">
+                        <span class="stat-number">世界初</span>
+                        <div class="stat-label" style="color: white;">商用生成AI導入</div>
+                    </div>
+                    <div class="stat-card" style="background: linear-gradient(135deg, #2196f3 0%, #1976d2 100%); color: white;">
+                        <span class="stat-number">98%</span>
+                        <div class="stat-label" style="color: white;">検索精度達成</div>
+                    </div>
+                    <div class="stat-card" style="background: linear-gradient(135deg, #ff9800 0%, #f57c00 100%); color: white;">
+                        <span class="stat-number">15,000時間</span>
+                        <div class="stat-label" style="color: white;">年間削減効果</div>
+                    </div>
+                    <div class="stat-card" style="background: linear-gradient(135deg, #9c27b0 0%, #7b1fa2 100%); color: white;">
+                        <span class="stat-number">225万ドル</span>
+                        <div class="stat-label" style="color: white;">年間コスト削減</div>
+                    </div>
+                </div>
+                <div class="highlight-box">
+                    <p style="font-size: 22px; margin: 0;">実験段階から実用段階へ：生成AI技術の実装と産業変革の実態</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- スライド 2: ディアブロキャニオン原発 - 世界初の商用導入 -->
+        <div class="slide" data-slide="2">
+            <div class="slide-header">
+                <h2>ディアブロキャニオン原発：世界初の商用生成AI導入</h2>
+                <div class="slide-number">2 / 14</div>
+            </div>
+            
+            <h3>2024年11月：原子力産業史に残る革命</h3>
+            
+            <div class="tech-comparison">
+                <div>
+                    <h4>導入背景と戦略的意図</h4>
+                    <ul style="font-size: 16px;">
+                        <li><strong>知識継承の危機</strong>：30年以上経験者の大量退職</li>
+                        <li><strong>技術文書の膨大化</strong>：数百万ページの管理負担</li>
+                        <li><strong>カリフォルニア政策</strong>：2045年カーボンニュートラル</li>
+                        <li><strong>エネルギー安全保障</strong>：原子力価値の再評価</li>
+                    </ul>
+                    
+                    <h4>FERMI-1024モデルの革新性</h4>
+                    <div class="architecture-diagram">
+<pre>FERMI技術仕様:
+├── ベース: ORNL開発FERMI（オープンソース）
+├── 特化領域: 原子力工学専門用語・規制文書
+├── 学習データ: NRC ADAMS 5,300万ページ
+└── 検索精度: 上位10件98%、上位5件93%</pre>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4>ハードウェア仕様</h4>
+                    <div class="architecture-diagram">
+<pre>システム構成:
+├── GPU: NVIDIA H100 × 8台
+│   ├── Memory: 80GB HBM3 per GPU
+│   ├── Bandwidth: 3.35TB/s per GPU
+│   └── 総演算能力: 7,912 TOPS
+├── Network: NVLink 4.0 (900GB/s)
+├── Storage: NVMe SSD 100TB (冗長化)
+└── Cooling: 液冷+空冷ハイブリッド</pre>
+                    </div>
+                    
+                    <h4>セキュリティ設計</h4>
+                    <ul style="font-size: 16px;">
+                        <li><strong>完全エアギャップ</strong>：物理的インターネット遮断</li>
+                        <li><strong>専用建屋隔離</strong>：電磁遮蔽・生体認証</li>
+                        <li><strong>暗号化ストレージ</strong>：AES-256・監査証跡</li>
+                        <li><strong>最小権限運用</strong>：厳格な身元調査・操作制限</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="highlight-box">
+                <p style="font-size: 20px; margin: 0;">従来10年以上要していた新技術導入を、わずか2年で実現した画期的事例</p>
+            </div>
+        </div>
+
+        <!-- スライド 3: 驚異的な性能指標 -->
+        <div class="slide" data-slide="3">
+            <div class="slide-header">
+                <h2>驚異的な性能指標：98%検索精度と15,000時間削減</h2>
+                <div class="slide-number">3 / 14</div>
+            </div>
+            
+            <h3>検索性能の劇的向上</h3>
+            
+            <table class="company-table">
+                <thead>
+                    <tr>
+                        <th>指標</th>
+                        <th>導入前</th>
+                        <th>導入後</th>
+                        <th>改善率</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>上位10件検索精度</strong></td>
+                        <td>65%</td>
+                        <td style="color: #4caf50; font-weight: bold;">98%</td>
+                        <td style="color: #4caf50; font-weight: bold;">51%向上</td>
+                    </tr>
+                    <tr>
+                        <td><strong>上位5件検索精度</strong></td>
+                        <td>55%</td>
+                        <td style="color: #4caf50; font-weight: bold;">93%</td>
+                        <td style="color: #4caf50; font-weight: bold;">69%向上</td>
+                    </tr>
+                    <tr>
+                        <td><strong>平均検索時間</strong></td>
+                        <td>2-3時間</td>
+                        <td style="color: #4caf50; font-weight: bold;">数秒</td>
+                        <td style="color: #4caf50; font-weight: bold;">99.9%短縮</td>
+                    </tr>
+                    <tr>
+                        <td><strong>関連文書発見率</strong></td>
+                        <td>40%</td>
+                        <td style="color: #4caf50; font-weight: bold;">85%</td>
+                        <td style="color: #4caf50; font-weight: bold;">113%向上</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>年間15,000時間削減の詳細内訳</h3>
+            <div class="performance-chart">
+                <div class="chart-bar">
+                    <div class="chart-label">技術文書検索</div>
+                    <div class="chart-fill" style="width: 57%; background: #2196f3;">8,500時間 (57%)</div>
+                </div>
+                <div class="chart-bar">
+                    <div class="chart-label">技術仕様確認</div>
+                    <div class="chart-fill" style="width: 21%; background: #4caf50;">3,200時間 (21%)</div>
+                </div>
+                <div class="chart-bar">
+                    <div class="chart-label">履歴・経験検索</div>
+                    <div class="chart-fill" style="width: 14%; background: #ff9800;">2,100時間 (14%)</div>
+                </div>
+                <div class="chart-bar">
+                    <div class="chart-label">その他関連作業</div>
+                    <div class="chart-fill" style="width: 8%; background: #9c27b0;">1,200時間 (8%)</div>
+                </div>
+            </div>
+
+            <h3>年間コスト削減225万ドルの算出根拠</h3>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <span class="stat-number">180万ドル</span>
+                    <div class="stat-label">直接人件費削減 (80%)</div>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">30万ドル</span>
+                    <div class="stat-label">機会費用削減 (13%)</div>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">15万ドル</span>
+                    <div class="stat-label">品質向上効果 (7%)</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- スライド 4: 具体的活用事例 -->
+        <div class="slide" data-slide="4">
+            <div class="slide-header">
+                <h2>具体的活用事例：実運用での価値実証</h2>
+                <div class="slide-number">4 / 14</div>
+            </div>
+            
+            <h3>Case 1: コンクリート構造物交換プロジェクト</h3>
+            
+            <div class="tech-comparison">
+                <div class="before-after before">
+                    <h4>従来のアプローチ（2.5日）</h4>
+                    <ol style="font-size: 16px;">
+                        <li>設計基準書の物理的検索（半日）</li>
+                        <li>過去のメンテナンス履歴調査（1日）</li>
+                        <li>NRC規制要件の確認（半日）</li>
+                        <li>関連技術仕様の照合（半日）</li>
+                        <li>情報の統合・整理（半日）</li>
+                    </ol>
+                </div>
+                
+                <div class="before-after after">
+                    <h4>FERMI-1024活用後（1時間以内）</h4>
+                    <ol style="font-size: 16px;">
+                        <li>自然言語クエリ入力（瞬時）</li>
+                        <li>関連情報の自動抽出・統合（数秒）</li>
+                        <li>設計基準・履歴・規制要件の同時表示</li>
+                        <li>専門家による内容確認・承認（30分）</li>
+                    </ol>
+                </div>
+            </div>
+
+            <div class="case-study">
+                <h4>実際のクエリ例</h4>
+                <p style="font-size: 16px; margin-bottom: 10px;"><strong>入力：</strong>「原子炉建屋コンクリート構造物の交換に関する設計基準、過去のメンテナンス履歴、およびNRC規制要件を統合して提示してください。特に、構造強度基準と施工時の品質管理要件に重点を置いて。」</p>
+                <p style="font-size: 16px; margin: 0;"><strong>FERMI-1024の回答：</strong>関連する15の技術文書から統合情報を抽出し、設計基準（ASME Section III Division 2）、過去3回の類似工事履歴、NRC規制要件（10 CFR 50.55a）を構造化して提示。施工時の品質管理検査項目と合格基準を自動一覧表示。</p>
+            </div>
+
+            <h3>Case 2: 緊急時対応手順の高速検索</h3>
+            
+            <div class="performance-chart">
+                <h4>主蒸気管破断（MSLB）時の対応時間比較</h4>
+                <div class="chart-bar">
+                    <div class="chart-label">従来手法</div>
+                    <div class="chart-fill" style="width: 90%; background: #f44336;">15-25分</div>
+                </div>
+                <div class="chart-bar">
+                    <div class="chart-label">FERMI-1024</div>
+                    <div class="chart-fill" style="width: 10%; background: #4caf50;">15秒</div>
+                </div>
+            </div>
+
+            <div class="highlight-box">
+                <p style="font-size: 20px; margin: 0;">劇的な時間短縮により、運転員は技術的判断により多くの時間を集中でき、安全性が大幅に向上</p>
+            </div>
+        </div>
+
+        <!-- スライド 5: Westinghouse HiVe™システム -->
+        <div class="slide" data-slide="5">
+            <div class="slide-header">
+                <h2>Westinghouse HiVe™：産業規模のAI統合プラットフォーム</h2>
+                <div class="slide-number">5 / 14</div>
+            </div>
+            
+            <h3>次世代原子力プラットフォームの全体像</h3>
+            
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px;">
+                <div>
+                    <h4>HiVe™設計哲学</h4>
+                    <div class="architecture-diagram">
+<pre>設計哲学:
+├── 集合知の活用
+│   ├── 100年間の工学知識統合
+│   ├── 世界中の専門家経験蓄積
+│   ├── 多様な原子炉型式知見統合
+│   └── 継続的学習・改善機能
+├── 協調作業的統合  
+│   ├── 人間-AI協調設計
+│   ├── 異分野間知識共有
+│   └── リアルタイム協調支援
+└── 高度汎用性
+    ├── 全ライフサイクル対応
+    ├── 多様業務プロセス適用
+    └── スケーラブル構築</pre>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4>システムアーキテクチャ</h4>
+                    <div class="architecture-diagram">
+<pre>HiVe™ Core Platform:
+├── bertha™ LLM Engine
+│   ├── 原子力専門知識
+│   └── 設計・解析支援
+├── Knowledge Integration Layer
+│   ├── 文書管理システム
+│   └── CAD/CAE統合
+├── Google Cloud Infrastructure
+│   ├── Vertex AI
+│   ├── BigQuery
+│   └── Gemini Integration
+├── Security & Compliance Layer
+│   ├── 暗号化・認証
+│   └── 監査・ログ管理
+└── User Interface & APIs
+    ├── Web Interface
+    ├── Mobile Apps
+    └── Third-party APIs</pre>
+                    </div>
+                </div>
+            </div>
+
+            <h3>bertha™大規模言語モデル</h3>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <span class="stat-number">75年以上</span>
+                    <div class="stat-label">Westinghouse技術知識蓄積</div>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">Bertha Lamme</span>
+                    <div class="stat-label">名称由来：初代女性エンジニア</div>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">PWR特化</span>
+                    <div class="stat-label">高度対応・専門特化</div>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">物理法則統合</span>
+                    <div class="stat-label">工学知識活用</div>
+                </div>
+            </div>
+
+            <div class="highlight-box">
+                <p style="font-size: 20px; margin: 0;"><strong>蜂の巣（Hive）のような集合知と協調作業</strong>：原子力産業全体のデジタル変革を目指す包括的AIプラットフォーム</p>
+            </div>
+        </div>
+
+        <!-- スライド 6: 国立研究所の先端技術開発 -->
+        <div class="slide" data-slide="6">
+            <div class="slide-header">
+                <h2>国立研究所の先端技術開発</h2>
+                <div class="slide-number">6 / 14</div>
+            </div>
+            
+            <h3>ORNL設計最適化AI：温度ピーキング係数3倍改善</h3>
+            
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px;">
+                <div>
+                    <h4>Frontierエクサスケールスーパーコンピューター</h4>
+                    <div class="architecture-diagram">
+<pre>Frontier仕様（世界1位）:
+├── 計算性能: 1.1 エクサフロップス
+├── CPU: AMD EPYC 64コア × 9,408個
+├── GPU: AMD Instinct MI250X × 37,632個
+├── メモリ: 9.2 ペタバイト
+├── ストレージ: 700 ペタバイト
+├── 消費電力: 21 メガワット
+└── 用途: AI・機械学習・物理シミュレーション</pre>
+                    </div>
+                    
+                    <h4>FERMI-1024開発プロジェクト</h4>
+                    <ul style="font-size: 16px;">
+                        <li><strong>研究基盤</strong>：Frontierスーパーコンピューター活用</li>
+                        <li><strong>協業体制</strong>：ORNL・Atomic Canyon連携</li>
+                        <li><strong>学習データ</strong>：NRC ADAMS 5,300万ページ</li>
+                        <li><strong>主要成果</strong>：温度ピーキング係数3倍改善</li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4>驚異的な改善成果</h4>
+                    <table class="company-table">
+                        <thead>
+                            <tr>
+                                <th>研究成果</th>
+                                <th>従来手法</th>
+                                <th>AI最適化</th>
+                                <th>成果</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>温度ピーキング係数</strong></td>
+                                <td>基準設計</td>
+                                <td style="color: #4caf50; font-weight: bold;">3倍改善</td>
+                                <td style="color: #4caf50;">842.1℃→291.35℃</td>
+                            </tr>
+                            <tr>
+                                <td><strong>設計アプローチ</strong></td>
+                                <td>従来手法</td>
+                                <td style="color: #4caf50; font-weight: bold;">AI最適化</td>
+                                <td>任意形状設計実現</td>
+                            </tr>
+                            <tr>
+                                <td><strong>応用分野</strong></td>
+                                <td>限定的</td>
+                                <td style="color: #4caf50; font-weight: bold;">拡張</td>
+                                <td>3D積層造形対応</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    
+                    <h4>物理制約統合型深層学習</h4>
+                    <ul style="font-size: 16px;">
+                        <li><strong>ベイズ最適化</strong>組み合わせ手法</li>
+                        <li><strong>物理法則統合</strong>による制約満足</li>
+                        <li><strong>材料特性考慮</strong>した設計最適化</li>
+                        <li><strong>3D積層造形</strong>対応設計技術</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="highlight-box">
+                <p style="font-size: 20px; margin: 0;">世界初のエクサスケール計算能力を活用した革新的AI設計により、原子炉設計の概念を根本から変革</p>
+            </div>
+        </div>
+
+        <!-- スライド 7: INL-Microsoft協業 -->
+        <div class="slide" data-slide="7">
+            <div class="slide-header">
+                <h2>INL-Microsoft協業：認可プロセス革命</h2>
+                <div class="slide-number">7 / 14</div>
+            </div>
+            
+            <h3>原子力認可プロセスの構造的課題</h3>
+            
+            <div class="performance-chart">
+                <h4>現行認可プロセスの実態</h4>
+                <div class="chart-bar">
+                    <div class="chart-label">設計認証期間</div>
+                    <div class="chart-fill" style="width: 80%; background: #f44336;">6-8年</div>
+                </div>
+                <div class="chart-bar">
+                    <div class="chart-label">申請書類</div>
+                    <div class="chart-fill" style="width: 60%; background: #ff9800;">12,000ページ以上</div>
+                </div>
+                <div class="chart-bar">
+                    <div class="chart-label">補足文書</div>
+                    <div class="chart-fill" style="width: 100%; background: #9c27b0;">200万ページ以上</div>
+                </div>
+                <div class="chart-bar">
+                    <div class="chart-label">総費用</div>
+                    <div class="chart-fill" style="width: 90%; background: #d32f2f;">5-10億ドル</div>
+                </div>
+            </div>
+
+            <div class="tech-comparison">
+                <div>
+                    <h4>NuScale SMR認可事例</h4>
+                    <ul style="font-size: 16px;">
+                        <li><strong>申請</strong>：2016年開始</li>
+                        <li><strong>設計認証取得</strong>：2022年（約5.5年）</li>
+                        <li><strong>消費リソース</strong>：膨大な人的・金銭的コスト</li>
+                        <li><strong>課題</strong>：時間・コストの著しい増大</li>
+                    </ul>
+                    
+                    <h4>人的リソース要求</h4>
+                    <ul style="font-size: 16px;">
+                        <li><strong>エンジニア</strong>：100-200人年</li>
+                        <li><strong>法務専門家</strong>：50-100人年</li>
+                        <li><strong>外部コンサル</strong>：200-500人年</li>
+                        <li><strong>総合計</strong>：350-800人年</li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4>Microsoft Azure AI革命的解決策</h4>
+                    <div class="architecture-diagram">
+<pre>INL-Microsoft協業（2025年7月発表）:
+├── 協業発表: 2025年7月
+├── 技術基盤: Microsoft Azure AI Platform
+├── 協業目標: 認可プロセス効率化
+└── 適用分野: 設計文書・安全解析自動化</pre>
+                    </div>
+                    
+                    <h4>厳格な人間中心設計（Human-in-the-Loop）</h4>
+                    <ul style="font-size: 16px;">
+                        <li><strong>AI役割限定</strong>：文書構築のみ担当</li>
+                        <li><strong>専門家検証必須</strong>：全AI生成内容を事後検証</li>
+                        <li><strong>人間判断優先</strong>：最終意思決定権限は人間</li>
+                        <li><strong>安全性確保</strong>：原子力安全判断はAI非依存</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="highlight-box">
+                <p style="font-size: 20px; margin: 0;">認可プロセスの根本的変革を目指す画期的取り組み：時間・コスト・品質の同時改善を実現</p>
+            </div>
+        </div>
+
+        <!-- スライド 8: 分野横断的技術展開 -->
+        <div class="slide" data-slide="8">
+            <div class="slide-header">
+                <h2>分野横断的な技術展開</h2>
+                <div class="slide-number">8 / 14</div>
+            </div>
+            
+            <h3>原子力工学4分野でのAI活用</h3>
+            
+            <div class="stats-grid">
+                <div class="stat-card" style="background: linear-gradient(135deg, #2196f3 0%, #1976d2 100%); color: white;">
+                    <span class="stat-number">設計・解析</span>
+                    <div class="stat-label" style="color: white;">AI設計最適化</div>
+                </div>
+                <div class="stat-card" style="background: linear-gradient(135deg, #4caf50 0%, #388e3c 100%); color: white;">
+                    <span class="stat-number">予知保全</span>
+                    <div class="stat-label" style="color: white;">コスト30%削減</div>
+                </div>
+                <div class="stat-card" style="background: linear-gradient(135deg, #ff9800 0%, #f57c00 100%); color: white;">
+                    <span class="stat-number">廃炉・廃棄物</span>
+                    <div class="stat-label" style="color: white;">ロボティクス活用</div>
+                </div>
+                <div class="stat-card" style="background: linear-gradient(135deg, #9c27b0 0%, #7b1fa2 100%); color: white;">
+                    <span class="stat-number">運転支援</span>
+                    <div class="stat-label" style="color: white;">文書管理革新</div>
+                </div>
+            </div>
+
+            <h3>原子炉設計・安全解析への応用</h3>
+            <div class="architecture-diagram">
+<pre>SMR設計AI最適化研究:
+├── 研究対象: 300MW級小型原子炉
+├── 最適化手法: 遺伝的アルゴリズム・機械学習
+├── 目標指標:
+│   ├── 燃料利用率の向上
+│   ├── 温度ピーキング係数の最適化
+│   ├── 制御棒価値の最適化
+│   └── 安全余裕の確保
+└── 期待効果:
+    ├── 設計期間の短縮
+    ├── 開発コストの削減
+    └── 経済性・安全性の両立</pre>
+            </div>
+
+            <h3>AI統合PSA（確率論的安全評価）システム</h3>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <span class="stat-number">自動化</span>
+                    <div class="stat-label">事故シナリオ網羅生成</div>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">高精度化</span>
+                    <div class="stat-label">確率評価・不確実性定量</div>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">統合解析</span>
+                    <div class="stat-label">マルチハザード対応</div>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">効率化</span>
+                    <div class="stat-label">解析時間大幅短縮</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- スライド 9: 予知保全技術の詳細 -->
+        <div class="slide" data-slide="9">
+            <div class="slide-header">
+                <h2>予知保全：コスト30%削減、可用性20%向上</h2>
+                <div class="slide-number">9 / 14</div>
+            </div>
+            
+            <h3>原子力発電所AI予知保全の期待効果</h3>
+            
+            <div class="performance-chart">
+                <h4>業界目標効果</h4>
+                <div class="chart-bar">
+                    <div class="chart-label">保全コスト削減</div>
+                    <div class="chart-fill" style="width: 30%; background: #4caf50;">最大30%</div>
+                </div>
+                <div class="chart-bar">
+                    <div class="chart-label">設備可用性向上</div>
+                    <div class="chart-fill" style="width: 20%; background: #2196f3;">最大20%</div>
+                </div>
+                <div class="chart-bar">
+                    <div class="chart-label">計画外停止削減</div>
+                    <div class="chart-fill" style="width: 50%; background: #ff9800;">大幅削減</div>
+                </div>
+                <div class="chart-bar">
+                    <div class="chart-label">故障予測精度向上</div>
+                    <div class="chart-fill" style="width: 40%; background: #9c27b0;">精度向上</div>
+                </div>
+            </div>
+
+            <h3>技術アーキテクチャの詳細</h3>
+            <div style="background: var(--fluent-light-gray); padding: 25px; border-radius: 8px; margin: 20px 0;">
+                <h4>AI予知保全システム構成</h4>
+                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 20px;">
+                    <div>
+                        <h5 style="color: #2196f3; margin-bottom: 10px;">データ入力層</h5>
+                        <ul style="font-size: 14px; margin: 0;">
+                            <li>センサーデータ収集</li>
+                            <li>前処理・正規化</li>
+                            <li>特徴量エンジニアリング</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h5 style="color: #4caf50; margin-bottom: 10px;">AI解析層</h5>
+                        <ul style="font-size: 14px; margin: 0;">
+                            <li>異常検知AI</li>
+                            <li>故障予測AI</li>
+                            <li>診断AI</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h5 style="color: #ff9800; margin-bottom: 10px;">出力・制御層</h5>
+                        <ul style="font-size: 14px; margin: 0;">
+                            <li>アラート生成</li>
+                            <li>故障時期予測</li>
+                            <li>保全計画最適化</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <h3>技術手法の組み合わせ</h3>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <span class="stat-number">統計手法</span>
+                    <div class="stat-label">統計的異常検知</div>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">深層学習</span>
+                    <div class="stat-label">パターン認識・分類</div>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">LSTM</span>
+                    <div class="stat-label">時系列予測</div>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">生存解析</span>
+                    <div class="stat-label">故障時期推定</div>
+                </div>
+            </div>
+
+            <div class="highlight-box">
+                <p style="font-size: 20px; margin: 0;">実証段階から商用化への移行が進行中：国際的技術協力と業界標準化が活発化</p>
+            </div>
+        </div>
+
+        <!-- スライド 10: 廃炉・廃棄物管理でのAI活用 -->
+        <div class="slide" data-slide="10">
+            <div class="slide-header">
+                <h2>廃炉・廃棄物管理でのロボティクス活用</h2>
+                <div class="slide-number">10 / 14</div>
+            </div>
+            
+            <h3>ドイツの廃炉AI技術リーダーシップ</h3>
+            
+            <div class="tech-comparison">
+                <div>
+                    <h4>技術開発分野</h4>
+                    <div class="stat-card">
+                        <span class="stat-number">ロボティクス</span>
+                        <div class="stat-label">危険区域作業の自動化</div>
+                    </div>
+                    <div class="stat-card" style="margin-top: 15px;">
+                        <span class="stat-number">AI画像解析</span>
+                        <div class="stat-label">構造物状態診断</div>
+                    </div>
+                    <div class="stat-card" style="margin-top: 15px;">
+                        <span class="stat-number">最適化AI</span>
+                        <div class="stat-label">廃棄物分別・処理</div>
+                    </div>
+                    <div class="stat-card" style="margin-top: 15px;">
+                        <span class="stat-number">管理AI</span>
+                        <div class="stat-label">プロジェクト工程最適化</div>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4>福島第一原発での適用展開</h4>
+                    <ul style="font-size: 18px;">
+                        <li><strong>遠隔操作ロボット</strong>のAI制御</li>
+                        <li><strong>放射線マップ作成AI</strong>の高精度化</li>
+                        <li><strong>作業計画最適化</strong>による被ばく低減</li>
+                        <li><strong>廃棄物分類AI</strong>による処理効率化</li>
+                    </ul>
+                    
+                    <div class="case-study">
+                        <h5>放射線マップAI成果</h5>
+                        <p style="font-size: 16px; margin: 5px 0;"><strong>精度向上：</strong>従来手法比30%向上</p>
+                        <p style="font-size: 16px; margin: 5px 0;"><strong>時間短縮：</strong>1時間以上→数分</p>
+                        <p style="font-size: 16px; margin: 0;"><strong>実用化：</strong>避難区域マッピングに活用</p>
+                    </div>
+                </div>
+            </div>
+
+            <h3>廃炉作業における安全性向上効果</h3>
+            <div class="performance-chart">
+                <div class="chart-bar">
+                    <div class="chart-label">作業員被ばく低減</div>
+                    <div class="chart-fill" style="width: 70%; background: #4caf50;">大幅低減</div>
+                </div>
+                <div class="chart-bar">
+                    <div class="chart-label">作業効率向上</div>
+                    <div class="chart-fill" style="width: 50%; background: #2196f3;">効率化</div>
+                </div>
+                <div class="chart-bar">
+                    <div class="chart-label">精度向上</div>
+                    <div class="chart-fill" style="width: 30%; background: #ff9800;">30%向上</div>
+                </div>
+                <div class="chart-bar">
+                    <div class="chart-label">コスト削減</div>
+                    <div class="chart-fill" style="width: 40%; background: #9c27b0;">削減効果</div>
+                </div>
+            </div>
+
+            <div class="highlight-box">
+                <p style="font-size: 20px; margin: 0;">脱原子力政策を採用するドイツが廃炉AI技術で世界をリード：日本の福島廃炉にも技術応用</p>
+            </div>
+        </div>
+
+        <!-- スライド 11: 運転支援と文書管理の革新 -->
+        <div class="slide" data-slide="11">
+            <div class="slide-header">
+                <h2>運転支援と文書管理の革新</h2>
+                <div class="slide-number">11 / 14</div>
+            </div>
+            
+            <h3>インテリジェント文書管理システム</h3>
+            
+            <div class="stats-grid">
+                <div class="stat-card" style="background: linear-gradient(135deg, #2196f3 0%, #1976d2 100%); color: white;">
+                    <span class="stat-number">自然言語</span>
+                    <div class="stat-label" style="color: white;">質問応答による情報検索</div>
+                </div>
+                <div class="stat-card" style="background: linear-gradient(135deg, #4caf50 0%, #388e3c 100%); color: white;">
+                    <span class="stat-number">自動分類</span>
+                    <div class="stat-label" style="color: white;">文書自動分類・タグ付け</div>
+                </div>
+                <div class="stat-card" style="background: linear-gradient(135deg, #ff9800 0%, #f57c00 100%); color: white;">
+                    <span class="stat-number">規制照合</span>
+                    <div class="stat-label" style="color: white;">規制要件との自動照合</div>
+                </div>
+                <div class="stat-card" style="background: linear-gradient(135deg, #9c27b0 0%, #7b1fa2 100%); color: white;">
+                    <span class="stat-number">多言語</span>
+                    <div class="stat-label" style="color: white;">国際展開対応</div>
+                </div>
+            </div>
+
+            <h3>運転員支援システム</h3>
+            
+            <div class="tech-comparison">
+                <div>
+                    <h4>異常診断支援</h4>
+                    <ul style="font-size: 18px;">
+                        <li><strong>症状パターン認識</strong>による迅速診断</li>
+                        <li><strong>過去事例検索</strong>による対応策提示</li>
+                        <li><strong>重要度判定</strong>による優先順位付け</li>
+                        <li><strong>関連系統表示</strong>による包括的理解</li>
+                    </ul>
+                    
+                    <h4>手順書自動生成</h4>
+                    <ul style="font-size: 18px;">
+                        <li><strong>状況適応型</strong>手順書作成</li>
+                        <li><strong>安全条件確認</strong>の自動化</li>
+                        <li><strong>チェックリスト</strong>生成</li>
+                        <li><strong>承認フロー</strong>統合</li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4>訓練シミュレータ統合</h4>
+                    <ul style="font-size: 18px;">
+                        <li><strong>AI生成シナリオ</strong>による訓練</li>
+                        <li><strong>個別化学習</strong>プログラム</li>
+                        <li><strong>習熟度評価</strong>自動化</li>
+                        <li><strong>弱点補強</strong>プログラム提案</li>
+                    </ul>
+                    
+                    <h4>経験知の形式知化</h4>
+                    <ul style="font-size: 18px;">
+                        <li><strong>ベテラン技術者</strong>の経験統合</li>
+                        <li><strong>暗黙知の明文化</strong></li>
+                        <li><strong>ナレッジベース</strong>構築</li>
+                        <li><strong>継続学習機能</strong></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="highlight-box">
+                <p style="font-size: 20px; margin: 0;">運転員の技術的判断を支援し、安全性と効率性を同時に向上：知識継承問題の根本的解決</p>
+            </div>
+        </div>
+
+        <!-- スライド 12: 技術成熟度の評価 -->
+        <div class="slide" data-slide="12">
+            <div class="slide-header">
+                <h2>技術成熟度の評価と課題</h2>
+                <div class="slide-number">12 / 14</div>
+            </div>
+            
+            <h3>各技術領域の成熟度評価（TRL: Technology Readiness Level）</h3>
+            
+            <table class="company-table">
+                <thead>
+                    <tr>
+                        <th>技術領域</th>
+                        <th>成熟度</th>
+                        <th>商用化状況</th>
+                        <th>主要課題</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="high">
+                        <td><strong>文書検索・管理</strong></td>
+                        <td style="color: #4caf50; font-weight: bold;">高 (TRL 8-9)</td>
+                        <td>商用化済み</td>
+                        <td>スケーラビリティ</td>
+                    </tr>
+                    <tr class="medium">
+                        <td><strong>予知保全</strong></td>
+                        <td style="color: #ff9800; font-weight: bold;">中高 (TRL 7-8)</td>
+                        <td>実証段階</td>
+                        <td>説明可能性</td>
+                    </tr>
+                    <tr class="medium">
+                        <td><strong>設計最適化</strong></td>
+                        <td style="color: #ff9800; font-weight: bold;">中 (TRL 5-6)</td>
+                        <td>研究開発段階</td>
+                        <td>規制承認</td>
+                    </tr>
+                    <tr class="medium">
+                        <td><strong>安全解析</strong></td>
+                        <td style="color: #ff9800; font-weight: bold;">中 (TRL 5-6)</td>
+                        <td>実証段階</td>
+                        <td>検証・妥当性確認</td>
+                    </tr>
+                    <tr class="low">
+                        <td><strong>廃炉・廃棄物</strong></td>
+                        <td style="color: #f44336; font-weight: bold;">低中 (TRL 3-4)</td>
+                        <td>基礎研究段階</td>
+                        <td>技術統合</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>技術成熟度の可視化</h3>
+            <div class="maturity-grid">
+                <div class="maturity-item high">
+                    <h4 style="margin-bottom: 10px; color: #4caf50;">文書検索・管理</h4>
+                    <p style="font-size: 14px; margin: 0;">TRL 8-9<br>商用化済み</p>
+                </div>
+                <div class="maturity-item medium">
+                    <h4 style="margin-bottom: 10px; color: #ff9800;">予知保全</h4>
+                    <p style="font-size: 14px; margin: 0;">TRL 7-8<br>実証段階</p>
+                </div>
+                <div class="maturity-item medium">
+                    <h4 style="margin-bottom: 10px; color: #ff9800;">設計最適化</h4>
+                    <p style="font-size: 14px; margin: 0;">TRL 5-6<br>研究開発段階</p>
+                </div>
+                <div class="maturity-item medium">
+                    <h4 style="margin-bottom: 10px; color: #ff9800;">安全解析</h4>
+                    <p style="font-size: 14px; margin: 0;">TRL 5-6<br>実証段階</p>
+                </div>
+                <div class="maturity-item low">
+                    <h4 style="margin-bottom: 10px; color: #f44336;">廃炉・廃棄物</h4>
+                    <p style="font-size: 14px; margin: 0;">TRL 3-4<br>基礎研究段階</p>
+                </div>
+            </div>
+
+            <div class="highlight-box">
+                <p style="font-size: 20px; margin: 0;">文書管理は商用化段階、予知保全は実証段階、設計・安全解析は研究開発段階と、技術分野ごとに成熟度が大きく異なる</p>
+            </div>
+        </div>
+
+        <!-- スライド 13: 今後の展開方向 -->
+        <div class="slide" data-slide="13">
+            <div class="slide-header">
+                <h2>今後の展開方向</h2>
+                <div class="slide-number">13 / 14</div>
+            </div>
+            
+            <h3>段階的技術発展ロードマップ</h3>
+            
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px;">
+                <div class="stat-card" style="background: linear-gradient(135deg, #4caf50 0%, #388e3c 100%); color: white;">
+                    <h4 style="color: white; margin-bottom: 15px;">短期（2025-2027年）</h4>
+                    <ul style="text-align: left; font-size: 16px; margin: 0; color: white;">
+                        <li>文書管理システムの標準化</li>
+                        <li>予知保全の商用展開拡大</li>
+                        <li>規制当局との協議加速</li>
+                        <li>国際標準化活動開始</li>
+                    </ul>
+                </div>
+                
+                <div class="stat-card" style="background: linear-gradient(135deg, #2196f3 0%, #1976d2 100%); color: white;">
+                    <h4 style="color: white; margin-bottom: 15px;">中期（2028-2030年）</h4>
+                    <ul style="text-align: left; font-size: 16px; margin: 0; color: white;">
+                        <li>設計AIの規制承認取得</li>
+                        <li>安全解析AIの実用化</li>
+                        <li>国際標準の策定完了</li>
+                        <li>統合プラットフォーム確立</li>
+                    </ul>
+                </div>
+                
+                <div class="stat-card" style="background: linear-gradient(135deg, #9c27b0 0%, #7b1fa2 100%); color: white;">
+                    <h4 style="color: white; margin-bottom: 15px;">長期（2031年以降）</h4>
+                    <ul style="text-align: left; font-size: 16px; margin: 0; color: white;">
+                        <li>完全自律運転の段階的実現</li>
+                        <li>廃炉AIの本格適用</li>
+                        <li>新型炉への全面適用</li>
+                        <li>次世代AIシステム統合</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3>技術発展の加速要因</h3>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <span class="stat-number">規制協調</span>
+                    <div class="stat-label">規制当局との建設的対話</div>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">国際協力</span>
+                    <div class="stat-label">技術共有・標準化推進</div>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">産学連携</span>
+                    <div class="stat-label">研究機関・産業界協力</div>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">投資拡大</span>
+                    <div class="stat-label">民間・政府投資増大</div>
+                </div>
+            </div>
+
+            <h3>克服すべき主要課題</h3>
+            <div class="performance-chart">
+                <div class="chart-bar">
+                    <div class="chart-label">説明可能性確保</div>
+                    <div class="chart-fill" style="width: 70%; background: #f44336;">高優先度</div>
+                </div>
+                <div class="chart-bar">
+                    <div class="chart-label">検証・妥当性確認</div>
+                    <div class="chart-fill" style="width: 80%; background: #ff9800;">最高優先度</div>
+                </div>
+                <div class="chart-bar">
+                    <div class="chart-label">規制承認取得</div>
+                    <div class="chart-fill" style="width: 60%; background: #2196f3;">中高優先度</div>
+                </div>
+                <div class="chart-bar">
+                    <div class="chart-label">技術統合・標準化</div>
+                    <div class="chart-fill" style="width: 50%; background: #4caf50;">中優先度</div>
+                </div>
+            </div>
+
+            <div class="highlight-box">
+                <p style="font-size: 20px; margin: 0;">技術成熟度の段階的向上と課題克服により、2030年代に本格的なAI統合原子力システムが実現</p>
+            </div>
+        </div>
+
+        <!-- スライド 14: まとめ -->
+        <div class="slide" data-slide="14">
+            <div class="slide-header">
+                <h2>まとめ：商用導入から産業変革まで</h2>
+                <div class="slide-number">14 / 14</div>
+            </div>
+            
+            <div style="text-align: center; padding: 40px 0;">
+                <h3 style="font-size: 32px; margin-bottom: 40px;">実験から実用へ：AI技術の産業変革</h3>
+                
+                <div class="stats-grid" style="margin: 40px 0;">
+                    <div class="stat-card" style="background: linear-gradient(135deg, #4caf50 0%, #388e3c 100%); color: white;">
+                        <span class="stat-number">実証済み</span>
+                        <div class="stat-label" style="color: white;">ディアブロキャニオンの成功</div>
+                    </div>
+                    <div class="stat-card" style="background: linear-gradient(135deg, #2196f3 0%, #1976d2 100%); color: white;">
+                        <span class="stat-number">産業化進行</span>
+                        <div class="stat-label" style="color: white;">Westinghouse HiVe™展開</div>
+                    </div>
+                    <div class="stat-card" style="background: linear-gradient(135deg, #ff9800 0%, #f57c00 100%); color: white;">
+                        <span class="stat-number">基盤研究</span>
+                        <div class="stat-label" style="color: white;">国立研究所の先端技術</div>
+                    </div>
+                    <div class="stat-card" style="background: linear-gradient(135deg, #9c27b0 0%, #7b1fa2 100%); color: white;">
+                        <span class="stat-number">分野展開</span>
+                        <div class="stat-label" style="color: white;">全工学分野への応用</div>
+                    </div>
+                </div>
+
+                <div style="margin: 40px 0;">
+                    <h4 style="color: #0078d4; margin-bottom: 20px;">技術成熟度の現状</h4>
+                    <div style="display: flex; justify-content: center; gap: 40px; flex-wrap: wrap;">
+                        <div style="background: #e8f5e8; padding: 15px; border-radius: 8px; border: 2px solid #4caf50;">
+                            <p style="font-size: 16px; margin: 0; color: #4caf50; font-weight: bold;">商用化済み：文書管理</p>
+                        </div>
+                        <div style="background: #fff3e0; padding: 15px; border-radius: 8px; border: 2px solid #ff9800;">
+                            <p style="font-size: 16px; margin: 0; color: #ff9800; font-weight: bold;">実証段階：予知保全・安全解析</p>
+                        </div>
+                        <div style="background: #ffebee; padding: 15px; border-radius: 8px; border: 2px solid #f44336;">
+                            <p style="font-size: 16px; margin: 0; color: #f44336; font-weight: bold;">研究段階：設計・廃炉</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="highlight-box" style="margin: 40px auto; max-width: 800px;">
+                    <h4 style="color: white; font-size: 24px; margin-bottom: 20px;">産業変革の本質</h4>
+                    <p style="font-size: 20px; margin-bottom: 15px;">単純な効率化を超えた根本的変革が進行中</p>
+                    <p style="font-size: 18px; margin: 0;">次章では、この技術革新に対する安全性・規制面での対応について詳述</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="navigation">
+        <button class="nav-button" id="prevBtn" onclick="changeSlide(-1)">◀ 前へ</button>
+        <span id="slideInfo">1 / 14</span>
+        <button class="nav-button" id="nextBtn" onclick="changeSlide(1)">次へ ▶</button>
+    </div>
+
+    <script>
+        let currentSlide = 1;
+        const totalSlides = 14;
+
+        function updateSlideVisibility() {
+            const slides = document.querySelectorAll('.slide');
+            slides.forEach((slide, index) => {
+                if (index + 1 === currentSlide) {
+                    slide.style.display = 'flex';
+                    slide.scrollIntoView({ behavior: 'smooth' });
+                } else {
+                    slide.style.display = 'none';
+                }
+            });
+
+            // Update navigation
+            document.getElementById('slideInfo').textContent = `${currentSlide} / ${totalSlides}`;
+            document.getElementById('prevBtn').disabled = currentSlide === 1;
+            document.getElementById('nextBtn').disabled = currentSlide === totalSlides;
+
+            // Update progress bar
+            const progress = (currentSlide / totalSlides) * 100;
+            document.getElementById('progressBar').style.width = `${progress}%`;
+        }
+
+        function changeSlide(direction) {
+            const newSlide = currentSlide + direction;
+            if (newSlide >= 1 && newSlide <= totalSlides) {
+                currentSlide = newSlide;
+                updateSlideVisibility();
+            }
+        }
+
+        function goToSlide(slideNumber) {
+            if (slideNumber >= 1 && slideNumber <= totalSlides) {
+                currentSlide = slideNumber;
+                updateSlideVisibility();
+            }
+        }
+
+        // キーボードナビゲーション
+        document.addEventListener('keydown', function(e) {
+            switch(e.key) {
+                case 'ArrowRight':
+                case ' ':
+                    e.preventDefault();
+                    changeSlide(1);
+                    break;
+                case 'ArrowLeft':
+                    e.preventDefault();
+                    changeSlide(-1);
+                    break;
+                case 'Home':
+                    e.preventDefault();
+                    goToSlide(1);
+                    break;
+                case 'End':
+                    e.preventDefault();
+                    goToSlide(totalSlides);
+                    break;
+                default:
+                    const num = parseInt(e.key);
+                    if (!isNaN(num) && num >= 1 && num <= Math.min(9, totalSlides)) {
+                        e.preventDefault();
+                        goToSlide(num);
+                    }
+                    break;
+            }
+        });
+
+        // タッチナビゲーション
+        let startX = 0;
+        document.addEventListener('touchstart', function(e) {
+            startX = e.touches[0].clientX;
+        });
+
+        document.addEventListener('touchend', function(e) {
+            const endX = e.changedTouches[0].clientX;
+            const diff = startX - endX;
+            
+            if (Math.abs(diff) > 50) {
+                if (diff > 0) {
+                    changeSlide(1);
+                } else {
+                    changeSlide(-1);
+                }
+            }
+        });
+
+        // 初期化
+        updateSlideVisibility();
+
+        // ページ読み込み完了時にフォーカスを設定
+        document.addEventListener('DOMContentLoaded', function() {
+            document.body.focus();
+        });
+    </script>
+</body>
+</html>
