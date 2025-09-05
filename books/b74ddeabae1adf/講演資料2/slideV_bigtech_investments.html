@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Big Tech戦略的投資 - 原子力AI技術革命</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Segoe UI", -apple-system, BlinkMacSystemFont, "Roboto", sans-serif;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            color: #333;
+            line-height: 1.6;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            aspect-ratio: 16 / 9;
+        }
+
+        .container {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            padding: 3rem;
+            background: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+
+        .main-title {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #0078D4;
+            margin-bottom: 1rem;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .subtitle {
+            font-size: 1.1rem;
+            color: #666;
+            font-weight: 500;
+        }
+
+        .companies-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            flex: 1;
+            align-items: stretch;
+        }
+
+        .company-card {
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .company-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15);
+        }
+
+        .company-card.microsoft {
+            border-top: 4px solid #0078D4;
+        }
+
+        .company-card.amazon {
+            border-top: 4px solid #FF9900;
+        }
+
+        .company-card.google {
+            border-top: 4px solid #4285F4;
+        }
+
+        .company-logo {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+
+        .company-logo.microsoft {
+            color: #0078D4;
+        }
+
+        .company-logo.amazon {
+            color: #FF9900;
+        }
+
+        .company-logo.google {
+            color: #4285F4;
+        }
+
+        .investment-amount {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 1rem;
+        }
+
+        .project-name {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #666;
+            margin-bottom: 1rem;
+        }
+
+        .project-details {
+            font-size: 0.9rem;
+            color: #777;
+            line-height: 1.5;
+        }
+
+        .project-details strong {
+            color: #333;
+        }
+
+        .total-investment {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 25px;
+            text-align: center;
+            box-shadow: 0 6px 20px rgba(40, 167, 69, 0.3);
+        }
+
+        .total-label {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            margin-bottom: 0.3rem;
+        }
+
+        .total-amount {
+            font-size: 1.8rem;
+            font-weight: bold;
+        }
+
+        .bg-pattern {
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(0, 120, 212, 0.05) 0%, transparent 70%);
+            z-index: -1;
+        }
+
+        @keyframes slideInUp {
+            from {
+                transform: translateY(30px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .company-card {
+            animation: slideInUp 0.8s ease-out forwards;
+        }
+
+        .company-card:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .company-card:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        .strategic-note {
+            position: absolute;
+            top: 2rem;
+            right: 2rem;
+            background: rgba(255, 107, 53, 0.1);
+            color: #ff6b35;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            backdrop-filter: blur(10px);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="bg-pattern"></div>
+        <div class="strategic-note">AI電力需要への戦略的対応</div>
+        
+        <div class="header">
+            <h1 class="main-title">Big Tech戦略的投資</h1>
+            <p class="subtitle">Tech巨大企業による原子力分野への本格参入</p>
+        </div>
+
+        <div class="companies-grid">
+            <div class="company-card microsoft">
+                <div class="company-logo microsoft">Microsoft</div>
+                <div class="investment-amount">$1.6億</div>
+                <div class="project-name">Three Mile Island再稼働</div>
+                <div class="project-details">
+                    <strong>Constellation Energy</strong>と20年契約<br>
+                    <strong>835MW</strong> • <strong>2028年</strong>運転開始<br>
+                    Azure AI Services統合戦略
+                </div>
+            </div>
+
+            <div class="company-card amazon">
+                <div class="company-logo amazon">Amazon</div>
+                <div class="investment-amount">$12億</div>
+                <div class="project-name">X-energy SMRプロジェクト</div>
+                <div class="project-details">
+                    <strong>4基のXe-100 SMR</strong>開発<br>
+                    <strong>320MW合計</strong> • <strong>2030年代</strong>運転開始<br>
+                    AWS専用電力供給インフラ
+                </div>
+            </div>
+
+            <div class="company-card google">
+                <div class="company-logo google">Google</div>
+                <div class="investment-amount">500MW</div>
+                <div class="project-name">Kairos Power協業</div>
+                <div class="project-details">
+                    <strong>溶融塩冷却原子炉</strong>（FHR）<br>
+                    <strong>2035年</strong>まで電力調達契約<br>
+                    次世代原子力技術への投資
+                </div>
+            </div>
+        </div>
+
+        <div class="total-investment">
+            <div class="total-label">Big Tech総投資額</div>
+            <div class="total-amount">$21億+</div>
+        </div>
+    </div>
+</body>
+</html>

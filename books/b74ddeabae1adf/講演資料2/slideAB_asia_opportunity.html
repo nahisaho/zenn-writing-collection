@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>アジア市場での機会 - 原子力AI技術革命</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Segoe UI", -apple-system, BlinkMacSystemFont, "Roboto", sans-serif;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            color: #333;
+            line-height: 1.6;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            aspect-ratio: 16 / 9;
+        }
+
+        .container {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            padding: 3rem;
+            background: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .main-title {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #0078D4;
+            margin-bottom: 1rem;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .subtitle {
+            font-size: 1.1rem;
+            color: #666;
+            font-weight: 500;
+        }
+
+        .content-layout {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 3rem;
+            flex: 1;
+            align-items: start;
+        }
+
+        .market-expansion {
+            background: white;
+            padding: 2rem;
+            border-radius: 16px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+        }
+
+        .expansion-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            padding-bottom: 0.5rem;
+            border-bottom: 3px solid #28a745;
+        }
+
+        .country-item {
+            margin-bottom: 1.5rem;
+            padding: 1.2rem;
+            background: #f8f9fa;
+            border-radius: 12px;
+            border-left: 4px solid;
+        }
+
+        .country-item.china {
+            border-left-color: #dc3545;
+        }
+
+        .country-item.india {
+            border-left-color: #ff6b35;
+        }
+
+        .country-item.asean {
+            border-left-color: #28a745;
+        }
+
+        .country-name {
+            font-weight: bold;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            color: #333;
+        }
+
+        .country-details {
+            font-size: 0.9rem;
+            color: #666;
+            line-height: 1.5;
+        }
+
+        .market-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.8rem;
+            margin-top: 1rem;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 0.8rem;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .stat-number {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #28a745;
+        }
+
+        .stat-label {
+            font-size: 0.8rem;
+            color: #666;
+        }
+
+        .japan-advantages {
+            background: linear-gradient(135deg, #0078D4 0%, #106ebe 100%);
+            color: white;
+            padding: 2.5rem;
+            border-radius: 16px;
+            box-shadow: 0 8px 32px rgba(0, 120, 212, 0.3);
+        }
+
+        .advantages-title {
+            font-size: 1.6rem;
+            font-weight: bold;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .advantage-section {
+            margin-bottom: 2rem;
+        }
+
+        .section-title {
+            font-size: 1.1rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .advantage-list {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 1rem;
+            border-radius: 8px;
+            backdrop-filter: blur(10px);
+        }
+
+        .advantage-item {
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+            opacity: 0.95;
+            line-height: 1.4;
+        }
+
+        .advantage-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .advantage-item:before {
+            content: "✓";
+            margin-right: 0.5rem;
+            color: #40E0D0;
+            font-weight: bold;
+        }
+
+        .competitive-position {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 85%;
+            background: white;
+            padding: 1.5rem;
+            border-radius: 16px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .position-title {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .competitors {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+            text-align: center;
+        }
+
+        .competitor {
+            padding: 0.8rem;
+            border-radius: 8px;
+            font-size: 0.85rem;
+        }
+
+        .competitor.china-comp {
+            background: #ffe6e6;
+            color: #dc3545;
+        }
+
+        .competitor.korea-comp {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .competitor.russia-comp {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        .competitor.japan-comp {
+            background: #d1ecf1;
+            color: #0c5460;
+            font-weight: bold;
+        }
+
+        .competitor-name {
+            font-weight: bold;
+            margin-bottom: 0.3rem;
+        }
+
+        .competitor-share {
+            font-size: 0.75rem;
+            opacity: 0.8;
+        }
+
+        .growth-badge {
+            position: absolute;
+            top: 2rem;
+            right: 2rem;
+            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 1rem;
+            box-shadow: 0 4px 12px rgba(40, 167, 69, 0.3);
+        }
+
+        .leadership-potential {
+            position: absolute;
+            top: 6rem;
+            right: 2rem;
+            background: rgba(0, 120, 212, 0.1);
+            color: #0078D4;
+            padding: 0.5rem 1rem;
+            border-radius: 16px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            backdrop-filter: blur(10px);
+        }
+
+        @keyframes slideInUp {
+            from {
+                transform: translateY(30px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideInLeft {
+            from {
+                transform: translateX(-30px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                transform: translateX(30px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        .market-expansion {
+            animation: slideInLeft 0.8s ease-out forwards;
+        }
+
+        .japan-advantages {
+            animation: slideInRight 0.8s ease-out forwards;
+            animation-delay: 0.3s;
+        }
+
+        .competitive-position {
+            animation: slideInUp 0.8s ease-out forwards;
+            animation-delay: 0.6s;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="growth-badge">急速拡大市場</div>
+        <div class="leadership-potential">リーダーシップ獲得機会</div>
+        
+        <div class="header">
+            <h1 class="main-title">アジア市場での機会</h1>
+            <p class="subtitle">地理的・文化的優位性を活かした戦略的展開</p>
+        </div>
+
+        <div class="content-layout">
+            <div class="market-expansion">
+                <h3 class="expansion-title">アジア原子力市場の急拡大</h3>
+                
+                <div class="country-item china">
+                    <div class="country-name">🇨🇳 中国：大規模拡大継続</div>
+                    <div class="country-details">
+                        国産技術による建設加速、継続的な新規プロジェクト推進<br>
+                        大規模政府投資による積極的容量拡大
+                    </div>
+                </div>
+                
+                <div class="country-item india">
+                    <div class="country-name">🇮🇳 インド：積極的拡大計画</div>
+                    <div class="country-details">
+                        重水炉・高速増殖炉開発推進、長期エネルギー戦略重点化<br>
+                        電力需要3倍増（2050年）への対応
+                    </div>
+                </div>
+                
+                <div class="country-item asean">
+                    <div class="country-name">🌏 ASEAN：初回導入ラッシュ</div>
+                    <div class="country-details">
+                        インドネシア2032年、タイ2030年、フィリピン2032年<br>
+                        SMR技術・浮体式原子炉による新規導入
+                    </div>
+                </div>
+
+                <div class="market-stats">
+                    <div class="stat-card">
+                        <div class="stat-number">2050年</div>
+                        <div class="stat-label">電力需要3倍増</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">5兆円</div>
+                        <div class="stat-label">市場規模予測</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="japan-advantages">
+                <div class="advantages-title">日本の差別化優位性</div>
+                
+                <div class="advantage-section">
+                    <div class="section-title">🌏 地理的優位性</div>
+                    <div class="advantage-list">
+                        <div class="advantage-item">物理的距離の近さ（輸送コスト削減）</div>
+                        <div class="advantage-item">時差の少なさ（リアルタイムサポート）</div>
+                        <div class="advantage-item">既存製造業ネットワーク活用</div>
+                    </div>
+                </div>
+                
+                <div class="advantage-section">
+                    <div class="section-title">🎯 技術差別化</div>
+                    <div class="advantage-list">
+                        <div class="advantage-item">世界最高の安全技術（福島経験）</div>
+                        <div class="advantage-item">AI統合原子炉の世界初商用化</div>
+                        <div class="advantage-item">地震・津波対策の専門知識</div>
+                    </div>
+                </div>
+                
+                <div class="advantage-section">
+                    <div class="section-title">🤝 文化的親和性</div>
+                    <div class="advantage-list">
+                        <div class="advantage-item">「ものづくり」文化への信頼</div>
+                        <div class="advantage-item">長期関係重視のアプローチ</div>
+                        <div class="advantage-item">技術移転・人材育成への意欲</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="competitive-position">
+            <div class="position-title">アジア市場競合分析</div>
+            <div class="competitors">
+                <div class="competitor china-comp">
+                    <div class="competitor-name">中国</div>
+                    <div class="competitor-share">約40%シェア<br>低価格・建設スピード</div>
+                </div>
+                
+                <div class="competitor korea-comp">
+                    <div class="competitor-name">韓国</div>
+                    <div class="competitor-share">約20%シェア<br>輸出実績・政府支援</div>
+                </div>
+                
+                <div class="competitor russia-comp">
+                    <div class="competitor-name">ロシア</div>
+                    <div class="competitor-share">約25%シェア<br>建設実績・金融支援</div>
+                </div>
+                
+                <div class="competitor japan-comp">
+                    <div class="competitor-name">日本</div>
+                    <div class="competitor-share">約10%シェア<br>安全技術・AI統合</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

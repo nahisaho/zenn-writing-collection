@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>緊急性：今すぐ行動すべき理由</title>
+    <style>
+        :root {
+            --microsoft-blue: #0078D4;
+            --microsoft-dark-blue: #005A9E;
+            --microsoft-light-blue: #40C0FF;
+            --microsoft-green: #107C10;
+            --microsoft-orange: #FF8C00;
+            --microsoft-purple: #5B2C87;
+            --microsoft-red: #D13438;
+            --text-primary: #323130;
+            --text-secondary: #605E5C;
+            --background: #FFFFFF;
+            --card-background: #FAFAFA;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #FFFFFF 0%, #F8F9FA 100%);
+            color: var(--text-primary);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            aspect-ratio: 16/9;
+            overflow: hidden;
+        }
+
+        .slide-container {
+            width: 100%;
+            max-width: 1600px;
+            max-height: 900px;
+            aspect-ratio: 16/9;
+            display: grid;
+            grid-template-rows: auto 1fr;
+            padding: 40px;
+            gap: 20px;
+        }
+
+        .slide-header {
+            text-align: center;
+            animation: slideDownFadeIn 1s ease-out;
+        }
+
+        .slide-title {
+            font-size: 40px;
+            font-weight: 700;
+            color: var(--microsoft-red);
+            margin-bottom: 16px;
+        }
+
+        .slide-subtitle {
+            font-size: 18px;
+            color: var(--text-secondary);
+            font-weight: 400;
+        }
+
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: auto auto;
+            gap: 24px;
+            animation: slideUpFadeIn 1.2s ease-out;
+        }
+
+        .opportunity-window {
+            background: var(--card-background);
+            border-radius: 16px;
+            padding: 28px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+            border-left: 6px solid var(--microsoft-red);
+            grid-column: 1 / -1;
+        }
+
+        .timing-factors {
+            background: var(--card-background);
+            border-radius: 16px;
+            padding: 28px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+            border-left: 6px solid var(--microsoft-blue);
+        }
+
+        .delay-cost {
+            background: var(--card-background);
+            border-radius: 16px;
+            padding: 28px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+            border-left: 6px solid var(--microsoft-orange);
+        }
+
+        .section-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--microsoft-red);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .timing-factors .section-title {
+            color: var(--microsoft-blue);
+        }
+
+        .delay-cost .section-title {
+            color: var(--microsoft-orange);
+        }
+
+        .critical-period {
+            background: linear-gradient(120deg, rgba(209, 52, 56, 0.1) 0%, rgba(255, 185, 0, 0.1) 100%);
+            border: 3px solid var(--microsoft-red);
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 20px;
+            text-align: center;
+            position: relative;
+        }
+
+        .critical-period::before {
+            content: '🚨';
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--background);
+            padding: 0 10px;
+            font-size: 24px;
+        }
+
+        .period-title {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--microsoft-red);
+            margin-bottom: 12px;
+        }
+
+        .period-subtitle {
+            font-size: 16px;
+            color: var(--text-primary);
+            line-height: 1.4;
+        }
+
+        .reasons-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+
+        .reason-card {
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            border-top: 4px solid var(--microsoft-blue);
+            transition: all 0.3s ease;
+        }
+
+        .reason-card:nth-child(2) {
+            border-top-color: var(--microsoft-green);
+        }
+
+        .reason-card:nth-child(3) {
+            border-top-color: var(--microsoft-purple);
+        }
+
+        .reason-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .reason-number {
+            width: 36px;
+            height: 36px;
+            background: var(--microsoft-blue);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            margin: 0 auto 12px auto;
+        }
+
+        .reason-card:nth-child(2) .reason-number {
+            background: var(--microsoft-green);
+        }
+
+        .reason-card:nth-child(3) .reason-number {
+            background: var(--microsoft-purple);
+        }
+
+        .reason-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+        }
+
+        .reason-description {
+            font-size: 12px;
+            color: var(--text-secondary);
+            line-height: 1.4;
+        }
+
+        .factors-list {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .factor-item {
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 10px;
+            padding: 16px;
+            margin-bottom: 12px;
+            border-left: 4px solid var(--microsoft-blue);
+            transition: all 0.3s ease;
+        }
+
+        .factor-item:hover {
+            background: rgba(255, 255, 255, 0.95);
+            transform: translateX(8px);
+        }
+
+        .factor-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 6px;
+        }
+
+        .factor-description {
+            font-size: 13px;
+            color: var(--text-secondary);
+            line-height: 1.4;
+        }
+
+        .cost-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        .cost-card {
+            background: rgba(255, 185, 0, 0.1);
+            border-radius: 12px;
+            padding: 16px;
+            border: 2px solid rgba(255, 185, 0, 0.2);
+        }
+
+        .cost-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--microsoft-orange);
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .cost-description {
+            font-size: 12px;
+            color: var(--text-primary);
+            line-height: 1.4;
+        }
+
+        .japan-advantages {
+            grid-column: 1 / -1;
+            background: linear-gradient(120deg, rgba(0, 120, 212, 0.1) 0%, rgba(16, 124, 16, 0.1) 100%);
+            border: 2px solid var(--microsoft-light-blue);
+            border-radius: 16px;
+            padding: 24px;
+            text-align: center;
+        }
+
+        .advantages-title {
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--microsoft-dark-blue);
+            margin-bottom: 16px;
+        }
+
+        .advantages-list {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 16px;
+        }
+
+        .advantage-item {
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
+            padding: 16px;
+            text-align: center;
+            border-top: 3px solid var(--microsoft-green);
+        }
+
+        .advantage-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+        }
+
+        .advantage-desc {
+            font-size: 12px;
+            color: var(--text-secondary);
+            line-height: 1.3;
+        }
+
+        .call-to-action {
+            background: rgba(16, 124, 16, 0.1);
+            border-radius: 12px;
+            padding: 16px;
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--microsoft-green);
+            text-align: center;
+        }
+
+        @keyframes slideDownFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideUpFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 1400px) {
+            .slide-title { font-size: 34px; }
+            .reasons-grid { grid-template-columns: 1fr; }
+            .advantages-list { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 1024px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+            .cost-grid { grid-template-columns: 1fr; }
+            .slide-container { padding: 35px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="slide-header">
+            <h1 class="slide-title">緊急性：今すぐ行動すべき理由</h1>
+            <p class="slide-subtitle">2025-2027年が日本の競争力確立の最後のチャンス</p>
+        </div>
+
+        <div class="main-content">
+            <div class="opportunity-window">
+                <div class="critical-period">
+                    <div class="period-title">2025-2027年</div>
+                    <div class="period-subtitle">限られた機会の窓：決定的に重要な3年間</div>
+                </div>
+                
+                <div class="reasons-grid">
+                    <div class="reason-card">
+                        <div class="reason-number">1</div>
+                        <div class="reason-title">技術的タイミング</div>
+                        <div class="reason-description">
+                            生成AI技術が実用段階に到達。原子力専用モデルの開発が本格化。統合プラットフォームの標準化進行中。
+                        </div>
+                    </div>
+                    
+                    <div class="reason-card">
+                        <div class="reason-number">2</div>
+                        <div class="reason-title">市場形成期</div>
+                        <div class="reason-description">
+                            年間成長率55%の急成長市場。主要プレイヤー未確定。先行者利益獲得の最後のチャンス。
+                        </div>
+                    </div>
+                    
+                    <div class="reason-card">
+                        <div class="reason-number">3</div>
+                        <div class="reason-title">規制環境整備</div>
+                        <div class="reason-description">
+                            各国でAI規制枠組み策定中。国際標準未確定。ルールメイキングに参画できる時期。
+                        </div>
+                    </div>
+                </div>
+
+                <div style="background: rgba(209, 52, 56, 0.1); border-radius: 8px; padding: 16px; text-align: center;">
+                    <div style="font-size: 14px; font-weight: 600; color: var(--microsoft-red); margin-bottom: 8px;">
+                        ⏰ IEA（国際エネルギー機関）も強調
+                    </div>
+                    <div style="font-size: 13px; line-height: 1.4; color: var(--text-primary);">
+                        原子力のエネルギー転換における重要性を指摘。技術・市場・規制の3つの要因が同時に整った歴史的機会。
+                    </div>
+                </div>
+            </div>
+
+            <div class="timing-factors">
+                <h2 class="section-title">
+                    ⚡ なぜ今なのか：3つの要因
+                </h2>
+                
+                <ul class="factors-list">
+                    <li class="factor-item">
+                        <div class="factor-title">米中が本格動き出した今</div>
+                        <div class="factor-description">
+                            差別化ポジション確立の最後のチャンス。技術覇権競争が本格化する前の戦略的対応が必要。
+                        </div>
+                    </li>
+                    
+                    <li class="factor-item">
+                        <div class="factor-title">AI電力需要爆発</div>
+                        <div class="factor-description">
+                            原子力ルネサンスが不可避。データセンター需要が原子力の必要性を決定づけている。
+                        </div>
+                    </li>
+                    
+                    <li class="factor-item">
+                        <div class="factor-title">日本独自の強みの融合可能性</div>
+                        <div class="factor-description">
+                            福島経験・安全文化・製造業力がAIと融合する絶好のタイミング。この組み合わせは他国にはない。
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="delay-cost">
+                <h2 class="section-title">
+                    ⚠️ 遅れることのコスト
+                </h2>
+                
+                <div class="cost-grid">
+                    <div class="cost-card">
+                        <div class="cost-title">
+                            🎯 技術覇権の喪失
+                        </div>
+                        <div class="cost-description">
+                            米中韓に決定的な差をつけられる。一度失った技術的優位性の回復は極めて困難。
+                        </div>
+                    </div>
+                    
+                    <div class="cost-card">
+                        <div class="cost-title">
+                            💰 市場機会の逸失
+                        </div>
+                        <div class="cost-description">
+                            4,000-5,000億ドル市場でのシェアゼロ。巨大な経済機会を永続的に失う。
+                        </div>
+                    </div>
+                    
+                    <div class="cost-card">
+                        <div class="cost-title">
+                            👥 人材流出の加速
+                        </div>
+                        <div class="cost-description">
+                            魅力的なプロジェクトを求めて海外へ。国内産業の空洞化が加速。
+                        </div>
+                    </div>
+                    
+                    <div class="cost-card">
+                        <div class="cost-title">
+                            📉 産業衰退の加速
+                        </div>
+                        <div class="cost-description">
+                            競争力を失い、廃炉一辺倒の未来。日本の技術立国としての地位失墜。
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="japan-advantages">
+                <div class="advantages-title">🇯🇵 日本の固有の優位性</div>
+                
+                <div class="advantages-list">
+                    <div class="advantage-item">
+                        <div class="advantage-title">福島経験の価値転換</div>
+                        <div class="advantage-desc">
+                            極限環境AI技術は他国が持ち得ない圧倒的優位性
+                        </div>
+                    </div>
+                    
+                    <div class="advantage-item">
+                        <div class="advantage-title">世界最高水準の安全文化</div>
+                        <div class="advantage-desc">
+                            40年にわたる原子力技術の深い蓄積と製造品質
+                        </div>
+                    </div>
+                    
+                    <div class="advantage-item">
+                        <div class="advantage-title">成熟した産業インフラ</div>
+                        <div class="advantage-desc">
+                            高度な理工系人材と産業・研究インフラの豊富な蓄積
+                        </div>
+                    </div>
+                </div>
+
+                <div class="call-to-action">
+                    💪 不足しているのは変革への決断と実行のスピードだけ！<br>
+                    今すぐ行動を起こすことが我々の世代に課せられた歴史的使命
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

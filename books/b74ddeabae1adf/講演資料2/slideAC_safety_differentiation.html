@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>安全技術での差別化 - 原子力AI技術革命</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Segoe UI", -apple-system, BlinkMacSystemFont, "Roboto", sans-serif;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            color: #333;
+            line-height: 1.6;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            aspect-ratio: 16 / 9;
+        }
+
+        .container {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            padding: 3rem;
+            background: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+
+        .main-title {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #0078D4;
+            margin-bottom: 1rem;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .subtitle {
+            font-size: 1.1rem;
+            color: #666;
+            font-weight: 500;
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            flex: 1;
+            align-items: start;
+        }
+
+        .explainable-ai {
+            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+            color: white;
+            padding: 2.5rem;
+            border-radius: 16px;
+            box-shadow: 0 8px 32px rgba(40, 167, 69, 0.3);
+        }
+
+        .explainable-title {
+            font-size: 1.8rem;
+            font-weight: bold;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .ai-feature {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 1.2rem;
+            margin-bottom: 1rem;
+            border-radius: 12px;
+            backdrop-filter: blur(10px);
+        }
+
+        .feature-title {
+            font-weight: bold;
+            margin-bottom: 0.8rem;
+            font-size: 1rem;
+        }
+
+        .feature-description {
+            font-size: 0.9rem;
+            opacity: 0.95;
+            line-height: 1.4;
+        }
+
+        .unique-advantage {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 1rem;
+            border-radius: 8px;
+            backdrop-filter: blur(5px);
+            text-align: center;
+            margin-top: 1rem;
+        }
+
+        .advantage-text {
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        .international-standards {
+            background: white;
+            padding: 2rem;
+            border-radius: 16px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+        }
+
+        .standards-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            padding-bottom: 0.5rem;
+            border-bottom: 3px solid #6f42c1;
+        }
+
+        .standard-item {
+            margin-bottom: 1.5rem;
+            padding: 1.2rem;
+            background: #f8f9fa;
+            border-radius: 12px;
+            border-left: 4px solid;
+        }
+
+        .standard-item.iso {
+            border-left-color: #0078D4;
+        }
+
+        .standard-item.iaea {
+            border-left-color: #28a745;
+        }
+
+        .standard-item.japan-leadership {
+            border-left-color: #6f42c1;
+        }
+
+        .standard-name {
+            font-weight: bold;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            color: #333;
+        }
+
+        .standard-details {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 0.8rem;
+            line-height: 1.5;
+        }
+
+        .standard-impact {
+            background: #e9ecef;
+            padding: 0.6rem;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            color: #495057;
+            font-style: italic;
+        }
+
+        .market-dominance {
+            position: absolute;
+            bottom: 1.5rem;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90%;
+            background: linear-gradient(135deg, #6f42c1 0%, #8e5bff 100%);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 16px;
+            box-shadow: 0 8px 24px rgba(111, 66, 193, 0.3);
+        }
+
+        .dominance-title {
+            font-size: 1.3rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .dominance-benefits {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+        }
+
+        .benefit-item {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 1rem;
+            border-radius: 8px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+        }
+
+        .benefit-icon {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .benefit-title {
+            font-weight: bold;
+            font-size: 0.9rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .benefit-description {
+            font-size: 0.8rem;
+            opacity: 0.9;
+        }
+
+        .world-first-badge {
+            position: absolute;
+            top: 2rem;
+            right: 2rem;
+            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 1rem;
+            box-shadow: 0 4px 12px rgba(40, 167, 69, 0.3);
+        }
+
+        .safety-first-note {
+            position: absolute;
+            top: 6rem;
+            right: 2rem;
+            background: rgba(40, 167, 69, 0.1);
+            color: #28a745;
+            padding: 0.5rem 1rem;
+            border-radius: 16px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            backdrop-filter: blur(10px);
+        }
+
+        @keyframes slideInUp {
+            from {
+                transform: translateY(30px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideInLeft {
+            from {
+                transform: translateX(-30px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                transform: translateX(30px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes glow {
+            0% { box-shadow: 0 8px 32px rgba(40, 167, 69, 0.3); }
+            50% { box-shadow: 0 8px 32px rgba(40, 167, 69, 0.6); }
+            100% { box-shadow: 0 8px 32px rgba(40, 167, 69, 0.3); }
+        }
+
+        .explainable-ai {
+            animation: slideInLeft 0.8s ease-out forwards, glow 3s ease-in-out infinite;
+        }
+
+        .international-standards {
+            animation: slideInRight 0.8s ease-out forwards;
+            animation-delay: 0.3s;
+        }
+
+        .market-dominance {
+            animation: slideInUp 0.8s ease-out forwards;
+            animation-delay: 0.6s;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="world-first-badge">世界初技術</div>
+        <div class="safety-first-note">説明可能AI独走</div>
+        
+        <div class="header">
+            <h1 class="main-title">安全技術での差別化</h1>
+            <p class="subtitle">世界最高水準の説明可能AI技術による市場支配</p>
+        </div>
+
+        <div class="content-grid">
+            <div class="explainable-ai">
+                <div class="explainable-title">説明可能AI技術の独走</div>
+                
+                <div class="ai-feature">
+                    <div class="feature-title">🔍 完全説明可能性</div>
+                    <div class="feature-description">
+                        AI判断プロセス100%可視化<br>
+                        因果推論AI・物理制約AI・不確実性定量化
+                    </div>
+                </div>
+                
+                <div class="ai-feature">
+                    <div class="feature-title">👤 人間中心設計</div>
+                    <div class="feature-description">
+                        Human-in-the-Loop AI<br>
+                        最終判断権・スキル維持・緊急時対応
+                    </div>
+                </div>
+                
+                <div class="ai-feature">
+                    <div class="feature-title">📚 継続的学習</div>
+                    <div class="feature-description">
+                        運転経験からの改善<br>
+                        フィードバック学習・エラー分析・予防的更新
+                    </div>
+                </div>
+
+                <div class="unique-advantage">
+                    <div class="advantage-text">他国では模倣困難な独自領域</div>
+                </div>
+            </div>
+
+            <div class="international-standards">
+                <h3 class="standards-title">国際標準策定でのリーダーシップ</h3>
+                
+                <div class="standard-item iso">
+                    <div class="standard-name">ISO/IEC 23053</div>
+                    <div class="standard-details">
+                        AI安全性要求事項（2022年発行）<br>
+                        機械学習AIシステムのフレームワーク策定
+                    </div>
+                    <div class="standard-impact">
+                        日本主導による世界初のAI安全国際標準
+                    </div>
+                </div>
+                
+                <div class="standard-item iaea">
+                    <div class="standard-name">IAEA TECDOC</div>
+                    <div class="standard-details">
+                        原子力AI利用指針開発<br>
+                        技術会議での積極的貢献・安全評価フレームワーク
+                    </div>
+                    <div class="standard-impact">
+                        福島経験に基づく安全重視アプローチで主導権確保
+                    </div>
+                </div>
+                
+                <div class="standard-item japan-leadership">
+                    <div class="standard-name">技術覇権確立</div>
+                    <div class="standard-details">
+                        標準化による市場支配の可能性<br>
+                        参入障壁・ライセンス収入・エコシステム支配
+                    </div>
+                    <div class="standard-impact">
+                        日本技術準拠が実質的な市場参入条件となる
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="market-dominance">
+            <div class="dominance-title">標準化による市場支配戦略</div>
+            <div class="dominance-benefits">
+                <div class="benefit-item">
+                    <div class="benefit-icon">🚧</div>
+                    <div class="benefit-title">参入障壁</div>
+                    <div class="benefit-description">日本技術準拠が市場参入条件</div>
+                </div>
+                
+                <div class="benefit-item">
+                    <div class="benefit-icon">💰</div>
+                    <div class="benefit-title">ライセンス収入</div>
+                    <div class="benefit-description">標準技術の知的財産権収益</div>
+                </div>
+                
+                <div class="benefit-item">
+                    <div class="benefit-icon">🌐</div>
+                    <div class="benefit-title">エコシステム支配</div>
+                    <div class="benefit-description">関連産業全体での影響力確保</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

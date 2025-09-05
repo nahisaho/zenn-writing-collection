@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"="width=device-width, initial-scale=1.0">
+    <title>時代的背景と課題</title>
+    <style>
+        :root {
+            --microsoft-blue: #0078D4;
+            --microsoft-dark-blue: #005A9E;
+            --microsoft-light-blue: #40C0FF;
+            --microsoft-red: #D13438;
+            --microsoft-orange: #FF8C00;
+            --microsoft-purple: #5B2C87;
+            --text-primary: #323130;
+            --text-secondary: #605E5C;
+            --background: #FFFFFF;
+            --card-background: #FAFAFA;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #FFFFFF 0%, #F8F9FA 100%);
+            color: var(--text-primary);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            aspect-ratio: 16/9;
+            overflow: hidden;
+        }
+
+        .slide-container {
+            width: 100%;
+            max-width: 1600px;
+            max-height: 900px;
+            aspect-ratio: 16/9;
+            display: grid;
+            grid-template-rows: auto 1fr;
+            padding: 50px;
+            gap: 30px;
+        }
+
+        .slide-header {
+            text-align: center;
+            animation: slideDownFadeIn 1s ease-out;
+        }
+
+        .slide-title {
+            font-size: 44px;
+            font-weight: 700;
+            color: var(--microsoft-blue);
+            margin-bottom: 16px;
+        }
+
+        .slide-subtitle {
+            font-size: 18px;
+            color: var(--text-secondary);
+            font-weight: 400;
+        }
+
+        .content-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            animation: slideUpFadeIn 1.2s ease-out;
+        }
+
+        .section-card {
+            background: var(--card-background);
+            border-radius: 16px;
+            padding: 32px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-left: 6px solid var(--microsoft-blue);
+        }
+
+        .section-card.challenges {
+            border-left-color: var(--microsoft-red);
+        }
+
+        .section-card.opportunities {
+            border-left-color: var(--microsoft-purple);
+        }
+
+        .section-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .section-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: var(--microsoft-blue);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            flex-shrink: 0;
+        }
+
+        .challenges .section-icon {
+            background: var(--microsoft-red);
+        }
+
+        .opportunities .section-icon {
+            background: var(--microsoft-purple);
+        }
+
+        .section-title {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--text-primary);
+            line-height: 1.2;
+        }
+
+        .challenge-list, .opportunity-list {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .challenge-item, .opportunity-item {
+            margin-bottom: 20px;
+            padding: 16px;
+            background: rgba(255, 255, 255, 0.6);
+            border-radius: 12px;
+            border-left: 4px solid var(--microsoft-red);
+            transition: all 0.3s ease;
+        }
+
+        .opportunity-item {
+            border-left-color: var(--microsoft-purple);
+        }
+
+        .challenge-item:hover, .opportunity-item:hover {
+            background: rgba(255, 255, 255, 0.9);
+            transform: translateX(8px);
+        }
+
+        .item-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .item-description {
+            font-size: 15px;
+            line-height: 1.5;
+            color: var(--text-secondary);
+        }
+
+        .strategic-insight {
+            background: linear-gradient(120deg, rgba(0, 120, 212, 0.1) 0%, rgba(91, 44, 135, 0.1) 100%);
+            border: 2px solid var(--microsoft-light-blue);
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 24px;
+            grid-column: 1 / -1;
+            text-align: center;
+        }
+
+        .insight-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--microsoft-dark-blue);
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .insight-text {
+            font-size: 16px;
+            line-height: 1.5;
+            color: var(--text-primary);
+        }
+
+        @keyframes slideDownFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideUpFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 1400px) {
+            .slide-title { font-size: 38px; }
+            .section-title { font-size: 24px; }
+            .item-title { font-size: 16px; }
+        }
+
+        @media (max-width: 1024px) {
+            .content-container {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            .slide-container { padding: 40px; }
+            .section-card { padding: 24px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="slide-header">
+            <h1 class="slide-title">時代的背景と課題</h1>
+            <p class="slide-subtitle">原子力産業が直面する現実とAI導入による解決の機会</p>
+        </div>
+
+        <div class="content-container">
+            <div class="section-card challenges">
+                <div class="section-header">
+                    <div class="section-icon">⚠️</div>
+                    <h2 class="section-title">原子力工学の課題</h2>
+                </div>
+                
+                <ul class="challenge-list">
+                    <li class="challenge-item">
+                        <div class="item-title">
+                            🔒 安全性の絶対的要求
+                        </div>
+                        <div class="item-description">
+                            膨大なデータ分析、複雑なシミュレーション、継続的監視が必要。人間の認知能力の限界による運転員への負担。
+                        </div>
+                    </li>
+                    
+                    <li class="challenge-item">
+                        <div class="item-title">
+                            💰 経済性の改善
+                        </div>
+                        <div class="item-description">
+                            初期投資の大きさ、長期建設期間、厳格な規制要求により、他電源との競争で不利な状況。
+                        </div>
+                    </li>
+                    
+                    <li class="challenge-item">
+                        <div class="item-title">
+                            👥 技術継承と人材育成
+                        </div>
+                        <div class="item-description">
+                            熟練技術者の退職、暗黙知の継承困難、従来教育訓練方法の限界。
+                        </div>
+                    </li>
+                    
+                    <li class="challenge-item">
+                        <div class="item-title">
+                            🌍 社会的受容性
+                        </div>
+                        <div class="item-description">
+                            事故の記憶による根強い不安、透明性確保、リスクコミュニケーションの改善が必要。
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="section-card opportunities">
+                <div class="section-header">
+                    <div class="section-icon">💡</div>
+                    <h2 class="section-title">生成AIがもたらす機会</h2>
+                </div>
+                
+                <ul class="opportunity-list">
+                    <li class="opportunity-item">
+                        <div class="item-title">
+                            📚 大規模言語モデル
+                        </div>
+                        <div class="item-description">
+                            技術文書の理解と生成、規制文書解釈、技術報告書作成、運転手順書生成の自動化。
+                        </div>
+                    </li>
+                    
+                    <li class="opportunity-item">
+                        <div class="item-title">
+                            🔮 予測と最適化
+                        </div>
+                        <div class="item-description">
+                            原子炉出力予測、機器劣化診断、燃料配置最適化など、データドリブンなアプローチの実現。
+                        </div>
+                    </li>
+                    
+                    <li class="opportunity-item">
+                        <div class="item-title">
+                            🤖 自動化と自律性
+                        </div>
+                        <div class="item-description">
+                            人的エラー削減、作業効率向上、定型作業から高度な意思決定支援まで段階的自律化。
+                        </div>
+                    </li>
+                    
+                    <li class="opportunity-item">
+                        <div class="item-title">
+                            🔄 継続的学習
+                        </div>
+                        <div class="item-description">
+                            運転経験からの自動学習、知識更新、次世代への技術継承支援システム構築。
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="strategic-insight">
+                <div class="insight-title">
+                    💡 戦略的示唆
+                </div>
+                <div class="insight-text">
+                    これらの課題は、AI導入による解決の「機会の窓」を示している。<br>
+                    生成AI技術の成熟により、原子力産業の根本的変革が可能な時代に突入。
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

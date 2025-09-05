@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>原子力産業の根本的課題</title>
+    <style>
+        :root {
+            --microsoft-blue: #0078D4;
+            --microsoft-dark-blue: #005A9E;
+            --microsoft-light-blue: #40C0FF;
+            --microsoft-green: #107C10;
+            --microsoft-orange: #FF8C00;
+            --microsoft-purple: #5B2C87;
+            --microsoft-red: #D13438;
+            --microsoft-yellow: #FFB900;
+            --text-primary: #323130;
+            --text-secondary: #605E5C;
+            --background: #FFFFFF;
+            --card-background: #FAFAFA;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #FFFFFF 0%, #F8F9FA 100%);
+            color: var(--text-primary);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            aspect-ratio: 16/9;
+            overflow: hidden;
+        }
+
+        .slide-container {
+            width: 100%;
+            max-width: 1600px;
+            max-height: 900px;
+            aspect-ratio: 16/9;
+            display: grid;
+            grid-template-rows: auto 1fr;
+            padding: 40px;
+            gap: 20px;
+        }
+
+        .slide-header {
+            text-align: center;
+            animation: slideDownFadeIn 1s ease-out;
+        }
+
+        .slide-title {
+            font-size: 42px;
+            font-weight: 700;
+            color: var(--microsoft-blue);
+            margin-bottom: 16px;
+        }
+
+        .slide-subtitle {
+            font-size: 18px;
+            color: var(--text-secondary);
+            font-weight: 400;
+        }
+
+        .challenges-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: 1fr 1fr;
+            gap: 20px;
+            animation: slideUpFadeIn 1.2s ease-out;
+        }
+
+        .challenge-card {
+            background: var(--card-background);
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .challenge-card:nth-child(1) {
+            border-left: 6px solid var(--microsoft-red);
+        }
+
+        .challenge-card:nth-child(2) {
+            border-left: 6px solid var(--microsoft-orange);
+        }
+
+        .challenge-card:nth-child(3) {
+            border-left: 6px solid var(--microsoft-purple);
+        }
+
+        .challenge-card:nth-child(4) {
+            border-left: 6px solid var(--microsoft-yellow);
+        }
+
+        .challenge-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .challenge-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+
+        .challenge-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: var(--microsoft-red);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            flex-shrink: 0;
+        }
+
+        .challenge-card:nth-child(2) .challenge-icon {
+            background: var(--microsoft-orange);
+        }
+
+        .challenge-card:nth-child(3) .challenge-icon {
+            background: var(--microsoft-purple);
+        }
+
+        .challenge-card:nth-child(4) .challenge-icon {
+            background: var(--microsoft-yellow);
+        }
+
+        .challenge-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--text-primary);
+            line-height: 1.2;
+        }
+
+        .challenge-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .challenge-description {
+            font-size: 14px;
+            line-height: 1.5;
+            color: var(--text-secondary);
+            margin-bottom: 16px;
+        }
+
+        .stats-container {
+            margin-top: auto;
+            padding-top: 16px;
+        }
+
+        .stat-highlight {
+            background: rgba(0, 120, 212, 0.08);
+            border-radius: 10px;
+            padding: 12px;
+            margin-bottom: 12px;
+            border: 2px solid rgba(0, 120, 212, 0.1);
+        }
+
+        .stat-number {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--microsoft-blue);
+            margin-bottom: 4px;
+        }
+
+        .stat-label {
+            font-size: 12px;
+            color: var(--text-secondary);
+            line-height: 1.3;
+        }
+
+        .quote-box {
+            background: rgba(209, 52, 56, 0.05);
+            border-left: 4px solid var(--microsoft-red);
+            border-radius: 8px;
+            padding: 12px;
+            margin-top: 12px;
+            font-style: italic;
+        }
+
+        .quote-text {
+            font-size: 13px;
+            color: var(--text-primary);
+            line-height: 1.4;
+        }
+
+        .quote-source {
+            font-size: 11px;
+            color: var(--text-secondary);
+            margin-top: 6px;
+            font-style: normal;
+        }
+
+        .bullet-list {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .bullet-item {
+            position: relative;
+            padding-left: 20px;
+            margin-bottom: 8px;
+            font-size: 13px;
+            line-height: 1.4;
+            color: var(--text-primary);
+        }
+
+        .bullet-item::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            top: 0;
+            color: var(--microsoft-blue);
+            font-weight: 700;
+            font-size: 16px;
+        }
+
+        .challenge-card:nth-child(2) .bullet-item::before {
+            color: var(--microsoft-orange);
+        }
+
+        .challenge-card:nth-child(3) .bullet-item::before {
+            color: var(--microsoft-purple);
+        }
+
+        .challenge-card:nth-child(4) .bullet-item::before {
+            color: var(--microsoft-yellow);
+        }
+
+        .emphasis {
+            background: linear-gradient(120deg, rgba(0, 120, 212, 0.1) 0%, rgba(64, 192, 255, 0.1) 100%);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+
+        .warning-badge {
+            background: var(--microsoft-red);
+            color: white;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 600;
+            margin-left: 8px;
+            display: inline-block;
+        }
+
+        @keyframes slideDownFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideUpFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 1400px) {
+            .slide-title { font-size: 36px; }
+            .challenge-title { font-size: 18px; }
+            .challenge-description { font-size: 13px; }
+        }
+
+        @media (max-width: 1024px) {
+            .challenges-grid {
+                grid-template-columns: 1fr;
+                grid-template-rows: repeat(4, auto);
+            }
+            .slide-container { padding: 35px; }
+            .challenge-card { padding: 20px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="slide-header">
+            <h1 class="slide-title">原子力産業の根本的課題</h1>
+            <p class="slide-subtitle">AIが解決すべき4つの構造的問題</p>
+        </div>
+
+        <div class="challenges-grid">
+            <div class="challenge-card">
+                <div class="challenge-header">
+                    <div class="challenge-icon">📄</div>
+                    <h3 class="challenge-title">膨大な文書管理の負担</h3>
+                </div>
+                <div class="challenge-content">
+                    <p class="challenge-description">
+                        世界で最も厳格に文書化された産業施設。その規模は想像を絶する。
+                    </p>
+                    
+                    <div class="stats-container">
+                        <div class="stat-highlight">
+                            <div class="stat-number">数十億ページ</div>
+                            <div class="stat-label">米国連邦・州規制による技術文書管理義務</div>
+                        </div>
+                        
+                        <ul class="bullet-list">
+                            <li class="bullet-item">ディアブロキャニオン原発：<span class="emphasis">約20億ページ</span>蓄積</li>
+                            <li class="bullet-item">年間<span class="emphasis">15,000時間</span>を文書検索に費やす</li>
+                            <li class="bullet-item">コスト換算：<span class="emphasis">225万ドル/年</span></li>
+                        </ul>
+
+                        <div class="quote-box">
+                            <div class="quote-text">
+                                「運営上の問題発生時、必要な情報を見つけるまでに数時間から数日を要していた」
+                            </div>
+                            <div class="quote-source">- PG&E担当副社長</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="challenge-card">
+                <div class="challenge-header">
+                    <div class="challenge-icon">👥</div>
+                    <h3 class="challenge-title">知識継承の危機</h3>
+                </div>
+                <div class="challenge-content">
+                    <p class="challenge-description">
+                        「シルバー津波」と呼ばれる深刻な人材問題に直面している。
+                    </p>
+                    
+                    <div class="stats-container">
+                        <div class="stat-highlight">
+                            <div class="stat-number">30-40%</div>
+                            <div class="stat-label">今後10年で現役技術者の退職予定割合</div>
+                        </div>
+                        
+                        <ul class="bullet-list">
+                            <li class="bullet-item"><span class="emphasis">熟練技術者の大量退職</span><span class="warning-badge">危機</span></li>
+                            <li class="bullet-item">原子力工学専攻：1970年代の<span class="emphasis">1/3以下</span></li>
+                            <li class="bullet-item">40年の運転経験による<span class="emphasis">暗黙知の喪失</span></li>
+                        </ul>
+
+                        <div style="background: rgba(255, 185, 0, 0.1); border-radius: 8px; padding: 12px; margin-top: 12px;">
+                            <div style="font-size: 12px; font-weight: 600; color: var(--microsoft-orange); margin-bottom: 6px;">
+                                ⚠️ 緊急課題
+                            </div>
+                            <div style="font-size: 11px; line-height: 1.3; color: var(--text-secondary);">
+                                貴重なノウハウが文書化されずに失われる危機
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="challenge-card">
+                <div class="challenge-header">
+                    <div class="challenge-icon">💰</div>
+                    <h3 class="challenge-title">効率化への圧力</h3>
+                </div>
+                <div class="challenge-content">
+                    <p class="challenge-description">
+                        競争的な電力市場において、原子力発電の経済性向上は死活問題。
+                    </p>
+                    
+                    <div class="stats-container">
+                        <div class="stat-highlight">
+                            <div class="stat-number">年率3-5%</div>
+                            <div class="stat-label">運転・保守コスト削減目標</div>
+                        </div>
+                        
+                        <ul class="bullet-list">
+                            <li class="bullet-item">設備利用率：90% → <span class="emphasis">95%以上</span>へ</li>
+                            <li class="bullet-item">計画外停止削減：<span class="emphasis">年間数億円</span>の機会損失</li>
+                            <li class="bullet-item">再エネとの価格競争激化</li>
+                        </ul>
+
+                        <div style="background: rgba(91, 44, 135, 0.1); border-radius: 8px; padding: 12px; margin-top: 12px;">
+                            <div style="font-size: 12px; font-weight: 600; color: var(--microsoft-purple); margin-bottom: 6px;">
+                                📈 市場圧力
+                            </div>
+                            <div style="font-size: 11px; line-height: 1.3; color: var(--text-secondary);">
+                                効率化なくして生き残れない競争環境
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="challenge-card">
+                <div class="challenge-header">
+                    <div class="challenge-icon">🌍</div>
+                    <h3 class="challenge-title">社会的受容性の課題</h3>
+                </div>
+                <div class="challenge-content">
+                    <p class="challenge-description">
+                        事故の記憶とともに根強く残る社会的な不安や懸念への対応。
+                    </p>
+                    
+                    <div class="stats-container">
+                        <ul class="bullet-list">
+                            <li class="bullet-item"><span class="emphasis">透明性の確保</span>が必要</li>
+                            <li class="bullet-item">リスクコミュニケーションの改善</li>
+                            <li class="bullet-item">技術的安全性の<span class="emphasis">分かりやすい説明</span></li>
+                            <li class="bullet-item">継続的な信頼関係構築</li>
+                        </ul>
+
+                        <div style="background: rgba(255, 185, 0, 0.1); border-radius: 8px; padding: 12px; margin-top: 12px;">
+                            <div style="font-size: 12px; font-weight: 600; color: var(--microsoft-yellow); margin-bottom: 6px;">
+                                💬 対話の重要性
+                            </div>
+                            <div style="font-size: 11px; line-height: 1.3; color: var(--text-secondary);">
+                                科学的根拠に基づく建設的な社会対話が必要
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

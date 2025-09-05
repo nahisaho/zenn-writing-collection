@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>国立研究所の革新技術 - 原子力AI技術革命</title>
+    <style>
+        :root {
+            --microsoft-blue: #0078D4;
+            --microsoft-dark-blue: #005A9E;
+            --microsoft-light-blue: #40C0FF;
+            --microsoft-green: #107C10;
+            --microsoft-gold: #FFB900;
+            --microsoft-purple: #5C2D91;
+            --text-primary: #323130;
+            --text-secondary: #605E5C;
+            --background: #FFFFFF;
+            --card-background: #FAFAFA;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #FFFFFF 0%, #F8F9FA 100%);
+            color: var(--text-primary);
+            line-height: 1.6;
+            padding: 40px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            aspect-ratio: 16/9;
+            background: var(--background);
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+            padding: 60px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .slide-number {
+            font-size: 24px;
+            font-weight: 600;
+            color: var(--microsoft-blue);
+            margin-bottom: 16px;
+        }
+
+        .main-title {
+            font-size: 42px;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 12px;
+        }
+
+        .subtitle {
+            font-size: 22px;
+            color: var(--text-secondary);
+            font-weight: 400;
+        }
+
+        .content {
+            flex: 1;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 35px;
+        }
+
+        .left-section {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .right-section {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .frontier-specs {
+            background: linear-gradient(135deg, rgba(255, 185, 0, 0.1) 0%, rgba(255, 185, 0, 0.05) 100%);
+            border: 2px solid var(--microsoft-gold);
+            border-radius: 16px;
+            padding: 25px;
+        }
+
+        .frontier-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--microsoft-gold);
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+        }
+
+        .frontier-title::before {
+            content: "🚀";
+            margin-right: 8px;
+            font-size: 24px;
+        }
+
+        .frontier-highlight {
+            background: rgba(255, 185, 0, 0.1);
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 12px;
+            text-align: center;
+        }
+
+        .exascale-number {
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--microsoft-gold);
+            margin-bottom: 6px;
+        }
+
+        .exascale-description {
+            font-size: 12px;
+            color: var(--text-secondary);
+        }
+
+        .specs-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+        }
+
+        .spec-item {
+            font-size: 11px;
+            color: var(--text-primary);
+            padding: 6px;
+            background: rgba(255, 185, 0, 0.05);
+            border-radius: 4px;
+        }
+
+        .spec-label {
+            font-weight: 700;
+            color: var(--microsoft-gold);
+        }
+
+        .ornl-achievement {
+            background: linear-gradient(135deg, rgba(16, 124, 16, 0.1) 0%, rgba(16, 124, 16, 0.05) 100%);
+            border: 2px solid var(--microsoft-green);
+            border-radius: 16px;
+            padding: 25px;
+            text-align: center;
+        }
+
+        .achievement-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--microsoft-green);
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .achievement-title::before {
+            content: "🏆";
+            margin-right: 8px;
+            font-size: 24px;
+        }
+
+        .temperature-comparison {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            gap: 15px;
+            margin-bottom: 16px;
+            align-items: center;
+        }
+
+        .temp-before {
+            background: rgba(216, 59, 1, 0.1);
+            border: 1px solid #D83B01;
+            border-radius: 8px;
+            padding: 15px;
+            text-align: center;
+        }
+
+        .temp-after {
+            background: rgba(16, 124, 16, 0.1);
+            border: 1px solid var(--microsoft-green);
+            border-radius: 8px;
+            padding: 15px;
+            text-align: center;
+        }
+
+        .temp-value {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .temp-before .temp-value {
+            color: #D83B01;
+        }
+
+        .temp-after .temp-value {
+            color: var(--microsoft-green);
+        }
+
+        .temp-label {
+            font-size: 10px;
+            color: var(--text-secondary);
+        }
+
+        .arrow {
+            font-size: 24px;
+            color: var(--microsoft-blue);
+            font-weight: 700;
+        }
+
+        .improvement-note {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--microsoft-green);
+            text-align: center;
+        }
+
+        .inl-microsoft {
+            background: linear-gradient(135deg, rgba(0, 120, 212, 0.1) 0%, rgba(0, 120, 212, 0.05) 100%);
+            border: 2px solid var(--microsoft-blue);
+            border-radius: 16px;
+            padding: 25px;
+        }
+
+        .collaboration-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--microsoft-blue);
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+        }
+
+        .collaboration-title::before {
+            content: "🤝";
+            margin-right: 8px;
+            font-size: 24px;
+        }
+
+        .partnership-details {
+            background: rgba(0, 120, 212, 0.05);
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 12px;
+        }
+
+        .partnership-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+            font-size: 13px;
+        }
+
+        .partnership-item::before {
+            content: "✓";
+            color: var(--microsoft-blue);
+            font-weight: 700;
+            margin-right: 8px;
+        }
+
+        .challenge-solution {
+            background: var(--card-background);
+            border-radius: 16px;
+            padding: 20px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+            border-left: 6px solid var(--microsoft-purple);
+        }
+
+        .challenge-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--microsoft-purple);
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+        }
+
+        .challenge-title::before {
+            content: "⚡";
+            margin-right: 6px;
+            font-size: 18px;
+        }
+
+        .challenge-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 12px;
+        }
+
+        .challenge-stat {
+            text-align: center;
+            padding: 8px;
+            background: rgba(92, 45, 145, 0.1);
+            border-radius: 6px;
+        }
+
+        .stat-number {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--microsoft-purple);
+            margin-bottom: 2px;
+        }
+
+        .stat-label {
+            font-size: 10px;
+            color: var(--text-secondary);
+        }
+
+        .human-in-loop {
+            background: rgba(92, 45, 145, 0.05);
+            border: 1px solid var(--microsoft-purple);
+            border-radius: 8px;
+            padding: 10px;
+        }
+
+        .loop-title {
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--microsoft-purple);
+            margin-bottom: 6px;
+        }
+
+        .loop-principle {
+            font-size: 10px;
+            color: var(--text-primary);
+            line-height: 1.3;
+            margin-bottom: 3px;
+        }
+
+        .research-ecosystem {
+            background: linear-gradient(135deg, rgba(92, 45, 145, 0.1) 0%, rgba(92, 45, 145, 0.05) 100%);
+            border: 2px solid var(--microsoft-purple);
+            border-radius: 16px;
+            padding: 20px;
+        }
+
+        .ecosystem-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--microsoft-purple);
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+        }
+
+        .ecosystem-title::before {
+            content: "🔬";
+            margin-right: 8px;
+            font-size: 20px;
+        }
+
+        .ecosystem-flow {
+            font-size: 11px;
+            color: var(--text-primary);
+            line-height: 1.4;
+            background: rgba(92, 45, 145, 0.05);
+            border-radius: 6px;
+            padding: 10px;
+        }
+
+        .footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 25px;
+            padding-top: 25px;
+            border-top: 2px solid #E1E1E1;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .nav-button {
+            background: var(--microsoft-light-blue);
+            color: var(--text-primary);
+            padding: 12px 24px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-button:hover {
+            background: var(--microsoft-blue);
+            color: white;
+        }
+
+        .slide-info {
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        @media (max-width: 1200px) {
+            .container { padding: 40px; }
+            .main-title { font-size: 32px; }
+            .content { grid-template-columns: 1fr; }
+            .specs-grid { grid-template-columns: 1fr; }
+            .temperature-comparison { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="slide-number">スライド M</div>
+            <h1 class="main-title">国立研究所の革新技術</h1>
+            <p class="subtitle">基礎研究から実用化への橋渡し</p>
+        </div>
+
+        <div class="content">
+            <div class="left-section">
+                <div class="frontier-specs">
+                    <div class="frontier-title">ORNL Frontierスーパーコンピューター</div>
+                    <div class="frontier-highlight">
+                        <div class="exascale-number">1.1 EFlops</div>
+                        <div class="exascale-description">世界初のエクサスケール計算能力</div>
+                    </div>
+                    <div class="specs-grid">
+                        <div class="spec-item">
+                            <span class="spec-label">CPU:</span> AMD EPYC 64コア×9,408個
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-label">GPU:</span> AMD Instinct MI250X×37,632個
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-label">メモリ:</span> 9.2ペタバイト
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-label">ストレージ:</span> 700ペタバイト
+                        </div>
+                    </div>
+                </div>
+
+                <div class="ornl-achievement">
+                    <div class="achievement-title">ORNL設計最適化AI成果</div>
+                    <div class="temperature-comparison">
+                        <div class="temp-before">
+                            <div class="temp-value">842.1℃</div>
+                            <div class="temp-label">従来設計</div>
+                        </div>
+                        <div class="arrow">→</div>
+                        <div class="temp-after">
+                            <div class="temp-value">291.35℃</div>
+                            <div class="temp-label">AI最適化後</div>
+                        </div>
+                    </div>
+                    <div class="improvement-note">
+                        温度ピーキング係数3倍改善を実現
+                    </div>
+                </div>
+
+                <div class="research-ecosystem">
+                    <div class="ecosystem-title">研究エコシステム</div>
+                    <div class="ecosystem-flow">
+                        <strong>基礎研究 → 実証 → 商用化</strong><br>
+                        ORNL・INL等の国立研究所が<br>
+                        革新技術の基盤を創出<br><br>
+                        
+                        • 物理制約統合型深層学習<br>
+                        • ベイズ最適化手法<br>
+                        • エクサスケール計算活用<br>
+                        • 産業界への技術移転
+                    </div>
+                </div>
+            </div>
+
+            <div class="right-section">
+                <div class="inl-microsoft">
+                    <div class="collaboration-title">INL-Microsoft戦略的協業</div>
+                    <div class="partnership-details">
+                        <div class="partnership-item">2025年7月戦略的パートナーシップ発表</div>
+                        <div class="partnership-item">Microsoft Azure AI Platform活用</div>
+                        <div class="partnership-item">原子力認可プロセス効率化目標</div>
+                        <div class="partnership-item">設計文書・安全解析レポート自動化</div>
+                    </div>
+                    
+                    <div class="human-in-loop">
+                        <div class="loop-title">🔒 Human-in-the-Loop原則</div>
+                        <div class="loop-principle">• AIは文書構築のみ担当（判断は行わない）</div>
+                        <div class="loop-principle">• 専門家による事後検証が必須</div>
+                        <div class="loop-principle">• 最終意思決定権限は常に人間が保持</div>
+                        <div class="loop-principle">• 原子力安全判断は絶対にAIに委ねない</div>
+                    </div>
+                </div>
+
+                <div class="challenge-solution">
+                    <div class="challenge-title">認可プロセスの構造的課題</div>
+                    <div class="challenge-stats">
+                        <div class="challenge-stat">
+                            <div class="stat-number">6-8年</div>
+                            <div class="stat-label">設計認証期間</div>
+                        </div>
+                        <div class="challenge-stat">
+                            <div class="stat-number">5-10億$</div>
+                            <div class="stat-label">認証総費用</div>
+                        </div>
+                    </div>
+                    <div style="font-size: 12px; color: var(--text-primary); text-align: center;">
+                        NuScale SMR: 2016年申請→2022年認証取得<br>
+                        <strong>約5.5年と膨大なリソースを消費</strong>
+                    </div>
+                </div>
+
+                <div style="background: linear-gradient(135deg, rgba(16, 124, 16, 0.1) 0%, rgba(16, 124, 16, 0.05) 100%); border: 2px solid var(--microsoft-green); border-radius: 16px; padding: 20px;">
+                    <div style="font-size: 18px; font-weight: 700; color: var(--microsoft-green); margin-bottom: 12px; display: flex; align-items: center;">
+                        <span style="margin-right: 8px; font-size: 20px;">⚡</span>革命的インパクト
+                    </div>
+                    <div style="font-size: 13px; color: var(--text-primary); line-height: 1.5;">
+                        <strong>従来の段階的設計から</strong><br>
+                        <strong>AI支援による最適化設計へ</strong><br><br>
+                        
+                        • 設計パラダイムの根本的変革<br>
+                        • 任意形状設計の実現<br>
+                        • 3D積層造形技術への対応<br>
+                        • 物理制約統合による信頼性向上
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <div class="nav-buttons">
+                <a href="slideL_westinghouse_hive.html" class="nav-button">← 前へ：Westinghouse HiVe™</a>
+                <a href="slideN_cross_field_applications.html" class="nav-button">次へ：分野横断応用 →</a>
+            </div>
+            <div class="slide-info">原子力AI技術革命 | 日本原子力学会2025年秋の大会</div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>米国の圧倒的優位 - 原子力AI技術革命</title>
+    <style>
+        :root {
+            --microsoft-blue: #0078D4;
+            --microsoft-dark-blue: #005A9E;
+            --microsoft-light-blue: #40C0FF;
+            --microsoft-green: #107C10;
+            --microsoft-gold: #FFB900;
+            --text-primary: #323130;
+            --text-secondary: #605E5C;
+            --background: #FFFFFF;
+            --card-background: #FAFAFA;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #FFFFFF 0%, #F8F9FA 100%);
+            color: var(--text-primary);
+            line-height: 1.6;
+            padding: 40px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            aspect-ratio: 16/9;
+            background: var(--background);
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+            padding: 60px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .slide-number {
+            font-size: 24px;
+            font-weight: 600;
+            color: var(--microsoft-blue);
+            margin-bottom: 16px;
+        }
+
+        .main-title {
+            font-size: 48px;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 16px;
+        }
+
+        .subtitle {
+            font-size: 24px;
+            color: var(--text-secondary);
+            font-weight: 400;
+        }
+
+        .content {
+            flex: 1;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+
+        .left-section {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .right-section {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .success-case {
+            background: linear-gradient(135deg, rgba(16, 124, 16, 0.1) 0%, rgba(16, 124, 16, 0.05) 100%);
+            border: 2px solid var(--microsoft-green);
+            border-radius: 16px;
+            padding: 25px;
+        }
+
+        .case-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--microsoft-green);
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+        }
+
+        .case-title::before {
+            content: "🏆";
+            margin-right: 8px;
+            font-size: 24px;
+        }
+
+        .case-details {
+            font-size: 16px;
+            color: var(--text-primary);
+            line-height: 1.5;
+        }
+
+        .investment-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .investment-card {
+            background: var(--card-background);
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+            border-left: 4px solid var(--microsoft-blue);
+        }
+
+        .company-name {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--microsoft-blue);
+            margin-bottom: 8px;
+        }
+
+        .investment-amount {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--microsoft-gold);
+            margin-bottom: 8px;
+        }
+
+        .investment-detail {
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        .policy-section {
+            background: linear-gradient(135deg, rgba(0, 120, 212, 0.1) 0%, rgba(0, 120, 212, 0.05) 100%);
+            border: 2px solid var(--microsoft-blue);
+            border-radius: 16px;
+            padding: 25px;
+        }
+
+        .policy-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--microsoft-blue);
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+        }
+
+        .policy-title::before {
+            content: "📋";
+            margin-right: 8px;
+            font-size: 24px;
+        }
+
+        .policy-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .policy-list li {
+            font-size: 16px;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .policy-list li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--microsoft-green);
+            font-weight: bold;
+        }
+
+        .competitive-advantage {
+            background: linear-gradient(135deg, rgba(255, 185, 0, 0.1) 0%, rgba(255, 185, 0, 0.05) 100%);
+            border: 2px solid var(--microsoft-gold);
+            border-radius: 16px;
+            padding: 25px;
+        }
+
+        .advantage-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--microsoft-gold);
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+        }
+
+        .advantage-title::before {
+            content: "🎯";
+            margin-right: 8px;
+            font-size: 24px;
+        }
+
+        .advantage-text {
+            font-size: 16px;
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+
+        .footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 30px;
+            padding-top: 30px;
+            border-top: 2px solid #E1E1E1;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .nav-button {
+            background: var(--microsoft-light-blue);
+            color: var(--text-primary);
+            padding: 12px 24px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-button:hover {
+            background: var(--microsoft-blue);
+            color: white;
+        }
+
+        .slide-info {
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        @media (max-width: 1200px) {
+            .container { padding: 40px; }
+            .main-title { font-size: 36px; }
+            .content { grid-template-columns: 1fr; }
+            .investment-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="slide-number">スライド G</div>
+            <h1 class="main-title">🇺🇸 米国の圧倒的優位</h1>
+            <p class="subtitle">商用化速度と投資規模で他を圧倒</p>
+        </div>
+
+        <div class="content">
+            <div class="left-section">
+                <div class="success-case">
+                    <div class="case-title">世界初商用化成功事例</div>
+                    <div class="case-details">
+                        <strong>PG&E Diablo Canyon原子力発電所</strong><br>
+                        • 世界初の商用生成AIソリューション実装<br>
+                        • 2024年11月稼働開始<br>
+                        • 運転効率15%向上、保守コスト25%削減<br>
+                        • 安全性指標で業界トップクラス達成
+                    </div>
+                </div>
+
+                <div class="investment-grid">
+                    <div class="investment-card">
+                        <div class="company-name">Microsoft</div>
+                        <div class="investment-amount">$1.6B</div>
+                        <div class="investment-detail">Three Mile Island再開<br>20年電力供給契約</div>
+                    </div>
+                    <div class="investment-card">
+                        <div class="company-name">Amazon</div>
+                        <div class="investment-amount">$500M</div>
+                        <div class="investment-detail">X-energy SMR開発<br>データセンター直結</div>
+                    </div>
+                    <div class="investment-card">
+                        <div class="company-name">Google</div>
+                        <div class="investment-amount">$300M+</div>
+                        <div class="investment-detail">Kairos Power連携<br>溶融塩炉技術開発</div>
+                    </div>
+                    <div class="investment-card">
+                        <div class="company-name">Constellation</div>
+                        <div class="investment-amount">$1.2B</div>
+                        <div class="investment-detail">Crane Clean Energy<br>廃炉施設再稼働</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="right-section">
+                <div class="policy-section">
+                    <div class="policy-title">トランプ政権AI統合政策</div>
+                    <ul class="policy-list">
+                        <li>原子力AI統合の国家戦略位置付け</li>
+                        <li>NRC（原子力規制委員会）改革推進</li>
+                        <li>新設原子炉の認可プロセス迅速化</li>
+                        <li>AI技術統合の規制枠組み整備</li>
+                        <li>産官学連携プログラム大幅拡充</li>
+                        <li>国防総省SMR調達計画加速</li>
+                    </ul>
+                </div>
+
+                <div class="competitive-advantage">
+                    <div class="advantage-title">米国の戦略的優位性</div>
+                    <div class="advantage-text">
+                        <strong>圧倒的な意思決定速度</strong><br>
+                        政府方針決定から実装まで平均18ヶ月<br><br>
+                        
+                        <strong>民間投資の桁違いの規模</strong><br>
+                        年間$50億以上の民間投資流入<br><br>
+                        
+                        <strong>AI技術の世界的リーダーシップ</strong><br>
+                        OpenAI、Google、Microsoft等の技術覇権
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <div class="nav-buttons">
+                <a href="slideF_global_three_polar.html" class="nav-button">← 前へ：三極構造</a>
+                <a href="slideH_europe_standards.html" class="nav-button">次へ：欧州標準化戦略 →</a>
+            </div>
+            <div class="slide-info">原子力AI技術革命 | 日本原子力学会2025年秋の大会</div>
+        </div>
+    </div>
+</body>
+</html>

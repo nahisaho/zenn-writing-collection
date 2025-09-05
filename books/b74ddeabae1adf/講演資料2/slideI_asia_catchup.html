@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>アジアの急速な追撃 - 原子力AI技術革命</title>
+    <style>
+        :root {
+            --microsoft-blue: #0078D4;
+            --microsoft-dark-blue: #005A9E;
+            --microsoft-light-blue: #40C0FF;
+            --microsoft-green: #107C10;
+            --microsoft-red: #D83B01;
+            --microsoft-orange: #FF8C00;
+            --text-primary: #323130;
+            --text-secondary: #605E5C;
+            --background: #FFFFFF;
+            --card-background: #FAFAFA;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #FFFFFF 0%, #F8F9FA 100%);
+            color: var(--text-primary);
+            line-height: 1.6;
+            padding: 40px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            aspect-ratio: 16/9;
+            background: var(--background);
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+            padding: 60px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .slide-number {
+            font-size: 24px;
+            font-weight: 600;
+            color: var(--microsoft-blue);
+            margin-bottom: 16px;
+        }
+
+        .main-title {
+            font-size: 48px;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 16px;
+        }
+
+        .subtitle {
+            font-size: 24px;
+            color: var(--text-secondary);
+            font-weight: 400;
+        }
+
+        .content {
+            flex: 1;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+
+        .left-section {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .right-section {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .country-strategy {
+            background: var(--card-background);
+            border-radius: 16px;
+            padding: 25px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+            border-left: 6px solid var(--microsoft-red);
+        }
+
+        .country-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        .country-flag {
+            font-size: 32px;
+            margin-right: 12px;
+        }
+
+        .country-name {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--microsoft-red);
+        }
+
+        .strategy-focus {
+            font-size: 16px;
+            color: var(--microsoft-blue);
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .strategy-points {
+            list-style: none;
+            padding: 0;
+        }
+
+        .strategy-points li {
+            font-size: 14px;
+            color: var(--text-secondary);
+            margin-bottom: 6px;
+            padding-left: 16px;
+            position: relative;
+        }
+
+        .strategy-points li::before {
+            content: "▶";
+            position: absolute;
+            left: 0;
+            color: var(--microsoft-red);
+            font-size: 12px;
+        }
+
+        .korea-strategy {
+            border-left-color: var(--microsoft-orange);
+        }
+
+        .korea-strategy .country-name {
+            color: var(--microsoft-orange);
+        }
+
+        .korea-strategy .strategy-points li::before {
+            color: var(--microsoft-orange);
+        }
+
+        .market-potential {
+            background: linear-gradient(135deg, rgba(16, 124, 16, 0.1) 0%, rgba(16, 124, 16, 0.05) 100%);
+            border: 2px solid var(--microsoft-green);
+            border-radius: 16px;
+            padding: 25px;
+        }
+
+        .market-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--microsoft-green);
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+        }
+
+        .market-title::before {
+            content: "📈";
+            margin-right: 8px;
+            font-size: 24px;
+        }
+
+        .market-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 16px;
+        }
+
+        .market-stat {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--microsoft-green);
+            margin-bottom: 4px;
+        }
+
+        .stat-label {
+            font-size: 12px;
+            color: var(--text-secondary);
+        }
+
+        .market-description {
+            font-size: 14px;
+            color: var(--text-primary);
+            line-height: 1.5;
+        }
+
+        .japan-warning {
+            background: linear-gradient(135deg, rgba(216, 59, 1, 0.1) 0%, rgba(216, 59, 1, 0.05) 100%);
+            border: 2px solid var(--microsoft-red);
+            border-radius: 16px;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .warning-icon {
+            font-size: 48px;
+            margin-bottom: 16px;
+        }
+
+        .warning-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--microsoft-red);
+            margin-bottom: 12px;
+        }
+
+        .warning-text {
+            font-size: 18px;
+            color: var(--text-primary);
+            font-weight: 600;
+            line-height: 1.4;
+        }
+
+        .strategic-comparison {
+            background: linear-gradient(135deg, rgba(0, 120, 212, 0.1) 0%, rgba(0, 120, 212, 0.05) 100%);
+            border: 2px solid var(--microsoft-blue);
+            border-radius: 16px;
+            padding: 25px;
+        }
+
+        .comparison-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--microsoft-blue);
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+        }
+
+        .comparison-title::before {
+            content: "⚖️";
+            margin-right: 8px;
+            font-size: 24px;
+        }
+
+        .comparison-content {
+            font-size: 16px;
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+
+        .footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 30px;
+            padding-top: 30px;
+            border-top: 2px solid #E1E1E1;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .nav-button {
+            background: var(--microsoft-light-blue);
+            color: var(--text-primary);
+            padding: 12px 24px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-button:hover {
+            background: var(--microsoft-blue);
+            color: white;
+        }
+
+        .slide-info {
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        @media (max-width: 1200px) {
+            .container { padding: 40px; }
+            .main-title { font-size: 36px; }
+            .content { grid-template-columns: 1fr; }
+            .market-stats { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="slide-number">スライド I</div>
+            <h1 class="main-title">🌏 アジアの急速な追撃</h1>
+            <p class="subtitle">技術自立と市場拡大の同時戦略</p>
+        </div>
+
+        <div class="content">
+            <div class="left-section">
+                <div class="country-strategy">
+                    <div class="country-header">
+                        <span class="country-flag">🇨🇳</span>
+                        <div class="country-name">中国</div>
+                    </div>
+                    <div class="strategy-focus">内製技術による完全技術自立戦略</div>
+                    <ul class="strategy-points">
+                        <li>外国依存度ゼロの国産AI技術開発</li>
+                        <li>華為技術（Huawei）等との技術協力</li>
+                        <li>清華大学等での基礎研究強化</li>
+                        <li>一帯一路政策との連携海外展開</li>
+                        <li>大規模データセンター統合開発</li>
+                        <li>国家主導の巨額投資プログラム</li>
+                    </ul>
+                </div>
+
+                <div class="country-strategy korea-strategy">
+                    <div class="country-header">
+                        <span class="country-flag">🇰🇷</span>
+                        <div class="country-name">韓国</div>
+                    </div>
+                    <div class="strategy-focus">K-Nuclear AI輸出戦略</div>
+                    <ul class="strategy-points">
+                        <li>APR1400＋AI統合パッケージ</li>
+                        <li>中東・東南アジア市場開拓</li>
+                        <li>Samsung・LG等IT企業連携</li>
+                        <li>政府R&D投資年率20%増加</li>
+                        <li>新韓流としての技術輸出</li>
+                        <li>デジタル原子炉概念の先駆け</li>
+                    </ul>
+                </div>
+
+                <div class="market-potential">
+                    <div class="market-title">アジア太平洋市場ポテンシャル</div>
+                    <div class="market-stats">
+                        <div class="market-stat">
+                            <div class="stat-value">60%+</div>
+                            <div class="stat-label">世界市場シェア</div>
+                        </div>
+                        <div class="market-stat">
+                            <div class="stat-value">$50B</div>
+                            <div class="stat-label">AI統合システム市場</div>
+                        </div>
+                        <div class="market-stat">
+                            <div class="stat-value">$500B</div>
+                            <div class="stat-label">新設炉建設(2030)</div>
+                        </div>
+                        <div class="market-stat">
+                            <div class="stat-value">$200B</div>
+                            <div class="stat-label">運転・保守サービス</div>
+                        </div>
+                    </div>
+                    <div class="market-description">
+                        世界最大の成長市場であるアジア太平洋地域では、原子力新設需要が急拡大中。AI技術との融合により、従来の原子力産業の枠組みが根本的に変化している。
+                    </div>
+                </div>
+            </div>
+
+            <div class="right-section">
+                <div class="strategic-comparison">
+                    <div class="comparison-title">アジア戦略の共通特徴</div>
+                    <div class="comparison-content">
+                        <strong>国家戦略の一貫性</strong><br>
+                        • 長期的視点での技術開発計画<br>
+                        • 政府・産業界・学界の密接な連携<br><br>
+                        
+                        <strong>技術自立への強いコミットメント</strong><br>
+                        • 外国技術依存からの脱却<br>
+                        • 独自技術による差別化<br><br>
+                        
+                        <strong>輸出志向の市場戦略</strong><br>
+                        • 自国市場での実証→海外展開<br>
+                        • 地域統合戦略の重視<br><br>
+                        
+                        <strong>急速な技術習得能力</strong><br>
+                        • 後発優位性を活かした追撃<br>
+                        • 先進技術の効率的導入・改良
+                    </div>
+                </div>
+
+                <div class="japan-warning">
+                    <div class="warning-icon">⚠️</div>
+                    <div class="warning-title">日本への緊急警告</div>
+                    <div class="warning-text">
+                        技術で勝つが実装で負けている<br>
+                        このギャップは致命的<br><br>
+                        <strong>残された時間：2025-2027年のみ</strong>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <div class="nav-buttons">
+                <a href="slideH_europe_standards.html" class="nav-button">← 前へ：欧州標準化</a>
+                <a href="slideJ_japan_opportunity.html" class="nav-button">次へ：日本の機会 →</a>
+            </div>
+            <div class="slide-info">原子力AI技術革命 | 日本原子力学会2025年秋の大会</div>
+        </div>
+    </div>
+</body>
+</html>

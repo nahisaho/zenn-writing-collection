@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>分野横断的応用事例 - 原子力AI技術革命</title>
+    <style>
+        :root {
+            --microsoft-blue: #0078D4;
+            --microsoft-dark-blue: #005A9E;
+            --microsoft-light-blue: #40C0FF;
+            --microsoft-green: #107C10;
+            --microsoft-orange: #FF8C00;
+            --microsoft-purple: #5C2D91;
+            --microsoft-teal: #00BCB4;
+            --text-primary: #323130;
+            --text-secondary: #605E5C;
+            --background: #FFFFFF;
+            --card-background: #FAFAFA;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #FFFFFF 0%, #F8F9FA 100%);
+            color: var(--text-primary);
+            line-height: 1.6;
+            padding: 40px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            aspect-ratio: 16/9;
+            background: var(--background);
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+            padding: 60px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .slide-number {
+            font-size: 24px;
+            font-weight: 600;
+            color: var(--microsoft-blue);
+            margin-bottom: 16px;
+        }
+
+        .main-title {
+            font-size: 40px;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 12px;
+        }
+
+        .subtitle {
+            font-size: 20px;
+            color: var(--text-secondary);
+            font-weight: 400;
+        }
+
+        .content {
+            flex: 1;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+
+        .left-section {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .right-section {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .application-card {
+            background: var(--card-background);
+            border-radius: 16px;
+            padding: 20px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+            border-left: 6px solid var(--microsoft-blue);
+        }
+
+        .application-card.design {
+            border-left-color: var(--microsoft-blue);
+        }
+
+        .application-card.maintenance {
+            border-left-color: var(--microsoft-green);
+        }
+
+        .application-card.decommission {
+            border-left-color: var(--microsoft-orange);
+        }
+
+        .application-card.operations {
+            border-left-color: var(--microsoft-purple);
+        }
+
+        .app-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .app-icon {
+            font-size: 24px;
+            margin-right: 10px;
+        }
+
+        .app-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .app-content {
+            font-size: 13px;
+            color: var(--text-secondary);
+            line-height: 1.4;
+            margin-bottom: 12px;
+        }
+
+        .app-highlights {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+        }
+
+        .highlight-item {
+            background: rgba(0, 120, 212, 0.1);
+            border-radius: 6px;
+            padding: 8px;
+            text-align: center;
+        }
+
+        .highlight-number {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--microsoft-blue);
+            margin-bottom: 2px;
+        }
+
+        .highlight-label {
+            font-size: 10px;
+            color: var(--text-secondary);
+        }
+
+        .maintenance-roi {
+            background: linear-gradient(135deg, rgba(16, 124, 16, 0.1) 0%, rgba(16, 124, 16, 0.05) 100%);
+            border: 2px solid var(--microsoft-green);
+            border-radius: 16px;
+            padding: 25px;
+            text-align: center;
+        }
+
+        .roi-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--microsoft-green);
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .roi-title::before {
+            content: "💰";
+            margin-right: 8px;
+            font-size: 24px;
+        }
+
+        .roi-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 12px;
+        }
+
+        .roi-item {
+            background: rgba(16, 124, 16, 0.1);
+            border-radius: 8px;
+            padding: 15px;
+        }
+
+        .roi-value {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--microsoft-green);
+            margin-bottom: 4px;
+        }
+
+        .roi-description {
+            font-size: 11px;
+            color: var(--text-secondary);
+        }
+
+        .roi-note {
+            font-size: 12px;
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        .tech-architecture {
+            background: linear-gradient(135deg, rgba(0, 188, 180, 0.1) 0%, rgba(0, 188, 180, 0.05) 100%);
+            border: 2px solid var(--microsoft-teal);
+            border-radius: 16px;
+            padding: 20px;
+        }
+
+        .arch-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--microsoft-teal);
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+        }
+
+        .arch-title::before {
+            content: "🏗️";
+            margin-right: 6px;
+            font-size: 18px;
+        }
+
+        .tech-flow {
+            font-size: 10px;
+            color: var(--text-primary);
+            line-height: 1.4;
+            font-family: 'Courier New', monospace;
+            background: rgba(0, 188, 180, 0.05);
+            border-radius: 6px;
+            padding: 10px;
+        }
+
+        .maturity-assessment {
+            background: linear-gradient(135deg, rgba(92, 45, 145, 0.1) 0%, rgba(92, 45, 145, 0.05) 100%);
+            border: 2px solid var(--microsoft-purple);
+            border-radius: 16px;
+            padding: 20px;
+        }
+
+        .maturity-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--microsoft-purple);
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+        }
+
+        .maturity-title::before {
+            content: "📊";
+            margin-right: 8px;
+            font-size: 20px;
+        }
+
+        .maturity-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 11px;
+        }
+
+        .maturity-table th {
+            background: rgba(92, 45, 145, 0.1);
+            color: var(--microsoft-purple);
+            font-weight: 700;
+            padding: 6px;
+            text-align: left;
+            border-bottom: 1px solid var(--microsoft-purple);
+        }
+
+        .maturity-table td {
+            padding: 4px 6px;
+            border-bottom: 1px solid #E1E1E1;
+        }
+
+        .trl-high {
+            color: var(--microsoft-green);
+            font-weight: 700;
+        }
+
+        .trl-medium {
+            color: var(--microsoft-orange);
+            font-weight: 700;
+        }
+
+        .trl-low {
+            color: #D83B01;
+            font-weight: 700;
+        }
+
+        .future-roadmap {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 12px;
+        }
+
+        .roadmap-phase {
+            background: rgba(92, 45, 145, 0.05);
+            border: 1px solid var(--microsoft-purple);
+            border-radius: 8px;
+            padding: 12px;
+            text-align: center;
+        }
+
+        .phase-period {
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--microsoft-purple);
+            margin-bottom: 6px;
+        }
+
+        .phase-content {
+            font-size: 10px;
+            color: var(--text-primary);
+            line-height: 1.3;
+        }
+
+        .footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 25px;
+            padding-top: 25px;
+            border-top: 2px solid #E1E1E1;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .nav-button {
+            background: var(--microsoft-light-blue);
+            color: var(--text-primary);
+            padding: 12px 24px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-button:hover {
+            background: var(--microsoft-blue);
+            color: white;
+        }
+
+        .slide-info {
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        @media (max-width: 1200px) {
+            .container { padding: 40px; }
+            .main-title { font-size: 32px; }
+            .content { grid-template-columns: 1fr; }
+            .app-highlights { grid-template-columns: 1fr; }
+            .roi-grid { grid-template-columns: 1fr; }
+            .future-roadmap { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="slide-number">スライド N</div>
+            <h1 class="main-title">分野横断的応用事例</h1>
+            <p class="subtitle">原子力工学全領域でのAI技術展開</p>
+        </div>
+
+        <div class="content">
+            <div class="left-section">
+                <div class="application-card design">
+                    <div class="app-header">
+                        <span class="app-icon">🎯</span>
+                        <h3 class="app-title">原子炉設計・安全解析</h3>
+                    </div>
+                    <div class="app-content">
+                        設計思想の根本的変革：経験則ベースから<br>
+                        AI支援最適化設計へのパラダイムシフト
+                    </div>
+                    <div class="app-highlights">
+                        <div class="highlight-item">
+                            <div class="highlight-number">3倍</div>
+                            <div class="highlight-label">温度ピーキング改善</div>
+                        </div>
+                        <div class="highlight-item">
+                            <div class="highlight-number">300MW</div>
+                            <div class="highlight-label">SMR設計最適化</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="application-card maintenance">
+                    <div class="app-header">
+                        <span class="app-icon">🔧</span>
+                        <h3 class="app-title">予知保全システム</h3>
+                    </div>
+                    <div class="app-content">
+                        機械学習・深層学習による設備故障予測<br>
+                        と最適保全計画の自動生成
+                    </div>
+                    <div class="app-highlights">
+                        <div class="highlight-item">
+                            <div class="highlight-number">30%</div>
+                            <div class="highlight-label">コスト削減</div>
+                        </div>
+                        <div class="highlight-item">
+                            <div class="highlight-number">20%</div>
+                            <div class="highlight-label">可用性向上</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="application-card decommission">
+                    <div class="app-header">
+                        <span class="app-icon">🤖</span>
+                        <h3 class="app-title">廃炉・廃棄物管理</h3>
+                    </div>
+                    <div class="app-content">
+                        ロボティクス×AI画像解析による<br>
+                        危険区域作業自動化と最適化
+                    </div>
+                    <div class="app-highlights">
+                        <div class="highlight-item">
+                            <div class="highlight-number">90%</div>
+                            <div class="highlight-label">被ばく低減</div>
+                        </div>
+                        <div class="highlight-item">
+                            <div class="highlight-number">福島</div>
+                            <div class="highlight-label">実証適用</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="application-card operations">
+                    <div class="app-header">
+                        <span class="app-icon">📋</span>
+                        <h3 class="app-title">運転支援・文書管理</h3>
+                    </div>
+                    <div class="app-content">
+                        自然言語質問応答による情報検索<br>
+                        と規制要件との自動照合システム
+                    </div>
+                    <div class="app-highlights">
+                        <div class="highlight-item">
+                            <div class="highlight-number">98%</div>
+                            <div class="highlight-label">検索精度</div>
+                        </div>
+                        <div class="highlight-item">
+                            <div class="highlight-number">15秒</div>
+                            <div class="highlight-label">緊急時検索</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="right-section">
+                <div class="maintenance-roi">
+                    <div class="roi-title">予知保全投資収益率</div>
+                    <div class="roi-grid">
+                        <div class="roi-item">
+                            <div class="roi-value">$3,000-5,000万</div>
+                            <div class="roi-description">1000MW原発1基<br>年間コスト削減</div>
+                        </div>
+                        <div class="roi-item">
+                            <div class="roi-value">計画外停止</div>
+                            <div class="roi-description">大幅削減による<br>機会損失回避</div>
+                        </div>
+                    </div>
+                    <div class="roi-note">
+                        具体的ROI実現により投資効果を実証
+                    </div>
+                </div>
+
+                <div class="tech-architecture">
+                    <div class="arch-title">予知保全AIアーキテクチャ</div>
+                    <div class="tech-flow">
+センサーデータ
+├── 前処理・正規化
+├── 特徴量エンジニアリング
+├── AI処理層
+│   ├── 異常検知AI
+│   │   ├── 統計的異常検知
+│   │   └── 深層学習異常検知
+│   ├── 故障予測AI
+│   │   ├── LSTM時系列予測
+│   │   ├── Transformer長期予測
+│   │   └── 生存時間解析
+│   └── 診断AI
+│       ├── 故障モード分類
+│       └── 根本原因分析
+└── 保全計画最適化
+    └── 作業指示書生成
+                    </div>
+                </div>
+
+                <div class="maturity-assessment">
+                    <div class="maturity-title">技術成熟度評価</div>
+                    <table class="maturity-table">
+                        <tr>
+                            <th>技術領域</th>
+                            <th>TRL</th>
+                            <th>商用化状況</th>
+                        </tr>
+                        <tr>
+                            <td><strong>文書検索・管理</strong></td>
+                            <td class="trl-high">8-9</td>
+                            <td>商用化済み</td>
+                        </tr>
+                        <tr>
+                            <td><strong>予知保全</strong></td>
+                            <td class="trl-medium">7-8</td>
+                            <td>実証段階</td>
+                        </tr>
+                        <tr>
+                            <td><strong>設計最適化</strong></td>
+                            <td class="trl-medium">5-6</td>
+                            <td>研究開発段階</td>
+                        </tr>
+                        <tr>
+                            <td><strong>安全解析</strong></td>
+                            <td class="trl-medium">5-6</td>
+                            <td>実証段階</td>
+                        </tr>
+                        <tr>
+                            <td><strong>廃炉・廃棄物</strong></td>
+                            <td class="trl-low">3-4</td>
+                            <td>基礎研究段階</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div style="background: rgba(92, 45, 145, 0.05); border: 1px solid var(--microsoft-purple); border-radius: 12px; padding: 15px;">
+                    <div style="font-size: 14px; font-weight: 700; color: var(--microsoft-purple); margin-bottom: 12px;">🚀 展開ロードマップ</div>
+                    <div class="future-roadmap">
+                        <div class="roadmap-phase">
+                            <div class="phase-period">2025-2027</div>
+                            <div class="phase-content">文書管理標準化<br>予知保全商用展開<br>規制当局協議</div>
+                        </div>
+                        <div class="roadmap-phase">
+                            <div class="phase-period">2028-2030</div>
+                            <div class="phase-content">設計AI規制承認<br>安全解析AI実用化<br>国際標準策定</div>
+                        </div>
+                        <div class="roadmap-phase">
+                            <div class="phase-period">2031年以降</div>
+                            <div class="phase-content">完全自律運転実現<br>廃炉AI本格適用<br>新型炉全面適用</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <div class="nav-buttons">
+                <a href="slideM_national_labs_innovation.html" class="nav-button">← 前へ：国立研究所</a>
+                <a href="slideO_technology_maturity.html" class="nav-button">次へ：技術成熟度 →</a>
+            </div>
+            <div class="slide-info">原子力AI技術革命 | 日本原子力学会2025年秋の大会</div>
+        </div>
+    </div>
+</body>
+</html>

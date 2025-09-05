@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2025-2027年 決定的機会の窓 - 原子力AI技術革命</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Segoe UI", -apple-system, BlinkMacSystemFont, "Roboto", sans-serif;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            color: #333;
+            line-height: 1.6;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            aspect-ratio: 16 / 9;
+        }
+
+        .container {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            padding: 3rem;
+            background: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .main-title {
+            font-size: 2.3rem;
+            font-weight: bold;
+            color: #dc3545;
+            margin-bottom: 1rem;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .year-range {
+            font-size: 3rem;
+            font-weight: bold;
+            color: #ff6b35;
+            margin-bottom: 0.5rem;
+        }
+
+        .subtitle {
+            font-size: 1.1rem;
+            color: #666;
+            font-weight: 500;
+        }
+
+        .content-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            flex: 1;
+            align-items: start;
+        }
+
+        .critical-factors {
+            background: white;
+            padding: 2rem;
+            border-radius: 16px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+        }
+
+        .factors-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            padding-bottom: 0.5rem;
+            border-bottom: 3px solid #dc3545;
+        }
+
+        .factor-item {
+            margin-bottom: 1.5rem;
+            padding: 1.2rem;
+            background: #f8f9fa;
+            border-radius: 12px;
+            border-left: 4px solid;
+        }
+
+        .factor-item.standards {
+            border-left-color: #0078D4;
+        }
+
+        .factor-item.market {
+            border-left-color: #28a745;
+        }
+
+        .factor-item.talent {
+            border-left-color: #ff6b35;
+        }
+
+        .factor-item.government {
+            border-left-color: #6f42c1;
+        }
+
+        .factor-title {
+            font-weight: bold;
+            font-size: 1.1rem;
+            margin-bottom: 0.8rem;
+            color: #333;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .factor-description {
+            font-size: 0.9rem;
+            color: #666;
+            line-height: 1.5;
+        }
+
+        .delay-cost-analysis {
+            background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
+            color: white;
+            padding: 2.5rem;
+            border-radius: 16px;
+            box-shadow: 0 8px 32px rgba(220, 53, 69, 0.3);
+        }
+
+        .cost-title {
+            font-size: 1.8rem;
+            font-weight: bold;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .cost-warning {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+            text-align: center;
+            backdrop-filter: blur(10px);
+        }
+
+        .warning-text {
+            font-weight: bold;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .warning-detail {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        .cost-timeline {
+            display: grid;
+            gap: 0.8rem;
+        }
+
+        .timeline-item {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 0.8rem;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+        }
+
+        .timeline-year {
+            font-weight: bold;
+            font-size: 1rem;
+        }
+
+        .timeline-cost {
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        .timeline-cost.exponential {
+            color: #ffff00;
+            text-shadow: 0 0 10px rgba(255, 255, 0, 0.5);
+        }
+
+        .action-plan {
+            position: absolute;
+            bottom: 1.5rem;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90%;
+            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 16px;
+            box-shadow: 0 8px 24px rgba(40, 167, 69, 0.3);
+        }
+
+        .action-title {
+            font-size: 1.3rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .action-items {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 0.8rem;
+            font-size: 0.85rem;
+        }
+
+        .action-item {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 0.8rem;
+            border-radius: 8px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+        }
+
+        .action-number {
+            font-weight: bold;
+            font-size: 1rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .action-text {
+            font-size: 0.8rem;
+            line-height: 1.3;
+        }
+
+        .urgency-badge {
+            position: absolute;
+            top: 2rem;
+            right: 2rem;
+            background: #dc3545;
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 1rem;
+            box-shadow: 0 4px 12px rgba(220, 53, 69, 0.3);
+            animation: urgent-pulse 2s infinite;
+        }
+
+        @keyframes urgent-pulse {
+            0% { 
+                opacity: 1; 
+                transform: scale(1);
+            }
+            50% { 
+                opacity: 0.7; 
+                transform: scale(1.05);
+            }
+            100% { 
+                opacity: 1; 
+                transform: scale(1);
+            }
+        }
+
+        .last-chance-note {
+            position: absolute;
+            top: 6rem;
+            right: 2rem;
+            background: rgba(220, 53, 69, 0.1);
+            color: #dc3545;
+            padding: 0.5rem 1rem;
+            border-radius: 16px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            backdrop-filter: blur(10px);
+        }
+
+        @keyframes slideInUp {
+            from {
+                transform: translateY(30px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideInLeft {
+            from {
+                transform: translateX(-30px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                transform: translateX(30px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes warningGlow {
+            0% { box-shadow: 0 8px 32px rgba(220, 53, 69, 0.3); }
+            50% { box-shadow: 0 8px 32px rgba(220, 53, 69, 0.7); }
+            100% { box-shadow: 0 8px 32px rgba(220, 53, 69, 0.3); }
+        }
+
+        .critical-factors {
+            animation: slideInLeft 0.8s ease-out forwards;
+        }
+
+        .delay-cost-analysis {
+            animation: slideInRight 0.8s ease-out forwards, warningGlow 3s ease-in-out infinite;
+            animation-delay: 0.3s;
+        }
+
+        .action-plan {
+            animation: slideInUp 0.8s ease-out forwards;
+            animation-delay: 0.6s;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="urgency-badge">緊急行動必要</div>
+        <div class="last-chance-note">ラストチャンス</div>
+        
+        <div class="header">
+            <div class="year-range">2025-2027年</div>
+            <h1 class="main-title">決定的機会の窓</h1>
+            <p class="subtitle">この3年間が日本の運命を決定する</p>
+        </div>
+
+        <div class="content-layout">
+            <div class="critical-factors">
+                <h3 class="factors-title">なぜこの3年間が決定的か</h3>
+                
+                <div class="factor-item standards">
+                    <div class="factor-title">📋 技術標準化の決定期</div>
+                    <div class="factor-description">
+                        ISO/IEC AI安全基準・IAEA原子力AI指針策定<br>
+                        標準化の主導権を逃すと永続的フォロワーに
+                    </div>
+                </div>
+                
+                <div class="factor-item market">
+                    <div class="factor-title">🎯 First Mover Advantage</div>
+                    <div class="factor-description">
+                        アジア市場での初回大型契約獲得の機会<br>
+                        先行者利益確保のラストチャンス
+                    </div>
+                </div>
+                
+                <div class="factor-item talent">
+                    <div class="factor-title">👥 人材・技術蓄積期限</div>
+                    <div class="factor-description">
+                        競合に対抗できる技術・人材基盤確立期限<br>
+                        優秀人材の海外流出阻止の最後の機会
+                    </div>
+                </div>
+                
+                <div class="factor-item government">
+                    <div class="factor-title">🏛️ 政府支援確保期限</div>
+                    <div class="factor-description">
+                        国家戦略としての支援体制構築期限<br>
+                        政治的意志決定の重要なタイミング
+                    </div>
+                </div>
+            </div>
+
+            <div class="delay-cost-analysis">
+                <div class="cost-title">遅れのコストは指数関数的増大</div>
+                
+                <div class="cost-warning">
+                    <div class="warning-text">機会逸失の不可逆性</div>
+                    <div class="warning-detail">一度失ったポジションは取り戻し困難</div>
+                </div>
+                
+                <div class="cost-timeline">
+                    <div class="timeline-item">
+                        <span class="timeline-year">2025年開始</span>
+                        <span class="timeline-cost">基準コスト (100)</span>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <span class="timeline-year">2026年開始</span>
+                        <span class="timeline-cost">150 (キャッチアップ)</span>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <span class="timeline-year">2027年開始</span>
+                        <span class="timeline-cost">250 (参入障壁)</span>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <span class="timeline-year">2028年開始</span>
+                        <span class="timeline-cost exponential">400 (標準化対応)</span>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <span class="timeline-year">2029年以降</span>
+                        <span class="timeline-cost exponential">800～ (完全後発)</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="action-plan">
+            <div class="action-title">今すぐ実施すべき5つの決定</div>
+            <div class="action-items">
+                <div class="action-item">
+                    <div class="action-number">✅ 1週間</div>
+                    <div class="action-text">原子力AI戦略本部<br>設立を閣議決定</div>
+                </div>
+                
+                <div class="action-item">
+                    <div class="action-number">✅ 1ヶ月</div>
+                    <div class="action-text">補正予算500億円<br>確保を指示</div>
+                </div>
+                
+                <div class="action-item">
+                    <div class="action-number">✅ 2週間</div>
+                    <div class="action-text">福島データ戦略的<br>活用方針を策定</div>
+                </div>
+                
+                <div class="action-item">
+                    <div class="action-number">✅ 3週間</div>
+                    <div class="action-text">アジア5カ国との<br>協議開始を指示</div>
+                </div>
+                
+                <div class="action-item">
+                    <div class="action-number">✅ 1ヶ月</div>
+                    <div class="action-text">規制サンドボックス<br>設置の検討開始</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

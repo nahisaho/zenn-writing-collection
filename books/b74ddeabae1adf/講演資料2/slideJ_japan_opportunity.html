@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>日本の戦略的機会 - 原子力AI技術革命</title>
+    <style>
+        :root {
+            --microsoft-blue: #0078D4;
+            --microsoft-dark-blue: #005A9E;
+            --microsoft-light-blue: #40C0FF;
+            --microsoft-green: #107C10;
+            --microsoft-red: #D83B01;
+            --microsoft-gold: #FFB900;
+            --text-primary: #323130;
+            --text-secondary: #605E5C;
+            --background: #FFFFFF;
+            --card-background: #FAFAFA;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #FFFFFF 0%, #F8F9FA 100%);
+            color: var(--text-primary);
+            line-height: 1.6;
+            padding: 40px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            aspect-ratio: 16/9;
+            background: var(--background);
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+            padding: 60px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .slide-number {
+            font-size: 24px;
+            font-weight: 600;
+            color: var(--microsoft-blue);
+            margin-bottom: 16px;
+        }
+
+        .main-title {
+            font-size: 48px;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 16px;
+        }
+
+        .subtitle {
+            font-size: 24px;
+            color: var(--text-secondary);
+            font-weight: 400;
+        }
+
+        .content {
+            flex: 1;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+
+        .left-section {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .right-section {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .unique-advantages {
+            background: linear-gradient(135deg, rgba(255, 185, 0, 0.1) 0%, rgba(255, 185, 0, 0.05) 100%);
+            border: 2px solid var(--microsoft-gold);
+            border-radius: 16px;
+            padding: 25px;
+        }
+
+        .advantages-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--microsoft-gold);
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+        }
+
+        .advantages-title::before {
+            content: "🌟";
+            margin-right: 8px;
+            font-size: 24px;
+        }
+
+        .advantage-item {
+            margin-bottom: 16px;
+        }
+
+        .advantage-header {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--microsoft-gold);
+            margin-bottom: 6px;
+        }
+
+        .advantage-description {
+            font-size: 14px;
+            color: var(--text-primary);
+            line-height: 1.5;
+        }
+
+        .fukushima-experience {
+            background: linear-gradient(135deg, rgba(16, 124, 16, 0.1) 0%, rgba(16, 124, 16, 0.05) 100%);
+            border: 2px solid var(--microsoft-green);
+            border-radius: 16px;
+            padding: 25px;
+        }
+
+        .fukushima-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--microsoft-green);
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+        }
+
+        .fukushima-title::before {
+            content: "🏆";
+            margin-right: 8px;
+            font-size: 20px;
+        }
+
+        .fukushima-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--microsoft-green);
+            margin-bottom: 4px;
+        }
+
+        .stat-label {
+            font-size: 12px;
+            color: var(--text-secondary);
+        }
+
+        .government-policy {
+            background: linear-gradient(135deg, rgba(0, 120, 212, 0.1) 0%, rgba(0, 120, 212, 0.05) 100%);
+            border: 2px solid var(--microsoft-blue);
+            border-radius: 16px;
+            padding: 25px;
+        }
+
+        .policy-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--microsoft-blue);
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+        }
+
+        .policy-title::before {
+            content: "📋";
+            margin-right: 8px;
+            font-size: 20px;
+        }
+
+        .policy-highlight {
+            background: rgba(0, 120, 212, 0.1);
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 16px;
+        }
+
+        .policy-number {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--microsoft-blue);
+            margin-bottom: 6px;
+        }
+
+        .policy-description {
+            font-size: 14px;
+            color: var(--text-primary);
+        }
+
+        .research-institutions {
+            background: var(--card-background);
+            border-radius: 16px;
+            padding: 20px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+            border-left: 4px solid var(--microsoft-blue);
+        }
+
+        .research-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--microsoft-blue);
+            margin-bottom: 12px;
+        }
+
+        .research-item {
+            margin-bottom: 12px;
+        }
+
+        .research-name {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 4px;
+        }
+
+        .research-achievement {
+            font-size: 13px;
+            color: var(--text-secondary);
+            line-height: 1.4;
+        }
+
+        .critical-timeline {
+            background: linear-gradient(135deg, rgba(216, 59, 1, 0.1) 0%, rgba(216, 59, 1, 0.05) 100%);
+            border: 2px solid var(--microsoft-red);
+            border-radius: 16px;
+            padding: 25px;
+            text-align: center;
+        }
+
+        .timeline-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--microsoft-red);
+            margin-bottom: 16px;
+        }
+
+        .timeline-phases {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 16px;
+        }
+
+        .timeline-phase {
+            text-align: center;
+        }
+
+        .phase-year {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--microsoft-red);
+            margin-bottom: 4px;
+        }
+
+        .phase-description {
+            font-size: 12px;
+            color: var(--text-secondary);
+        }
+
+        .timeline-warning {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--microsoft-red);
+        }
+
+        .footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 30px;
+            padding-top: 30px;
+            border-top: 2px solid #E1E1E1;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .nav-button {
+            background: var(--microsoft-light-blue);
+            color: var(--text-primary);
+            padding: 12px 24px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-button:hover {
+            background: var(--microsoft-blue);
+            color: white;
+        }
+
+        .slide-info {
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        @media (max-width: 1200px) {
+            .container { padding: 40px; }
+            .main-title { font-size: 36px; }
+            .content { grid-template-columns: 1fr; }
+            .fukushima-stats { grid-template-columns: 1fr; }
+            .timeline-phases { flex-direction: column; gap: 10px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="slide-number">スライド J</div>
+            <h1 class="main-title">🇯🇵 日本の戦略的機会</h1>
+            <p class="subtitle">福島経験を武器に差別化するか、周回遅れで終わるか</p>
+        </div>
+
+        <div class="content">
+            <div class="left-section">
+                <div class="unique-advantages">
+                    <div class="advantages-title">日本の技術的強み</div>
+                    
+                    <div class="advantage-item">
+                        <div class="advantage-header">🌟 福島廃炉から得た世界唯一の経験</div>
+                        <div class="advantage-description">極限環境下でのロボット・センサー技術、遠隔操作・AI画像認識技術の実践的蓄積</div>
+                    </div>
+
+                    <div class="advantage-item">
+                        <div class="advantage-header">🔧 世界最高水準の安全文化×製造業力</div>
+                        <div class="advantage-description">高信頼性センサー・ロボット技術とAIの融合、ハードウェア×ソフトウェア統合ソリューション</div>
+                    </div>
+
+                    <div class="advantage-item">
+                        <div class="advantage-header">📊 豊富な運転経験と技術蓄積</div>
+                        <div class="advantage-description">54基の原子炉運転実績（累計1,500炉年以上）、高い設備利用率の維持技術</div>
+                    </div>
+                </div>
+
+                <div class="fukushima-experience">
+                    <div class="fukushima-title">福島廃炉AI技術成果</div>
+                    <div class="fukushima-stats">
+                        <div class="stat-item">
+                            <div class="stat-value">30%</div>
+                            <div class="stat-label">精度向上</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">90%</div>
+                            <div class="stat-label">時間短縮</div>
+                        </div>
+                    </div>
+                    <div class="advantage-description">放射線マッピングAI技術で名古屋大学と共同開発、福島避難区域マッピングに実用化済み</div>
+                </div>
+
+                <div class="research-institutions">
+                    <div class="research-title">研究機関の基盤整備</div>
+                    
+                    <div class="research-item">
+                        <div class="research-name">JAEA（日本原子力研究開発機構）</div>
+                        <div class="research-achievement">完全内製LLM環境構築、機密保持対応の所内スーパーコンピュータ活用</div>
+                    </div>
+
+                    <div class="research-item">
+                        <div class="research-name">三菱重工業：TOMONI</div>
+                        <div class="research-achievement">全社AI・デジタル変革プラットフォーム、宇宙グレードAI「AIRIS」の原子力応用</div>
+                    </div>
+
+                    <div class="research-item">
+                        <div class="research-name">日立GEニュークリア</div>
+                        <div class="research-achievement">米国DOEからBWRX-300 SMRのAI対応デジタルツイン開発契約獲得</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="right-section">
+                <div class="government-policy">
+                    <div class="policy-title">第7次エネルギー基本計画</div>
+                    
+                    <div class="policy-highlight">
+                        <div class="policy-number">年間2,000億円</div>
+                        <div class="policy-description">原子力への投資目標規模</div>
+                    </div>
+
+                    <div class="policy-highlight">
+                        <div class="policy-number">20-22%</div>
+                        <div class="policy-description">2040年電源構成目標</div>
+                    </div>
+
+                    <div class="advantage-description">
+                        2025年2月承認の第7次エネルギー基本計画で「原子力の最大限活用」への大幅政策転換を実現
+                    </div>
+                </div>
+
+                <div class="critical-timeline">
+                    <div class="timeline-title">🚨 日本に残された時間</div>
+                    
+                    <div class="timeline-phases">
+                        <div class="timeline-phase">
+                            <div class="phase-year">2025-2027</div>
+                            <div class="phase-description">技術確立期<br>最後の機会</div>
+                        </div>
+                        <div class="timeline-phase">
+                            <div class="phase-year">2028-2030</div>
+                            <div class="phase-description">市場拡大期<br>本格競争</div>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-warning">
+                        この3年を逃せば永久に追いつけない
+                    </div>
+                </div>
+
+                <div class="advantages">
+                    <div style="background: linear-gradient(135deg, rgba(16, 124, 16, 0.1) 0%, rgba(16, 124, 16, 0.05) 100%); border: 2px solid var(--microsoft-green); border-radius: 16px; padding: 25px;">
+                        <div style="font-size: 18px; font-weight: 700; color: var(--microsoft-green); margin-bottom: 16px; display: flex; align-items: center;">
+                            <span style="margin-right: 8px; font-size: 20px;">📈</span>戦略的優位性の活用
+                        </div>
+                        
+                        <div style="margin-bottom: 12px;">
+                            <div style="font-size: 14px; font-weight: 700; color: var(--text-primary); margin-bottom: 6px;">短期戦略（2025-2026年）</div>
+                            <div style="font-size: 13px; color: var(--text-secondary); line-height: 1.4;">米国技術協力強化・欧州規制調和・アジア市場差別化</div>
+                        </div>
+
+                        <div>
+                            <div style="font-size: 14px; font-weight: 700; color: var(--text-primary); margin-bottom: 6px;">中長期戦略（2027年以降）</div>
+                            <div style="font-size: 13px; color: var(--text-secondary); line-height: 1.4;">独自技術領域確立・アジア統合戦略・グローバル標準貢献</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <div class="nav-buttons">
+                <a href="slideI_asia_catchup.html" class="nav-button">← 前へ：アジア追撃</a>
+                <a href="index.html" class="nav-button">目次に戻る</a>
+            </div>
+            <div class="slide-info">原子力AI技術革命 | 日本原子力学会2025年秋の大会</div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>生成AIがもたらす革新</title>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+    <style>
+        :root {
+            --microsoft-blue: #0078D4;
+            --microsoft-dark-blue: #005A9E;
+            --microsoft-light-blue: #40C0FF;
+            --microsoft-green: #107C10;
+            --microsoft-orange: #FF8C00;
+            --microsoft-purple: #5B2C87;
+            --text-primary: #323130;
+            --text-secondary: #605E5C;
+            --background: #FFFFFF;
+            --card-background: #FAFAFA;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #FFFFFF 0%, #F8F9FA 100%);
+            color: var(--text-primary);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            aspect-ratio: 16/9;
+            overflow: hidden;
+        }
+
+        .slide-container {
+            width: 100%;
+            max-width: 1600px;
+            max-height: 900px;
+            aspect-ratio: 16/9;
+            display: grid;
+            grid-template-rows: auto 1fr;
+            padding: 50px;
+            gap: 30px;
+        }
+
+        .slide-header {
+            text-align: center;
+            animation: slideDownFadeIn 1s ease-out;
+        }
+
+        .slide-title {
+            font-size: 44px;
+            font-weight: 700;
+            color: var(--microsoft-blue);
+            margin-bottom: 16px;
+        }
+
+        .slide-subtitle {
+            font-size: 18px;
+            color: var(--text-secondary);
+            font-weight: 400;
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: 1fr 1fr;
+            gap: 24px;
+            animation: slideUpFadeIn 1.2s ease-out;
+        }
+
+        .innovation-card {
+            background: var(--card-background);
+            border-radius: 16px;
+            padding: 28px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-left: 6px solid var(--microsoft-blue);
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .innovation-card:nth-child(1) {
+            border-left-color: var(--microsoft-blue);
+        }
+
+        .innovation-card:nth-child(2) {
+            border-left-color: var(--microsoft-green);
+        }
+
+        .innovation-card:nth-child(3) {
+            border-left-color: var(--microsoft-orange);
+        }
+
+        .innovation-card:nth-child(4) {
+            border-left-color: var(--microsoft-purple);
+        }
+
+        .innovation-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+
+        .card-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: var(--microsoft-blue);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            flex-shrink: 0;
+        }
+
+        .innovation-card:nth-child(1) .card-icon {
+            background: var(--microsoft-blue);
+        }
+
+        .innovation-card:nth-child(2) .card-icon {
+            background: var(--microsoft-green);
+        }
+
+        .innovation-card:nth-child(3) .card-icon {
+            background: var(--microsoft-orange);
+        }
+
+        .innovation-card:nth-child(4) .card-icon {
+            background: var(--microsoft-purple);
+        }
+
+        .card-title {
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--text-primary);
+            line-height: 1.2;
+        }
+
+        .card-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .card-description {
+            font-size: 15px;
+            line-height: 1.5;
+            color: var(--text-secondary);
+        }
+
+        .application-list {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .application-item {
+            position: relative;
+            padding-left: 20px;
+            margin-bottom: 8px;
+            font-size: 14px;
+            line-height: 1.4;
+            color: var(--text-primary);
+        }
+
+        .application-item::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            top: 0;
+            color: var(--microsoft-blue);
+            font-weight: 700;
+            font-size: 16px;
+        }
+
+        .innovation-card:nth-child(2) .application-item::before {
+            color: var(--microsoft-green);
+        }
+
+        .innovation-card:nth-child(3) .application-item::before {
+            color: var(--microsoft-orange);
+        }
+
+        .innovation-card:nth-child(4) .application-item::before {
+            color: var(--microsoft-purple);
+        }
+
+        .highlight-badge {
+            background: linear-gradient(120deg, rgba(0, 120, 212, 0.1) 0%, rgba(64, 192, 255, 0.1) 100%);
+            color: var(--microsoft-dark-blue);
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 600;
+            align-self: flex-start;
+            margin-bottom: 8px;
+        }
+
+        .mermaid-container {
+            grid-column: 1 / -1;
+            background: var(--card-background);
+            border-radius: 16px;
+            padding: 32px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+            border-left: 6px solid var(--microsoft-blue);
+            text-align: center;
+        }
+
+        .mermaid-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--microsoft-blue);
+            margin-bottom: 20px;
+        }
+
+        .mermaid {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
+        }
+
+        @keyframes slideDownFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideUpFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 1400px) {
+            .slide-title { font-size: 38px; }
+            .card-title { font-size: 20px; }
+            .card-description { font-size: 14px; }
+        }
+
+        @media (max-width: 1024px) {
+            .content-grid {
+                grid-template-columns: 1fr;
+                grid-template-rows: repeat(4, auto);
+            }
+            .slide-container { padding: 40px; }
+            .innovation-card { padding: 24px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="slide-header">
+            <h1 class="slide-title">生成AIがもたらす革新</h1>
+            <p class="slide-subtitle">原子力産業の根本的変革を可能にする4つの技術領域</p>
+        </div>
+
+        <div class="content-grid">
+            <div class="innovation-card">
+                <div class="highlight-badge">基盤技術</div>
+                <div class="card-header">
+                    <div class="card-icon">📚</div>
+                    <h3 class="card-title">大規模言語モデル</h3>
+                </div>
+                <div class="card-content">
+                    <p class="card-description">
+                        GPT-4、Claude、Geminiなどが技術文書の理解と生成において驚異的な能力を実証。膨大な技術文献から知識を抽出し、複雑な質問に適切回答。
+                    </p>
+                    <ul class="application-list">
+                        <li class="application-item">規制文書の自動解釈</li>
+                        <li class="application-item">技術報告書の生成支援</li>
+                        <li class="application-item">運転手順書の自動作成</li>
+                        <li class="application-item">多言語技術文書翻訳</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="innovation-card">
+                <div class="highlight-badge">予測技術</div>
+                <div class="card-header">
+                    <div class="card-icon">🔮</div>
+                    <h3 class="card-title">予測と最適化</h3>
+                </div>
+                <div class="card-content">
+                    <p class="card-description">
+                        機械学習が複雑システムの挙動予測と最適化を実現。経験と勘に頼っていた領域でデータドリブンなアプローチが可能に。
+                    </p>
+                    <ul class="application-list">
+                        <li class="application-item">原子炉出力の予測制御</li>
+                        <li class="application-item">機器劣化診断の高精度化</li>
+                        <li class="application-item">燃料配置の最適化</li>
+                        <li class="application-item">メンテナンススケジュール最適化</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="innovation-card">
+                <div class="highlight-badge">自動化技術</div>
+                <div class="card-header">
+                    <div class="card-icon">🤖</div>
+                    <h3 class="card-title">自動化と自律性</h3>
+                </div>
+                <div class="card-content">
+                    <p class="card-description">
+                        AIによる自動化で人的エラー削減と作業効率向上を実現。定型作業から異常時対応まで、段階的な自律化が進展。
+                    </p>
+                    <ul class="application-list">
+                        <li class="application-item">定型監視業務の自動化</li>
+                        <li class="application-item">異常検知と初期対応</li>
+                        <li class="application-item">運転操作の支援・自動化</li>
+                        <li class="application-item">品質管理の自動検査</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="innovation-card">
+                <div class="highlight-badge">学習技術</div>
+                <div class="card-header">
+                    <div class="card-icon">🧠</div>
+                    <h3 class="card-title">継続的学習システム</h3>
+                </div>
+                <div class="card-content">
+                    <p class="card-description">
+                        運転経験から自動学習し、知識を継続更新。熟練者の暗黙知を体系化し、次世代への技術継承を支援。
+                    </p>
+                    <ul class="application-list">
+                        <li class="application-item">運転データからの知見抽出</li>
+                        <li class="application-item">熟練者知識のデジタル化</li>
+                        <li class="application-item">トレーニング教材の自動生成</li>
+                        <li class="application-item">経験知の体系的継承</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="mermaid-container">
+                <h3 class="mermaid-title">原子力AI統合システム全体像</h3>
+                <div class="mermaid">
+                    graph TB
+                        subgraph "原子力施設"
+                            A[センサー・計測]
+                            B[制御システム]
+                            C[運転員]
+                        end
+                        
+                        subgraph "AI統合レイヤー"
+                            D[大規模言語モデル]
+                            E[予測AI]
+                            F[自動化AI]
+                            G[学習システム]
+                        end
+                        
+                        subgraph "出力・支援"
+                            H[運転支援]
+                            I[保守計画]
+                            J[安全監視]
+                            K[文書生成]
+                        end
+                        
+                        A --> D
+                        A --> E
+                        B --> F
+                        C --> D
+                        
+                        D --> H
+                        D --> K
+                        E --> I
+                        E --> J
+                        F --> B
+                        G --> D
+                        G --> E
+                        
+                        H --> C
+                        I --> C
+                        J --> C
+                        K --> C
+                        
+                        classDef facility fill:#e1f5fe
+                        classDef ai fill:#f3e5f5
+                        classDef output fill:#e8f5e8
+                        
+                        class A,B,C facility
+                        class D,E,F,G ai
+                        class H,I,J,K output
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        mermaid.initialize({ 
+            startOnLoad: true,
+            theme: 'base',
+            themeVariables: {
+                primaryColor: '#0078D4',
+                primaryTextColor: '#323130',
+                primaryBorderColor: '#0078D4',
+                lineColor: '#605E5C',
+                secondaryColor: '#F3F2F1',
+                tertiaryColor: '#FFFFFF',
+                background: '#FFFFFF',
+                mainBkg: '#FAFAFA',
+                secondBkg: '#F8F9FA'
+            }
+        });
+    </script>
+</body>
+</html>

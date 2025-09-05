@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>本書の3つの核心メッセージ</title>
+    <style>
+        :root {
+            --microsoft-blue: #0078D4;
+            --microsoft-dark-blue: #005A9E;
+            --microsoft-light-blue: #40C0FF;
+            --microsoft-red: #D13438;
+            --microsoft-orange: #FF8C00;
+            --microsoft-green: #107C10;
+            --text-primary: #323130;
+            --text-secondary: #605E5C;
+            --background: #FFFFFF;
+            --card-background: #FAFAFA;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #FFFFFF 0%, #F8F9FA 100%);
+            color: var(--text-primary);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            aspect-ratio: 16/9;
+            overflow: hidden;
+        }
+
+        .slide-container {
+            width: 100%;
+            max-width: 1600px;
+            max-height: 900px;
+            aspect-ratio: 16/9;
+            display: grid;
+            grid-template-rows: auto 1fr;
+            padding: 60px;
+            gap: 40px;
+        }
+
+        .slide-header {
+            text-align: center;
+            animation: slideDownFadeIn 1s ease-out;
+        }
+
+        .slide-title {
+            font-size: 48px;
+            font-weight: 700;
+            color: var(--microsoft-blue);
+            margin-bottom: 20px;
+        }
+
+        .slide-subtitle {
+            font-size: 20px;
+            color: var(--text-secondary);
+            font-weight: 400;
+        }
+
+        .messages-container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 30px;
+            animation: slideUpFadeIn 1.2s ease-out;
+        }
+
+        .message-card {
+            background: var(--card-background);
+            border-radius: 16px;
+            padding: 40px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+            border-left: 6px solid var(--microsoft-blue);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .message-card:nth-child(1) {
+            border-left-color: var(--microsoft-red);
+        }
+
+        .message-card:nth-child(2) {
+            border-left-color: var(--microsoft-orange);
+        }
+
+        .message-card:nth-child(3) {
+            border-left-color: var(--microsoft-green);
+        }
+
+        .message-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
+        }
+
+        .message-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+
+        .message-number {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: var(--microsoft-blue);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        .message-card:nth-child(1) .message-number {
+            background: var(--microsoft-red);
+        }
+
+        .message-card:nth-child(2) .message-number {
+            background: var(--microsoft-orange);
+        }
+
+        .message-card:nth-child(3) .message-number {
+            background: var(--microsoft-green);
+        }
+
+        .message-title {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--text-primary);
+            line-height: 1.2;
+        }
+
+        .message-content {
+            font-size: 18px;
+            line-height: 1.6;
+            color: var(--text-primary);
+        }
+
+        .message-bullets {
+            list-style: none;
+            margin: 16px 0 0 0;
+            padding: 0;
+        }
+
+        .message-bullets li {
+            position: relative;
+            padding-left: 24px;
+            margin-bottom: 12px;
+            font-size: 16px;
+            line-height: 1.5;
+        }
+
+        .message-bullets li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            top: 0;
+            color: var(--microsoft-blue);
+            font-weight: 700;
+            font-size: 18px;
+        }
+
+        .highlight {
+            background: linear-gradient(120deg, rgba(0, 120, 212, 0.1) 0%, rgba(64, 192, 255, 0.1) 100%);
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+
+        .urgent-badge {
+            background: var(--microsoft-red);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+            margin-left: 12px;
+            display: inline-block;
+        }
+
+        @keyframes slideDownFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideUpFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 1400px) {
+            .slide-title { font-size: 42px; }
+            .message-title { font-size: 24px; }
+            .message-content { font-size: 16px; }
+        }
+
+        @media (max-width: 1024px) {
+            .slide-container { padding: 40px; }
+            .message-card { padding: 30px; }
+            .slide-title { font-size: 36px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="slide-header">
+            <h1 class="slide-title">本書の3つの核心メッセージ</h1>
+            <p class="slide-subtitle">戦略決定に必要な重要事実</p>
+        </div>
+
+        <div class="messages-container">
+            <div class="message-card">
+                <div class="message-header">
+                    <div class="message-number">1</div>
+                    <h2 class="message-title">🚨 緊急性：世界は既に動き出している</h2>
+                </div>
+                <div class="message-content">
+                    <p><span class="highlight">2025年7月：INL-Microsoft協業</span> → 米国が原子力AI覇権を本格追求</p>
+                    <ul class="message-bullets">
+                        <li><strong>中国：</strong>国家戦略として推進 → 2030年までに世界最大の原子力AI市場へ</li>
+                        <li><strong>欧州：</strong>安全性AIで差別化 → 規制フレームワーク構築でリード</li>
+                        <li><strong>日本の残された時間：</strong><span class="highlight">2025-2027年が勝負</span><span class="urgent-badge">緊急</span></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="message-card">
+                <div class="message-header">
+                    <div class="message-number">2</div>
+                    <h2 class="message-title">💎 日本独自の戦略的価値：福島の経験を世界標準へ</h2>
+                </div>
+                <div class="message-content">
+                    <p><span class="highlight">福島廃炉AIの技術蓄積</span> → 極限環境下データ収集・分析の世界的優位性</p>
+                    <ul class="message-bullets">
+                        <li><strong>世界一の安全文化：</strong>「世界一レジリエントな原子力AI」への転換</li>
+                        <li><strong>製造業との融合：</strong>ハードウェア×AIの統合ソリューションで差別化</li>
+                        <li><strong>海外廃炉市場：</strong>2030年代200基超の廃炉需要への対応力</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="message-card">
+                <div class="message-header">
+                    <div class="message-number">3</div>
+                    <h2 class="message-title">🎯 今すぐ実行すべき3つのアクション</h2>
+                </div>
+                <div class="message-content">
+                    <ul class="message-bullets">
+                        <li><strong>最初の100日：</strong><span class="highlight">原子力AI推進本部設置</span>と初期予算確保</li>
+                        <li><strong>最初の1年：</strong>規制サンドボックス開始と産学官コンソーシアム発足</li>
+                        <li><strong>3年以内：</strong>福島廃炉AI技術の国際標準化と輸出開始</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

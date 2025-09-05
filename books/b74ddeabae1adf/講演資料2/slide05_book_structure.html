@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>本書の構成と対象読者</title>
+    <style>
+        :root {
+            --microsoft-blue: #0078D4;
+            --microsoft-dark-blue: #005A9E;
+            --microsoft-light-blue: #40C0FF;
+            --microsoft-green: #107C10;
+            --microsoft-orange: #FF8C00;
+            --microsoft-purple: #5B2C87;
+            --microsoft-red: #D13438;
+            --text-primary: #323130;
+            --text-secondary: #605E5C;
+            --background: #FFFFFF;
+            --card-background: #FAFAFA;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #FFFFFF 0%, #F8F9FA 100%);
+            color: var(--text-primary);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            aspect-ratio: 16/9;
+            overflow: hidden;
+        }
+
+        .slide-container {
+            width: 100%;
+            max-width: 1600px;
+            max-height: 900px;
+            aspect-ratio: 16/9;
+            display: grid;
+            grid-template-rows: auto 1fr;
+            padding: 45px;
+            gap: 25px;
+        }
+
+        .slide-header {
+            text-align: center;
+            animation: slideDownFadeIn 1s ease-out;
+        }
+
+        .slide-title {
+            font-size: 42px;
+            font-weight: 700;
+            color: var(--microsoft-blue);
+            margin-bottom: 16px;
+        }
+
+        .slide-subtitle {
+            font-size: 18px;
+            color: var(--text-secondary);
+            font-weight: 400;
+        }
+
+        .main-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 30px;
+            animation: slideUpFadeIn 1.2s ease-out;
+        }
+
+        .book-structure {
+            background: var(--card-background);
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+            border-left: 6px solid var(--microsoft-blue);
+        }
+
+        .structure-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--microsoft-blue);
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .chapters-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        .chapter-item {
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 12px;
+            padding: 16px;
+            border-left: 4px solid var(--microsoft-light-blue);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .chapter-item:hover {
+            background: rgba(255, 255, 255, 0.95);
+            transform: translateX(8px);
+            box-shadow: 0 4px 16px rgba(0, 120, 212, 0.1);
+        }
+
+        .chapter-number {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--microsoft-blue);
+            margin-bottom: 4px;
+        }
+
+        .chapter-title {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 6px;
+            line-height: 1.3;
+        }
+
+        .chapter-description {
+            font-size: 12px;
+            color: var(--text-secondary);
+            line-height: 1.4;
+        }
+
+        .readers-section {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .target-readers, .reading-guide {
+            background: var(--card-background);
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+            flex: 1;
+        }
+
+        .target-readers {
+            border-left: 6px solid var(--microsoft-green);
+        }
+
+        .reading-guide {
+            border-left: 6px solid var(--microsoft-orange);
+        }
+
+        .section-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--microsoft-green);
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .reading-guide .section-title {
+            color: var(--microsoft-orange);
+        }
+
+        .reader-list {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .reader-item {
+            position: relative;
+            padding-left: 20px;
+            margin-bottom: 10px;
+            font-size: 14px;
+            line-height: 1.4;
+            color: var(--text-primary);
+        }
+
+        .reader-item::before {
+            content: '👤';
+            position: absolute;
+            left: 0;
+            top: 0;
+            font-size: 14px;
+        }
+
+        .reading-path {
+            background: rgba(0, 120, 212, 0.05);
+            border-radius: 8px;
+            padding: 12px;
+            margin-bottom: 12px;
+        }
+
+        .path-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--microsoft-dark-blue);
+            margin-bottom: 6px;
+        }
+
+        .path-description {
+            font-size: 12px;
+            color: var(--text-secondary);
+            line-height: 1.4;
+        }
+
+        .highlight-badge {
+            background: linear-gradient(120deg, rgba(0, 120, 212, 0.1) 0%, rgba(64, 192, 255, 0.1) 100%);
+            color: var(--microsoft-dark-blue);
+            padding: 4px 8px;
+            border-radius: 10px;
+            font-size: 11px;
+            font-weight: 600;
+            margin-left: 8px;
+        }
+
+        @keyframes slideDownFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideUpFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 1400px) {
+            .slide-title { font-size: 36px; }
+            .structure-title { font-size: 22px; }
+            .chapters-grid { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 1024px) {
+            .main-content {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            .slide-container { padding: 35px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="slide-header">
+            <h1 class="slide-title">本書の構成と対象読者</h1>
+            <p class="slide-subtitle">10章構成による体系的解説と戦略的読み方ガイド</p>
+        </div>
+
+        <div class="main-content">
+            <div class="book-structure">
+                <h2 class="structure-title">
+                    📖 本書の構成
+                </h2>
+                <div class="chapters-grid">
+                    <div class="chapter-item">
+                        <div class="chapter-number">第1章</div>
+                        <div class="chapter-title">序論</div>
+                        <div class="chapter-description">歴史的変革の概観と緊急性</div>
+                    </div>
+                    
+                    <div class="chapter-item">
+                        <div class="chapter-number">第2章</div>
+                        <div class="chapter-title">世界の最新動向</div>
+                        <div class="chapter-description">米欧アジア三極構造の競争分析</div>
+                    </div>
+                    
+                    <div class="chapter-item">
+                        <div class="chapter-number">第3章</div>
+                        <div class="chapter-title">先端技術と実用化事例</div>
+                        <div class="chapter-description">商用導入から産業変革まで</div>
+                    </div>
+                    
+                    <div class="chapter-item">
+                        <div class="chapter-number">第4章</div>
+                        <div class="chapter-title">技術的課題と解決アプローチ</div>
+                        <div class="chapter-description">安全性確保から規制対応まで</div>
+                    </div>
+                    
+                    <div class="chapter-item">
+                        <div class="chapter-number">第5章</div>
+                        <div class="chapter-title">経済性分析と市場展望</div>
+                        <div class="chapter-description">投資動向から将来予測まで</div>
+                    </div>
+                    
+                    <div class="chapter-item">
+                        <div class="chapter-number">第6章</div>
+                        <div class="chapter-title">日本の現状分析</div>
+                        <div class="chapter-description">強みと課題の客観的分析</div>
+                    </div>
+                    
+                    <div class="chapter-item">
+                        <div class="chapter-number">第7章</div>
+                        <div class="chapter-title">戦略的提言と政策提案</div>
+                        <div class="chapter-description">世界的優位性確立の戦略</div>
+                    </div>
+                    
+                    <div class="chapter-item">
+                        <div class="chapter-number">第8章</div>
+                        <div class="chapter-title">実現のための具体的施策</div>
+                        <div class="chapter-description">産学官の役割と行動指針</div>
+                    </div>
+                    
+                    <div class="chapter-item">
+                        <div class="chapter-number">第9章</div>
+                        <div class="chapter-title">リスク管理と社会的受容</div>
+                        <div class="chapter-description">技術・社会的課題への対応</div>
+                    </div>
+                    
+                    <div class="chapter-item">
+                        <div class="chapter-number">第10章</div>
+                        <div class="chapter-title">結論と展望</div>
+                        <div class="chapter-description">持続可能な未来への道筋</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="readers-section">
+                <div class="target-readers">
+                    <h3 class="section-title">
+                        🎯 対象読者
+                        <span class="highlight-badge">重要</span>
+                    </h3>
+                    <ul class="reader-list">
+                        <li class="reader-item"><strong>原子力技術者・研究者：</strong>AI活用を検討する専門家</li>
+                        <li class="reader-item"><strong>プラント運転員：</strong>現場でのAI活用を学びたい実務者</li>
+                        <li class="reader-item"><strong>規制機関職員：</strong>AI技術の規制課題を理解したい行政関係者</li>
+                        <li class="reader-item"><strong>企業経営者：</strong>AI導入による競争力強化を検討する意思決定者</li>
+                        <li class="reader-item"><strong>大学院生・若手研究者：</strong>融合分野で研究を始めたい学生</li>
+                    </ul>
+                </div>
+
+                <div class="reading-guide">
+                    <h3 class="section-title">
+                        📊 読み方ガイド
+                    </h3>
+                    
+                    <div class="reading-path">
+                        <div class="path-title">意思決定者向け</div>
+                        <div class="path-description">第1章と第7-8章を優先。戦略的判断に必要な核心情報に集中。</div>
+                    </div>
+                    
+                    <div class="reading-path">
+                        <div class="path-title">実務者向け</div>
+                        <div class="path-description">第3-4章から開始。具体的技術と実装課題を詳細に理解。</div>
+                    </div>
+                    
+                    <div class="reading-path">
+                        <div class="path-title">研究者向け</div>
+                        <div class="path-description">第2章から体系的に読了。国際動向から技術詳細まで包括的理解。</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>第8章: 実現のための具体的施策 - 産学官連携による包括的推進体制の構築</title>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #ffffff;
+            color: #323130;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .presentation-container {
+            max-width: 1280px;
+            width: 100%;
+            min-height: 720px;
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(255, 152, 0, 0.1);
+            padding: 40px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .presentation-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #ff9800 0%, #ffb74d 100%);
+        }
+
+        h1 {
+            font-size: 32px;
+            font-weight: 700;
+            color: #f57c00;
+            text-align: center;
+            margin-bottom: 30px;
+            text-shadow: 0 2px 4px rgba(245, 124, 0, 0.1);
+        }
+
+        .hero-section {
+            background: linear-gradient(135deg, #fff8e1 0%, #ffecb3 100%);
+            border-left: 4px solid #ff9800;
+            padding: 25px;
+            margin: 30px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(255, 152, 0, 0.1);
+            text-align: center;
+        }
+
+        .hero-section h2 {
+            font-size: 24px;
+            font-weight: 600;
+            color: #f57c00;
+            margin-bottom: 15px;
+        }
+
+        .icon {
+            margin-right: 10px;
+            font-size: 24px;
+        }
+
+        .role-matrix {
+            background: linear-gradient(135deg, #f3e5f5 0%, #e8eaf6 100%);
+            border-radius: 8px;
+            padding: 25px;
+            margin: 30px 0;
+            border-left: 4px solid #673ab7;
+        }
+
+        .role-matrix h3 {
+            color: #673ab7;
+            margin-bottom: 20px;
+        }
+
+        .three-pillars {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .role-card {
+            background: #ffffff;
+            border-radius: 8px;
+            padding: 25px;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+            border-top: 4px solid;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .role-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .role-card.government { border-top-color: #3f51b5; }
+        .role-card.industry { border-top-color: #ff9800; }
+        .role-card.academia { border-top-color: #4caf50; }
+
+        .role-card h4 {
+            font-size: 18px;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .role-card.government h4 { color: #3f51b5; }
+        .role-card.industry h4 { color: #ff9800; }
+        .role-card.academia h4 { color: #4caf50; }
+
+        .investment-strategy {
+            background: linear-gradient(135deg, #e8f5e8 0%, #c8e6c8 100%);
+            border-radius: 8px;
+            padding: 25px;
+            margin: 30px 0;
+            border-left: 4px solid #4caf50;
+        }
+
+        .investment-strategy h3 {
+            color: #2e7d32;
+            margin-bottom: 20px;
+        }
+
+        .phase-timeline {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .phase-item {
+            background: #ffffff;
+            border-radius: 6px;
+            padding: 15px;
+            border-left: 4px solid #4caf50;
+            transition: background-color 0.3s ease;
+        }
+
+        .phase-item:hover {
+            background-color: #f8fff8;
+        }
+
+        .phase-item h5 {
+            color: #4caf50;
+            margin-bottom: 10px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .regulatory-section {
+            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+            border-radius: 8px;
+            padding: 25px;
+            margin: 30px 0;
+            border-left: 4px solid #2196f3;
+        }
+
+        .regulatory-section h3 {
+            color: #1976d2;
+            margin-bottom: 20px;
+        }
+
+        .kpi-section {
+            background: linear-gradient(135deg, #ffebee 0%, #ffcdd2 100%);
+            border-radius: 8px;
+            padding: 25px;
+            margin: 30px 0;
+            border-left: 4px solid #f44336;
+        }
+
+        .kpi-section h3 {
+            color: #c62828;
+            margin-bottom: 20px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 25px 0;
+        }
+
+        .stat-card {
+            background: #ffffff;
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+            border-top: 3px solid;
+            transition: transform 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-2px);
+        }
+
+        .stat-card.blue { border-top-color: #2196f3; }
+        .stat-card.green { border-top-color: #4caf50; }
+        .stat-card.orange { border-top-color: #ff9800; }
+        .stat-card.purple { border-top-color: #673ab7; }
+        .stat-card.red { border-top-color: #f44336; }
+
+        .stat-number {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .stat-card.blue .stat-number { color: #2196f3; }
+        .stat-card.green .stat-number { color: #4caf50; }
+        .stat-card.orange .stat-number { color: #ff9800; }
+        .stat-card.purple .stat-number { color: #673ab7; }
+        .stat-card.red .stat-number { color: #f44336; }
+
+        .mermaid-container {
+            background: #ffffff;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 25px 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+            text-align: center;
+        }
+
+        .kpi-table {
+            background: #ffffff;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 25px 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+            overflow-x: auto;
+        }
+
+        .kpi-table table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .kpi-table th,
+        .kpi-table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #dee2e6;
+        }
+
+        .kpi-table th {
+            background-color: #f8f9fa;
+            color: #495057;
+            font-weight: 600;
+        }
+
+        .highlight-number {
+            color: #f44336;
+            font-weight: 700;
+            font-size: 18px;
+        }
+
+        .quote {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-left: 4px solid #6c757d;
+            padding: 20px;
+            margin: 25px 0;
+            font-style: italic;
+            font-size: 18px;
+            text-align: center;
+            border-radius: 8px;
+        }
+
+        .key-takeaway {
+            background: linear-gradient(135deg, #fff9c4 0%, #ffeb3b 100%);
+            border: 2px solid #ffc107;
+            border-radius: 8px;
+            padding: 25px;
+            margin: 30px 0;
+            text-align: center;
+        }
+
+        .key-takeaway h3 {
+            color: #f9a825;
+            margin-bottom: 15px;
+        }
+
+        @media (max-width: 768px) {
+            .presentation-container {
+                padding: 20px;
+            }
+            
+            h1 {
+                font-size: 24px;
+            }
+            
+            .three-pillars,
+            .phase-timeline,
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="presentation-container">
+        <h1>🛠️ 第8章: 実現のための具体的施策</h1>
+        <div class="hero-section">
+            <h2><span class="icon">⚡</span>産学官連携による包括的推進体制の構築</h2>
+            <p><strong>実行力で勝負が決まる3つの要素</strong></p>
+            <p>役割と責任の明確化・測定可能な成果指標・継続的改善メカニズム</p>
+        </div>
+
+        <div class="role-matrix">
+            <h3>📋 産学官役割分担マトリックス</h3>
+            <div class="mermaid-container">
+                <div class="mermaid">
+graph TB
+    subgraph Government["🏛️ 政府の役割"]
+        G1[戦略策定・予算配分]
+        G2[規制整備・国際協力]
+        G3[基盤インフラ整備]
+        G4[人材育成制度設計]
+    end
+    
+    subgraph Industry["🏭 産業界の役割"]
+        I1[技術開発・実証投資]
+        I2[商用化・事業化]
+        I3[データ共有・標準化]
+        I4[人材確保・研修]
+    end
+    
+    subgraph Academia["🎓 学術界の役割"]
+        A1[基礎研究・技術革新]
+        A2[人材育成・教育]
+        A3[国際標準化参画]
+        A4[社会的合意形成]
+    end
+    
+    Government --> Industry
+    Industry --> Academia
+    Academia --> Government
+    
+    classDef govBox fill:#e8f4f8
+    classDef indBox fill:#fff2e8
+    classDef acadBox fill:#f0f8e8
+    
+    class Government govBox
+    class Industry indBox
+    class Academia acadBox
+                </div>
+            </div>
+        </div>
+
+        <div class="investment-strategy">
+            <h3>💰 政府投資の戦略的推進</h3>
+            <div class="three-pillars">
+                <div class="role-card government">
+                    <h4>最優先投資（Tier 1）- 2025年度：200億円</h4>
+                    <ul>
+                        <li><strong>AI原子力推進本部運営費：</strong>30億円（人件費・事務費）</li>
+                        <li><strong>パイロットサイト実証費用：</strong>100億円（3サイト×33億円）</li>
+                        <li><strong>規制サンドボックス運営費：</strong>20億円（JAEA実証環境整備）</li>
+                        <li><strong>緊急人材確保：</strong>50億円（海外人材招聘・国内研修）</li>
+                    </ul>
+                </div>
+                <div class="role-card industry">
+                    <h4>第二優先投資（Tier 2）- 2026年度：500億円</h4>
+                    <ul>
+                        <li><strong>技術開発加速：</strong>200億円（説明可能AI・安全技術）</li>
+                        <li><strong>産学官コンソーシアム：</strong>150億円（共同研究・設備投資）</li>
+                        <li><strong>国際標準化活動：</strong>50億円（ISO/IAEA参画・標準策定）</li>
+                        <li><strong>基盤インフラ整備：</strong>100億円（計算資源・通信設備）</li>
+                    </ul>
+                </div>
+                <div class="role-card academia">
+                    <h4>段階的投資アプローチ</h4>
+                    <ul>
+                        <li><strong>Stage 1：</strong>基礎研究フェーズ（100%政府資金）</li>
+                        <li><strong>Stage 2：</strong>応用研究フェーズ（政府70%:民間30%）</li>
+                        <li><strong>Stage 3：</strong>実証フェーズ（政府50%:民間50%）</li>
+                        <li><strong>Stage 4：</strong>商用化フェーズ（民間主導+税制支援）</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="regulatory-section">
+            <h3>🏛️ AI対応規制の段階的整備</h3>
+            <div class="phase-timeline">
+                <div class="phase-item">
+                    <h5>Phase 1: 非安全系での限定実証</h5>
+                    <p>情報系統・データ分析システムでの実証実験。安全影響の少ない分野から開始</p>
+                </div>
+                <div class="phase-item">
+                    <h5>Phase 2: 安全関連系での条件付き実証</h5>
+                    <p>運転支援・診断システムでの実証。厳格な監視・承認プロセス下での実施</p>
+                </div>
+                <div class="phase-item">
+                    <h5>Phase 3: 安全系での慎重な実証</h5>
+                    <p>制御系統での実証。多重防護・フェイルセーフ確保前提での慎重実施</p>
+                </div>
+                <div class="phase-item">
+                    <h5>規制サンドボックス制度活用</h5>
+                    <p>既存制度を活用した期間限定規制特例。厳格な安全監視下での技術実証</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="stats-grid">
+            <div class="stat-card blue">
+                <div class="stat-number">700億円</div>
+                <div>2025-2026年総投資</div>
+                <small>政府戦略的投資</small>
+            </div>
+            <div class="stat-card green">
+                <div class="stat-number">3サイト</div>
+                <div>実証サイト数</div>
+                <small>BWR・PWR・廃炉サイト</small>
+            </div>
+            <div class="stat-card orange">
+                <div class="stat-number">10兆円</div>
+                <div>AI・半導体支援計画</div>
+                <small>国家戦略投資枠組み</small>
+            </div>
+            <div class="stat-card purple">
+                <div class="stat-number">最大3年</div>
+                <div>サンドボックス期間</div>
+                <small>規制特例実証期間</small>
+            </div>
+        </div>
+
+        <div class="role-matrix">
+            <h3>🏭 産業界の行動指針</h3>
+            <div class="three-pillars">
+                <div class="role-card government">
+                    <h4>電力会社によるAI投資推進</h4>
+                    <p><strong>基本方針：</strong>産業界主導でのAI技術開発加速</p>
+                    <ul>
+                        <li>技術開発・実証：自社技術開発、外部技術導入</li>
+                        <li>システム・インフラ：AI計算基盤、データ基盤</li>
+                        <li>人材育成・研修：専門人材確保、技能向上</li>
+                        <li>安全性・信頼性：技術評価、リスク管理</li>
+                    </ul>
+                </div>
+                <div class="role-card industry">
+                    <h4>IT企業との戦略的提携</h4>
+                    <p><strong>大手外資IT企業：</strong>Microsoft・Google・Amazon</p>
+                    <ul>
+                        <li>クラウド基盤・AI/ML技術活用</li>
+                        <li>量子コンピューティング協力</li>
+                        <li>データ分析・セキュリティ技術</li>
+                        <li>システム統合・既存システム連携</li>
+                    </ul>
+                </div>
+                <div class="role-card academia">
+                    <h4>データ共有による相互学習</h4>
+                    <p><strong>基本認識：</strong>AI学習効果最大化のためのデータ共有</p>
+                    <ul>
+                        <li>運転データ：匿名化処理前提の基本情報</li>
+                        <li>設備データ：機器仕様・劣化パターン</li>
+                        <li>連合学習：プライバシー保護学習手法</li>
+                        <li>データ標準化：共通フォーマット・品質基準</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="role-matrix">
+            <h3>🎓 学術界の使命</h3>
+            <div class="three-pillars">
+                <div class="role-card government">
+                    <h4>AI×原子力教育統合</h4>
+                    <p><strong>既存教育基盤の活用：</strong></p>
+                    <ul>
+                        <li>東京大学：核融合研究教育プログラム実績</li>
+                        <li>京都大学：原子力工学教育の充実</li>
+                        <li>東京工業大学：原子力工学専攻の専門性</li>
+                        <li>JT-60SA：国際核融合教育プログラム（2024年実施）</li>
+                    </ul>
+                </div>
+                <div class="role-card industry">
+                    <h4>国際標準策定への積極的参画</h4>
+                    <p><strong>重点標準化領域：</strong></p>
+                    <ul>
+                        <li>AI安全・信頼性：説明可能性、検証手法</li>
+                        <li>データ・情報標準：フォーマット統一、相互運用</li>
+                        <li>システム統合：既存システムとの連携</li>
+                        <li>品質・管理：性能評価、管理手法</li>
+                    </ul>
+                </div>
+                <div class="role-card academia">
+                    <h4>社会的合意形成の推進</h4>
+                    <p><strong>科学コミュニケーション強化：</strong></p>
+                    <ul>
+                        <li>市民向け解説資料の充実</li>
+                        <li>視覚的コンテンツ：動画・インフォグラフィック</li>
+                        <li>双方向対話：SNS・Web活用による交流促進</li>
+                        <li>ステークホルダーとの建設的対話</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="kpi-section">
+            <h3>📊 成功指標（KPI）の設定</h3>
+            <div class="kpi-table">
+                <h4>2027年目標の具体的数値指標</h4>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>指標</th>
+                            <th>2025年ベースライン</th>
+                            <th>2027年目標</th>
+                            <th>測定方法</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>パイロットサイト数</td>
+                            <td>0サイト</td>
+                            <td><span class="highlight-number">3サイト</span></td>
+                            <td>実証運転開始サイト数</td>
+                        </tr>
+                        <tr>
+                            <td>AI判断精度</td>
+                            <td>-</td>
+                            <td><span class="highlight-number">90%以上</span></td>
+                            <td>予測的中率・異常検知精度</td>
+                        </tr>
+                        <tr>
+                            <td>システム稼働率</td>
+                            <td>-</td>
+                            <td><span class="highlight-number">95%以上</span></td>
+                            <td>年間稼働時間/計画運転時間</td>
+                        </tr>
+                        <tr>
+                            <td>専門人材数</td>
+                            <td>約50名</td>
+                            <td><span class="highlight-number">200名</span></td>
+                            <td>資格認定・研修修了者数</td>
+                        </tr>
+                        <tr>
+                            <td>地域住民支持率</td>
+                            <td>-</td>
+                            <td><span class="highlight-number">60%以上</span></td>
+                            <td>定期アンケート調査</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="mermaid-container">
+            <div class="mermaid">
+graph LR
+    subgraph MarketDrivers["📊 成長ドライバー"]
+        D1[🌱 脱炭素政策強化]
+        D2[⚡ エネルギー安全保障]
+        D3[💡 AI技術成熟]
+        D4[🛡️ 安全規制高度化]
+    end
+    
+    subgraph MarketSize["💰 市場規模予測"]
+        M1[2025年: 100億円]
+        M2[2030年: 2,000億円]
+        M3[2035年: 8,000億円]
+    end
+    
+    subgraph Risks["⚠️ 潜在リスク"]
+        R1[技術開発遅延]
+        R2[規制対応長期化]
+        R3[社会受容性低下]
+        R4[国際競合激化]
+    end
+    
+    MarketDrivers --> MarketSize
+    MarketSize -.-> Risks
+    
+    classDef driverBox fill:#e8f5e8
+    classDef sizeBox fill:#fff2e8
+    classDef riskBox fill:#ffe8e8
+    
+    class MarketDrivers driverBox
+    class MarketSize sizeBox
+    class Risks riskBox
+            </div>
+        </div>
+
+        <div class="stats-grid">
+            <div class="stat-card red">
+                <div class="stat-number">10サイト</div>
+                <div>2030年商用運転目標</div>
+                <small>全国展開サイト数</small>
+            </div>
+            <div class="stat-card green">
+                <div class="stat-number">2,000億円</div>
+                <div>2030年市場規模</div>
+                <small>年平均成長率+151%</small>
+            </div>
+            <div class="stat-card blue">
+                <div class="stat-number">1,000名</div>
+                <div>2030年専門技術者</div>
+                <small>年平均成長率+58%</small>
+            </div>
+            <div class="stat-card orange">
+                <div class="stat-number">5ヶ国</div>
+                <div>2030年海外展開</div>
+                <small>国際プロジェクト数</small>
+            </div>
+        </div>
+
+        <div class="quote">
+            "「戦略」から「実行」へ。美しい計画ではなく、「誰が、いつまでに、何を、どのように」実行するかが勝敗を分ける。"
+        </div>
+
+        <div class="key-takeaway">
+            <h3>🎯 Key Takeaway</h3>
+            <p><strong>産学官の明確な役割分担と測定可能なKPI設定</strong>により、2025-2027年の確実な実行と2030年以降の長期的成功を両立。政府の戦略的投資（700億円）、産業界の積極的投資、学術界の技術革新が連携し、原子力AI分野での世界的リーダーシップを実現する。</p>
+        </div>
+    </div>
+
+    <script>
+        mermaid.initialize({ 
+            startOnLoad: true,
+            theme: 'default',
+            flowchart: {
+                useMaxWidth: true,
+                htmlLabels: true
+            }
+        });
+
+        // Add smooth scrolling and hover effects
+        document.querySelectorAll('.role-card, .phase-item, .stat-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-3px)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0)';
+            });
+        });
+    </script>
+</body>
+</html>

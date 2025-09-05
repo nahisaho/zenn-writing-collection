@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>第9章: リスク管理と社会的受容 - 安全性を決して犠牲にしない技術実装</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #ffffff;
+            color: #323130;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .presentation-container {
+            max-width: 1280px;
+            width: 100%;
+            min-height: 720px;
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(244, 67, 54, 0.1);
+            padding: 40px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .presentation-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #f44336 0%, #ff9800 100%);
+        }
+
+        h1 {
+            font-size: 32px;
+            font-weight: 700;
+            color: #c62828;
+            text-align: center;
+            margin-bottom: 30px;
+            text-shadow: 0 2px 4px rgba(198, 40, 40, 0.1);
+        }
+
+        .safety-principles {
+            background: linear-gradient(135deg, #ffebee 0%, #ffcdd2 100%);
+            border-left: 4px solid #f44336;
+            padding: 25px;
+            margin: 30px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(244, 67, 54, 0.1);
+        }
+
+        .safety-principles h2 {
+            font-size: 24px;
+            font-weight: 600;
+            color: #c62828;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+
+        .icon {
+            margin-right: 10px;
+            font-size: 24px;
+        }
+
+        .principles-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+            margin: 20px 0;
+        }
+
+        .principle-item {
+            background: #ffffff;
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 2px 15px rgba(244, 67, 54, 0.08);
+            border: 2px solid #ffebee;
+            transition: all 0.3s ease;
+        }
+
+        .principle-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 25px rgba(244, 67, 54, 0.15);
+            border-color: #f44336;
+        }
+
+        .principle-number {
+            font-size: 32px;
+            font-weight: 700;
+            color: #f44336;
+            margin-bottom: 10px;
+        }
+
+        .principle-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #c62828;
+            margin-bottom: 10px;
+        }
+
+        .risk-matrix {
+            background: #ffffff;
+            border-radius: 8px;
+            padding: 25px;
+            margin: 30px 0;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .risk-level {
+            display: flex;
+            align-items: center;
+            margin: 15px 0;
+            padding: 15px;
+            border-radius: 8px;
+            transition: transform 0.3s ease;
+        }
+
+        .risk-level:hover {
+            transform: translateX(5px);
+        }
+
+        .high-risk {
+            background: linear-gradient(135deg, #ffebee 0%, #ffcdd2 100%);
+            border-left: 4px solid #f44336;
+        }
+
+        .medium-risk {
+            background: linear-gradient(135deg, #fff8e1 0%, #ffecb3 100%);
+            border-left: 4px solid #ff9800;
+        }
+
+        .low-risk {
+            background: linear-gradient(135deg, #e8f5e8 0%, #c8e6c8 100%);
+            border-left: 4px solid #4caf50;
+        }
+
+        .risk-icon {
+            font-size: 32px;
+            margin-right: 20px;
+            width: 50px;
+            text-align: center;
+        }
+
+        .risk-content h3 {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .risk-content ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .risk-content li {
+            margin: 5px 0;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .risk-content li::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+        }
+
+        .qa-section {
+            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+            border-radius: 8px;
+            padding: 25px;
+            margin: 30px 0;
+            border-left: 4px solid #0078d4;
+        }
+
+        .qa-item {
+            background: #ffffff;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 15px 0;
+            border: 1px solid #e1e1e1;
+            transition: box-shadow 0.3s ease;
+        }
+
+        .qa-item:hover {
+            box-shadow: 0 4px 15px rgba(0, 120, 212, 0.1);
+        }
+
+        .question {
+            font-size: 16px;
+            font-weight: 600;
+            color: #0078d4;
+            margin-bottom: 10px;
+        }
+
+        .answer {
+            color: #323130;
+            line-height: 1.7;
+        }
+
+        .kpi-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: #ffffff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 15px rgba(0, 120, 212, 0.1);
+        }
+
+        .kpi-table th {
+            background: linear-gradient(135deg, #0078d4, #40e0d0);
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        .kpi-table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #e1e1e1;
+        }
+
+        .kpi-table tr:hover {
+            background-color: #f8f9fa;
+        }
+
+        .countermeasures {
+            background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%);
+            border-radius: 8px;
+            padding: 25px;
+            margin: 30px 0;
+            border-left: 4px solid #ff9800;
+        }
+
+        .countermeasure-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .countermeasure-card {
+            background: #ffffff;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(255, 152, 0, 0.1);
+            border: 1px solid #ffcc02;
+            transition: all 0.3s ease;
+        }
+
+        .countermeasure-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 20px rgba(255, 152, 0, 0.15);
+        }
+
+        .countermeasure-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #e65100;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+
+        .conclusion {
+            background: linear-gradient(135deg, #f3e5f5 0%, #e1bee7 100%);
+            border-radius: 8px;
+            padding: 25px;
+            margin: 30px 0;
+            border-left: 4px solid #9c27b0;
+            text-align: center;
+        }
+
+        .conclusion h2 {
+            font-size: 24px;
+            font-weight: 700;
+            color: #7b1fa2;
+            margin-bottom: 15px;
+        }
+
+        .trust-factors {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .trust-card {
+            background: #ffffff;
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 2px 15px rgba(156, 39, 176, 0.1);
+            border: 1px solid #f3e5f5;
+        }
+
+        .trust-icon {
+            font-size: 48px;
+            color: #9c27b0;
+            margin-bottom: 15px;
+        }
+
+        .highlight {
+            background: linear-gradient(135deg, #fff9c4 0%, #fff59d 100%);
+            padding: 3px 6px;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+
+        .warning-box {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 15px 0;
+            border-left: 4px solid #f39c12;
+        }
+
+        .warning-title {
+            font-weight: 600;
+            color: #d68910;
+            margin-bottom: 5px;
+        }
+
+        @media (max-width: 768px) {
+            .principles-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .countermeasure-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .trust-factors {
+                grid-template-columns: 1fr;
+            }
+            
+            h1 {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="presentation-container">
+        <h1>第9章: リスク管理と社会的受容<br>安全性を決して犠牲にしない技術実装</h1>
+
+        <div class="safety-principles">
+            <h2><span class="icon">🛡️</span>私たちの基本姿勢</h2>
+            <div class="principles-grid">
+                <div class="principle-item">
+                    <div class="principle-number">1</div>
+                    <div class="principle-title">人間支援</div>
+                    <p>AIは人間を置き換えるのではなく、<strong>人間の判断を支援</strong>するツール</p>
+                </div>
+                <div class="principle-item">
+                    <div class="principle-number">2</div>
+                    <div class="principle-title">人間責任</div>
+                    <p>最終的な判断と責任は<strong>常に人間が保持</strong></p>
+                </div>
+                <div class="principle-item">
+                    <div class="principle-number">3</div>
+                    <div class="principle-title">多重安全網</div>
+                    <p>AI故障時も安全を確保する<strong>多重の安全網</strong>を構築</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="risk-matrix">
+            <h2><span class="icon">📊</span>原子力AI技術リスクマトリックス</h2>
+            
+            <div class="risk-level high-risk">
+                <div class="risk-icon">🔴</div>
+                <div class="risk-content">
+                    <h3>高影響リスク</h3>
+                    <ul>
+                        <li>AI幻覚による誤判断</li>
+                        <li>サイバー攻撃</li>
+                        <li>システム全面停止</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="risk-level medium-risk">
+                <div class="risk-icon">🟡</div>
+                <div class="risk-content">
+                    <h3>中影響リスク</h3>
+                    <ul>
+                        <li>AI判断遅延</li>
+                        <li>データ品質低下</li>
+                        <li>運転員スキル低下</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="risk-level low-risk">
+                <div class="risk-icon">🟢</div>
+                <div class="risk-content">
+                    <h3>低影響リスク</h3>
+                    <ul>
+                        <li>軽微な精度低下</li>
+                        <li>一時的通信障害</li>
+                        <li>設定変更ミス</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="countermeasures">
+            <h2><span class="icon">🚨</span>具体的リスクシナリオと対策</h2>
+            <div class="countermeasure-grid">
+                <div class="countermeasure-card">
+                    <div class="countermeasure-title">
+                        <span class="icon">🧠</span>AI幻覚対策
+                    </div>
+                    <ul>
+                        <li>Physics-Informed AI</li>
+                        <li>複数AI相互検証</li>
+                        <li>人間最終承認</li>
+                        <li>リアルタイム監視</li>
+                    </ul>
+                </div>
+                <div class="countermeasure-card">
+                    <div class="countermeasure-title">
+                        <span class="icon">🔒</span>サイバー攻撃対策
+                    </div>
+                    <ul>
+                        <li>完全エアギャップ</li>
+                        <li>多層認証システム</li>
+                        <li>異常検知AI</li>
+                        <li>緊急停止機能</li>
+                    </ul>
+                </div>
+                <div class="countermeasure-card">
+                    <div class="countermeasure-title">
+                        <span class="icon">👨‍💼</span>スキル低下対策
+                    </div>
+                    <ul>
+                        <li>定期手動訓練</li>
+                        <li>段階的権限移譲</li>
+                        <li>技能評価システム</li>
+                        <li>緊急時対応訓練</li>
+                    </ul>
+                </div>
+                <div class="countermeasure-card">
+                    <div class="countermeasure-title">
+                        <span class="icon">⚡</span>フェイルセーフ機能
+                    </div>
+                    <ul>
+                        <li>深層防護の適用</li>
+                        <li>保守的判断</li>
+                        <li>代替手段確保</li>
+                        <li>段階的縮退</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <table class="kpi-table">
+            <thead>
+                <tr>
+                    <th>指標</th>
+                    <th>現在値(2024)</th>
+                    <th>2027年目標</th>
+                    <th>2030年目標</th>
+                    <th>測定方法</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>一般市民理解度</strong></td>
+                    <td>20%</td>
+                    <td>50%</td>
+                    <td>70%</td>
+                    <td>年2回全国世論調査</td>
+                </tr>
+                <tr>
+                    <td><strong>地域住民支持率</strong></td>
+                    <td>-</td>
+                    <td>60%</td>
+                    <td>80%</td>
+                    <td>立地地域アンケート</td>
+                </tr>
+                <tr>
+                    <td><strong>メディア好意度</strong></td>
+                    <td>30%</td>
+                    <td>60%</td>
+                    <td>75%</td>
+                    <td>報道分析・トーン解析</td>
+                </tr>
+                <tr>
+                    <td><strong>専門家支持率</strong></td>
+                    <td>60%</td>
+                    <td>80%</td>
+                    <td>90%</td>
+                    <td>学会・業界アンケート</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="qa-section">
+            <h2><span class="icon">❓</span>よくある質問への透明な回答</h2>
+            
+            <div class="qa-item">
+                <div class="question">Q1: AIが原子力を制御することは安全なのですか？</div>
+                <div class="answer">A: <strong>AIは判断を支援するだけで、最終的な制御判断は必ず人間が行います。</strong> AIが故障しても、従来の安全システムが確実に動作し、プラントを安全に停止できます。</div>
+            </div>
+            
+            <div class="qa-item">
+                <div class="question">Q2: AIがハッキングされて暴走する可能性はありませんか？</div>
+                <div class="answer">A: <strong>完全にオフライン（エアギャップ）環境で動作</strong>させ、外部からの侵入を物理的に遮断します。また、複数の独立したAIが相互にチェックし合う仕組みを採用しています。</div>
+            </div>
+            
+            <div class="qa-item">
+                <div class="question">Q3: AIの判断根拠が分からないのは不安です</div>
+                <div class="answer">A: <strong>説明可能AI（XAI）技術の発展</strong>により、AIの判断理由をより分かりやすく説明する取り組みが進んでいます。現在は研究開発段階ですが、将来的には判断根拠の透明性確保を目指します。</div>
+            </div>
+            
+            <div class="qa-item">
+                <div class="question">Q4: 雇用が奪われるのではないですか？</div>
+                <div class="answer">A: <strong>AI導入により新たな雇用が創出</strong>されます。AI保守・運用、データ分析、システム統合など、高度なスキルを活かせる仕事が生まれます。</div>
+            </div>
+        </div>
+
+        <div class="conclusion">
+            <h2><span class="icon">🎯</span>「安全第一」から「社会的信頼」へ</h2>
+            <div class="trust-factors">
+                <div class="trust-card">
+                    <div class="trust-icon">📋</div>
+                    <h3>リスクvs信頼</h3>
+                    <p>リスクを列挙するだけでは信頼は得られない。「管理できる」ことを証明する</p>
+                </div>
+                <div class="trust-card">
+                    <div class="trust-icon">🏆</div>
+                    <h3>福島の教訓は競争優位</h3>
+                    <p>世界最高水準の安全文化は日本の差別化要因</p>
+                </div>
+                <div class="trust-card">
+                    <div class="trust-icon">💎</div>
+                    <h3>透明性が競争力</h3>
+                    <p>隠さない、逃げない、誇張しない姿勢が信頼を生む</p>
+                </div>
+                <div class="trust-card">
+                    <div class="trust-icon">🌍</div>
+                    <h3>世界の手本</h3>
+                    <p>日本の原子力AIは、世界が手本とする「安全性のお手本」を提示できる</p>
+                </div>
+            </div>
+            
+            <div class="warning-box">
+                <div class="warning-title">成功への条件</div>
+                <p><strong>安全最優先の文化</strong> × <strong>透明性の徹底</strong> × <strong>市民参加の真正性</strong> × <strong>継続的学習・改善</strong></p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

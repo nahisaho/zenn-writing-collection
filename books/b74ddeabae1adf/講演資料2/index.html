@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>原子力AI技術革命 - プレゼンテーション</title>
+    <style>
+        :root {
+            --microsoft-blue: #0078D4;
+            --microsoft-dark-blue: #005A9E;
+            --microsoft-light-blue: #40C0FF;
+            --text-primary: #323130;
+            --text-secondary: #605E5C;
+            --background: #FFFFFF;
+            --card-background: #FAFAFA;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #FFFFFF 0%, #F8F9FA 100%);
+            color: var(--text-primary);
+            line-height: 1.6;
+            padding: 40px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 60px;
+            padding: 40px;
+            background: var(--card-background);
+            border-radius: 20px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+        }
+
+        .main-title {
+            font-size: 48px;
+            font-weight: 700;
+            color: var(--microsoft-blue);
+            margin-bottom: 20px;
+        }
+
+        .subtitle {
+            font-size: 24px;
+            color: var(--text-secondary);
+            margin-bottom: 30px;
+        }
+
+        .description {
+            font-size: 18px;
+            color: var(--text-primary);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .slides-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+        .slide-card {
+            background: var(--card-background);
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-left: 6px solid var(--microsoft-blue);
+        }
+
+        .slide-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .slide-number {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--microsoft-blue);
+            margin-bottom: 8px;
+        }
+
+        .slide-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 12px;
+        }
+
+        .slide-description {
+            font-size: 16px;
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+
+        .slide-link {
+            display: inline-block;
+            background: var(--microsoft-blue);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            transition: background-color 0.3s ease;
+        }
+
+        .slide-link:hover {
+            background: var(--microsoft-dark-blue);
+        }
+
+        .navigation {
+            background: var(--card-background);
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+            text-align: center;
+        }
+
+        .nav-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--microsoft-blue);
+            margin-bottom: 20px;
+        }
+
+        .nav-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .nav-button {
+            background: var(--microsoft-light-blue);
+            color: var(--text-primary);
+            padding: 12px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .nav-button:hover {
+            background: var(--microsoft-blue);
+            color: white;
+            border-color: var(--microsoft-dark-blue);
+        }
+
+        .info-section {
+            background: rgba(0, 120, 212, 0.05);
+            border: 2px solid var(--microsoft-light-blue);
+            border-radius: 16px;
+            padding: 30px;
+            margin-top: 40px;
+            text-align: center;
+        }
+
+        .info-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--microsoft-dark-blue);
+            margin-bottom: 16px;
+        }
+
+        .info-text {
+            font-size: 16px;
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+
+        @media (max-width: 768px) {
+            .main-title { font-size: 36px; }
+            .subtitle { font-size: 20px; }
+            .slides-grid { grid-template-columns: 1fr; }
+            .nav-buttons { flex-direction: column; align-items: center; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1 class="main-title">原子力AI技術革命</h1>
+            <p class="subtitle">日本のエネルギー安全保障と気候変動対策の切り札</p>
+            <p class="description">
+                日本原子力学会2025年秋の大会講演「原子力分野における生成AI利用の世界動向と日本の戦略的課題」の補足資料として作成されたプレゼンテーション資料集です。
+            </p>
+        </div>
+
+        <div class="slides-grid">
+            <div class="slide-card">
+                <div class="slide-number">スライド 1</div>
+                <h3 class="slide-title">タイトルページ</h3>
+                <p class="slide-description">
+                    書籍のタイトルと核心メッセージ「原子力×AI融合は、もはや選択ではなく必然である」を印象的に提示。2025-2027年が勝負の3年間であることを強調。
+                </p>
+                <a href="slide01_title.html" class="slide-link">スライドを開く</a>
+            </div>
+
+            <div class="slide-card">
+                <div class="slide-number">スライド 2</div>
+                <h3 class="slide-title">本書の3つの核心メッセージ</h3>
+                <p class="slide-description">
+                    緊急性・日本独自の戦略的価値・今すぐ実行すべきアクションの3つの重要ポイントを視覚的にわかりやすく解説。戦略決定に必要な重要事実を整理。
+                </p>
+                <a href="slide02_core_messages.html" class="slide-link">スライドを開く</a>
+            </div>
+
+            <div class="slide-card">
+                <div class="slide-number">スライド 3</div>
+                <h3 class="slide-title">時代的背景と課題</h3>
+                <p class="slide-description">
+                    原子力産業が直面する現実的課題と生成AIがもたらす解決の機会を対比。安全性・経済性・人材育成・社会受容性の4つの課題領域を分析。
+                </p>
+                <a href="slide03_background_challenges.html" class="slide-link">スライドを開く</a>
+            </div>
+
+            <div class="slide-card">
+                <div class="slide-number">スライド 4</div>
+                <h3 class="slide-title">生成AIがもたらす革新</h3>
+                <p class="slide-description">
+                    大規模言語モデル・予測最適化・自動化・継続学習の4つの技術領域が原子力産業に与える革新性をMermaid図解とともに解説。
+                </p>
+                <a href="slide04_ai_innovation.html" class="slide-link">スライドを開く</a>
+            </div>
+
+            <div class="slide-card">
+                <div class="slide-number">スライド 5</div>
+                <h3 class="slide-title">本書の構成と対象読者</h3>
+                <p class="slide-description">
+                    全10章の構成を体系的に紹介し、意思決定者・実務者・研究者それぞれに最適な読み方ガイドを提供。効率的な情報取得をサポート。
+                </p>
+                <a href="slide05_book_structure.html" class="slide-link">スライドを開く</a>
+            </div>
+
+            <div class="slide-card">
+                <div class="slide-number">スライド 6</div>
+                <h3 class="slide-title">革新的研究手法</h3>
+                <p class="slide-description">
+                    「AIを使ってAIを研究する」メタ・アプローチの解説。4つのAIプラットフォームを戦略的に活用した3段階検証プロセスを紹介。
+                </p>
+                <a href="slide06_research_method.html" class="slide-link">スライドを開く</a>
+            </div>
+
+            <div class="slide-card">
+                <div class="slide-number">スライド A</div>
+                <h3 class="slide-title">生成AIと原子力AI - 歴史的融合</h3>
+                <p class="slide-description">
+                    2023年ChatGPTショックから原子力専用AIまでの劇的変化。技術進化のタイムラインと原子力コミュニティでの急速な浸透を解説。
+                </p>
+                <a href="slideA_ai_nuclear_convergence.html" class="slide-link">スライドを開く</a>
+            </div>
+
+            <div class="slide-card">
+                <div class="slide-number">スライド B</div>
+                <h3 class="slide-title">原子力産業の根本的課題</h3>
+                <p class="slide-description">
+                    膨大な文書管理・知識継承の危機・効率化への圧力・社会的受容性の4つの構造的問題をAIが解決すべき課題として整理。
+                </p>
+                <a href="slideB_nuclear_challenges.html" class="slide-link">スライドを開く</a>
+            </div>
+
+            <div class="slide-card">
+                <div class="slide-number">スライド C</div>
+                <h3 class="slide-title">AI電力需要爆発と相乗効果</h3>
+                <p class="slide-description">
+                    データセンター電力危機と技術大手の原子力シフト。AIと原子力が生み出すWin-Winの関係構築について詳細に分析。
+                </p>
+                <a href="slideC_ai_power_synergy.html" class="slide-link">スライドを開く</a>
+            </div>
+
+            <div class="slide-card">
+                <div class="slide-number">スライド D</div>
+                <h3 class="slide-title">緊急性：今すぐ行動すべき理由</h3>
+                <p class="slide-description">
+                    2025-2027年が日本の競争力確立の最後のチャンス。限られた機会の窓と遅れることのコスト、日本固有の優位性を解説。
+                </p>
+                <a href="slideD_urgency_opportunity.html" class="slide-link">スライドを開く</a>
+            </div>
+
+            <div class="slide-card">
+                <div class="slide-number">スライド E</div>
+                <h3 class="slide-title">革新的研究手法と調査範囲</h3>
+                <p class="slide-description">
+                    「AIを使ってAIを研究する」メタ・アプローチによる包括的分析。4つのAIプラットフォーム活用と3段階検証プロセスの詳細。
+                </p>
+                <a href="slideE_research_methodology.html" class="slide-link">スライドを開く</a>
+            </div>
+
+            <div class="slide-card">
+                <div class="slide-number">スライド F</div>
+                <h3 class="slide-title">世界の三極構造形成</h3>
+                <p class="slide-description">
+                    原子力AI技術革命における地政学的競争構造。米国・欧州・アジアの戦略的特徴と競争優位性の源泉を分析。
+                </p>
+                <a href="slideF_global_three_polar.html" class="slide-link">スライドを開く</a>
+            </div>
+
+            <div class="slide-card">
+                <div class="slide-number">スライド G</div>
+                <h3 class="slide-title">米国の圧倒的優位</h3>
+                <p class="slide-description">
+                    PG&E Diablo Canyon世界初商用化成功、技術大手の巨額投資、トランプ政権のAI統合政策による商用化速度での他を圧倒する優位性。
+                </p>
+                <a href="slideG_us_dominance.html" class="slide-link">スライドを開く</a>
+            </div>
+
+            <div class="slide-card">
+                <div class="slide-number">スライド H</div>
+                <h3 class="slide-title">欧州標準化戦略</h3>
+                <p class="slide-description">
+                    EDF €70B EPR2計画、EU AI法規制枠組み、IAEA主導の国際標準化リーダーシップによる責任あるイノベーション戦略。
+                </p>
+                <a href="slideH_europe_standards.html" class="slide-link">スライドを開く</a>
+            </div>
+
+            <div class="slide-card">
+                <div class="slide-number">スライド I</div>
+                <h3 class="slide-title">アジアの急速な追撃</h3>
+                <p class="slide-description">
+                    中国の技術自立戦略、韓国のK-Nuclear AI輸出戦略、世界最大市場での国家戦略一貫性による急速な技術習得。
+                </p>
+                <a href="slideI_asia_catchup.html" class="slide-link">スライドを開く</a>
+            </div>
+
+            <div class="slide-card">
+                <div class="slide-number">スライド J</div>
+                <h3 class="slide-title">日本の戦略的機会</h3>
+                <p class="slide-description">
+                    福島廃炉から得た世界唯一の経験、第7次エネルギー基本計画の政策転換、2025-2027年のラストチャンスによる差別化戦略。
+                </p>
+                <a href="slideJ_japan_opportunity.html" class="slide-link">スライドを開く</a>
+            </div>
+
+            <div class="slide-card">
+                <div class="slide-number">スライド K</div>
+                <h3 class="slide-title">ディアブロキャニオン成功事例</h3>
+                <p class="slide-description">
+                    世界初の商用生成AI導入による革命的成果。FERMI-1024システム、検索精度98%、年間225万ドル削減効果の詳細分析。
+                </p>
+                <a href="slideK_diablo_canyon_success.html" class="slide-link">スライドを開く</a>
+            </div>
+
+            <div class="slide-card">
+                <div class="slide-number">スライド L</div>
+                <h3 class="slide-title">Westinghouse HiVe™プラットフォーム</h3>
+                <p class="slide-description">
+                    産業規模のAI統合による原子力デジタル変革。bertha™大規模言語モデルと蜂の巣型協調設計の革新性を解説。
+                </p>
+                <a href="slideL_westinghouse_hive.html" class="slide-link">スライドを開く</a>
+            </div>
+
+            <div class="slide-card">
+                <div class="slide-number">スライド M</div>
+                <h3 class="slide-title">国立研究所の革新技術</h3>
+                <p class="slide-description">
+                    ORNL Frontierエクサスケール、温度ピーキング係数3倍改善、INL-Microsoft協業による認可プロセス効率化への挑戦。
+                </p>
+                <a href="slideM_national_labs_innovation.html" class="slide-link">スライドを開く</a>
+            </div>
+
+            <div class="slide-card">
+                <div class="slide-number">スライド N</div>
+                <h3 class="slide-title">分野横断的応用事例</h3>
+                <p class="slide-description">
+                    設計最適化・予知保全・廃炉管理・運転支援の4分野における具体的成果。年間3000-5000万ドル削減効果を実現。
+                </p>
+                <a href="slideN_cross_field_applications.html" class="slide-link">スライドを開く</a>
+            </div>
+
+            <div class="slide-card">
+                <div class="slide-number">スライド O</div>
+                <h3 class="slide-title">技術成熟度と今後の展望</h3>
+                <p class="slide-description">
+                    TRL評価による技術成熟度分析、2025-2031年ロードマップ、主要課題と成功要因の戦略的含意を提示。
+                </p>
+                <a href="slideO_technology_maturity.html" class="slide-link">スライドを開く</a>
+            </div>
+
+            <div class="slide-card">
+                <div class="slide-number">スライド P</div>
+                <h3 class="slide-title">技術的課題と解決策</h3>
+                <p class="slide-description">
+                    ブラックボックス問題・安全性保証・物理法則整合性の3つの核心課題と、XAI技術・国際標準・PINNs等の実用的解決策。
+                </p>
+                <a href="slideP_technical_challenges.html" class="slide-link">スライドを開く</a>
+            </div>
+
+            <div class="slide-card">
+                <div class="slide-number">スライド Q</div>
+                <h3 class="slide-title">国際規制協調の進展</h3>
+                <p class="slide-description">
+                    2024年9月NRC-ONR-CNSC三者共同原則発表、世界初の原子力AI規制国際協力、段階的実装アプローチ確立。
+                </p>
+                <a href="slideQ_regulatory_coordination.html" class="slide-link">スライドを開く</a>
+            </div>
+
+            <div class="slide-card">
+                <div class="slide-number">スライド R</div>
+                <h3 class="slide-title">Physics-Informed AI革新</h3>
+                <p class="slide-description">
+                    PINNs技術による物理制約自動保証、中性子拡散方程式の損失関数統合、エネルギー保存則の厳密遵守を実現。
+                </p>
+                <a href="slideR_physics_informed_ai.html" class="slide-link">スライドを開く</a>
+            </div>
+
+            <div class="slide-card">
+                <div class="slide-number">スライド S</div>
+                <h3 class="slide-title">サイバーセキュリティ多層防護</h3>
+                <p class="slide-description">
+                    AI時代の新たな脅威（敵対的攻撃等）と防御戦略、エアギャップ設計、TEMPEST要求、量子暗号通信実用化。
+                </p>
+                <a href="slideS_cybersecurity_defense.html" class="slide-link">スライドを開く</a>
+            </div>
+
+            <div class="slide-card">
+                <div class="slide-number">スライド T</div>
+                <h3 class="slide-title">統合的解決アプローチ</h3>
+                <p class="slide-description">
+                    技術・規制・セキュリティの三位一体戦略、多面的リスク管理フレームワーク、量子技術統合への取り組み。
+                </p>
+                <a href="slideT_integrated_solutions.html" class="slide-link">スライドを開く</a>
+            </div>
+
+            <div class="slide-card">
+                <div class="slide-number">スライド U</div>
+                <h3 class="slide-title">投資動向の爆発的拡大</h3>
+                <p class="slide-description">
+                    2024年原子力AI投資の歴史的転換点。VC投資$2.4億（前年比12倍）、Amazon・Google・Microsoft等のBig Tech本格参入。
+                </p>
+                <a href="slideU_investment_surge.html" class="slide-link">スライドを開く</a>
+            </div>
+
+            <div class="slide-card">
+                <div class="slide-number">スライド V</div>
+                <h3 class="slide-title">Big Tech戦略的投資</h3>
+                <p class="slide-description">
+                    Tech巨大企業による総額$21億超の戦略的投資。Microsoft $1.6億、Amazon $12億、Google 500MW契約のAI電力需要対応戦略。
+                </p>
+                <a href="slideV_bigtech_investments.html" class="slide-link">スライドを開く</a>
+            </div>
+
+            <div class="slide-card">
+                <div class="slide-number">スライド W</div>
+                <h3 class="slide-title">ROI実績分析</h3>
+                <p class="slide-description">
+                    投資回収期間4.6年、IRR 18%の優秀な投資効率。保全費20-30%削減、設備可用性最大50%向上の実証済み効果。
+                </p>
+                <a href="slideW_roi_analysis.html" class="slide-link">スライドを開く</a>
+            </div>
+
+            <div class="slide-card">
+                <div class="slide-number">スライド X</div>
+                <h3 class="slide-title">市場成長予測</h3>
+                <p class="slide-description">
+                    年率19.8%成長（CAGR）、2035年280億ドル市場への拡大予測。北米・アジア・欧州の地域別特性と用途別構成分析。
+                </p>
+                <a href="slideX_market_growth.html" class="slide-link">スライドを開く</a>
+            </div>
+
+            <div class="slide-card">
+                <div class="slide-number">スライド Y</div>
+                <h3 class="slide-title">新ビジネスモデル創出</h3>
+                <p class="slide-description">
+                    Nuclear AIaaS、データ収益化（年間5-10億ドル）、エコシステム・プラットフォーム戦略による産業構造変革。
+                </p>
+                <a href="slideY_business_models.html" class="slide-link">スライドを開く</a>
+            </div>
+
+            <div class="slide-card">
+                <div class="slide-number">スライド Z</div>
+                <h3 class="slide-title">日本の技術的優位性</h3>
+                <p class="slide-description">
+                    福島の教訓から生まれた世界唯一の競争力。安全文化・廃炉AI実績・産学官連携・世界トップ大学研究の4つの核心優位性。
+                </p>
+                <a href="slideZ_japan_advantages.html" class="slide-link">スライドを開く</a>
+            </div>
+
+            <div class="slide-card">
+                <div class="slide-number">スライド AA</div>
+                <h3 class="slide-title">構造的課題の分析</h3>
+                <p class="slide-description">
+                    技術先進・実装後進の矛盾。商用実装遅れ・投資格差・意思決定遅延・人材不足の4つの構造的課題を徹底分析。
+                </p>
+                <a href="slideAA_structural_challenges.html" class="slide-link">スライドを開く</a>
+            </div>
+
+            <div class="slide-card">
+                <div class="slide-number">スライド AB</div>
+                <h3 class="slide-title">アジア市場での機会</h3>
+                <p class="slide-description">
+                    地理的・文化的優位性を活かした戦略的展開。中国・インド・ASEAN諸国の急拡大する原子力市場でのリーダーシップ獲得。
+                </p>
+                <a href="slideAB_asia_opportunity.html" class="slide-link">スライドを開く</a>
+            </div>
+
+            <div class="slide-card">
+                <div class="slide-number">スライド AC</div>
+                <h3 class="slide-title">安全技術での差別化</h3>
+                <p class="slide-description">
+                    世界最高水準の説明可能AI技術による市場支配。国際標準策定リーダーシップと技術覇権確立戦略。
+                </p>
+                <a href="slideAC_safety_differentiation.html" class="slide-link">スライドを開く</a>
+            </div>
+
+            <div class="slide-card">
+                <div class="slide-number">スライド AD</div>
+                <h3 class="slide-title">2025-2027年 決定的機会の窓</h3>
+                <p class="slide-description">
+                    この3年間が日本の運命を決定。技術標準化・市場確立・人材確保の最後のチャンス。遅れのコストは指数関数的増大。
+                </p>
+                <a href="slideAD_critical_window.html" class="slide-link">スライドを開く</a>
+            </div>
+        </div>
+
+        <div class="navigation">
+            <h2 class="nav-title">ナビゲーション</h2>
+            <div class="nav-buttons">
+                <a href="slide01_title.html" class="nav-button">1. タイトル</a>
+                <a href="slide02_core_messages.html" class="nav-button">2. 核心メッセージ</a>
+                <a href="slide03_background_challenges.html" class="nav-button">3. 背景と課題</a>
+                <a href="slide04_ai_innovation.html" class="nav-button">4. AI革新</a>
+                <a href="slide05_book_structure.html" class="nav-button">5. 書籍構成</a>
+                <a href="slide06_research_method.html" class="nav-button">6. 研究手法</a>
+                <a href="slideA_ai_nuclear_convergence.html" class="nav-button">A. 歴史的融合</a>
+                <a href="slideB_nuclear_challenges.html" class="nav-button">B. 産業課題</a>
+                <a href="slideC_ai_power_synergy.html" class="nav-button">C. 相乗効果</a>
+                <a href="slideD_urgency_opportunity.html" class="nav-button">D. 緊急性</a>
+                <a href="slideE_research_methodology.html" class="nav-button">E. 研究手法</a>
+                <a href="slideF_global_three_polar.html" class="nav-button">F. 三極構造</a>
+                <a href="slideG_us_dominance.html" class="nav-button">G. 米国優位</a>
+                <a href="slideH_europe_standards.html" class="nav-button">H. 欧州標準</a>
+                <a href="slideI_asia_catchup.html" class="nav-button">I. アジア追撃</a>
+                <a href="slideJ_japan_opportunity.html" class="nav-button">J. 日本の機会</a>
+                <a href="slideK_diablo_canyon_success.html" class="nav-button">K. ディアブロキャニオン</a>
+                <a href="slideL_westinghouse_hive.html" class="nav-button">L. Westinghouse HiVe™</a>
+                <a href="slideM_national_labs_innovation.html" class="nav-button">M. 国立研究所</a>
+                <a href="slideN_cross_field_applications.html" class="nav-button">N. 分野横断応用</a>
+                <a href="slideO_technology_maturity.html" class="nav-button">O. 技術成熟度</a>
+                <a href="slideP_technical_challenges.html" class="nav-button">P. 技術的課題</a>
+                <a href="slideQ_regulatory_coordination.html" class="nav-button">Q. 規制協調</a>
+                <a href="slideR_physics_informed_ai.html" class="nav-button">R. Physics-AI</a>
+                <a href="slideS_cybersecurity_defense.html" class="nav-button">S. サイバー防御</a>
+                <a href="slideT_integrated_solutions.html" class="nav-button">T. 統合解決策</a>
+                <a href="slideU_investment_surge.html" class="nav-button">U. 投資拡大</a>
+                <a href="slideV_bigtech_investments.html" class="nav-button">V. Big Tech投資</a>
+                <a href="slideW_roi_analysis.html" class="nav-button">W. ROI分析</a>
+                <a href="slideX_market_growth.html" class="nav-button">X. 市場成長</a>
+                <a href="slideY_business_models.html" class="nav-button">Y. ビジネスモデル</a>
+                <a href="slideZ_japan_advantages.html" class="nav-button">Z. 日本の優位性</a>
+                <a href="slideAA_structural_challenges.html" class="nav-button">AA. 構造的課題</a>
+                <a href="slideAB_asia_opportunity.html" class="nav-button">AB. アジア機会</a>
+                <a href="slideAC_safety_differentiation.html" class="nav-button">AC. 安全技術差別化</a>
+                <a href="slideAD_critical_window.html" class="nav-button">AD. 決定的機会</a>
+            </div>
+        </div>
+
+        <div class="info-section">
+            <h3 class="info-title">プレゼンテーション資料について</h3>
+            <p class="info-text">
+                これらの資料は、Microsoft Fluent Design Systemを基調としたPresentation Zenスタイルで作成されています。各スライドは16:9のアスペクト比で最適化されており、講演やプレゼンテーションでの使用に適しています。<br><br>
+                <strong>作成日：</strong>2025年9月<br>
+                <strong>著者：</strong>中田 寿穂<br>
+                <strong>関連：</strong>日本原子力学会2025年秋の大会講演補足資料
+            </p>
+        </div>
+    </div>
+</body>
+</html>

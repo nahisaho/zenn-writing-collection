@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>市場成長予測 - 原子力AI技術革命</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Segoe UI", -apple-system, BlinkMacSystemFont, "Roboto", sans-serif;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            color: #333;
+            line-height: 1.6;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            aspect-ratio: 16 / 9;
+        }
+
+        .container {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            padding: 3rem;
+            background: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .main-title {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #0078D4;
+            margin-bottom: 1rem;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .subtitle {
+            font-size: 1.1rem;
+            color: #666;
+            font-weight: 500;
+        }
+
+        .content-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            flex: 1;
+            align-items: start;
+        }
+
+        .growth-metrics {
+            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+            color: white;
+            padding: 2.5rem;
+            border-radius: 16px;
+            text-align: center;
+            box-shadow: 0 8px 32px rgba(40, 167, 69, 0.3);
+        }
+
+        .cagr-number {
+            font-size: 4rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .cagr-label {
+            font-size: 1.2rem;
+            opacity: 0.95;
+            margin-bottom: 1.5rem;
+        }
+
+        .projection-range {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 1rem;
+            border-radius: 12px;
+            backdrop-filter: blur(10px);
+        }
+
+        .range-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .regional-breakdown {
+            background: white;
+            padding: 2rem;
+            border-radius: 16px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+        }
+
+        .breakdown-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            padding-bottom: 0.5rem;
+            border-bottom: 3px solid #0078D4;
+        }
+
+        .region-item {
+            margin-bottom: 1.5rem;
+            padding: 1rem;
+            background: #f8f9fa;
+            border-radius: 12px;
+            border-left: 4px solid;
+        }
+
+        .region-item.north-america {
+            border-left-color: #0078D4;
+        }
+
+        .region-item.asia-pacific {
+            border-left-color: #ff6b35;
+        }
+
+        .region-item.europe {
+            border-left-color: #28a745;
+        }
+
+        .region-name {
+            font-weight: bold;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            color: #333;
+        }
+
+        .region-characteristics {
+            font-size: 0.95rem;
+            color: #666;
+            line-height: 1.5;
+        }
+
+        .application-segments {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            width: 85%;
+        }
+
+        .segment-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+            border-top: 4px solid;
+        }
+
+        .segment-card.new-plants {
+            border-top-color: #0078D4;
+        }
+
+        .segment-card.existing-plants {
+            border-top-color: #28a745;
+        }
+
+        .segment-card.decommissioning {
+            border-top-color: #ff6b35;
+        }
+
+        .segment-percentage {
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .segment-percentage.new {
+            color: #0078D4;
+        }
+
+        .segment-percentage.existing {
+            color: #28a745;
+        }
+
+        .segment-percentage.decom {
+            color: #ff6b35;
+        }
+
+        .segment-label {
+            font-size: 0.9rem;
+            color: #666;
+            font-weight: 500;
+        }
+
+        .growth-badge {
+            position: absolute;
+            top: 2rem;
+            right: 2rem;
+            background: linear-gradient(135deg, #ff6b35 0%, #ff8c42 100%);
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 1rem;
+            box-shadow: 0 4px 12px rgba(255, 107, 53, 0.3);
+        }
+
+        .ai-demand-note {
+            position: absolute;
+            top: 6rem;
+            right: 2rem;
+            background: rgba(0, 120, 212, 0.1);
+            color: #0078D4;
+            padding: 0.5rem 1rem;
+            border-radius: 16px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            backdrop-filter: blur(10px);
+        }
+
+        @keyframes slideInUp {
+            from {
+                transform: translateY(30px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                transform: translateX(30px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        .growth-metrics {
+            animation: slideInUp 0.8s ease-out forwards;
+        }
+
+        .regional-breakdown {
+            animation: slideInRight 0.8s ease-out forwards;
+            animation-delay: 0.3s;
+        }
+
+        .segment-card {
+            animation: slideInUp 0.8s ease-out forwards;
+        }
+
+        .segment-card:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .segment-card:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="growth-badge">年率15-25%成長</div>
+        <div class="ai-demand-note">AI電力需要がドライバー</div>
+        
+        <div class="header">
+            <h1 class="main-title">市場成長予測</h1>
+            <p class="subtitle">2030年代に向けた急速な市場拡大</p>
+        </div>
+
+        <div class="content-layout">
+            <div class="growth-metrics">
+                <div class="cagr-number">19.8%</div>
+                <div class="cagr-label">年平均成長率（CAGR）</div>
+                <div class="projection-range">
+                    <div class="range-item">
+                        <span>2030年市場規模</span>
+                        <span>120億ドル</span>
+                    </div>
+                    <div class="range-item">
+                        <span>2035年市場規模</span>
+                        <span>280億ドル</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="regional-breakdown">
+                <h3 class="breakdown-title">地域別市場特性</h3>
+                
+                <div class="region-item north-america">
+                    <div class="region-name">北米市場</div>
+                    <div class="region-characteristics">
+                        技術開発・実証のリーダー<br>
+                        Microsoft・Amazon・Google主導投資
+                    </div>
+                </div>
+                
+                <div class="region-item asia-pacific">
+                    <div class="region-name">アジア太平洋</div>
+                    <div class="region-characteristics">
+                        急速成長、原子力機器40%シェア<br>
+                        中国・韓国の国家主導投資
+                    </div>
+                </div>
+                
+                <div class="region-item europe">
+                    <div class="region-name">欧州市場</div>
+                    <div class="region-characteristics">
+                        規制革新・廃炉技術<br>
+                        原子力25%エネルギーミックス
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="application-segments">
+            <div class="segment-card new-plants">
+                <div class="segment-percentage new">40%</div>
+                <div class="segment-label">新設プラント<br>（SMR建設本格化）</div>
+            </div>
+            
+            <div class="segment-card existing-plants">
+                <div class="segment-percentage existing">45%</div>
+                <div class="segment-label">既設プラント改良<br>（寿命延長・効率改善）</div>
+            </div>
+            
+            <div class="segment-card decommissioning">
+                <div class="segment-percentage decom">15%</div>
+                <div class="segment-label">廃炉市場<br>（ロボティクス・AI監視）</div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

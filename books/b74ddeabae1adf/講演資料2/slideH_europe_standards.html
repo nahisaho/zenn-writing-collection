@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>欧州標準化戦略 - 原子力AI技術革命</title>
+    <style>
+        :root {
+            --microsoft-blue: #0078D4;
+            --microsoft-dark-blue: #005A9E;
+            --microsoft-light-blue: #40C0FF;
+            --microsoft-green: #107C10;
+            --microsoft-purple: #5C2D91;
+            --text-primary: #323130;
+            --text-secondary: #605E5C;
+            --background: #FFFFFF;
+            --card-background: #FAFAFA;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #FFFFFF 0%, #F8F9FA 100%);
+            color: var(--text-primary);
+            line-height: 1.6;
+            padding: 40px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            aspect-ratio: 16/9;
+            background: var(--background);
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+            padding: 60px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .slide-number {
+            font-size: 24px;
+            font-weight: 600;
+            color: var(--microsoft-blue);
+            margin-bottom: 16px;
+        }
+
+        .main-title {
+            font-size: 48px;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 16px;
+        }
+
+        .subtitle {
+            font-size: 24px;
+            color: var(--text-secondary);
+            font-weight: 400;
+        }
+
+        .content {
+            flex: 1;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+
+        .left-section {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .right-section {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .edf-investment {
+            background: linear-gradient(135deg, rgba(16, 124, 16, 0.1) 0%, rgba(16, 124, 16, 0.05) 100%);
+            border: 2px solid var(--microsoft-green);
+            border-radius: 16px;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .investment-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--microsoft-green);
+            margin-bottom: 16px;
+        }
+
+        .investment-amount {
+            font-size: 48px;
+            font-weight: 700;
+            color: var(--microsoft-green);
+            margin-bottom: 12px;
+        }
+
+        .investment-details {
+            font-size: 16px;
+            color: var(--text-primary);
+            line-height: 1.5;
+        }
+
+        .regulatory-framework {
+            background: linear-gradient(135deg, rgba(92, 45, 145, 0.1) 0%, rgba(92, 45, 145, 0.05) 100%);
+            border: 2px solid var(--microsoft-purple);
+            border-radius: 16px;
+            padding: 25px;
+        }
+
+        .framework-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--microsoft-purple);
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+        }
+
+        .framework-title::before {
+            content: "⚖️";
+            margin-right: 8px;
+            font-size: 24px;
+        }
+
+        .framework-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .framework-list li {
+            font-size: 16px;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .framework-list li::before {
+            content: "📋";
+            position: absolute;
+            left: 0;
+            font-size: 14px;
+        }
+
+        .standards-leadership {
+            background: linear-gradient(135deg, rgba(0, 120, 212, 0.1) 0%, rgba(0, 120, 212, 0.05) 100%);
+            border: 2px solid var(--microsoft-blue);
+            border-radius: 16px;
+            padding: 25px;
+        }
+
+        .standards-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--microsoft-blue);
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+        }
+
+        .standards-title::before {
+            content: "🌍";
+            margin-right: 8px;
+            font-size: 24px;
+        }
+
+        .standards-content {
+            font-size: 16px;
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+
+        .key-advantages {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .advantage-card {
+            background: var(--card-background);
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+            border-left: 4px solid var(--microsoft-blue);
+        }
+
+        .advantage-icon {
+            font-size: 24px;
+            margin-bottom: 8px;
+        }
+
+        .advantage-title-small {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--microsoft-blue);
+            margin-bottom: 8px;
+        }
+
+        .advantage-description {
+            font-size: 14px;
+            color: var(--text-secondary);
+            line-height: 1.4;
+        }
+
+        .footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 30px;
+            padding-top: 30px;
+            border-top: 2px solid #E1E1E1;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .nav-button {
+            background: var(--microsoft-light-blue);
+            color: var(--text-primary);
+            padding: 12px 24px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-button:hover {
+            background: var(--microsoft-blue);
+            color: white;
+        }
+
+        .slide-info {
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        @media (max-width: 1200px) {
+            .container { padding: 40px; }
+            .main-title { font-size: 36px; }
+            .content { grid-template-columns: 1fr; }
+            .key-advantages { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="slide-number">スライド H</div>
+            <h1 class="main-title">🇪🇺 欧州標準化戦略</h1>
+            <p class="subtitle">規制調和と責任あるイノベーション</p>
+        </div>
+
+        <div class="content">
+            <div class="left-section">
+                <div class="edf-investment">
+                    <div class="investment-title">EDF EPR2プロジェクト</div>
+                    <div class="investment-amount">€70B</div>
+                    <div class="investment-details">
+                        次世代EPR2炉の開発・建設<br>
+                        AI統合設計による効率化<br>
+                        2024年記録的利益€11.4B達成<br>
+                        Framatome収益11.8%増加
+                    </div>
+                </div>
+
+                <div class="regulatory-framework">
+                    <div class="framework-title">EU AI法規制枠組み</div>
+                    <ul class="framework-list">
+                        <li>高リスクAIシステムの厳格管理</li>
+                        <li>透明性・説明可能性の義務化</li>
+                        <li>人間中心のAI開発原則</li>
+                        <li>基本的権利保護の徹底</li>
+                        <li>責任あるイノベーション促進</li>
+                        <li>国際標準化への積極関与</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="right-section">
+                <div class="standards-leadership">
+                    <div class="standards-title">国際標準化リーダーシップ</div>
+                    <div class="standards-content">
+                        <strong>IAEA AI-原子力シンポジウム主導</strong><br>
+                        • 国際原子力機関での標準策定<br>
+                        • 多国間協力フレームワーク構築<br><br>
+                        
+                        <strong>持続可能性重視アプローチ</strong><br>
+                        • Green Deal政策との整合性<br>
+                        • 長期的環境影響評価の重視<br><br>
+                        
+                        <strong>技術倫理の先駆的取り組み</strong><br>
+                        • AI倫理委員会の設置<br>
+                        • 社会的受容性の体系的研究
+                    </div>
+                </div>
+
+                <div class="key-advantages">
+                    <div class="advantage-card">
+                        <div class="advantage-icon">🤝</div>
+                        <div class="advantage-title-small">国際協調力</div>
+                        <div class="advantage-description">27ヶ国の合意形成能力と多様な利害関係者との調整経験</div>
+                    </div>
+
+                    <div class="advantage-card">
+                        <div class="advantage-icon">📚</div>
+                        <div class="advantage-title-small">規制専門性</div>
+                        <div class="advantage-description">複雑な技術規制の策定・運用における世界最高水準のノウハウ</div>
+                    </div>
+
+                    <div class="advantage-card">
+                        <div class="advantage-icon">🌱</div>
+                        <div class="advantage-title-small">持続可能性</div>
+                        <div class="advantage-description">長期的視点での環境・社会影響を重視した技術開発アプローチ</div>
+                    </div>
+
+                    <div class="advantage-card">
+                        <div class="advantage-icon">⚡</div>
+                        <div class="advantage-title-small">技術成熟度</div>
+                        <div class="advantage-description">60年以上の原子力運用経験と高度な安全文化の蓄積</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <div class="nav-buttons">
+                <a href="slideG_us_dominance.html" class="nav-button">← 前へ：米国優位</a>
+                <a href="slideI_asia_catchup.html" class="nav-button">次へ：アジア追撃 →</a>
+            </div>
+            <div class="slide-info">原子力AI技術革命 | 日本原子力学会2025年秋の大会</div>
+        </div>
+    </div>
+</body>
+</html>

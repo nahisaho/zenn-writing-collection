@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Westinghouse HiVe™プラットフォーム - 原子力AI技術革命</title>
+    <style>
+        :root {
+            --microsoft-blue: #0078D4;
+            --microsoft-dark-blue: #005A9E;
+            --microsoft-light-blue: #40C0FF;
+            --microsoft-green: #107C10;
+            --microsoft-purple: #5C2D91;
+            --microsoft-orange: #FF8C00;
+            --text-primary: #323130;
+            --text-secondary: #605E5C;
+            --background: #FFFFFF;
+            --card-background: #FAFAFA;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #FFFFFF 0%, #F8F9FA 100%);
+            color: var(--text-primary);
+            line-height: 1.6;
+            padding: 40px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            aspect-ratio: 16/9;
+            background: var(--background);
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+            padding: 60px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .slide-number {
+            font-size: 24px;
+            font-weight: 600;
+            color: var(--microsoft-blue);
+            margin-bottom: 16px;
+        }
+
+        .main-title {
+            font-size: 42px;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 12px;
+        }
+
+        .subtitle {
+            font-size: 22px;
+            color: var(--text-secondary);
+            font-weight: 400;
+        }
+
+        .content {
+            flex: 1;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 35px;
+        }
+
+        .left-section {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .right-section {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .hive-philosophy {
+            background: linear-gradient(135deg, rgba(92, 45, 145, 0.1) 0%, rgba(92, 45, 145, 0.05) 100%);
+            border: 2px solid var(--microsoft-purple);
+            border-radius: 16px;
+            padding: 25px;
+        }
+
+        .philosophy-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--microsoft-purple);
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+        }
+
+        .philosophy-title::before {
+            content: "🐝";
+            margin-right: 8px;
+            font-size: 24px;
+        }
+
+        .philosophy-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .philosophy-item {
+            background: rgba(92, 45, 145, 0.05);
+            border-radius: 8px;
+            padding: 12px;
+        }
+
+        .philosophy-name {
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--microsoft-purple);
+            margin-bottom: 4px;
+        }
+
+        .philosophy-description {
+            font-size: 11px;
+            color: var(--text-secondary);
+            line-height: 1.3;
+        }
+
+        .bertha-tribute {
+            background: linear-gradient(135deg, rgba(255, 140, 0, 0.1) 0%, rgba(255, 140, 0, 0.05) 100%);
+            border: 2px solid var(--microsoft-orange);
+            border-radius: 16px;
+            padding: 25px;
+            text-align: center;
+        }
+
+        .tribute-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--microsoft-orange);
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .tribute-title::before {
+            content: "👩‍💼";
+            margin-right: 8px;
+            font-size: 24px;
+        }
+
+        .tribute-content {
+            font-size: 14px;
+            color: var(--text-primary);
+            line-height: 1.5;
+            margin-bottom: 12px;
+        }
+
+        .tribute-highlight {
+            background: rgba(255, 140, 0, 0.1);
+            border-radius: 8px;
+            padding: 10px;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--microsoft-orange);
+        }
+
+        .architecture-diagram {
+            background: var(--card-background);
+            border-radius: 16px;
+            padding: 25px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+            border-left: 6px solid var(--microsoft-blue);
+        }
+
+        .architecture-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--microsoft-blue);
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+        }
+
+        .architecture-title::before {
+            content: "🏗️";
+            margin-right: 8px;
+            font-size: 20px;
+        }
+
+        .component-tree {
+            font-size: 12px;
+            color: var(--text-primary);
+            line-height: 1.4;
+            font-family: 'Courier New', monospace;
+            background: rgba(0, 120, 212, 0.05);
+            border-radius: 8px;
+            padding: 15px;
+        }
+
+        .technical-specs {
+            background: linear-gradient(135deg, rgba(0, 120, 212, 0.1) 0%, rgba(0, 120, 212, 0.05) 100%);
+            border: 2px solid var(--microsoft-blue);
+            border-radius: 16px;
+            padding: 25px;
+        }
+
+        .specs-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--microsoft-blue);
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+        }
+
+        .specs-title::before {
+            content: "⚙️";
+            margin-right: 8px;
+            font-size: 20px;
+        }
+
+        .specs-comparison {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .spec-category {
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--text-primary);
+            padding: 8px;
+            background: rgba(0, 120, 212, 0.1);
+            border-radius: 6px;
+            text-align: center;
+        }
+
+        .vs-divider {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: var(--microsoft-blue);
+        }
+
+        .competitive-advantage {
+            background: linear-gradient(135deg, rgba(16, 124, 16, 0.1) 0%, rgba(16, 124, 16, 0.05) 100%);
+            border: 2px solid var(--microsoft-green);
+            border-radius: 16px;
+            padding: 25px;
+        }
+
+        .advantage-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--microsoft-green);
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+        }
+
+        .advantage-title::before {
+            content: "🎯";
+            margin-right: 8px;
+            font-size: 24px;
+        }
+
+        .advantage-list {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .advantage-item {
+            background: rgba(16, 124, 16, 0.05);
+            border-radius: 8px;
+            padding: 10px;
+        }
+
+        .advantage-name {
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--microsoft-green);
+            margin-bottom: 4px;
+        }
+
+        .advantage-desc {
+            font-size: 10px;
+            color: var(--text-secondary);
+            line-height: 1.3;
+        }
+
+        .integration-focus {
+            background: rgba(92, 45, 145, 0.05);
+            border: 1px solid var(--microsoft-purple);
+            border-radius: 12px;
+            padding: 15px;
+        }
+
+        .integration-title {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--microsoft-purple);
+            margin-bottom: 10px;
+        }
+
+        .integration-content {
+            font-size: 12px;
+            color: var(--text-primary);
+            line-height: 1.4;
+        }
+
+        .footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 25px;
+            padding-top: 25px;
+            border-top: 2px solid #E1E1E1;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .nav-button {
+            background: var(--microsoft-light-blue);
+            color: var(--text-primary);
+            padding: 12px 24px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-button:hover {
+            background: var(--microsoft-blue);
+            color: white;
+        }
+
+        .slide-info {
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        @media (max-width: 1200px) {
+            .container { padding: 40px; }
+            .main-title { font-size: 32px; }
+            .content { grid-template-columns: 1fr; }
+            .philosophy-grid { grid-template-columns: 1fr; }
+            .advantage-list { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="slide-number">スライド L</div>
+            <h1 class="main-title">Westinghouse HiVe™プラットフォーム</h1>
+            <p class="subtitle">産業規模のAI統合による原子力デジタル変革</p>
+        </div>
+
+        <div class="content">
+            <div class="left-section">
+                <div class="hive-philosophy">
+                    <div class="philosophy-title">HiVe™設計哲学</div>
+                    <div class="philosophy-grid">
+                        <div class="philosophy-item">
+                            <div class="philosophy-name">集合知の活用</div>
+                            <div class="philosophy-description">100年間の工学知識統合<br>世界中の専門家経験蓄積</div>
+                        </div>
+                        <div class="philosophy-item">
+                            <div class="philosophy-name">協調作業統合</div>
+                            <div class="philosophy-description">人間-AI協調設計<br>リアルタイム協調支援</div>
+                        </div>
+                        <div class="philosophy-item">
+                            <div class="philosophy-name">高度汎用性</div>
+                            <div class="philosophy-description">全ライフサイクル対応<br>スケーラブル設計</div>
+                        </div>
+                        <div class="philosophy-item">
+                            <div class="philosophy-name">継続的進化</div>
+                            <div class="philosophy-description">新知識の自動統合<br>技術進歩への適応</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bertha-tribute">
+                    <div class="tribute-title">bertha™の名前の由来</div>
+                    <div class="tribute-content">
+                        <strong>Bertha Lamme氏</strong>（1869-1954）<br>
+                        1893年米国初の女性機械工学士<br>
+                        Westinghouse初の女性エンジニア
+                    </div>
+                    <div class="tribute-highlight">
+                        先駆的女性技術者への敬意を込めて<br>
+                        75年以上の原子力知識を統合したLLMに命名
+                    </div>
+                </div>
+
+                <div class="integration-focus">
+                    <div class="integration-title">🔗 Google Cloud統合</div>
+                    <div class="integration-content">
+                        • Vertex AI による機械学習基盤<br>
+                        • BigQuery でのデータ統合<br>
+                        • Gemini Integration による高度分析<br>
+                        • エンタープライズ級セキュリティ
+                    </div>
+                </div>
+            </div>
+
+            <div class="right-section">
+                <div class="architecture-diagram">
+                    <div class="architecture-title">システムアーキテクチャ</div>
+                    <div class="component-tree">
+HiVe™ Core Platform
+├── bertha™ LLM Engine
+│   ├── 原子力専門知識統合
+│   └── 設計・解析支援
+├── Knowledge Integration Layer
+│   ├── 文書管理システム
+│   └── CAD/CAE統合
+├── Google Cloud Infrastructure
+│   ├── Vertex AI Platform
+│   ├── BigQuery Analytics
+│   └── Gemini Integration
+├── Security & Compliance
+│   ├── 暗号化・認証
+│   └── 監査・ログ管理
+└── User Interface & APIs
+    ├── Web Interface
+    ├── Mobile Apps
+    └── Third-party APIs
+                    </div>
+                </div>
+
+                <div class="technical-specs">
+                    <div class="specs-title">bertha™技術的優位性</div>
+                    <div class="specs-comparison">
+                        <div class="spec-category">汎用LLM</div>
+                        <div class="vs-divider">VS</div>
+                        <div class="spec-category">bertha™</div>
+                    </div>
+                    <div style="display: grid; grid-template-columns: 1fr auto 1fr; gap: 8px; font-size: 11px; margin-bottom: 6px;">
+                        <div style="text-align: center; color: var(--text-secondary);">PWR系統設計: 基本対応</div>
+                        <div style="text-align: center; color: var(--microsoft-blue);">→</div>
+                        <div style="text-align: center; color: var(--microsoft-green); font-weight: 700;">高度対応</div>
+                    </div>
+                    <div style="display: grid; grid-template-columns: 1fr auto 1fr; gap: 8px; font-size: 11px; margin-bottom: 6px;">
+                        <div style="text-align: center; color: var(--text-secondary);">中性子物理: 限定対応</div>
+                        <div style="text-align: center; color: var(--microsoft-blue);">→</div>
+                        <div style="text-align: center; color: var(--microsoft-green); font-weight: 700;">専門対応</div>
+                    </div>
+                    <div style="display: grid; grid-template-columns: 1fr auto 1fr; gap: 8px; font-size: 11px; margin-bottom: 6px;">
+                        <div style="text-align: center; color: var(--text-secondary);">安全解析: 限定対応</div>
+                        <div style="text-align: center; color: var(--microsoft-blue);">→</div>
+                        <div style="text-align: center; color: var(--microsoft-green); font-weight: 700;">高度対応</div>
+                    </div>
+                </div>
+
+                <div class="competitive-advantage">
+                    <div class="advantage-title">競争優位性</div>
+                    <div class="advantage-list">
+                        <div class="advantage-item">
+                            <div class="advantage-name">物理法則統合</div>
+                            <div class="advantage-desc">熱力学・中性子物理の知識活用</div>
+                        </div>
+                        <div class="advantage-item">
+                            <div class="advantage-name">経験データ活用</div>
+                            <div class="advantage-desc">材料劣化・運転実績の統合</div>
+                        </div>
+                        <div class="advantage-item">
+                            <div class="advantage-name">規制知識統合</div>
+                            <div class="advantage-desc">国際規制要件の体系化</div>
+                        </div>
+                        <div class="advantage-item">
+                            <div class="advantage-name">ライフサイクル対応</div>
+                            <div class="advantage-desc">設計から廃炉まで全段階支援</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <div class="nav-buttons">
+                <a href="slideK_diablo_canyon_success.html" class="nav-button">← 前へ：ディアブロキャニオン</a>
+                <a href="slideM_national_labs_innovation.html" class="nav-button">次へ：国立研究所の革新 →</a>
+            </div>
+            <div class="slide-info">原子力AI技術革命 | 日本原子力学会2025年秋の大会</div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>新ビジネスモデル創出 - 原子力AI技術革命</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Segoe UI", -apple-system, BlinkMacSystemFont, "Roboto", sans-serif;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            color: #333;
+            line-height: 1.6;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            aspect-ratio: 16 / 9;
+        }
+
+        .container {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            padding: 3rem;
+            background: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+
+        .main-title {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #0078D4;
+            margin-bottom: 1rem;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .subtitle {
+            font-size: 1.1rem;
+            color: #666;
+            font-weight: 500;
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            flex: 1;
+            align-items: start;
+        }
+
+        .aiass-platform {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2.5rem;
+            border-radius: 16px;
+            box-shadow: 0 8px 32px rgba(102, 126, 234, 0.3);
+        }
+
+        .platform-title {
+            font-size: 1.8rem;
+            font-weight: bold;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .platform-layers {
+            margin-bottom: 2rem;
+        }
+
+        .layer {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 1rem;
+            margin-bottom: 0.8rem;
+            border-radius: 8px;
+            backdrop-filter: blur(10px);
+        }
+
+        .layer-title {
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .layer-content {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            line-height: 1.4;
+        }
+
+        .revenue-models {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.5rem;
+            font-size: 0.85rem;
+        }
+
+        .revenue-item {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 0.5rem;
+            border-radius: 4px;
+            text-align: center;
+        }
+
+        .data-monetization {
+            background: white;
+            padding: 2rem;
+            border-radius: 16px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+        }
+
+        .data-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            padding-bottom: 0.5rem;
+            border-bottom: 3px solid #28a745;
+        }
+
+        .data-stream {
+            margin-bottom: 1.5rem;
+            padding: 1.2rem;
+            background: #f8f9fa;
+            border-radius: 12px;
+            border-left: 4px solid;
+        }
+
+        .data-stream.anonymized {
+            border-left-color: #0078D4;
+        }
+
+        .data-stream.benchmarking {
+            border-left-color: #28a745;
+        }
+
+        .data-stream.training {
+            border-left-color: #ff6b35;
+        }
+
+        .stream-name {
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            color: #333;
+        }
+
+        .stream-description {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 0.8rem;
+            line-height: 1.4;
+        }
+
+        .revenue-projection {
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        .revenue-projection.blue {
+            color: #0078D4;
+        }
+
+        .revenue-projection.green {
+            color: #28a745;
+        }
+
+        .revenue-projection.orange {
+            color: #ff6b35;
+        }
+
+        .platform-ecosystem {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90%;
+            background: white;
+            padding: 1.5rem;
+            border-radius: 16px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .ecosystem-title {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .participants {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 1rem;
+            text-align: center;
+        }
+
+        .participant {
+            padding: 0.8rem;
+            background: #f8f9fa;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #666;
+            border-top: 3px solid;
+        }
+
+        .participant.operators {
+            border-top-color: #0078D4;
+        }
+
+        .participant.vendors {
+            border-top-color: #28a745;
+        }
+
+        .participant.service {
+            border-top-color: #ff6b35;
+        }
+
+        .participant.regulators {
+            border-top-color: #6f42c1;
+        }
+
+        .participant.research {
+            border-top-color: #20c997;
+        }
+
+        .innovation-badge {
+            position: absolute;
+            top: 2rem;
+            right: 2rem;
+            background: linear-gradient(135deg, #6f42c1 0%, #8e5bff 100%);
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 1rem;
+            box-shadow: 0 4px 12px rgba(111, 66, 193, 0.3);
+        }
+
+        @keyframes slideInUp {
+            from {
+                transform: translateY(30px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideInLeft {
+            from {
+                transform: translateX(-30px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                transform: translateX(30px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        .aiass-platform {
+            animation: slideInLeft 0.8s ease-out forwards;
+        }
+
+        .data-monetization {
+            animation: slideInRight 0.8s ease-out forwards;
+            animation-delay: 0.3s;
+        }
+
+        .platform-ecosystem {
+            animation: slideInUp 0.8s ease-out forwards;
+            animation-delay: 0.6s;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="innovation-badge">ビジネス革新</div>
+        
+        <div class="header">
+            <h1 class="main-title">新ビジネスモデル創出</h1>
+            <p class="subtitle">AIaaS・データ収益化・プラットフォーム戦略</p>
+        </div>
+
+        <div class="content-grid">
+            <div class="aiass-platform">
+                <h3 class="platform-title">Nuclear AI-as-a-Service</h3>
+                
+                <div class="platform-layers">
+                    <div class="layer">
+                        <div class="layer-title">🏗️ 基盤プラットフォーム</div>
+                        <div class="layer-content">クラウドベースAI実行環境<br>原子力特化データモデル</div>
+                    </div>
+                    
+                    <div class="layer">
+                        <div class="layer-title">🔧 提供サービス</div>
+                        <div class="layer-content">設計最適化・運転支援<br>予知保全・安全解析AI</div>
+                    </div>
+                </div>
+
+                <div class="revenue-models">
+                    <div class="revenue-item">従量課金制</div>
+                    <div class="revenue-item">サブスクリプション</div>
+                    <div class="revenue-item">成果報酬型</div>
+                    <div class="revenue-item">ライセンス料</div>
+                </div>
+            </div>
+
+            <div class="data-monetization">
+                <h3 class="data-title">データ収益化モデル</h3>
+                
+                <div class="data-stream anonymized">
+                    <div class="stream-name">匿名化データ販売</div>
+                    <div class="stream-description">運転パラメータ・機器性能・異常事例データ</div>
+                    <div class="revenue-projection blue">年間収益：5-10億ドル</div>
+                </div>
+                
+                <div class="data-stream benchmarking">
+                    <div class="stream-name">ベンチマーキングサービス</div>
+                    <div class="stream-description">同業他社比較・業界標準値・改善提案</div>
+                    <div class="revenue-projection green">市場規模：2-3億ドル</div>
+                </div>
+                
+                <div class="data-stream training">
+                    <div class="stream-name">AI学習データ提供</div>
+                    <div class="stream-description">高品質訓練データ・ラベル付きデータセット</div>
+                    <div class="revenue-projection orange">市場規模：3-5億ドル</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="platform-ecosystem">
+            <h3 class="ecosystem-title">原子力エコシステム・プラットフォーム</h3>
+            <div class="participants">
+                <div class="participant operators">原子力<br>事業者</div>
+                <div class="participant vendors">技術<br>ベンダー</div>
+                <div class="participant service">サービス<br>プロバイダー</div>
+                <div class="participant regulators">規制<br>機関</div>
+                <div class="participant research">研究<br>機関</div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ROI実績分析 - 原子力AI技術革命</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Segoe UI", -apple-system, BlinkMacSystemFont, "Roboto", sans-serif;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            color: #333;
+            line-height: 1.6;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            aspect-ratio: 16 / 9;
+        }
+
+        .container {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            padding: 3rem;
+            background: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+
+        .main-title {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #0078D4;
+            margin-bottom: 1rem;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .subtitle {
+            font-size: 1.1rem;
+            color: #666;
+            font-weight: 500;
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            flex: 1;
+            align-items: start;
+        }
+
+        .roi-metrics {
+            background: white;
+            padding: 2rem;
+            border-radius: 16px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+        }
+
+        .metrics-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 2rem;
+            text-align: center;
+            padding-bottom: 0.5rem;
+            border-bottom: 3px solid #28a745;
+        }
+
+        .metric-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.2rem;
+            margin-bottom: 1rem;
+            background: #f8f9fa;
+            border-radius: 12px;
+            border-left: 4px solid #28a745;
+        }
+
+        .metric-label {
+            font-weight: 600;
+            color: #333;
+            font-size: 1.1rem;
+        }
+
+        .metric-value {
+            font-weight: bold;
+            font-size: 1.4rem;
+        }
+
+        .metric-value.primary {
+            color: #28a745;
+        }
+
+        .metric-value.secondary {
+            color: #0078D4;
+        }
+
+        .comparison-table {
+            background: white;
+            padding: 2rem;
+            border-radius: 16px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+        }
+
+        .table-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            padding-bottom: 0.5rem;
+            border-bottom: 3px solid #0078D4;
+        }
+
+        .comparison-row {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 1rem;
+            padding: 1rem 0.5rem;
+            border-bottom: 1px solid #eee;
+            align-items: center;
+        }
+
+        .comparison-row:first-child {
+            font-weight: bold;
+            background: #f8f9fa;
+            border-radius: 8px;
+            color: #333;
+        }
+
+        .comparison-row:last-child {
+            border-bottom: none;
+        }
+
+        .cell {
+            text-align: center;
+            font-size: 0.95rem;
+        }
+
+        .cell:first-child {
+            text-align: left;
+            font-weight: 600;
+        }
+
+        .improvement {
+            background: #d4edda;
+            color: #155724;
+            padding: 0.3rem 0.6rem;
+            border-radius: 16px;
+            font-weight: bold;
+            font-size: 0.85rem;
+        }
+
+        .cost-benefits {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            width: 80%;
+        }
+
+        .benefit-card {
+            background: linear-gradient(135deg, #0078D4 0%, #106ebe 100%);
+            color: white;
+            padding: 1.2rem;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 4px 16px rgba(0, 120, 212, 0.3);
+        }
+
+        .benefit-percentage {
+            font-size: 1.8rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .benefit-label {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        .proven-badge {
+            position: absolute;
+            top: 2rem;
+            right: 2rem;
+            background: #28a745;
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 1rem;
+            box-shadow: 0 4px 12px rgba(40, 167, 69, 0.3);
+        }
+
+        @keyframes slideInUp {
+            from {
+                transform: translateY(30px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .roi-metrics,
+        .comparison-table {
+            animation: slideInUp 0.8s ease-out forwards;
+        }
+
+        .comparison-table {
+            animation-delay: 0.3s;
+        }
+
+        .benefit-card {
+            animation: slideInUp 0.8s ease-out forwards;
+        }
+
+        .benefit-card:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .benefit-card:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="proven-badge">実証済み効果</div>
+        
+        <div class="header">
+            <h1 class="main-title">ROI実績分析</h1>
+            <p class="subtitle">投資回収期間4.6年、IRR 18%の優秀な投資効率</p>
+        </div>
+
+        <div class="content-grid">
+            <div class="roi-metrics">
+                <h3 class="metrics-title">核心投資指標</h3>
+                
+                <div class="metric-item">
+                    <span class="metric-label">投資回収期間</span>
+                    <span class="metric-value primary">4.6年</span>
+                </div>
+                
+                <div class="metric-item">
+                    <span class="metric-label">IRR（内部収益率）</span>
+                    <span class="metric-value primary">18%</span>
+                </div>
+                
+                <div class="metric-item">
+                    <span class="metric-label">リスク調整済みリターン</span>
+                    <span class="metric-value secondary">15%</span>
+                </div>
+            </div>
+
+            <div class="comparison-table">
+                <h3 class="table-title">業界ベンチマーク比較</h3>
+                
+                <div class="comparison-row">
+                    <div class="cell">指標</div>
+                    <div class="cell">一般的IT投資</div>
+                    <div class="cell">原子力AI投資</div>
+                    <div class="cell">改善効果</div>
+                </div>
+                
+                <div class="comparison-row">
+                    <div class="cell">投資回収期間</div>
+                    <div class="cell">3-5年</div>
+                    <div class="cell">4.6年</div>
+                    <div class="cell">標準範囲内</div>
+                </div>
+                
+                <div class="comparison-row">
+                    <div class="cell">IRR</div>
+                    <div class="cell">12-15%</div>
+                    <div class="cell">18%</div>
+                    <div class="cell improvement">+3-6pt</div>
+                </div>
+                
+                <div class="comparison-row">
+                    <div class="cell">リスク調整済み</div>
+                    <div class="cell">8-12%</div>
+                    <div class="cell">15%</div>
+                    <div class="cell improvement">+3-7pt</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="cost-benefits">
+            <div class="benefit-card">
+                <div class="benefit-percentage">20-30%</div>
+                <div class="benefit-label">保全費削減</div>
+            </div>
+            
+            <div class="benefit-card">
+                <div class="benefit-percentage">最大50%</div>
+                <div class="benefit-label">設備可用性向上</div>
+            </div>
+            
+            <div class="benefit-card">
+                <div class="benefit-percentage">$60億</div>
+                <div class="benefit-label">年間節約効果</div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

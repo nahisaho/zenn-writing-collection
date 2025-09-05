@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>生成AIと原子力AI - 歴史的融合の始まり</title>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+    <style>
+        :root {
+            --microsoft-blue: #0078D4;
+            --microsoft-dark-blue: #005A9E;
+            --microsoft-light-blue: #40C0FF;
+            --microsoft-green: #107C10;
+            --microsoft-orange: #FF8C00;
+            --microsoft-purple: #5B2C87;
+            --microsoft-red: #D13438;
+            --text-primary: #323130;
+            --text-secondary: #605E5C;
+            --background: #FFFFFF;
+            --card-background: #FAFAFA;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #FFFFFF 0%, #F8F9FA 100%);
+            color: var(--text-primary);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            aspect-ratio: 16/9;
+            overflow: hidden;
+        }
+
+        .slide-container {
+            width: 100%;
+            max-width: 1600px;
+            max-height: 900px;
+            aspect-ratio: 16/9;
+            display: grid;
+            grid-template-rows: auto 1fr;
+            padding: 45px;
+            gap: 25px;
+        }
+
+        .slide-header {
+            text-align: center;
+            animation: slideDownFadeIn 1s ease-out;
+        }
+
+        .slide-title {
+            font-size: 42px;
+            font-weight: 700;
+            color: var(--microsoft-blue);
+            margin-bottom: 16px;
+        }
+
+        .slide-subtitle {
+            font-size: 18px;
+            color: var(--text-secondary);
+            font-weight: 400;
+        }
+
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            animation: slideUpFadeIn 1.2s ease-out;
+        }
+
+        .chatgpt-shock {
+            background: var(--card-background);
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+            border-left: 6px solid var(--microsoft-red);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .nuclear-adoption {
+            background: var(--card-background);
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+            border-left: 6px solid var(--microsoft-green);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .section-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--microsoft-red);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .nuclear-adoption .section-title {
+            color: var(--microsoft-green);
+        }
+
+        .timeline-item {
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 16px;
+            border-left: 4px solid var(--microsoft-light-blue);
+            transition: all 0.3s ease;
+        }
+
+        .timeline-item:hover {
+            background: rgba(255, 255, 255, 0.95);
+            transform: translateX(8px);
+        }
+
+        .timeline-date {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--microsoft-blue);
+            margin-bottom: 6px;
+        }
+
+        .timeline-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+        }
+
+        .timeline-description {
+            font-size: 14px;
+            color: var(--text-secondary);
+            line-height: 1.4;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-top: 16px;
+        }
+
+        .stat-card {
+            background: rgba(16, 124, 16, 0.1);
+            border-radius: 10px;
+            padding: 16px;
+            text-align: center;
+            border: 2px solid rgba(16, 124, 16, 0.2);
+        }
+
+        .stat-number {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--microsoft-green);
+            margin-bottom: 6px;
+        }
+
+        .stat-label {
+            font-size: 12px;
+            color: var(--text-secondary);
+            line-height: 1.3;
+        }
+
+        .evolution-timeline {
+            grid-column: 1 / -1;
+            background: var(--card-background);
+            border-radius: 16px;
+            padding: 28px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+            border-left: 6px solid var(--microsoft-purple);
+        }
+
+        .evolution-timeline .section-title {
+            color: var(--microsoft-purple);
+        }
+
+        .evolution-flow {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            gap: 16px;
+        }
+
+        .evolution-item {
+            flex: 1;
+            text-align: center;
+            position: relative;
+        }
+
+        .evolution-item:not(:last-child)::after {
+            content: '→';
+            position: absolute;
+            right: -16px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--microsoft-purple);
+        }
+
+        .evolution-date {
+            background: var(--microsoft-purple);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: 10px;
+            display: inline-block;
+        }
+
+        .evolution-tech {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 6px;
+        }
+
+        .evolution-desc {
+            font-size: 12px;
+            color: var(--text-secondary);
+            line-height: 1.3;
+        }
+
+        .key-insight {
+            background: linear-gradient(120deg, rgba(91, 44, 135, 0.1) 0%, rgba(0, 120, 212, 0.1) 100%);
+            border: 2px solid var(--microsoft-light-blue);
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .insight-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--microsoft-dark-blue);
+            margin-bottom: 12px;
+        }
+
+        .insight-text {
+            font-size: 15px;
+            line-height: 1.5;
+            color: var(--text-primary);
+        }
+
+        @keyframes slideDownFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideUpFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 1400px) {
+            .slide-title { font-size: 36px; }
+            .section-title { font-size: 22px; }
+            .evolution-flow { flex-direction: column; gap: 20px; }
+            .evolution-item:not(:last-child)::after { 
+                content: '↓';
+                right: 50%;
+                top: 100%;
+                transform: translateX(50%);
+            }
+        }
+
+        @media (max-width: 1024px) {
+            .main-content {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            .slide-container { padding: 35px; }
+            .stats-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="slide-header">
+            <h1 class="slide-title">生成AIと原子力AI - 歴史的融合の始まり</h1>
+            <p class="slide-subtitle">2023年ChatGPTショックから原子力専用AIまでの劇的変化</p>
+        </div>
+
+        <div class="main-content">
+            <div class="chatgpt-shock">
+                <h2 class="section-title">
+                    💥 ChatGPTショックとその波及効果
+                </h2>
+                
+                <div class="timeline-item">
+                    <div class="timeline-date">2022年11月30日</div>
+                    <div class="timeline-title">ChatGPT公開</div>
+                    <div class="timeline-description">
+                        わずか2ヶ月で1億ユーザー獲得。世界が新たな技術革命の時代に突入。
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-date">2023年</div>
+                    <div class="timeline-title">産業界への激震</div>
+                    <div class="timeline-description">
+                        従来の「特定タスク自動化」から「知的作業の拡張」へのパラダイムシフト。
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-date">2022年</div>
+                    <div class="timeline-title">IAEA報告書</div>
+                    <div class="timeline-description">
+                        AI技術が原子力分野の科学技術を加速させる可能性を指摘。
+                    </div>
+                </div>
+            </div>
+
+            <div class="nuclear-adoption">
+                <h2 class="section-title">
+                    ⚛️ 原子力コミュニティでの急速な浸透
+                </h2>
+                
+                <div class="timeline-item">
+                    <div class="timeline-date">2024年 国際会議報告</div>
+                    <div class="timeline-title">核工学コミュニティでの採用進展</div>
+                    <div class="timeline-description">
+                        特に学生層での採用率が顕著に高いことが確認。次世代の標準ツールへ。
+                    </div>
+                </div>
+
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-number">5%</div>
+                        <div class="stat-label">平均効率向上<br>（一般ユーザー）</div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-number">80-100%</div>
+                        <div class="stat-label">生産性向上<br>（先進ユーザー）</div>
+                    </div>
+                </div>
+
+                <div style="background: rgba(16, 124, 16, 0.1); border-radius: 8px; padding: 16px; margin-top: 16px;">
+                    <div style="font-size: 14px; font-weight: 600; color: var(--microsoft-green); margin-bottom: 8px;">
+                        🔥 急速な技術進化
+                    </div>
+                    <div style="font-size: 13px; line-height: 1.4; color: var(--text-secondary);">
+                        ムーアの法則を凌駕する進化速度。汎用AIから原子力特化型AIへの進化がわずか2年で実現。
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="evolution-timeline">
+            <h2 class="section-title">
+                🚀 技術進化のタイムライン
+            </h2>
+            
+            <div class="evolution-flow">
+                <div class="evolution-item">
+                    <div class="evolution-date">2023年3月</div>
+                    <div class="evolution-tech">GPT-4リリース</div>
+                    <div class="evolution-desc">マルチモーダル対応</div>
+                </div>
+                
+                <div class="evolution-item">
+                    <div class="evolution-date">2023年11月</div>
+                    <div class="evolution-tech">GPT-4 Turbo</div>
+                    <div class="evolution-desc">128kトークン対応</div>
+                </div>
+                
+                <div class="evolution-item">
+                    <div class="evolution-date">2024年5月</div>
+                    <div class="evolution-tech">GPT-4o</div>
+                    <div class="evolution-desc">リアルタイム音声・画像</div>
+                </div>
+                
+                <div class="evolution-item">
+                    <div class="evolution-date">2024-2025年</div>
+                    <div class="evolution-tech">原子力専用LLM</div>
+                    <div class="evolution-desc">FERMIモデル等実用化</div>
+                </div>
+            </div>
+
+            <div class="key-insight">
+                <div class="insight-title">⚡ 重要な示唆</div>
+                <div class="insight-text">
+                    技術の成熟速度が従来の産業技術とは根本的に異なる。<br>
+                    汎用AIから<strong>原子力特化型AI</strong>への進化がわずか2年で実現したことは、<br>
+                    原子力産業がAI革命の最前線に位置することを示している。
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        mermaid.initialize({ 
+            startOnLoad: true,
+            theme: 'base',
+            themeVariables: {
+                primaryColor: '#0078D4',
+                primaryTextColor: '#323130',
+                primaryBorderColor: '#0078D4',
+                lineColor: '#605E5C',
+                secondaryColor: '#F3F2F1',
+                tertiaryColor: '#FFFFFF',
+                background: '#FFFFFF',
+                mainBkg: '#FAFAFA',
+                secondBkg: '#F8F9FA'
+            }
+        });
+    </script>
+</body>
+</html>

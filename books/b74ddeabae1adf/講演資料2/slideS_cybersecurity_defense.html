@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>サイバーセキュリティ多層防護 - 原子力AI技術革命</title>
+    <style>
+        :root {
+            --microsoft-blue: #0078D4;
+            --microsoft-dark-blue: #005A9E;
+            --microsoft-light-blue: #40C0FF;
+            --microsoft-green: #107C10;
+            --microsoft-red: #D83B01;
+            --microsoft-orange: #FF8C00;
+            --microsoft-purple: #5C2D91;
+            --text-primary: #323130;
+            --text-secondary: #605E5C;
+            --background: #FFFFFF;
+            --card-background: #FAFAFA;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #FFFFFF 0%, #F8F9FA 100%);
+            color: var(--text-primary);
+            line-height: 1.6;
+            padding: 40px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            aspect-ratio: 16/9;
+            background: var(--background);
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+            padding: 60px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .slide-number {
+            font-size: 24px;
+            font-weight: 600;
+            color: var(--microsoft-blue);
+            margin-bottom: 16px;
+        }
+
+        .main-title {
+            font-size: 36px;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 12px;
+        }
+
+        .subtitle {
+            font-size: 18px;
+            color: var(--text-secondary);
+            font-weight: 400;
+        }
+
+        .content {
+            flex: 1;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+        }
+
+        .left-section {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .right-section {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .threat-landscape {
+            background: linear-gradient(135deg, rgba(216, 59, 1, 0.1) 0%, rgba(216, 59, 1, 0.05) 100%);
+            border: 2px solid var(--microsoft-red);
+            border-radius: 16px;
+            padding: 22px;
+        }
+
+        .threat-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--microsoft-red);
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+        }
+
+        .threat-title::before {
+            content: "⚠️";
+            margin-right: 8px;
+            font-size: 20px;
+        }
+
+        .threat-categories {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 10px;
+        }
+
+        .threat-category {
+            background: rgba(216, 59, 1, 0.05);
+            border-radius: 8px;
+            padding: 10px;
+        }
+
+        .category-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 6px;
+        }
+
+        .category-icon {
+            font-size: 16px;
+            margin-right: 6px;
+        }
+
+        .category-name {
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--microsoft-red);
+        }
+
+        .threat-examples {
+            font-size: 10px;
+            color: var(--text-primary);
+            line-height: 1.3;
+            margin-left: 20px;
+        }
+
+        .defense-layers {
+            background: linear-gradient(135deg, rgba(16, 124, 16, 0.1) 0%, rgba(16, 124, 16, 0.05) 100%);
+            border: 2px solid var(--microsoft-green);
+            border-radius: 16px;
+            padding: 22px;
+        }
+
+        .defense-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--microsoft-green);
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+        }
+
+        .defense-title::before {
+            content: "🛡️";
+            margin-right: 8px;
+            font-size: 20px;
+        }
+
+        .layers-diagram {
+            font-size: 10px;
+            color: var(--text-primary);
+            line-height: 1.4;
+            font-family: 'Courier New', monospace;
+            background: rgba(16, 124, 16, 0.05);
+            border-radius: 6px;
+            padding: 12px;
+        }
+
+        .airgap-design {
+            background: var(--card-background);
+            border-radius: 16px;
+            padding: 20px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+            border-left: 6px solid var(--microsoft-blue);
+        }
+
+        .airgap-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--microsoft-blue);
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+        }
+
+        .airgap-title::before {
+            content: "🔒";
+            margin-right: 8px;
+            font-size: 18px;
+        }
+
+        .airgap-principles {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+            margin-bottom: 12px;
+        }
+
+        .principle-item {
+            background: rgba(0, 120, 212, 0.05);
+            border-radius: 6px;
+            padding: 8px;
+            text-align: center;
+        }
+
+        .principle-name {
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--microsoft-blue);
+            margin-bottom: 3px;
+        }
+
+        .principle-desc {
+            font-size: 9px;
+            color: var(--text-secondary);
+            line-height: 1.2;
+        }
+
+        .tempest-info {
+            background: rgba(0, 120, 212, 0.1);
+            border-radius: 6px;
+            padding: 8px;
+            margin-top: 8px;
+        }
+
+        .tempest-spec {
+            font-size: 10px;
+            color: var(--text-primary);
+            font-weight: 600;
+            text-align: center;
+        }
+
+        .ai-specific-threats {
+            background: linear-gradient(135deg, rgba(92, 45, 145, 0.1) 0%, rgba(92, 45, 145, 0.05) 100%);
+            border: 2px solid var(--microsoft-purple);
+            border-radius: 16px;
+            padding: 20px;
+        }
+
+        .ai-threats-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--microsoft-purple);
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+        }
+
+        .ai-threats-title::before {
+            content: "🤖";
+            margin-right: 8px;
+            font-size: 18px;
+        }
+
+        .ai-threats-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+        }
+
+        .ai-threat-item {
+            background: rgba(92, 45, 145, 0.05);
+            border-radius: 6px;
+            padding: 8px;
+        }
+
+        .ai-threat-name {
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--microsoft-purple);
+            margin-bottom: 3px;
+        }
+
+        .ai-threat-desc {
+            font-size: 9px;
+            color: var(--text-secondary);
+            line-height: 1.2;
+        }
+
+        .defense-technologies {
+            background: linear-gradient(135deg, rgba(255, 140, 0, 0.1) 0%, rgba(255, 140, 0, 0.05) 100%);
+            border: 2px solid var(--microsoft-orange);
+            border-radius: 16px;
+            padding: 20px;
+        }
+
+        .defense-tech-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--microsoft-orange);
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+        }
+
+        .defense-tech-title::before {
+            content: "⚔️";
+            margin-right: 8px;
+            font-size: 18px;
+        }
+
+        .defense-methods {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 8px;
+        }
+
+        .defense-method {
+            background: rgba(255, 140, 0, 0.05);
+            border-radius: 6px;
+            padding: 8px;
+        }
+
+        .method-name {
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--microsoft-orange);
+            margin-bottom: 3px;
+        }
+
+        .method-techniques {
+            font-size: 9px;
+            color: var(--text-primary);
+            line-height: 1.2;
+        }
+
+        .quantum-crypto {
+            background: rgba(0, 188, 180, 0.05);
+            border: 1px solid #00BCB4;
+            border-radius: 12px;
+            padding: 15px;
+        }
+
+        .quantum-title {
+            font-size: 14px;
+            font-weight: 700;
+            color: #00BCB4;
+            margin-bottom: 8px;
+        }
+
+        .quantum-achievements {
+            font-size: 11px;
+            color: var(--text-primary);
+            line-height: 1.3;
+        }
+
+        .monitoring-soc {
+            background: var(--card-background);
+            border-radius: 16px;
+            padding: 18px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+            border-left: 6px solid var(--microsoft-green);
+        }
+
+        .soc-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--microsoft-green);
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+        }
+
+        .soc-title::before {
+            content: "👁️";
+            margin-right: 8px;
+            font-size: 18px;
+        }
+
+        .soc-features {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+            margin-bottom: 10px;
+        }
+
+        .soc-feature {
+            background: rgba(16, 124, 16, 0.05);
+            border-radius: 6px;
+            padding: 6px;
+            text-align: center;
+        }
+
+        .feature-label {
+            font-size: 10px;
+            font-weight: 700;
+            color: var(--microsoft-green);
+            margin-bottom: 2px;
+        }
+
+        .feature-value {
+            font-size: 9px;
+            color: var(--text-secondary);
+        }
+
+        .soc-requirements {
+            font-size: 10px;
+            color: var(--text-primary);
+            text-align: center;
+            margin-top: 8px;
+        }
+
+        .footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 25px;
+            padding-top: 25px;
+            border-top: 2px solid #E1E1E1;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .nav-button {
+            background: var(--microsoft-light-blue);
+            color: var(--text-primary);
+            padding: 12px 24px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-button:hover {
+            background: var(--microsoft-blue);
+            color: white;
+        }
+
+        .slide-info {
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        @media (max-width: 1200px) {
+            .container { padding: 40px; }
+            .main-title { font-size: 28px; }
+            .content { grid-template-columns: 1fr; }
+            .airgap-principles { grid-template-columns: 1fr; }
+            .ai-threats-grid { grid-template-columns: 1fr; }
+            .soc-features { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="slide-number">スライド S</div>
+            <h1 class="main-title">サイバーセキュリティ多層防護</h1>
+            <p class="subtitle">AI時代の新たな脅威と防御戦略</p>
+        </div>
+
+        <div class="content">
+            <div class="left-section">
+                <div class="threat-landscape">
+                    <div class="threat-title">AI時代の脅威分類</div>
+                    <div class="threat-categories">
+                        <div class="threat-category">
+                            <div class="category-header">
+                                <span class="category-icon">🌐</span>
+                                <div class="category-name">従来型サイバー脅威</div>
+                            </div>
+                            <div class="threat-examples">
+                                • ネットワーク侵入・マルウェア<br>
+                                • データ窃取・改ざん・破壊<br>
+                                • DoS/DDoS攻撃・内部脅威
+                            </div>
+                        </div>
+                        <div class="threat-category">
+                            <div class="category-header">
+                                <span class="category-icon">🤖</span>
+                                <div class="category-name">AI特有の新興脅威</div>
+                            </div>
+                            <div class="threat-examples">
+                                • 敵対的攻撃（Adversarial Attack）<br>
+                                • モデル盗用・逆解析攻撃<br>
+                                • データポイズニング攻撃
+                            </div>
+                        </div>
+                        <div class="threat-category">
+                            <div class="category-header">
+                                <span class="category-icon">🔗</span>
+                                <div class="category-name">複合型高度脅威</div>
+                            </div>
+                            <div class="threat-examples">
+                                • AI・従来システム連携攻撃<br>
+                                • APT（持続的攻撃）<br>
+                                • サプライチェーン攻撃
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="airgap-design">
+                    <div class="airgap-title">エアギャップ設計</div>
+                    <div class="airgap-principles">
+                        <div class="principle-item">
+                            <div class="principle-name">物理的分離</div>
+                            <div class="principle-desc">ネットワーク・通信物理遮断</div>
+                        </div>
+                        <div class="principle-item">
+                            <div class="principle-name">電磁波対策</div>
+                            <div class="principle-desc">TEMPEST電磁波漏洩防止</div>
+                        </div>
+                        <div class="principle-item">
+                            <div class="principle-name">データ統制</div>
+                            <div class="principle-desc">持込・持出厳格管理</div>
+                        </div>
+                        <div class="principle-item">
+                            <div class="principle-name">人的管理</div>
+                            <div class="principle-desc">身元調査・最小権限原則</div>
+                        </div>
+                    </div>
+                    <div class="tempest-info">
+                        <div class="tempest-spec">
+                            TEMPEST要求：1kHz-10GHz範囲で最小100dB挿入損失<br>
+                            RED/BLACK概念による機密・非機密情報の物理分離
+                        </div>
+                    </div>
+                </div>
+
+                <div class="ai-specific-threats">
+                    <div class="ai-threats-title">AI特有脅威の詳細</div>
+                    <div class="ai-threats-grid">
+                        <div class="ai-threat-item">
+                            <div class="ai-threat-name">Adversarial Attack</div>
+                            <div class="ai-threat-desc">入力データ巧妙改ざん<br>誤分類・誤判断誘導</div>
+                        </div>
+                        <div class="ai-threat-item">
+                            <div class="ai-threat-name">Model Inversion</div>
+                            <div class="ai-threat-desc">訓練データ逆推定<br>知的財産不正取得</div>
+                        </div>
+                        <div class="ai-threat-item">
+                            <div class="ai-threat-name">Data Poisoning</div>
+                            <div class="ai-threat-desc">訓練データ悪意混入<br>バックドア攻撃</div>
+                        </div>
+                        <div class="ai-threat-item">
+                            <div class="ai-threat-name">Privacy Attack</div>
+                            <div class="ai-threat-desc">会員推論・属性推論<br>プライバシー侵害</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="right-section">
+                <div class="defense-layers">
+                    <div class="defense-title">多層防護アーキテクチャ</div>
+                    <div class="layers-diagram">
+物理セキュリティ層
+├── ネットワークセキュリティ層
+│   ├── エアギャップ・セグメンテーション
+│   └── 侵入検知・防御システム
+├── システムセキュリティ層
+│   ├── OS・ミドルウェア強化
+│   └── アクセス制御・認証
+├── アプリケーションセキュリティ層
+│   ├── アプリ脆弱性対策
+│   └── セキュアコーディング
+├── AI特化セキュリティ層
+│   ├── AI攻撃検知・防御
+│   └── モデル保護・検証
+├── データセキュリティ層
+│   ├── 暗号化・完全性保護
+│   └── バックアップ・復旧
+└── 運用セキュリティ層
+    ├── 監視・インシデント対応
+    └── セキュリティ教育・訓練
+                    </div>
+                </div>
+
+                <div class="defense-technologies">
+                    <div class="defense-tech-title">AI防御技術</div>
+                    <div class="defense-methods">
+                        <div class="defense-method">
+                            <div class="method-name">敵対的攻撃対策</div>
+                            <div class="method-techniques">Adversarial Training・防御的蒸留・入力前処理検証</div>
+                        </div>
+                        <div class="defense-method">
+                            <div class="method-name">モデル防御機能</div>
+                            <div class="method-techniques">予測信頼度評価・不確実性定量化・アンサンブル学習</div>
+                        </div>
+                        <div class="defense-method">
+                            <div class="method-name">データ保護技術</div>
+                            <div class="method-techniques">差分プライバシー・同形暗号・連合学習</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="monitoring-soc">
+                    <div class="soc-title">セキュリティ監視体制</div>
+                    <div class="soc-features">
+                        <div class="soc-feature">
+                            <div class="feature-label">監視体制</div>
+                            <div class="feature-value">24時間365日</div>
+                        </div>
+                        <div class="soc-feature">
+                            <div class="feature-label">統合技術</div>
+                            <div class="feature-value">SIEM統合分析</div>
+                        </div>
+                        <div class="soc-feature">
+                            <div class="feature-label">異常検知</div>
+                            <div class="feature-value">AI行動分析</div>
+                        </div>
+                        <div class="soc-feature">
+                            <div class="feature-label">対応体制</div>
+                            <div class="feature-value">迅速復旧手順</div>
+                        </div>
+                    </div>
+                    <div class="soc-requirements">
+                        平均的SOCには最低11名のフルタイム専門家が必要<br>
+                        グローバルなセキュリティ人材不足が課題
+                    </div>
+                </div>
+
+                <div class="quantum-crypto">
+                    <div class="quantum-title">🔮 量子暗号通信の実用化</div>
+                    <div class="quantum-achievements">
+                        <strong>2024-2025年実証成果</strong><br>
+                        • Purdue大学・ORNL・東芝：世界初原子炉内量子通信実証<br>
+                        • 韓国KHNP：QKD（量子鍵配送）本格導入決定<br>
+                        • NIST FIPS 203/204/205：Post-Quantum標準化完了<br><br>
+                        
+                        次世代セキュリティ基盤として期待
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <div class="nav-buttons">
+                <a href="slideR_physics_informed_ai.html" class="nav-button">← 前へ：Physics-Informed AI</a>
+                <a href="slideT_integrated_solutions.html" class="nav-button">次へ：統合的解決策 →</a>
+            </div>
+            <div class="slide-info">原子力AI技術革命 | 日本原子力学会2025年秋の大会</div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>技術成熟度と今後の展望 - 原子力AI技術革命</title>
+    <style>
+        :root {
+            --microsoft-blue: #0078D4;
+            --microsoft-dark-blue: #005A9E;
+            --microsoft-light-blue: #40C0FF;
+            --microsoft-green: #107C10;
+            --microsoft-orange: #FF8C00;
+            --microsoft-red: #D83B01;
+            --microsoft-purple: #5C2D91;
+            --text-primary: #323130;
+            --text-secondary: #605E5C;
+            --background: #FFFFFF;
+            --card-background: #FAFAFA;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #FFFFFF 0%, #F8F9FA 100%);
+            color: var(--text-primary);
+            line-height: 1.6;
+            padding: 40px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            aspect-ratio: 16/9;
+            background: var(--background);
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+            padding: 60px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .slide-number {
+            font-size: 24px;
+            font-weight: 600;
+            color: var(--microsoft-blue);
+            margin-bottom: 16px;
+        }
+
+        .main-title {
+            font-size: 40px;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 12px;
+        }
+
+        .subtitle {
+            font-size: 20px;
+            color: var(--text-secondary);
+            font-weight: 400;
+        }
+
+        .content {
+            flex: 1;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+
+        .left-section {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .right-section {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .maturity-matrix {
+            background: linear-gradient(135deg, rgba(0, 120, 212, 0.1) 0%, rgba(0, 120, 212, 0.05) 100%);
+            border: 2px solid var(--microsoft-blue);
+            border-radius: 16px;
+            padding: 25px;
+        }
+
+        .matrix-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--microsoft-blue);
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+        }
+
+        .matrix-title::before {
+            content: "📊";
+            margin-right: 8px;
+            font-size: 24px;
+        }
+
+        .maturity-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 8px;
+            margin-bottom: 16px;
+        }
+
+        .tech-item {
+            background: var(--card-background);
+            border-radius: 8px;
+            padding: 10px;
+            text-align: center;
+            border: 2px solid transparent;
+        }
+
+        .tech-item.high-maturity {
+            border-color: var(--microsoft-green);
+            background: rgba(16, 124, 16, 0.1);
+        }
+
+        .tech-item.medium-maturity {
+            border-color: var(--microsoft-orange);
+            background: rgba(255, 140, 0, 0.1);
+        }
+
+        .tech-item.low-maturity {
+            border-color: var(--microsoft-red);
+            background: rgba(216, 59, 1, 0.1);
+        }
+
+        .tech-name {
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 4px;
+        }
+
+        .trl-level {
+            font-size: 14px;
+            font-weight: 700;
+            margin-bottom: 2px;
+        }
+
+        .high-maturity .trl-level {
+            color: var(--microsoft-green);
+        }
+
+        .medium-maturity .trl-level {
+            color: var(--microsoft-orange);
+        }
+
+        .low-maturity .trl-level {
+            color: var(--microsoft-red);
+        }
+
+        .trl-description {
+            font-size: 9px;
+            color: var(--text-secondary);
+        }
+
+        .legend {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 12px;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            font-size: 12px;
+        }
+
+        .legend-color {
+            width: 12px;
+            height: 12px;
+            border-radius: 3px;
+            margin-right: 6px;
+        }
+
+        .legend-color.high {
+            background: var(--microsoft-green);
+        }
+
+        .legend-color.medium {
+            background: var(--microsoft-orange);
+        }
+
+        .legend-color.low {
+            background: var(--microsoft-red);
+        }
+
+        .roadmap-timeline {
+            background: linear-gradient(135deg, rgba(92, 45, 145, 0.1) 0%, rgba(92, 45, 145, 0.05) 100%);
+            border: 2px solid var(--microsoft-purple);
+            border-radius: 16px;
+            padding: 25px;
+        }
+
+        .roadmap-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--microsoft-purple);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+        }
+
+        .roadmap-title::before {
+            content: "🛣️";
+            margin-right: 8px;
+            font-size: 24px;
+        }
+
+        .timeline-phases {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 15px;
+        }
+
+        .timeline-phase {
+            background: var(--card-background);
+            border-radius: 12px;
+            padding: 16px;
+            border-left: 4px solid var(--microsoft-purple);
+        }
+
+        .phase-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .phase-icon {
+            font-size: 18px;
+            margin-right: 8px;
+        }
+
+        .phase-title {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--microsoft-purple);
+        }
+
+        .phase-period {
+            font-size: 12px;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+        }
+
+        .phase-objectives {
+            list-style: none;
+            padding: 0;
+        }
+
+        .phase-objectives li {
+            font-size: 11px;
+            color: var(--text-primary);
+            margin-bottom: 4px;
+            padding-left: 12px;
+            position: relative;
+        }
+
+        .phase-objectives li::before {
+            content: "▶";
+            position: absolute;
+            left: 0;
+            color: var(--microsoft-purple);
+            font-size: 10px;
+        }
+
+        .key-challenges {
+            background: linear-gradient(135deg, rgba(255, 140, 0, 0.1) 0%, rgba(255, 140, 0, 0.05) 100%);
+            border: 2px solid var(--microsoft-orange);
+            border-radius: 16px;
+            padding: 20px;
+        }
+
+        .challenges-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--microsoft-orange);
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+        }
+
+        .challenges-title::before {
+            content: "⚠️";
+            margin-right: 8px;
+            font-size: 20px;
+        }
+
+        .challenge-categories {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .challenge-category {
+            background: rgba(255, 140, 0, 0.05);
+            border-radius: 8px;
+            padding: 12px;
+        }
+
+        .category-name {
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--microsoft-orange);
+            margin-bottom: 6px;
+        }
+
+        .category-items {
+            font-size: 11px;
+            color: var(--text-primary);
+            line-height: 1.3;
+        }
+
+        .success-factors {
+            background: linear-gradient(135deg, rgba(16, 124, 16, 0.1) 0%, rgba(16, 124, 16, 0.05) 100%);
+            border: 2px solid var(--microsoft-green);
+            border-radius: 16px;
+            padding: 20px;
+        }
+
+        .success-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--microsoft-green);
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+        }
+
+        .success-title::before {
+            content: "🎯";
+            margin-right: 8px;
+            font-size: 20px;
+        }
+
+        .success-list {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+        }
+
+        .success-item {
+            background: rgba(16, 124, 16, 0.05);
+            border-radius: 6px;
+            padding: 8px;
+        }
+
+        .success-name {
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--microsoft-green);
+            margin-bottom: 3px;
+        }
+
+        .success-description {
+            font-size: 10px;
+            color: var(--text-secondary);
+            line-height: 1.2;
+        }
+
+        .strategic-implications {
+            background: var(--card-background);
+            border-radius: 16px;
+            padding: 20px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+            border-left: 6px solid var(--microsoft-blue);
+        }
+
+        .implications-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--microsoft-blue);
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+        }
+
+        .implications-title::before {
+            content: "💡";
+            margin-right: 8px;
+            font-size: 20px;
+        }
+
+        .implications-content {
+            font-size: 13px;
+            color: var(--text-primary);
+            line-height: 1.4;
+        }
+
+        .implication-point {
+            margin-bottom: 8px;
+            padding-left: 16px;
+            position: relative;
+        }
+
+        .implication-point::before {
+            content: "●";
+            position: absolute;
+            left: 0;
+            color: var(--microsoft-blue);
+        }
+
+        .footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 25px;
+            padding-top: 25px;
+            border-top: 2px solid #E1E1E1;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .nav-button {
+            background: var(--microsoft-light-blue);
+            color: var(--text-primary);
+            padding: 12px 24px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-button:hover {
+            background: var(--microsoft-blue);
+            color: white;
+        }
+
+        .slide-info {
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        @media (max-width: 1200px) {
+            .container { padding: 40px; }
+            .main-title { font-size: 32px; }
+            .content { grid-template-columns: 1fr; }
+            .maturity-grid { grid-template-columns: repeat(3, 1fr); }
+            .timeline-phases { grid-template-columns: 1fr; }
+            .challenge-categories { grid-template-columns: 1fr; }
+            .success-list { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="slide-number">スライド O</div>
+            <h1 class="main-title">技術成熟度と今後の展望</h1>
+            <p class="subtitle">TRL評価と戦略的ロードマップ</p>
+        </div>
+
+        <div class="content">
+            <div class="left-section">
+                <div class="maturity-matrix">
+                    <div class="matrix-title">技術成熟度マトリックス</div>
+                    <div class="maturity-grid">
+                        <div class="tech-item high-maturity">
+                            <div class="tech-name">文書検索・管理</div>
+                            <div class="trl-level">TRL 8-9</div>
+                            <div class="trl-description">商用化済み</div>
+                        </div>
+                        <div class="tech-item medium-maturity">
+                            <div class="tech-name">予知保全</div>
+                            <div class="trl-level">TRL 7-8</div>
+                            <div class="trl-description">実証段階</div>
+                        </div>
+                        <div class="tech-item medium-maturity">
+                            <div class="tech-name">設計最適化</div>
+                            <div class="trl-level">TRL 5-6</div>
+                            <div class="trl-description">研究開発段階</div>
+                        </div>
+                        <div class="tech-item medium-maturity">
+                            <div class="tech-name">安全解析AI</div>
+                            <div class="trl-level">TRL 5-6</div>
+                            <div class="trl-description">実証段階</div>
+                        </div>
+                        <div class="tech-item low-maturity">
+                            <div class="tech-name">廃炉・廃棄物</div>
+                            <div class="trl-level">TRL 3-4</div>
+                            <div class="trl-description">基礎研究段階</div>
+                        </div>
+                    </div>
+                    <div class="legend">
+                        <div class="legend-item">
+                            <div class="legend-color high"></div>
+                            <span>商用化レベル</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color medium"></div>
+                            <span>実証・開発段階</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color low"></div>
+                            <span>基礎研究段階</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="key-challenges">
+                    <div class="challenges-title">主要課題</div>
+                    <div class="challenge-categories">
+                        <div class="challenge-category">
+                            <div class="category-name">技術的課題</div>
+                            <div class="category-items">
+                                • 説明可能AI の実現<br>
+                                • 物理制約統合の高度化<br>
+                                • リアルタイム処理性能<br>
+                                • スケーラビリティ確保
+                            </div>
+                        </div>
+                        <div class="challenge-category">
+                            <div class="category-name">規制・社会課題</div>
+                            <div class="category-items">
+                                • 規制承認プロセス<br>
+                                • 検証・妥当性確認<br>
+                                • 安全性保証体系<br>
+                                • 社会受容性確保
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="success-factors">
+                    <div class="success-title">成功要因</div>
+                    <div class="success-list">
+                        <div class="success-item">
+                            <div class="success-name">産官学連携</div>
+                            <div class="success-description">効率的技術開発・規制協議</div>
+                        </div>
+                        <div class="success-item">
+                            <div class="success-name">段階的導入</div>
+                            <div class="success-description">リスク最小化アプローチ</div>
+                        </div>
+                        <div class="success-item">
+                            <div class="success-name">国際協力</div>
+                            <div class="success-description">標準化・知見共有促進</div>
+                        </div>
+                        <div class="success-item">
+                            <div class="success-name">人材育成</div>
+                            <div class="success-description">AI×原子力専門人材確保</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="right-section">
+                <div class="roadmap-timeline">
+                    <div class="roadmap-title">技術展開ロードマップ</div>
+                    <div class="timeline-phases">
+                        <div class="timeline-phase">
+                            <div class="phase-header">
+                                <span class="phase-icon">🚀</span>
+                                <div class="phase-title">短期（2025-2027年）</div>
+                            </div>
+                            <div class="phase-period">技術確立期</div>
+                            <ul class="phase-objectives">
+                                <li>文書管理システム標準化</li>
+                                <li>予知保全商用展開拡大</li>
+                                <li>規制当局との協議加速</li>
+                                <li>実証プロジェクト推進</li>
+                                <li>人材育成プログラム開始</li>
+                            </ul>
+                        </div>
+
+                        <div class="timeline-phase">
+                            <div class="phase-header">
+                                <span class="phase-icon">🏗️</span>
+                                <div class="phase-title">中期（2028-2030年）</div>
+                            </div>
+                            <div class="phase-period">本格展開期</div>
+                            <ul class="phase-objectives">
+                                <li>設計AIの規制承認取得</li>
+                                <li>安全解析AIの実用化</li>
+                                <li>国際標準の策定完了</li>
+                                <li>商用プラント本格導入</li>
+                                <li>技術輸出基盤構築</li>
+                            </ul>
+                        </div>
+
+                        <div class="timeline-phase">
+                            <div class="phase-header">
+                                <span class="phase-icon">🌟</span>
+                                <div class="phase-title">長期（2031年以降）</div>
+                            </div>
+                            <div class="phase-period">完全統合期</div>
+                            <ul class="phase-objectives">
+                                <li>完全自律運転段階的実現</li>
+                                <li>廃炉AIの本格適用</li>
+                                <li>新型炉への全面適用</li>
+                                <li>グローバル市場展開</li>
+                                <li>次世代技術開発開始</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="strategic-implications">
+                    <div class="implications-title">戦略的含意</div>
+                    <div class="implications-content">
+                        <div class="implication-point">
+                            <strong>技術的優位性の源泉</strong><br>
+                            原子力特化AI技術により汎用AIを凌駕する専門性を確立
+                        </div>
+                        <div class="implication-point">
+                            <strong>競争力確保の時間軸</strong><br>
+                            2025-2027年の技術確立期が決定的な競争優位構築期間
+                        </div>
+                        <div class="implication-point">
+                            <strong>産業変革の規模</strong><br>
+                            単なる効率化を超えた原子力産業の構造的変革を実現
+                        </div>
+                        <div class="implication-point">
+                            <strong>国際協力の重要性</strong><br>
+                            標準化と規制調和による市場拡大とリスク分散の実現
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <div class="nav-buttons">
+                <a href="slideN_cross_field_applications.html" class="nav-button">← 前へ：分野横断応用</a>
+                <a href="index.html" class="nav-button">目次に戻る</a>
+            </div>
+            <div class="slide-info">原子力AI技術革命 | 日本原子力学会2025年秋の大会</div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>日本の技術的優位性 - 原子力AI技術革命</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Segoe UI", -apple-system, BlinkMacSystemFont, "Roboto", sans-serif;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            color: #333;
+            line-height: 1.6;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            aspect-ratio: 16 / 9;
+        }
+
+        .container {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            padding: 3rem;
+            background: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+
+        .main-title {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #0078D4;
+            margin-bottom: 1rem;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .subtitle {
+            font-size: 1.1rem;
+            color: #666;
+            font-weight: 500;
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            flex: 1;
+            align-items: start;
+        }
+
+        .advantages-list {
+            background: white;
+            padding: 2rem;
+            border-radius: 16px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+        }
+
+        .list-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 2rem;
+            text-align: center;
+            padding-bottom: 0.5rem;
+            border-bottom: 3px solid #0078D4;
+        }
+
+        .advantage-item {
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            background: #f8f9fa;
+            border-radius: 12px;
+            border-left: 4px solid;
+        }
+
+        .advantage-item.safety {
+            border-left-color: #dc3545;
+        }
+
+        .advantage-item.fukushima {
+            border-left-color: #28a745;
+        }
+
+        .advantage-item.collaboration {
+            border-left-color: #0078D4;
+        }
+
+        .advantage-item.research {
+            border-left-color: #6f42c1;
+        }
+
+        .advantage-title {
+            font-weight: bold;
+            font-size: 1.1rem;
+            margin-bottom: 0.8rem;
+            color: #333;
+        }
+
+        .advantage-description {
+            font-size: 0.9rem;
+            color: #666;
+            line-height: 1.5;
+        }
+
+        .fukushima-experience {
+            background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
+            color: white;
+            padding: 2.5rem;
+            border-radius: 16px;
+            text-align: center;
+            box-shadow: 0 8px 32px rgba(220, 53, 69, 0.3);
+        }
+
+        .fukushima-title {
+            font-size: 1.8rem;
+            font-weight: bold;
+            margin-bottom: 1.5rem;
+        }
+
+        .unique-value {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 1.5rem;
+            border-radius: 12px;
+            backdrop-filter: blur(10px);
+            margin-bottom: 1.5rem;
+        }
+
+        .value-label {
+            font-size: 1rem;
+            opacity: 0.9;
+            margin-bottom: 0.5rem;
+        }
+
+        .value-content {
+            font-size: 1.1rem;
+            font-weight: bold;
+            line-height: 1.4;
+        }
+
+        .global-impact {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 1rem;
+            border-radius: 8px;
+            backdrop-filter: blur(5px);
+            text-align: center;
+        }
+
+        .impact-text {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .impact-detail {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        .competitive-edge {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 25px;
+            text-align: center;
+            box-shadow: 0 6px 20px rgba(40, 167, 69, 0.3);
+        }
+
+        .edge-label {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            margin-bottom: 0.3rem;
+        }
+
+        .edge-text {
+            font-size: 1.1rem;
+            font-weight: bold;
+        }
+
+        .world-class-badge {
+            position: absolute;
+            top: 2rem;
+            right: 2rem;
+            background: linear-gradient(135deg, #6f42c1 0%, #8e5bff 100%);
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 1rem;
+            box-shadow: 0 4px 12px rgba(111, 66, 193, 0.3);
+        }
+
+        .safety-first-note {
+            position: absolute;
+            top: 6rem;
+            right: 2rem;
+            background: rgba(220, 53, 69, 0.1);
+            color: #dc3545;
+            padding: 0.5rem 1rem;
+            border-radius: 16px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            backdrop-filter: blur(10px);
+        }
+
+        @keyframes slideInUp {
+            from {
+                transform: translateY(30px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideInLeft {
+            from {
+                transform: translateX(-30px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                transform: translateX(30px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        .advantages-list {
+            animation: slideInLeft 0.8s ease-out forwards;
+        }
+
+        .fukushima-experience {
+            animation: slideInRight 0.8s ease-out forwards;
+            animation-delay: 0.3s;
+        }
+
+        .competitive-edge {
+            animation: slideInUp 0.8s ease-out forwards;
+            animation-delay: 0.6s;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="world-class-badge">世界最高水準</div>
+        <div class="safety-first-note">安全性第一の文化</div>
+        
+        <div class="header">
+            <h1 class="main-title">日本の技術的優位性</h1>
+            <p class="subtitle">福島の教訓から生まれた世界唯一の競争力</p>
+        </div>
+
+        <div class="content-grid">
+            <div class="advantages-list">
+                <h3 class="list-title">4つの核心優位性</h3>
+                
+                <div class="advantage-item safety">
+                    <div class="advantage-title">🛡️ 世界最高の安全文化</div>
+                    <div class="advantage-description">
+                        福島事故経験から生まれた厳格な安全基準<br>
+                        説明可能AI技術での世界トップレベル
+                    </div>
+                </div>
+                
+                <div class="advantage-item fukushima">
+                    <div class="advantage-title">🤖 福島廃炉AI実績</div>
+                    <div class="advantage-description">
+                        世界初の過酷事故廃炉AI技術<br>
+                        極限環境での実用化成功事例
+                    </div>
+                </div>
+                
+                <div class="advantage-item collaboration">
+                    <div class="advantage-title">🤝 強固な産学官連携</div>
+                    <div class="advantage-description">
+                        JAEA・電力・メーカー三位一体<br>
+                        年間1,500億円の集中投資体制
+                    </div>
+                </div>
+                
+                <div class="advantage-item research">
+                    <div class="advantage-title">🎓 世界トップ大学研究</div>
+                    <div class="advantage-description">
+                        東大・京大・東工大の先端研究<br>
+                        年間60億円の基礎研究投資
+                    </div>
+                </div>
+            </div>
+
+            <div class="fukushima-experience">
+                <div class="fukushima-title">福島の教訓＝世界最大の資産</div>
+                
+                <div class="unique-value">
+                    <div class="value-label">世界唯一の経験</div>
+                    <div class="value-content">過酷事故対応から生まれた<br>類稀な安全技術とノウハウ</div>
+                </div>
+                
+                <div class="unique-value">
+                    <div class="value-label">実証された技術力</div>
+                    <div class="value-content">極限環境での実用AI技術<br>他国では習得不可能</div>
+                </div>
+                
+                <div class="global-impact">
+                    <div class="impact-text">国際的価値</div>
+                    <div class="impact-detail">年間20-30億円のライセンス収入<br>IAEA多国間協力プログラム主導</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="competitive-edge">
+            <div class="edge-label">競合他社には模倣不可能</div>
+            <div class="edge-text">「日本品質」による市場差別化</div>
+        </div>
+    </div>
+</body>
+</html>

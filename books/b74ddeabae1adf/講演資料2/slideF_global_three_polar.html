@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>世界の三極構造形成 - 原子力AI技術革命</title>
+    <style>
+        :root {
+            --microsoft-blue: #0078D4;
+            --microsoft-dark-blue: #005A9E;
+            --microsoft-light-blue: #40C0FF;
+            --microsoft-green: #107C10;
+            --microsoft-red: #D83B01;
+            --text-primary: #323130;
+            --text-secondary: #605E5C;
+            --background: #FFFFFF;
+            --card-background: #FAFAFA;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #FFFFFF 0%, #F8F9FA 100%);
+            color: var(--text-primary);
+            line-height: 1.6;
+            padding: 40px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            aspect-ratio: 16/9;
+            background: var(--background);
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+            padding: 60px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .slide-number {
+            font-size: 24px;
+            font-weight: 600;
+            color: var(--microsoft-blue);
+            margin-bottom: 16px;
+        }
+
+        .main-title {
+            font-size: 48px;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 20px;
+        }
+
+        .subtitle {
+            font-size: 28px;
+            color: var(--text-secondary);
+            font-weight: 400;
+        }
+
+        .content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .three-polar-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .polar-card {
+            background: var(--card-background);
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+            border-left: 6px solid var(--microsoft-blue);
+            transition: transform 0.3s ease;
+        }
+
+        .polar-card:hover {
+            transform: translateY(-4px);
+        }
+
+        .polar-card.us {
+            border-left-color: var(--microsoft-blue);
+        }
+
+        .polar-card.europe {
+            border-left-color: var(--microsoft-green);
+        }
+
+        .polar-card.asia {
+            border-left-color: var(--microsoft-red);
+        }
+
+        .polar-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .flag-emoji {
+            font-size: 32px;
+            margin-right: 12px;
+        }
+
+        .polar-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .polar-strategy {
+            font-size: 16px;
+            color: var(--microsoft-blue);
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+
+        .key-points {
+            list-style: none;
+            padding: 0;
+        }
+
+        .key-points li {
+            font-size: 14px;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .key-points li::before {
+            content: "▶";
+            position: absolute;
+            left: 0;
+            color: var(--microsoft-blue);
+            font-size: 12px;
+        }
+
+        .warning-section {
+            background: linear-gradient(135deg, rgba(216, 59, 1, 0.1) 0%, rgba(216, 59, 1, 0.05) 100%);
+            border: 2px solid var(--microsoft-red);
+            border-radius: 16px;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .warning-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--microsoft-red);
+            margin-bottom: 12px;
+        }
+
+        .warning-text {
+            font-size: 18px;
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        .footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 2px solid #E1E1E1;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .nav-button {
+            background: var(--microsoft-light-blue);
+            color: var(--text-primary);
+            padding: 12px 24px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-button:hover {
+            background: var(--microsoft-blue);
+            color: white;
+        }
+
+        .slide-info {
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        @media (max-width: 1200px) {
+            .container { padding: 40px; }
+            .main-title { font-size: 36px; }
+            .three-polar-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="slide-number">スライド F</div>
+            <h1 class="main-title">世界の三極構造形成</h1>
+            <p class="subtitle">原子力AI技術革命における地政学的競争</p>
+        </div>
+
+        <div class="content">
+            <div class="three-polar-grid">
+                <div class="polar-card us">
+                    <div class="polar-header">
+                        <span class="flag-emoji">🇺🇸</span>
+                        <h3 class="polar-title">米国</h3>
+                    </div>
+                    <div class="polar-strategy">商用化速度・技術覇権戦略</div>
+                    <ul class="key-points">
+                        <li>PG&E Diablo Canyon世界初商用化</li>
+                        <li>Microsoft $1.6B、Amazon $500M投資</li>
+                        <li>トランプ政権AI統合政策</li>
+                        <li>産官学連携の効率性</li>
+                        <li>圧倒的投資規模とスピード</li>
+                    </ul>
+                </div>
+
+                <div class="polar-card europe">
+                    <div class="polar-header">
+                        <span class="flag-emoji">🇪🇺</span>
+                        <h3 class="polar-title">欧州</h3>
+                    </div>
+                    <div class="polar-strategy">規制調和・標準化主導戦略</div>
+                    <ul class="key-points">
+                        <li>EDF €70B EPR2計画</li>
+                        <li>EU AI法による規制枠組</li>
+                        <li>責任あるイノベーション</li>
+                        <li>国際協調の実効性</li>
+                        <li>持続可能性重視アプローチ</li>
+                    </ul>
+                </div>
+
+                <div class="polar-card asia">
+                    <div class="polar-header">
+                        <span class="flag-emoji">🌏</span>
+                        <h3 class="polar-title">アジア</h3>
+                    </div>
+                    <div class="polar-strategy">技術自立・市場拡大戦略</div>
+                    <ul class="key-points">
+                        <li>中国：内製技術による完全自立</li>
+                        <li>韓国：K-Nuclear AI戦略</li>
+                        <li>国家戦略の一貫性</li>
+                        <li>一帯一路政策連携</li>
+                        <li>急速な技術追い上げ</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="warning-section">
+                <div class="warning-title">🚨 日本への緊急警告</div>
+                <p class="warning-text">2025-2027年がラストチャンス<br>この3年を逃せば永久に追いつけない</p>
+            </div>
+        </div>
+
+        <div class="footer">
+            <div class="nav-buttons">
+                <a href="index.html" class="nav-button">← 目次に戻る</a>
+                <a href="slideG_us_dominance.html" class="nav-button">次へ：米国の圧倒的優位 →</a>
+            </div>
+            <div class="slide-info">原子力AI技術革命 | 日本原子力学会2025年秋の大会</div>
+        </div>
+    </div>
+</body>
+</html>

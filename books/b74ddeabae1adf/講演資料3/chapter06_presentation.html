@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>第6章: 日本の現状分析 - 技術的優位性と構造的課題の両面検証</title>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #ffffff;
+            color: #323130;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .presentation-container {
+            max-width: 1280px;
+            width: 100%;
+            min-height: 720px;
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(111, 66, 193, 0.1);
+            padding: 40px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .presentation-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #6f42c1 0%, #e83e8c 100%);
+        }
+
+        h1 {
+            font-size: 32px;
+            font-weight: 700;
+            color: #6f42c1;
+            text-align: center;
+            margin-bottom: 30px;
+            text-shadow: 0 2px 4px rgba(111, 66, 193, 0.1);
+        }
+
+        .hero-section {
+            background: linear-gradient(135deg, #f8f7ff 0%, #f3e8ff 100%);
+            border-left: 4px solid #6f42c1;
+            padding: 25px;
+            margin: 30px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(111, 66, 193, 0.1);
+            text-align: center;
+        }
+
+        .hero-section h2 {
+            font-size: 24px;
+            font-weight: 600;
+            color: #6f42c1;
+            margin-bottom: 15px;
+        }
+
+        .icon {
+            margin-right: 10px;
+            font-size: 24px;
+        }
+
+        .advantages-section {
+            background: linear-gradient(135deg, #e8f5e8 0%, #d4edda 100%);
+            border-radius: 8px;
+            padding: 25px;
+            margin: 30px 0;
+            border-left: 4px solid #28a745;
+        }
+
+        .advantages-card {
+            background: #ffffff;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            box-shadow: 0 2px 15px rgba(40, 167, 69, 0.1);
+            border: 1px solid #d4edda;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .advantages-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 25px rgba(40, 167, 69, 0.15);
+        }
+
+        .advantages-card::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: linear-gradient(180deg, #28a745 0%, #20c997 100%);
+        }
+
+        .advantages-card h3 {
+            color: #28a745;
+            margin-bottom: 15px;
+            padding-left: 15px;
+            font-weight: 600;
+        }
+
+        .challenges-section {
+            background: linear-gradient(135deg, #fff3cd 0%, #ffeaa7 100%);
+            border-radius: 8px;
+            padding: 25px;
+            margin: 30px 0;
+            border-left: 4px solid #ffc107;
+        }
+
+        .challenges-card {
+            background: #ffffff;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            box-shadow: 0 2px 15px rgba(255, 193, 7, 0.1);
+            border: 1px solid #ffeaa7;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .challenges-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 25px rgba(255, 193, 7, 0.15);
+        }
+
+        .challenges-card::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: linear-gradient(180deg, #ffc107 0%, #fd7e14 100%);
+        }
+
+        .challenges-card h3 {
+            color: #ffc107;
+            margin-bottom: 15px;
+            padding-left: 15px;
+            font-weight: 600;
+        }
+
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .country-card {
+            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+            border-radius: 8px;
+            padding: 25px;
+            border-left: 4px solid #2196f3;
+            box-shadow: 0 2px 15px rgba(33, 150, 243, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .country-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .country-card h4 {
+            color: #1976d2;
+            font-size: 18px;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .critical-period {
+            background: linear-gradient(135deg, #ffebee 0%, #ffcdd2 100%);
+            border-radius: 8px;
+            padding: 25px;
+            margin: 30px 0;
+            border-left: 4px solid #f44336;
+        }
+
+        .critical-period h3 {
+            color: #c62828;
+            margin-bottom: 20px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 25px 0;
+        }
+
+        .stat-card {
+            background: #ffffff;
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+            border-top: 3px solid;
+            transition: transform 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-2px);
+        }
+
+        .stat-card.green { border-top-color: #28a745; }
+        .stat-card.blue { border-top-color: #2196f3; }
+        .stat-card.orange { border-top-color: #ff9800; }
+        .stat-card.purple { border-top-color: #6f42c1; }
+        .stat-card.red { border-top-color: #f44336; }
+
+        .stat-number {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .stat-card.green .stat-number { color: #28a745; }
+        .stat-card.blue .stat-number { color: #2196f3; }
+        .stat-card.orange .stat-number { color: #ff9800; }
+        .stat-card.purple .stat-number { color: #6f42c1; }
+        .stat-card.red .stat-number { color: #f44336; }
+
+        .fukushima-innovation {
+            background: linear-gradient(135deg, #e0f2f1 0%, #b2dfdb 100%);
+            border-radius: 8px;
+            padding: 25px;
+            margin: 30px 0;
+            border-left: 4px solid #00695c;
+        }
+
+        .fukushima-innovation h3 {
+            color: #00695c;
+            margin-bottom: 20px;
+        }
+
+        .innovation-item {
+            background: #ffffff;
+            border-radius: 6px;
+            padding: 15px;
+            margin: 15px 0;
+            border: 1px solid #b2dfdb;
+            transition: background-color 0.3s ease;
+        }
+
+        .innovation-item:hover {
+            background-color: #f8ffff;
+        }
+
+        .innovation-item h5 {
+            color: #00695c;
+            margin-bottom: 10px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .mermaid-container {
+            background: #ffffff;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 25px 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+            text-align: center;
+        }
+
+        .quote {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-left: 4px solid #6c757d;
+            padding: 20px;
+            margin: 25px 0;
+            font-style: italic;
+            font-size: 18px;
+            text-align: center;
+            border-radius: 8px;
+        }
+
+        .action-plan {
+            background: linear-gradient(135deg, #e8f5e8 0%, #d1ecf1 100%);
+            border: 2px solid #17a2b8;
+            border-radius: 8px;
+            padding: 25px;
+            margin: 30px 0;
+            text-align: left;
+        }
+
+        .action-plan h3 {
+            color: #0056b3;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .action-item {
+            background: #ffffff;
+            border-radius: 6px;
+            padding: 15px;
+            margin: 10px 0;
+            border-left: 4px solid #17a2b8;
+            display: flex;
+            align-items: center;
+        }
+
+        .action-item .checkbox {
+            font-size: 18px;
+            margin-right: 10px;
+            color: #28a745;
+        }
+
+        .success-formula {
+            background: linear-gradient(135deg, #fff9c4 0%, #ffeb3b 100%);
+            border: 2px solid #ffc107;
+            border-radius: 8px;
+            padding: 25px;
+            margin: 30px 0;
+            text-align: center;
+            font-family: monospace;
+            font-size: 16px;
+            font-weight: 600;
+            color: #856404;
+        }
+
+        @media (max-width: 768px) {
+            .presentation-container {
+                padding: 20px;
+            }
+            
+            h1 {
+                font-size: 24px;
+            }
+            
+            .comparison-grid,
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="presentation-container">
+        <h1>🇯🇵 第6章: 日本の現状分析</h1>
+        <div class="hero-section">
+            <h2><span class="icon">⚖️</span>技術的優位性と構造的課題の両面検証</h2>
+            <p>福島事故の経験から生まれた世界最高水準の安全文化と、国際競争における構造的課題を客観的に分析</p>
+        </div>
+
+        <div class="advantages-section">
+            <h3><span class="icon">🎯</span>日本の競争優位性</h3>
+            <div class="comparison-grid">
+                <div class="advantages-card">
+                    <h3>🛡️ 世界最高水準の安全文化</h3>
+                    <p><strong>福島事故経験：</strong>世界唯一の過酷事故経験からの学習</p>
+                    <p><strong>新規制基準：</strong>世界初の過酷事故対策法的義務化</p>
+                    <p><strong>説明可能AI：</strong>AI判断プロセス100%可視化技術</p>
+                    <p><strong>市場価値：</strong>「日本品質」による差別化・プレミアム価格実現</p>
+                </div>
+                <div class="advantages-card">
+                    <h3>🤖 実証済みの先端技術</h3>
+                    <p><strong>福島廃炉AI：</strong>世界初の過酷事故廃炉AI技術</p>
+                    <p><strong>極限環境AI：</strong>最大毎時530シーベルトでの実用化</p>
+                    <p><strong>商業化実績：</strong>年間20-30億円のライセンス収入</p>
+                    <p><strong>技術移転：</strong>医療・産業分野への波及効果</p>
+                </div>
+                <div class="advantages-card">
+                    <h3>🤝 強固な産学官連携</h3>
+                    <p><strong>総投資額：</strong>年間1,500億円（政府800億+民間700億）</p>
+                    <p><strong>研究体制：</strong>JAEA 4,000名研究者による総合開発</p>
+                    <p><strong>商用化：</strong>メーカー年間280億円投資、海外受注実績</p>
+                    <p><strong>効率性：</strong>重複排除により30%効率化達成</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="fukushima-innovation">
+            <h3>⚛️ 福島廃炉での世界初AI実用化</h3>
+            <div class="comparison-grid">
+                <div class="innovation-item">
+                    <h5>AI統合ロボティクス</h5>
+                    <p><strong>燃料デブリ調査ロボット：</strong>世界初の放射線耐性AIチップ、自律航行・目標認識</p>
+                    <p><strong>大型廃棄物撤去：</strong>物体認識・把持計画・動作最適化による大幅効率向上</p>
+                </div>
+                <div class="innovation-item">
+                    <h5>AI画像・映像解析</h5>
+                    <p><strong>内部構造解析：</strong>深層学習による3D構造再現、詳細分布マップ作成</p>
+                    <p><strong>放射線画像解析：</strong>測定時間短縮・精度向上、作業員被ばく線量削減</p>
+                </div>
+                <div class="innovation-item">
+                    <h5>統合データ管理</h5>
+                    <p><strong>大規模データ活用：</strong>作業計画最適化、工期短縮・コスト削減</p>
+                    <p><strong>リアルタイム監視：</strong>作業効率向上、リスク低減システム</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="stats-grid">
+            <div class="stat-card green">
+                <div class="stat-number">4,000名</div>
+                <div>JAEA研究者</div>
+                <small>総合的技術開発体制</small>
+            </div>
+            <div class="stat-card blue">
+                <div class="stat-number">1,500億円</div>
+                <div>年間総投資額</div>
+                <small>政府+民間統合投資</small>
+            </div>
+            <div class="stat-card orange">
+                <div class="stat-number">30億円</div>
+                <div>年間ライセンス収入</div>
+                <small>廃炉技術国際展開</small>
+            </div>
+            <div class="stat-card purple">
+                <div class="stat-number">100%</div>
+                <div>AI判断可視化</div>
+                <small>説明可能性技術</small>
+            </div>
+        </div>
+
+        <div class="challenges-section">
+            <h3><span class="icon">⚠️</span>克服すべき構造的課題</h3>
+            <div class="comparison-grid">
+                <div class="challenges-card">
+                    <h3>⏰ 商用実装の遅れ</h3>
+                    <p><strong>意思決定期間：</strong>18-24ヶ月 vs 米国3-6ヶ月</p>
+                    <p><strong>規制承認：</strong>平均4年の厳格審査プロセス</p>
+                    <p><strong>完璧主義：</strong>過度な安全マージンによる機会逸失</p>
+                    <p><strong>前例主義：</strong>新技術導入への消極姿勢</p>
+                </div>
+                <div class="challenges-card">
+                    <h3>💰 深刻な投資格差</h3>
+                    <p><strong>投資規模：</strong>海外の1/5～1/10の投資格差</p>
+                    <p><strong>プロジェクト規模：</strong>平均5億円 vs 米国50億円</p>
+                    <p><strong>VCファンド：</strong>原子力AI特化ファンド日本2社 vs 米国20社</p>
+                    <p><strong>資金調達：</strong>IPO市場での上場例皆無</p>
+                </div>
+                <div class="challenges-card">
+                    <h3>👥 深刻な人材不足</h3>
+                    <p><strong>人材ギャップ：</strong>必要3,000名 vs 現有1,200名（60%不足）</p>
+                    <p><strong>海外流出：</strong>年間約50名が海外企業へ（給与2-3倍）</p>
+                    <p><strong>研究者高齢化：</strong>平均年齢48歳 vs IT業界35歳</p>
+                    <p><strong>国際参画：</strong>標準化委員会での日本人議長・委員長8%</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="mermaid-container">
+            <div class="mermaid">
+graph TD
+    A[アジア原子力市場急拡大] --> B[中国: 大規模建設プロジェクト]
+    A --> C[インド: 積極的拡大計画]
+    A --> D[韓国: 輸出戦略継続]
+    A --> E[ASEAN: 初回導入ラッシュ]
+    
+    F[日本の優位性] --> G[地理的近接性]
+    F --> H[文化的親和性]
+    F --> I[品質管理文化]
+    F --> J[技術移転意欲]
+    
+    K[競合分析] --> L[中国: 40%市場シェア<br/>低価格・政府支援]
+    K --> M[韓国: 20%市場シェア<br/>輸出実績・コスパ]
+    K --> N[ロシア: 25%市場シェア<br/>建設実績・金融支援]
+    K --> O[日本: 10%市場シェア<br/>技術・安全性重視]
+    
+    P[日本の差別化戦略] --> Q[世界最高の安全技術]
+    P --> R[AI統合原子炉]
+    P --> S[包括的パートナーシップ]
+    P --> T[地震・津波対策]
+
+    style A fill:#ffeb3b
+    style F fill:#4caf50
+    style K fill:#ff9800
+    style P fill:#2196f3
+            </div>
+        </div>
+
+        <div class="critical-period">
+            <h3>🚨 2025-2027年の決定的重要性</h3>
+            <div class="comparison-grid">
+                <div class="country-card">
+                    <h4>技術標準化の決定期</h4>
+                    <p>国際標準が確定する決定的期間。この期間を逃すと、日本は永続的に技術標準の「フォロワー」ポジションに甘んじることになる。</p>
+                    <ul>
+                        <li>ISO/IEC AI安全基準の継続開発</li>
+                        <li>IAEA原子力AI指針策定活動</li>
+                        <li>IEEE等での技術標準検討</li>
+                    </ul>
+                </div>
+                <div class="country-card">
+                    <h4>First Mover Advantage最後の機会</h4>
+                    <p>アジア市場での先行者利益を確保するため、2025-2027年での行動が決定的。</p>
+                    <ul>
+                        <li>技術実証の完了期限</li>
+                        <li>アジア市場での初回大型契約獲得</li>
+                        <li>競合対抗技術・人材基盤確立</li>
+                        <li>国家戦略支援体制構築</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="stats-grid">
+                <div class="stat-card red">
+                    <div class="stat-number">2025年</div>
+                    <div>基準コスト（100）</div>
+                    <small>今行動開始</small>
+                </div>
+                <div class="stat-card orange">
+                    <div class="stat-number">2027年</div>
+                    <div>コスト250</div>
+                    <small>市場参入障壁上昇</small>
+                </div>
+                <div class="stat-card red">
+                    <div class="stat-number">2029年</div>
+                    <div>コスト800～</div>
+                    <small>完全な後発参入</small>
+                </div>
+            </div>
+        </div>
+
+        <div class="action-plan">
+            <h3>📋 エグゼクティブ・アクションプラン</h3>
+            <p><strong>今すぐ実施すべき5つの決定</strong></p>
+            
+            <div class="action-item">
+                <span class="checkbox">✅</span>
+                <div>
+                    <strong>原子力AI戦略本部の設立を閣議決定</strong>（1週間以内）
+                </div>
+            </div>
+            <div class="action-item">
+                <span class="checkbox">✅</span>
+                <div>
+                    <strong>補正予算500億円の確保を指示</strong>（1ヶ月以内）
+                </div>
+            </div>
+            <div class="action-item">
+                <span class="checkbox">✅</span>
+                <div>
+                    <strong>福島データの戦略的活用方針を策定</strong>（2週間以内）
+                </div>
+            </div>
+            <div class="action-item">
+                <span class="checkbox">✅</span>
+                <div>
+                    <strong>アジア5カ国との協議開始を外務省に指示</strong>（3週間以内）
+                </div>
+            </div>
+            <div class="action-item">
+                <span class="checkbox">✅</span>
+                <div>
+                    <strong>規制サンドボックス設置の検討開始</strong>（1ヶ月以内）
+                </div>
+            </div>
+        </div>
+
+        <div class="success-formula">
+            <strong>成功の方程式</strong><br><br>
+            福島の経験（世界唯一）<br>
+            × AI技術（世界5位→1位へ）<br>
+            × アジア市場（5,000億円）<br>
+            × 日本の実行力<br>
+            = 原子力AI世界リーダー（2兆円市場）
+        </div>
+
+        <div class="quote">
+            "福島の経験を「世界が求める価値」に変える。それが日本の使命であり、最大のビジネスチャンスである。"
+        </div>
+
+        <div class="hero-section" style="background: linear-gradient(135deg, #e8f5e8 0%, #d4edda 100%); border-left-color: #28a745;">
+            <h2 style="color: #28a745;"><span class="icon">🎯</span>最終目標</h2>
+            <p><strong>2030年に原子力AI分野で世界首位、年間売上2兆円、雇用10万人創出</strong></p>
+        </div>
+    </div>
+
+    <script>
+        mermaid.initialize({ 
+            startOnLoad: true,
+            theme: 'default',
+            flowchart: {
+                useMaxWidth: true,
+                htmlLabels: true
+            }
+        });
+
+        // Add smooth scrolling and hover effects
+        document.querySelectorAll('.advantages-card, .challenges-card, .country-card, .innovation-item, .stat-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-3px)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0)';
+            });
+        });
+    </script>
+</body>
+</html>

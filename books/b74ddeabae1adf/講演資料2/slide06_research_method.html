@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>革新的研究手法</title>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+    <style>
+        :root {
+            --microsoft-blue: #0078D4;
+            --microsoft-dark-blue: #005A9E;
+            --microsoft-light-blue: #40C0FF;
+            --microsoft-green: #107C10;
+            --microsoft-orange: #FF8C00;
+            --microsoft-purple: #5B2C87;
+            --microsoft-red: #D13438;
+            --text-primary: #323130;
+            --text-secondary: #605E5C;
+            --background: #FFFFFF;
+            --card-background: #FAFAFA;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #FFFFFF 0%, #F8F9FA 100%);
+            color: var(--text-primary);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            aspect-ratio: 16/9;
+            overflow: hidden;
+        }
+
+        .slide-container {
+            width: 100%;
+            max-width: 1600px;
+            max-height: 900px;
+            aspect-ratio: 16/9;
+            display: grid;
+            grid-template-rows: auto 1fr;
+            padding: 45px;
+            gap: 25px;
+        }
+
+        .slide-header {
+            text-align: center;
+            animation: slideDownFadeIn 1s ease-out;
+        }
+
+        .slide-title {
+            font-size: 42px;
+            font-weight: 700;
+            color: var(--microsoft-blue);
+            margin-bottom: 16px;
+        }
+
+        .slide-subtitle {
+            font-size: 18px;
+            color: var(--text-secondary);
+            font-weight: 400;
+        }
+
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            animation: slideUpFadeIn 1.2s ease-out;
+        }
+
+        .meta-approach {
+            background: var(--card-background);
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+            border-left: 6px solid var(--microsoft-purple);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .section-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--microsoft-purple);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .highlight-box {
+            background: linear-gradient(120deg, rgba(91, 44, 135, 0.1) 0%, rgba(0, 120, 212, 0.1) 100%);
+            border: 2px solid var(--microsoft-light-blue);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .highlight-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--microsoft-dark-blue);
+            margin-bottom: 10px;
+        }
+
+        .highlight-text {
+            font-size: 15px;
+            line-height: 1.5;
+            color: var(--text-primary);
+        }
+
+        .ai-platforms {
+            background: var(--card-background);
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+            border-left: 6px solid var(--microsoft-green);
+        }
+
+        .ai-platforms .section-title {
+            color: var(--microsoft-green);
+        }
+
+        .platform-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+
+        .platform-card {
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 10px;
+            padding: 16px;
+            border-left: 4px solid var(--microsoft-blue);
+            transition: all 0.3s ease;
+        }
+
+        .platform-card:nth-child(2) {
+            border-left-color: var(--microsoft-green);
+        }
+
+        .platform-card:nth-child(3) {
+            border-left-color: var(--microsoft-orange);
+        }
+
+        .platform-card:nth-child(4) {
+            border-left-color: var(--microsoft-purple);
+        }
+
+        .platform-card:hover {
+            background: rgba(255, 255, 255, 0.95);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .platform-name {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+        }
+
+        .platform-role {
+            font-size: 13px;
+            color: var(--text-secondary);
+            line-height: 1.4;
+        }
+
+        .verification-process {
+            grid-column: 1 / -1;
+            background: var(--card-background);
+            border-radius: 16px;
+            padding: 28px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+            border-left: 6px solid var(--microsoft-orange);
+            margin-top: 20px;
+        }
+
+        .verification-process .section-title {
+            color: var(--microsoft-orange);
+        }
+
+        .process-steps {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .step-card {
+            flex: 1;
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            border-top: 4px solid var(--microsoft-blue);
+            position: relative;
+        }
+
+        .step-card:nth-child(2) {
+            border-top-color: var(--microsoft-green);
+        }
+
+        .step-card:nth-child(3) {
+            border-top-color: var(--microsoft-orange);
+        }
+
+        .step-number {
+            width: 36px;
+            height: 36px;
+            background: var(--microsoft-blue);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            margin: 0 auto 12px auto;
+        }
+
+        .step-card:nth-child(2) .step-number {
+            background: var(--microsoft-green);
+        }
+
+        .step-card:nth-child(3) .step-number {
+            background: var(--microsoft-orange);
+        }
+
+        .step-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+        }
+
+        .step-description {
+            font-size: 13px;
+            color: var(--text-secondary);
+            line-height: 1.4;
+        }
+
+        .mermaid-container {
+            grid-column: 1 / -1;
+            background: var(--card-background);
+            border-radius: 16px;
+            padding: 28px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+            border-left: 6px solid var(--microsoft-red);
+            text-align: center;
+        }
+
+        .mermaid-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--microsoft-red);
+            margin-bottom: 20px;
+        }
+
+        .limitations {
+            background: rgba(209, 52, 56, 0.05);
+            border: 2px solid rgba(209, 52, 56, 0.2);
+            border-radius: 12px;
+            padding: 16px;
+            margin-top: 16px;
+        }
+
+        .limitations-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--microsoft-red);
+            margin-bottom: 10px;
+        }
+
+        .limitations-text {
+            font-size: 14px;
+            line-height: 1.5;
+            color: var(--text-primary);
+        }
+
+        @keyframes slideDownFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideUpFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 1400px) {
+            .slide-title { font-size: 36px; }
+            .section-title { font-size: 22px; }
+            .platform-grid { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 1024px) {
+            .main-content {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            .process-steps {
+                flex-direction: column;
+                gap: 16px;
+            }
+            .slide-container { padding: 35px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="slide-header">
+            <h1 class="slide-title">革新的研究手法</h1>
+            <p class="slide-subtitle">メタ・イノベーション：AIを使ってAIを研究する時代の先駆け</p>
+        </div>
+
+        <div class="main-content">
+            <div class="meta-approach">
+                <h2 class="section-title">
+                    🔬 メタ・アプローチ
+                </h2>
+                
+                <div class="highlight-box">
+                    <div class="highlight-title">研究方法論の革新</div>
+                    <div class="highlight-text">
+                        原子力工学の専門家でない著者が、急速発展する最先端テーマを包括的かつ正確に調査・分析する挑戦に対し、<strong>「生成AI自体を調査ツールとして活用」</strong>する革新的アプローチを採用。
+                    </div>
+                </div>
+
+                <p style="font-size: 15px; line-height: 1.5; color: var(--text-primary); margin-bottom: 16px;">
+                    これは<strong>「AIを使ってAIを研究する」</strong>メタ・アプローチであり、研究方法論そのものに新たな地平を開くもの。まさに、INL-Microsoft協業に象徴される技術革新を、AI技術そのものを使って分析する時代を象徴する手法。
+                </p>
+
+                <div style="background: rgba(0, 120, 212, 0.08); border-radius: 8px; padding: 16px;">
+                    <div style="font-size: 14px; font-weight: 600; color: var(--microsoft-dark-blue); margin-bottom: 8px;">
+                        ⚡ 時代的意義
+                    </div>
+                    <div style="font-size: 13px; line-height: 1.4; color: var(--text-secondary);">
+                        従来では不可能だった包括的かつ迅速な情報収集・分析を実現し、原子力×AI融合の最新動向を正確に把握
+                    </div>
+                </div>
+            </div>
+
+            <div class="ai-platforms">
+                <h2 class="section-title">
+                    🤖 4つのAIプラットフォーム戦略活用
+                </h2>
+                
+                <div class="platform-grid">
+                    <div class="platform-card">
+                        <div class="platform-name">Microsoft Copilot</div>
+                        <div class="platform-role">統合的リサーチと情報検証。Bing検索による政府・国際機関文書アクセス</div>
+                    </div>
+                    
+                    <div class="platform-card">
+                        <div class="platform-name">ChatGPT（OpenAI）</div>
+                        <div class="platform-role">世界各国事例の網羅的収集。技術トレンドの整理と分類</div>
+                    </div>
+                    
+                    <div class="platform-card">
+                        <div class="platform-name">Claude（Anthropic）</div>
+                        <div class="platform-role">技術仕様書詳細分析。安全性要件の体系的整理</div>
+                    </div>
+                    
+                    <div class="platform-card">
+                        <div class="platform-name">Perplexity</div>
+                        <div class="platform-role">最新投資動向追跡。事実確認とソース検証</div>
+                    </div>
+                </div>
+
+                <div style="background: rgba(16, 124, 16, 0.08); border-radius: 8px; padding: 16px;">
+                    <div style="font-size: 14px; font-weight: 600; color: var(--microsoft-green); margin-bottom: 8px;">
+                        🛡️ リスク回避戦略
+                    </div>
+                    <div style="font-size: 13px; line-height: 1.4; color: var(--text-secondary);">
+                        単一プラットフォーム依存のリスクを回避。複数AI間での交差検証により信頼性を確保
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="verification-process">
+            <h2 class="section-title">
+                ✅ 3段階検証プロセス
+            </h2>
+            
+            <div class="process-steps">
+                <div class="step-card">
+                    <div class="step-number">1</div>
+                    <div class="step-title">プラットフォーム間整合性確認</div>
+                    <div class="step-description">同一事実に対する複数AI間での回答比較と矛盾点の特定</div>
+                </div>
+                
+                <div class="step-card">
+                    <div class="step-number">2</div>
+                    <div class="step-title">一次資料との照合</div>
+                    <div class="step-description">AI回答の根拠となる元文書確認と数値データの正確性検証</div>
+                </div>
+                
+                <div class="step-card">
+                    <div class="step-number">3</div>
+                    <div class="step-title">専門家による妥当性評価</div>
+                    <div class="step-description">今後の課題：原子力・AI・政策専門家との協働による内容精査</div>
+                </div>
+            </div>
+
+            <div class="mermaid-container">
+                <h3 class="mermaid-title">多様な情報源の統合</h3>
+                <div class="mermaid">
+                    graph TD
+                        subgraph "情報源の多様化"
+                            A[各国政府エネルギー政策文書]
+                            B[上場企業投資家向け説明資料]
+                            C[リアルタイム企業プレスリリース]
+                            D[国際機関報告書]
+                        end
+                        
+                        subgraph "AI分析レイヤー"
+                            E[Microsoft Copilot]
+                            F[ChatGPT]
+                            G[Claude]
+                            H[Perplexity]
+                        end
+                        
+                        subgraph "検証・統合"
+                            I[交差検証]
+                            J[一次資料照合]
+                            K[最終分析]
+                        end
+                        
+                        A --> E
+                        B --> F
+                        C --> G
+                        D --> H
+                        
+                        E --> I
+                        F --> I
+                        G --> J
+                        H --> J
+                        
+                        I --> K
+                        J --> K
+                        
+                        classDef source fill:#e3f2fd
+                        classDef ai fill:#f3e5f5
+                        classDef verify fill:#e8f5e8
+                        
+                        class A,B,C,D source
+                        class E,F,G,H ai
+                        class I,J,K verify
+                </div>
+            </div>
+
+            <div class="limitations">
+                <div class="limitations-title">⚠️ 手法の限界と配慮事項</div>
+                <div class="limitations-text">
+                    <strong>技術的限界：</strong>学習データカットオフ、幻覚現象による誤情報混入可能性、機密情報への限定アクセス<br>
+                    <strong>品質保証：</strong>複数独立情報源による裏付け、数値データの一次資料遡及、複数AIプラットフォームによる交差検証
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        mermaid.initialize({ 
+            startOnLoad: true,
+            theme: 'base',
+            themeVariables: {
+                primaryColor: '#0078D4',
+                primaryTextColor: '#323130',
+                primaryBorderColor: '#0078D4',
+                lineColor: '#605E5C',
+                secondaryColor: '#F3F2F1',
+                tertiaryColor: '#FFFFFF',
+                background: '#FFFFFF',
+                mainBkg: '#FAFAFA',
+                secondBkg: '#F8F9FA'
+            }
+        });
+    </script>
+</body>
+</html>

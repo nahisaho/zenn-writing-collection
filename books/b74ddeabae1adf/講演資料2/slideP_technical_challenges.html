@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>技術的課題と解決策 - 原子力AI技術革命</title>
+    <style>
+        :root {
+            --microsoft-blue: #0078D4;
+            --microsoft-dark-blue: #005A9E;
+            --microsoft-light-blue: #40C0FF;
+            --microsoft-green: #107C10;
+            --microsoft-orange: #FF8C00;
+            --microsoft-red: #D83B01;
+            --microsoft-purple: #5C2D91;
+            --text-primary: #323130;
+            --text-secondary: #605E5C;
+            --background: #FFFFFF;
+            --card-background: #FAFAFA;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #FFFFFF 0%, #F8F9FA 100%);
+            color: var(--text-primary);
+            line-height: 1.6;
+            padding: 40px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            aspect-ratio: 16/9;
+            background: var(--background);
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+            padding: 60px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .slide-number {
+            font-size: 24px;
+            font-weight: 600;
+            color: var(--microsoft-blue);
+            margin-bottom: 16px;
+        }
+
+        .main-title {
+            font-size: 40px;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 12px;
+        }
+
+        .subtitle {
+            font-size: 20px;
+            color: var(--text-secondary);
+            font-weight: 400;
+        }
+
+        .content {
+            flex: 1;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+
+        .left-section {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+
+        .right-section {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+
+        .challenge-card {
+            background: var(--card-background);
+            border-radius: 16px;
+            padding: 20px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+            border-left: 6px solid var(--microsoft-red);
+        }
+
+        .solution-card {
+            background: var(--card-background);
+            border-radius: 16px;
+            padding: 20px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+            border-left: 6px solid var(--microsoft-green);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .card-icon {
+            font-size: 24px;
+            margin-right: 10px;
+        }
+
+        .card-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .challenge-title {
+            color: var(--microsoft-red);
+        }
+
+        .solution-title {
+            color: var(--microsoft-green);
+        }
+
+        .card-content {
+            font-size: 14px;
+            color: var(--text-secondary);
+            line-height: 1.5;
+            margin-bottom: 12px;
+        }
+
+        .key-points {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 6px;
+        }
+
+        .point-item {
+            background: rgba(0, 120, 212, 0.05);
+            border-radius: 6px;
+            padding: 8px;
+            font-size: 12px;
+            color: var(--text-primary);
+        }
+
+        .point-label {
+            font-weight: 700;
+            color: var(--microsoft-blue);
+            margin-right: 4px;
+        }
+
+        .three-challenges {
+            background: linear-gradient(135deg, rgba(216, 59, 1, 0.1) 0%, rgba(216, 59, 1, 0.05) 100%);
+            border: 2px solid var(--microsoft-red);
+            border-radius: 16px;
+            padding: 25px;
+        }
+
+        .challenges-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--microsoft-red);
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+        }
+
+        .challenges-title::before {
+            content: "⚠️";
+            margin-right: 8px;
+            font-size: 24px;
+        }
+
+        .challenge-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 12px;
+        }
+
+        .challenge-item {
+            background: rgba(216, 59, 1, 0.05);
+            border-radius: 8px;
+            padding: 12px;
+        }
+
+        .challenge-name {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--microsoft-red);
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+        }
+
+        .challenge-name::before {
+            content: "🔍";
+            margin-right: 6px;
+            font-size: 16px;
+        }
+
+        .challenge-name.safety::before {
+            content: "🔒";
+        }
+
+        .challenge-name.physics::before {
+            content: "🔧";
+        }
+
+        .challenge-description {
+            font-size: 11px;
+            color: var(--text-primary);
+            line-height: 1.3;
+        }
+
+        .solutions-overview {
+            background: linear-gradient(135deg, rgba(16, 124, 16, 0.1) 0%, rgba(16, 124, 16, 0.05) 100%);
+            border: 2px solid var(--microsoft-green);
+            border-radius: 16px;
+            padding: 25px;
+        }
+
+        .solutions-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--microsoft-green);
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+        }
+
+        .solutions-title::before {
+            content: "✅";
+            margin-right: 8px;
+            font-size: 24px;
+        }
+
+        .solution-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 12px;
+        }
+
+        .solution-item {
+            background: rgba(16, 124, 16, 0.05);
+            border-radius: 8px;
+            padding: 12px;
+        }
+
+        .solution-name {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--microsoft-green);
+            margin-bottom: 6px;
+        }
+
+        .solution-description {
+            font-size: 11px;
+            color: var(--text-primary);
+            line-height: 1.3;
+            margin-bottom: 6px;
+        }
+
+        .solution-achievement {
+            font-size: 10px;
+            color: var(--microsoft-green);
+            font-weight: 600;
+        }
+
+        .xai-technology {
+            background: linear-gradient(135deg, rgba(92, 45, 145, 0.1) 0%, rgba(92, 45, 145, 0.05) 100%);
+            border: 2px solid var(--microsoft-purple);
+            border-radius: 16px;
+            padding: 20px;
+        }
+
+        .xai-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--microsoft-purple);
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+        }
+
+        .xai-title::before {
+            content: "🧠";
+            margin-right: 8px;
+            font-size: 20px;
+        }
+
+        .xai-techniques {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+        }
+
+        .xai-technique {
+            background: rgba(92, 45, 145, 0.05);
+            border-radius: 6px;
+            padding: 8px;
+            text-align: center;
+        }
+
+        .technique-name {
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--microsoft-purple);
+            margin-bottom: 3px;
+        }
+
+        .technique-desc {
+            font-size: 9px;
+            color: var(--text-secondary);
+            line-height: 1.2;
+        }
+
+        .nrc-funding {
+            background: rgba(255, 185, 0, 0.1);
+            border: 1px solid #FFB900;
+            border-radius: 8px;
+            padding: 10px;
+            text-align: center;
+            margin-top: 8px;
+        }
+
+        .funding-amount {
+            font-size: 16px;
+            font-weight: 700;
+            color: #FFB900;
+            margin-bottom: 4px;
+        }
+
+        .funding-description {
+            font-size: 10px;
+            color: var(--text-primary);
+        }
+
+        .footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 25px;
+            padding-top: 25px;
+            border-top: 2px solid #E1E1E1;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .nav-button {
+            background: var(--microsoft-light-blue);
+            color: var(--text-primary);
+            padding: 12px 24px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-button:hover {
+            background: var(--microsoft-blue);
+            color: white;
+        }
+
+        .slide-info {
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        @media (max-width: 1200px) {
+            .container { padding: 40px; }
+            .main-title { font-size: 32px; }
+            .content { grid-template-columns: 1fr; }
+            .xai-techniques { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="slide-number">スライド P</div>
+            <h1 class="main-title">技術的課題と解決策</h1>
+            <p class="subtitle">課題は明確、解決策も存在。実行の意志とスピードが勝負</p>
+        </div>
+
+        <div class="content">
+            <div class="left-section">
+                <div class="three-challenges">
+                    <div class="challenges-title">克服すべき3つの核心課題</div>
+                    <div class="challenge-grid">
+                        <div class="challenge-item">
+                            <div class="challenge-name">ブラックボックス問題</div>
+                            <div class="challenge-description">
+                                AIの判断根拠が説明できない<br>
+                                原子力安全では致命的な問題
+                            </div>
+                        </div>
+                        <div class="challenge-item">
+                            <div class="challenge-name safety">安全性・信頼性の保証</div>
+                            <div class="challenge-description">
+                                深層防護とAIの統合が未確立<br>
+                                確率論的システムへの適応必要
+                            </div>
+                        </div>
+                        <div class="challenge-item">
+                            <div class="challenge-name physics">物理法則との整合性</div>
+                            <div class="challenge-description">
+                                AI判断が物理法則に矛盾するリスク<br>
+                                エネルギー保存則等の自動遵守
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="xai-technology">
+                    <div class="xai-title">説明可能AI（XAI）技術</div>
+                    <div class="xai-techniques">
+                        <div class="xai-technique">
+                            <div class="technique-name">SHAP</div>
+                            <div class="technique-desc">ゲーム理論ベース<br>特徴量重要度評価</div>
+                        </div>
+                        <div class="xai-technique">
+                            <div class="technique-name">LIME</div>
+                            <div class="technique-desc">局所的説明<br>モデル非依存手法</div>
+                        </div>
+                        <div class="xai-technique">
+                            <div class="technique-name">注意機構</div>
+                            <div class="technique-desc">Transformer可視化<br>重要箇所特定</div>
+                        </div>
+                        <div class="xai-technique">
+                            <div class="technique-name">階層的説明</div>
+                            <div class="technique-desc">ステークホルダー別<br>適切レベル説明</div>
+                        </div>
+                    </div>
+                    <div class="nrc-funding">
+                        <div class="funding-amount">$50万</div>
+                        <div class="funding-description">NRC→ミシガン大学 XAI標準化助成（2024年）</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="right-section">
+                <div class="solutions-overview">
+                    <div class="solutions-title">実用的解決策の確立</div>
+                    <div class="solution-grid">
+                        <div class="solution-item">
+                            <div class="solution-name">XAI技術統合実装</div>
+                            <div class="solution-description">
+                                SHAP・LIME等の統合による多層説明システム<br>
+                                リアルタイム説明生成・段階的詳細化
+                            </div>
+                            <div class="solution-achievement">✓ NRC標準化推進中</div>
+                        </div>
+                        <div class="solution-item">
+                            <div class="solution-name">国際安全標準発効</div>
+                            <div class="solution-description">
+                                ISO/IEC 5469:2024（AI機能安全）発効<br>
+                                英米加三国共同AI安全原則発表
+                            </div>
+                            <div class="solution-achievement">✓ 2024年1月発効済</div>
+                        </div>
+                        <div class="solution-item">
+                            <div class="solution-name">Physics-Informed AI</div>
+                            <div class="solution-description">
+                                PINNs技術による物理制約自動遵守<br>
+                                中性子拡散方程式等の損失関数統合
+                            </div>
+                            <div class="solution-achievement">✓ 実用段階到達</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="background: linear-gradient(135deg, rgba(0, 120, 212, 0.1) 0%, rgba(0, 120, 212, 0.05) 100%); border: 2px solid var(--microsoft-blue); border-radius: 16px; padding: 20px;">
+                    <div style="font-size: 18px; font-weight: 700; color: var(--microsoft-blue); margin-bottom: 12px; display: flex; align-items: center;">
+                        <span style="margin-right: 8px; font-size: 20px;">🔒</span>深層防護とAIの統合
+                    </div>
+                    <div style="font-size: 12px; color: var(--text-primary); line-height: 1.4; font-family: 'Courier New', monospace; background: rgba(0, 120, 212, 0.05); border-radius: 6px; padding: 10px;">
+深層防護の各層でのAI活用:
+├── 第1層：異常発生の防止
+│   ├── 予知保全AI
+│   └── 運転最適化AI
+├── 第2層：異常の早期検知  
+│   ├── 異常検知AI
+│   └── パターン認識AI
+├── 第3層：事故への拡大防止
+│   ├── 制御支援AI
+│   └── シナリオ予測AI
+├── 第4層：過酷事故の影響緩和
+│   └── 事故対応AI
+└── 第5層：放射性物質放出対応
+    └── 環境評価AI
+                    </div>
+                </div>
+
+                <div style="background: rgba(92, 45, 145, 0.05); border: 1px solid var(--microsoft-purple); border-radius: 12px; padding: 15px;">
+                    <div style="font-size: 14px; font-weight: 700; color: var(--microsoft-purple); margin-bottom: 10px;">🚀 戦略的示唆</div>
+                    <div style="font-size: 12px; color: var(--text-primary); line-height: 1.4;">
+                        課題は「壁」ではなく「階段」<br>
+                        <strong>段階的アプローチで乗り越え可能</strong><br><br>
+                        
+                        • 技術的解決策は既に存在<br>
+                        • 国際標準化が急速に進展<br>
+                        • 実行の意志とスピードが成功要因
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <div class="nav-buttons">
+                <a href="slideO_technology_maturity.html" class="nav-button">← 前へ：技術成熟度</a>
+                <a href="slideQ_regulatory_coordination.html" class="nav-button">次へ：規制協調 →</a>
+            </div>
+            <div class="slide-info">原子力AI技術革命 | 日本原子力学会2025年秋の大会</div>
+        </div>
+    </div>
+</body>
+</html>
