@@ -33,7 +33,7 @@ title: "付録D: 参考資料とリンク集"
   - 国家レベルのセキュリティ戦略・重要インフラ保護方針
 
 ### 国際標準・フレームワーク
-- **[ISO/IEC 27001:2022 情報セキュリティマネジメントシステム](https://www.iso.org/standard/27001)**
+- **[ISO/IEC 27001:2022 情報セキュリティマネジメントシステム](https://www.iso.org/standard/82875.html)**
   - 国際的な情報セキュリティ管理標準
   - Zero Trust実装の管理体制構築に参考
 
@@ -46,7 +46,7 @@ title: "付録D: 参考資料とリンク集"
   - Microsoft製品でのZero Trust実装ガイド
   - アーキテクチャ・設計パターン・ベストプラクティス
 
-- **[Microsoft 365 Zero Trust展開ガイド](https://docs.microsoft.com/ja-jp/microsoft-365/security/office-365-security/zero-trust-guide-microsoft-365)**
+- **[Microsoft 365 Zero Trust展開ガイド](https://learn.microsoft.com/ja-jp/security/zero-trust/microsoft-365-zero-trust)**
   - M365環境での具体的実装手順・設定例
   - 段階的実装アプローチの詳細
 
