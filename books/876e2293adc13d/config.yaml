@@ -1,0 +1,22 @@
+title: "みえないリスクを見える化する - 予防的生徒指導を実現する教育データ革命"
+summary: "教育データの利活用とは、単にダッシュボードを作ることではなく、データに基づく意思決定により教育を改善することです。本書では、教育現場に潜む「見えないリスク」の早期発見から、適切な同意取得、データ分類の理解まで、実践的な教育データ活用法を解説します。"
+topics: ["教育", "データ活用", "生徒指導", "予防的支援", "教育DX"]
+published: true
+# 本の公開状態を設定します。trueにすると公開され、falseにすると非公開になります。
+# 本の価格を設定します。0にすると無料になり、有料にする場合は200〜5000の範囲で設定します。
+price: 0 # 有料の場合200〜5000
+# 本に含めるチャプターを順番に並べましょう
+chapters:
+  - introduction
+  - chapter01
+  - chapter02
+  - chapter03
+  - chapter04
+  - chapter05-data-driven-decision
+  - chapter06-risk-detection
+  - chapter07-success-and-failure
+  - chapter08-data-collection
+  - chapter09-risk-alert-system
+  - chapter10-implementation
+  - conclusion
+  - appendix
