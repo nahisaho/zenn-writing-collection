@@ -1,0 +1,22 @@
+title: "教育機関のための Microsoft 365 A3 Zero Trust 実装・運用ガイド"
+summary: "Microsoft 365 A3 ライセンスで実現可能な Zero Trust アーキテクチャの段階的実装方法を解説。Swim Lane方式による体系的なアプローチで、教育機関特有の課題に対応しながらセキュリティリスクを低減する実践的ガイド。各章では具体的な設定手順とベストプラクティスを提供します。"
+topics: ["Microsoft365", "ZeroTrust", "セキュリティ", "教育機関", "A3ライセンス"]
+published: false
+price: 0 # 有料の場合200〜5000
+# 本に含めるチャプターを順番に並べましょう
+chapters:
+  - introduction
+  - chapter01
+  - chapter02
+  - chapter03
+  - chapter04
+  - chapter05
+  - chapter06
+  - chapter07
+  - chapter08
+  - chapter09
+  - chapter10
+  - appendix-a
+  - appendix-b
+  - appendix-c
+  - appendix-d

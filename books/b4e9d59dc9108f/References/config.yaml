@@ -1,0 +1,23 @@
+title: "教育機関 Zero Trust 実現のための Microsoft 365 A3/A5 戦略的選択ガイド"
+summary: "教育機関がクラウド型校務支援システムを安全に運用するための Microsoft 365 A3 もしくは A5 による Zero Trust Architecture 実現戦略を解説します。NIST SP800-207準拠を目指し、文部科学省の次世代校務DX政策に対応した戦略的アプローチガイドです。細かな設定手順ではなく、Zero Trust実現のための考え方とA3/A5それぞれでの対応方法の違いを中心に解説します。"
+topics: ["Microsoft365", "セキュリティ", "校務支援", "クラウド", "ZeroTrust"]
+published: true
+price: 0 # 有料の場合200〜5000
+# 本に含めるチャプターを順番に並べましょう
+chapters:
+  - introduction
+  - chapter01
+  - chapter02
+  - chapter03
+  - chapter04
+  - chapter05
+  - chapter06
+  - chapter07
+  - chapter08
+  - chapter09
+  - conclusion
+  - appendix-a
+  - appendix-b
+  - appendix-c
+  - appendix-d
+  - appendix-e
