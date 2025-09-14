@@ -1,4 +1,4 @@
-title: "Zero Trust型クラウド校務支援システム調達ガイド - NIST SP800-207準拠のMicrosoft 365実装と運用"
+title: "Zero Trust型クラウド校務支援システム調達書の書き方 - NIST SP800-207準拠のMicrosoft 365実装と運用"
 summary: "NIST SP800-207に準拠したZero Trust Architectureを教育機関で実現するための調達仕様書作成ガイド。Microsoft 365 A3/A5の機能差を理解し、運用でカバーすべき領域を明確化することで、真のゼロトラストを実現する調達と運用体制の構築方法を解説。"
 topics: ["zerotrust", "microsoft365", "nist", "education", "security"]
 published: true
