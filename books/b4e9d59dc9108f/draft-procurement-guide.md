@@ -394,7 +394,7 @@
 - 要件一覧表
 
 #### 付録B：チェックリスト（Excel形式）
-- NIST SP800-207準拠チェック
+
 - Microsoft 365機能チェック
 - Microsoft Secure Score改善項目チェック
 - 運用要件チェック
