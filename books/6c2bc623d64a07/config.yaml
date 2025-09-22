@@ -1,0 +1,27 @@
+title: "生成AI時代の教育実践論"
+summary: "ChatGPTを始めとする生成AIの教育現場での活用方法を、実践的な視点から解説。教育者向けに、AI活用の基礎知識から具体的な授業設計まで幅広くカバーします。"
+topics: ["AI", "教育", "ChatGPT", "EdTech", "生成AI"]
+published: true
+price: 0 # 有料の場合200〜5000
+# 本に含めるチャプターを順番に並べましょう
+chapters:
+  - "introduction"
+  - "chapter01"
+  - "chapter02"
+  - "chapter03"
+  - "chapter04"
+  - "chapter05"
+  - "chapter06"
+  - "chapter07"
+  - "chapter08"
+  - "chapter09"
+  - "conclusion"
+  - "appendix"
+  - "appendix-a"
+  - "appendix-b"
+  - "appendix-c"
+  - "appendix-d"
+  - "appendix-e"
+  - "appendix-f"
+  - "appendix-g"
+  - "appendix-h"

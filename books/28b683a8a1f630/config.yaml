@@ -1,0 +1,20 @@
+title: "教師の理想を形にする：教育理論に裏打ちされた生成AI活用の教科書 (入門編)"
+summary: "一人ひとりの教師が心に描く『理想の教育』を、確立された教育理論を基盤として、生成AIという道具と融合させることで実現する方法を体系的に解説。教師の個別理想に合わせた理論×AI統合アプローチを提案します。"
+topics: ["生成AI", "教育", "教育理論", "AI活用", "教師支援"]
+published: false
+price: 0 # 有料の場合200〜5000
+# 本に含めるチャプターを順番に並べましょう
+chapters:
+  - introduction
+  - chapter01
+  - chapter02
+  - chapter03
+  - chapter04
+  - chapter05
+  - chapter06
+  - chapter07
+  - chapter08
+  - appendix-educational-ideal-type-checklist
+  - appendix-ai-templates
+  - appendix-practice-planning-worksheet
+  - appendix-effectiveness-measurement-tools
