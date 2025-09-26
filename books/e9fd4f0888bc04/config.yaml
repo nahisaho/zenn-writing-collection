@@ -1,0 +1,24 @@
+title: "生成AI依存で『考えない子ども』が急増中 - 世界の研究データが示す教育現場の危険信号"
+summary: "生成AIパイロット校の実践から見えてきた本質的な課題を分析し、教育的効果を明確にするためのメタメタプロンプトによる授業設計手法を提案。なぜ多くの教員が「教育的効果」を説明できないのか、その原因と解決策を実践的に解説します。"
+topics: ["生成AI", "教育", "プロンプトエンジニアリング", "授業設計", "EdTech"]
+published: true
+price: 0 # 有料の場合200〜5000
+# 本に含めるチャプターを順番に並べましょう
+chapters:
+  - introduction
+  - chapter1-current-situation
+  - chapter2-global-ai-dependency
+  - chapter3-cause-analysis
+  - chapter4-educational-value
+  - chapter5-metameta-prompt
+  - chapter6-student-centered-design
+  - chapter7-implementation-guidelines
+  - chapter8-future-prospects
+  - conclusion
+  - ai-dependency-analysis-report
+  - appendix-cppd-guardrail-system1
+  - appendix-cppd-guardrail-system2
+  - appendix-evaluation-rubrics
+  - appendix-ai-dependency-checklist
+  - appendix-parent-guide
+  - license
