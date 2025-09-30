@@ -1,0 +1,12 @@
+title: "生成AI時代のProject Based Learning"
+summary: "琉球大学での3年間の実践事例を基に、生成AI時代における大学のPBLの設計手法と活用指針を体系化。地域課題解決授業での具体的実践から、生成AIがもたらす学習効果と認知的影響、効果的な授業設計のフレームワークまでを実践先行型で解説。"
+topics: ["教育", "PBL", "生成AI", "大学教育", "授業設計"]
+published: false
+price: 0
+# 本に含めるチャプターを順番に並べましょう
+chapters:
+  - chapter01
+  - chapter02
+  - chapter03
+  - chapter04
+  - chapter05

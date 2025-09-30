@@ -1,0 +1,19 @@
+title: "生成AIが学習者の認知能力に与える影響：思考力低下と依存性形成の科学的分析"
+summary: "生成AIの教育活用が広がる中、中国・米国・スイスの最新研究から明らかになった学習者の認知能力への負の影響を科学的に解説。教育における生成AI肯定派の教育者に向けて、エビデンスに基づく再考を促す一冊。"
+topics: ["生成AI", "教育", "認知科学", "EdTech", "批判的思考"]
+published: false
+price: 0 # 有料の場合200〜5000
+# 本に含めるチャプターを順番に並べましょう
+chapters:
+  - introduction
+  - chapter1-china-reality
+  - chapter2-mit-brain
+  - chapter3-swiss-dependency
+  - chapter4-educational-changes
+  - chapter5-educator-bias
+  - chapter6-evidence-based
+  - chapter7-essence-education
+  - conclusion
+  - appendix-a
+  - appendix-b
+  - appendix-c
