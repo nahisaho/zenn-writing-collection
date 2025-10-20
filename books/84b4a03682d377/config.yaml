@@ -1,0 +1,31 @@
+title: "ゼロトラストを実現するための Microsoft 365 A5 設計・運用ガイドブック"
+summary: "ゼロトラスト製品を購入しただけでは、ゼロトラストは実現できない。Microsoft 365 A5のライセンスを最大限活用し、ID管理、デバイス保護、情報保護、脅威対策の各領域で実践的なゼロトラストセキュリティを実装するための設計・構成・運用の完全ガイド。"
+topics: ["microsoft365", "zerotrust", "security", "azure", "intune"]
+published: true
+price: 0 # 有料の場合200〜5000
+# 本に含めるチャプターを順番に並べましょう
+chapters:
+  - chapter00-introduction
+  - chapter01-why-zerotrust
+  - chapter02-zerotrust-principles
+  - chapter03-m365-a5-products
+  - chapter04-a3-a5-sase-comparison
+  - chapter05-entra-id-foundation
+  - chapter05-entra-id-foundation-continuation
+  - chapter06-conditional-access
+  - chapter07-privileged-identity-management
+  - chapter08-intune-device-management
+  - chapter09-defender-for-endpoint
+  - chapter10-information-protection
+  - chapter11-data-loss-prevention
+  - chapter12-insider-risk-management
+  - chapter13-ai-copilot-security
+  - chapter14-defender-for-office365
+  - chapter15-defender-for-cloud-apps
+  - chapter16-defender-portal
+  - chapter17-security-governance
+  - chapter18-monitoring-incident-response
+  - chapter19-sentinel-siem
+  - chapter20-roadmap-budget
+  - chapter21-future-outlook
+  - chapter99-conclusion
