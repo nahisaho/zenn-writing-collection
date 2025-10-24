@@ -1,0 +1,24 @@
+title: "教育AI影響測定ガイド：認知能力変化を科学的に検証するシステム構築"
+summary: "教育現場での生成AI活用において、その影響を科学的に測定・評価するための実践的なシステム構築方法を解説。エビデンスベースの教育実践を支援する測定フレームワークを提供。"
+topics: ["教育", "AI", "測定評価", "EdTech", "科学的検証"]
+published: false
+price: 0 # 有料の場合200〜5000
+# 本に含めるチャプターを順番に並べましょう
+chapters:
+  - "introduction"
+  - "chapter1-measurement-theory"
+  - "chapter2-system-design"
+  - "chapter3-cognitive-tools"
+  - "chapter4-learning-outcomes"
+  - "chapter5-motivation-measurement"
+  - "chapter6-teacher-impact"
+  - "chapter7-data-analysis"
+  - "chapter8-feedback-loops"
+  - "chapter9-case-studies"
+  - "chapter10-ethics-governance"
+  - "chapter11-technical-implementation"
+  - "conclusion"
+  - "appendix-a"
+  - "appendix-b"
+  - "appendix-c"
+  - "appendix-d"
