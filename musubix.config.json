@@ -1,0 +1,76 @@
+{
+  "version": "1.7.5",
+  "project": "zenn-writing-collection",
+  "projectType": "content-management",
+  "platform": "zenn.dev",
+  "steeringDir": "./steering",
+  "storageDir": "./storage",
+  "contentDirs": {
+    "articles": "./articles",
+    "books": "./books",
+    "drafts": "./drafts"
+  },
+  "llm": {
+    "provider": "anthropic",
+    "model": "claude-sonnet-4-20250514",
+    "maxTokens": 8192,
+    "temperature": 0.5,
+    "writingMode": "technical-content"
+  },
+  "zenn": {
+    "previewPort": 8000,
+    "maxCharacters": 50000,
+    "maxTopics": 5,
+    "mermaidVersion": "8.10.x",
+    "autoIndex": true
+  },
+  "writing": {
+    "defaultType": "tech",
+    "frontmatterRequired": true,
+    "draftPrefix": "draft-",
+    "chapterPrefix": "chapter",
+    "qualityChecklist": true,
+    "numberingSystem": {
+      "h1": {
+        "format": "第N章",
+        "example": "第2章 基礎概念"
+      },
+      "h2": {
+        "format": "N.M",
+        "example": "2.1 IAPの3つの革新ポイント"
+      },
+      "h3": {
+        "format": "N.M.L",
+        "example": "2.1.1 Interactive（対話的）"
+      },
+      "h4": {
+        "format": "none",
+        "example": "従来のアプローチ"
+      }
+    }
+  },
+  "integration": {
+    "neuralThreshold": 0.7,
+    "symbolicThreshold": 0.8,
+    "defaultStrategy": "neural-validated",
+    "gracefulDegradation": true
+  },
+  "workflow": {
+    "indexUpdateRequired": true,
+    "previewBeforePublish": true,
+    "draftFirstDevelopment": true
+  },
+  "automation": {
+    "enabled": true,
+    "scripts": {
+      "newBook": "npm run new:book",
+      "newArticle": "npm run new:article",
+      "updateIndex": "npm run index:update"
+    },
+    "triggers": {
+      "onBookCreate": ["updateIndex"],
+      "onArticleCreate": ["updateIndex"],
+      "onConfigChange": ["updateIndex"]
+    }
+  }
+}

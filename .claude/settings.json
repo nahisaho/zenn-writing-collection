@@ -1,0 +1,29 @@
+{
+  "projectContext": {
+    "name": "zenn-writing-collection",
+    "framework": "MUSUBIX",
+    "methodology": "SDD (Specification-Driven Development)"
+  },
+  "skills": {
+    "enabled": true,
+    "autoDetect": true,
+    "skillsPath": ".github/skills"
+  },
+  "prompts": {
+    "enabled": true,
+    "promptsPath": ".github/prompts"
+  },
+  "rules": {
+    "constitution": "steering/rules/constitution.md",
+    "alwaysReadFirst": [
+      "AGENTS.md",
+      "steering/product.md",
+      "steering/tech.md"
+    ]
+  },
+  "codeGeneration": {
+    "testFirst": true,
+    "traceabilityComments": true,
+    "earsFormat": true
+  }
+}

@@ -1,0 +1,18 @@
+title: "Interactive Agentic Promptエンジニアリング手法"
+summary: "AIを専門家パートナーに変える対話型プロンプト設計の完全ガイド。KOTODAMAプロジェクトの知見を体系化し、5フェーズアーキテクチャによるIAP（Interactive Agentic Prompt）の設計・作成・活用方法を詳解します。"
+topics: ["ai", "prompt", "chatgpt", "claude", "生成AI"]
+published: false
+price: 0
+chapters:
+  - chapter00-introduction
+  - chapter01-fundamentals
+  - chapter02-five-phase-architecture
+  - chapter03-design-principles
+  - chapter04-template-structure
+  - chapter05-dialogue-flow-control
+  - chapter06-framework-integration
+  - chapter07-quality-enhancement
+  - chapter08-practical-examples
+  - chapter09-ai-model-adaptation
+  - chapter10-advanced-topics
+  - appendix-templates

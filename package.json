@@ -3,7 +3,13 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "preview": "npx zenn preview",
+    "new:book": "node scripts/new-book.js",
+    "new:article": "node scripts/new-article.js",
+    "index:update": "node scripts/update-index.js",
+    "list:books": "npx zenn list:books",
+    "list:articles": "npx zenn list:articles"
   },
   "repository": {
     "type": "git",
@@ -18,6 +24,7 @@
   "homepage": "https://github.com/hisahonakata/zenn.dev#readme",
   "description": "",
   "dependencies": {
+    "yaml": "^2.8.2",
     "zenn-cli": "^0.2.3"
   }
 }
