@@ -452,7 +452,7 @@ Microsoft 365 A5 には、Entra ID P2、Intune、Defender for Endpoint、Defende
 | **合計** | | | **23,198,400円** |
 
 :::message alert
-⚠️ **注意**: 上記は参考価格です。実際の価格は、Microsoft または販売パートナーにお問い合わせください。ボリュームライセンス（EES: Enrollment for Education Solutions）を利用すると割引が適用される場合があります。
+⚠️ **注意**: 上記は参考価格です。実際の価格は、Microsoft または販売パートナーにお問い合わせください。
 :::
 
 ---
