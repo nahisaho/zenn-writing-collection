@@ -1,0 +1,168 @@
+# proposal-checklist.yaml
+# v1.16.0 - 提言書チェックリストテンプレート
+# REQ-PROP-001 実装
+#
+# 用途: deliverable_type が "提言書" の場合に必須項目チェックリストを提示
+# 参照元: shikigami-planner/SKILL.md (Phase 1: Purpose Discovery)
+
+version: "1.16.0"
+
+# 発動トリガー（いずれかにマッチで発動）
+triggers:
+  ja:
+    - "提言書"
+    - "提案書"
+    - "事業提案"
+    - "投資提案"
+    - "新規事業提案"
+    - "企画書"
+  en:
+    - "proposal"
+    - "investment proposal"
+    - "business proposal"
+    - "business case"
+    - "project proposal"
+
+# チェックリストカテゴリ
+proposal_checklist:
+
+  market_analysis:
+    name: "市場分析"
+    name_en: "Market Analysis"
+    description: "対象市場の規模・成長性・競合状況を分析"
+    items:
+      - item: "市場規模（TAM/SAM/SOM）"
+        item_en: "Market size (TAM/SAM/SOM)"
+        required: true
+        description: "対象市場の全体規模と獲得可能市場"
+        validation_hint: "数値（○○億円、○○万人など）が含まれているか"
+      - item: "市場成長率（CAGR）"
+        item_en: "Market growth rate (CAGR)"
+        required: true
+        description: "過去実績と将来予測"
+        validation_hint: "年率○%の形式で記載されているか"
+      - item: "競合分析"
+        item_en: "Competitor analysis"
+        required: true
+        description: "主要競合の強み・弱み・シェア"
+        validation_hint: "競合名と比較表があるか"
+      - item: "参入障壁分析"
+        item_en: "Entry barrier analysis"
+        required: false
+        description: "新規参入の難易度と自社の優位性"
+        validation_hint: "参入障壁の種類と対策が記載されているか"
+
+  financial_plan:
+    name: "財務計画"
+    name_en: "Financial Plan"
+    description: "投資計画・収益予測・投資対効果を詳細化"
+    items:
+      - item: "5年売上計画"
+        item_en: "5-year revenue plan"
+        required: true
+        description: "年度別売上予測"
+        validation_hint: "5年分の売上数値があるか"
+      - item: "投資計画"
+        item_en: "Investment plan"
+        required: true
+        description: "初期投資・運用コスト"
+        validation_hint: "投資額と費用内訳があるか"
+      - item: "ROI分析"
+        item_en: "ROI analysis"
+        required: true
+        description: "投資収益率・回収期間"
+        validation_hint: "ROI％と回収年数が記載されているか"
+      - item: "3シナリオ分析"
+        item_en: "3-scenario analysis"
+        required: true
+        description: "悲観・ベース・楽観の3パターン"
+        validation_hint: "3つのシナリオと確率が記載されているか"
+      - item: "感度分析"
+        item_en: "Sensitivity analysis"
+        required: false
+        description: "主要変数の変動影響"
+        validation_hint: "変動要因とROIへの影響があるか"
+
+  risk_management:
+    name: "リスク管理"
+    name_en: "Risk Management"
+    description: "想定リスクと対策を明示"
+    items:
+      - item: "リスク一覧"
+        item_en: "Risk inventory"
+        required: true
+        description: "主要リスクと発生確率・影響度"
+        validation_hint: "リスクマトリクスまたはリスク表があるか"
+      - item: "リスク対策"
+        item_en: "Risk mitigation"
+        required: true
+        description: "各リスクへの対策"
+        validation_hint: "各リスクに対策が紐づいているか"
+      - item: "Go/No-Go基準"
+        item_en: "Go/No-Go criteria"
+        required: false
+        description: "撤退判断基準"
+        validation_hint: "撤退条件が明記されているか"
+      - item: "コンティンジェンシープラン"
+        item_en: "Contingency plan"
+        required: false
+        description: "リスク顕在化時の代替計画"
+        validation_hint: "代替案があるか"
+
+  execution_plan:
+    name: "実行計画"
+    name_en: "Execution Plan"
+    description: "実行ロードマップとマイルストーンを定義"
+    items:
+      - item: "ロードマップ"
+        item_en: "Roadmap"
+        required: true
+        description: "フェーズ別実行計画"
+        validation_hint: "フェーズと期間が明記されているか"
+      - item: "マイルストーン"
+        item_en: "Milestones"
+        required: true
+        description: "主要マイルストーンと達成基準"
+        validation_hint: "マイルストーンと達成条件があるか"
+      - item: "体制・リソース計画"
+        item_en: "Organization and resource plan"
+        required: false
+        description: "必要人員・スキル・予算"
+        validation_hint: "人員数や役割が記載されているか"
+      - item: "KPI設定"
+        item_en: "KPI definition"
+        required: false
+        description: "進捗・成功を測る指標"
+        validation_hint: "測定可能な指標が定義されているか"
+
+# チェックリスト提示フォーマット
+presentation:
+  format: |
+    ## 📋 提言書チェックリスト
+    
+    以下の項目を調査・分析します。必須項目（★）は必ず含めます。
+    
+    ### 1. 市場分析
+    {market_analysis_items}
+    
+    ### 2. 財務計画
+    {financial_plan_items}
+    
+    ### 3. リスク管理
+    {risk_management_items}
+    
+    ### 4. 実行計画
+    {execution_plan_items}
+    
+    ---
+    ❓ 追加で調査すべき項目はありますか？
+  
+  item_format:
+    required: "- ★ {item}"
+    optional: "- ○ {item}"
+
+# manifest.yaml への出力先
+output:
+  path: "purpose_discovery.proposal_checklist"
+  include_status: true
+  initial_status: "not_started"

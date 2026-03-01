@@ -1,0 +1,500 @@
+# Objection Types Classification
+# v2.0.0 - REQ-TMPL-001-01, REQ-TALK-001-01
+#
+# 営業反論タイプの分類定義
+# v2.0.0: 競合別反論パターン、ACEテンプレート追加
+
+schema_version: "2.0"
+name: objection-types
+description: |
+  営業活動で遭遇する反論を6つのタイプに分類。
+  各タイプに対する根本原因と対応戦略を定義。
+  v2.0.0: 競合別反論パターンとACEテンプレートを追加。
+
+# 反論タイプ定義
+objection_types:
+  - id: already_solved
+    name: "既存解決済み"
+    description: "既に他の方法で課題を解決している、または解決する必要がないと考えている"
+    
+    patterns:
+      - "今のままで十分"
+      - "既存の方法で対応できている"
+      - "他社のソリューションを使っている"
+      - "社内で対応している"
+      - "課題を感じていない"
+      - "現状で問題ない"
+    
+    root_cause:
+      primary: "現状満足"
+      secondary:
+        - "潜在課題の未認識"
+        - "変更コストへの抵抗"
+        - "競合との既契約"
+    
+    strategy:
+      name: "潜在課題の顕在化"
+      approach: |
+        1. 現状の「見えないコスト」を可視化
+        2. 業界トレンドとの比較で危機感を醸成
+        3. 「さらに良くなる」可能性を提示
+    
+    difficulty: medium
+    success_rate: "35-45%"
+
+  - id: unclear_value
+    name: "価値不明確"
+    description: "提案の価値やメリットが理解できていない"
+    
+    patterns:
+      - "何がいいのかわからない"
+      - "うちに必要？"
+      - "メリットが見えない"
+      - "他と何が違うの？"
+      - "具体的に何が変わるの？"
+    
+    root_cause:
+      primary: "説明不足・伝達失敗"
+      secondary:
+        - "顧客課題の理解不足"
+        - "価値訴求のミスマッチ"
+        - "専門用語の多用"
+    
+    strategy:
+      name: "価値の具体化・可視化"
+      approach: |
+        1. 顧客の具体的課題に紐づけて説明
+        2. 定量的効果を数値で提示
+        3. 類似企業の成功事例を共有
+    
+    difficulty: low
+    success_rate: "55-65%"
+
+  - id: cost_concern
+    name: "コスト懸念"
+    description: "価格が高い、予算がない、投資対効果が見えない"
+    
+    patterns:
+      - "高い"
+      - "予算がない"
+      - "ROIが見えない"
+      - "費用対効果が..."
+      - "今期の予算は使い切った"
+      - "稟議が通らない"
+    
+    root_cause:
+      primary: "価格と価値の不一致"
+      secondary:
+        - "予算制約"
+        - "決裁権限の問題"
+        - "TCO理解の不足"
+    
+    strategy:
+      name: "価値の再定義・支払い方法の柔軟化"
+      approach: |
+        1. TCOでの比較（見えないコストの可視化）
+        2. ROI試算の具体的提示
+        3. 段階的導入・分割払いの提案
+        4. 予算サイクルに合わせた提案
+    
+    difficulty: medium
+    success_rate: "40-50%"
+
+  - id: timing_issue
+    name: "タイミング問題"
+    description: "今ではない、他の優先事項がある"
+    
+    patterns:
+      - "今は忙しい"
+      - "来期に検討"
+      - "他に優先することがある"
+      - "タイミングが悪い"
+      - "今じゃない"
+      - "また連絡する"
+    
+    root_cause:
+      primary: "緊急性の欠如"
+      secondary:
+        - "本当に忙しい"
+        - "やんわりとした断り"
+        - "意思決定の先延ばし"
+    
+    strategy:
+      name: "緊急性の創出・小さな一歩の提案"
+      approach: |
+        1. 先延ばしのコストを具体化
+        2. 競合・市場動向での危機感醸成
+        3. 負担の少ない「小さな一歩」を提案
+        4. 具体的なフォロー日程の設定
+    
+    difficulty: medium
+    success_rate: "30-40%"
+
+  - id: trust_deficit
+    name: "信頼不足"
+    description: "提案者や会社を信頼していない"
+    
+    patterns:
+      - "実績は？"
+      - "本当にできるの？"
+      - "聞いたことない会社"
+      - "他で失敗したことある"
+      - "御社のことをよく知らない"
+    
+    root_cause:
+      primary: "信頼・実績の不足"
+      secondary:
+        - "過去の悪い経験"
+        - "ブランド認知不足"
+        - "担当者との関係性不足"
+    
+    strategy:
+      name: "信頼構築・実績証明"
+      approach: |
+        1. 具体的な導入実績・事例の提示
+        2. 第三者評価・認証の提示
+        3. リファレンス（既存顧客からの推薦）
+        4. 小規模トライアルの提案
+    
+    difficulty: high
+    success_rate: "25-35%"
+
+  - id: internal_politics
+    name: "社内政治"
+    description: "社内の事情や力関係が障害になっている"
+    
+    patterns:
+      - "上が..."
+      - "他部署が反対"
+      - "社内調整が..."
+      - "〇〇部門の同意が必要"
+      - "組合との調整が..."
+      - "前任者が決めたことで..."
+    
+    root_cause:
+      primary: "組織的障壁"
+      secondary:
+        - "部門間対立"
+        - "変革抵抗勢力"
+        - "過去の経緯・しがらみ"
+    
+    strategy:
+      name: "社内調整支援・味方づくり"
+      approach: |
+        1. キーパーソンの特定と個別対応
+        2. 各部門向けの説明資料提供
+        3. 反対部門へのメリット提示
+        4. 段階的導入で合意形成を容易に
+    
+    difficulty: very_high
+    success_rate: "20-30%"
+
+# 反論分析ルール
+analysis_rules:
+  # 複数タイプが該当する場合の優先順位
+  priority_order:
+    - trust_deficit      # 信頼がなければ他の説得も無意味
+    - internal_politics  # 社内政治は外部からコントロール困難
+    - timing_issue       # タイミングは待つしかない場合も
+    - cost_concern       # コストは交渉可能
+    - unclear_value      # 説明で解決可能
+    - already_solved     # 再アプローチの余地あり
+
+  # 複合反論の検出
+  compound_patterns:
+    - name: "価格+価値"
+      types: [cost_concern, unclear_value]
+      strategy: "価値を先に確立してからコスト議論へ"
+    
+    - name: "信頼+実績"
+      types: [trust_deficit, unclear_value]
+      strategy: "実績提示で信頼と価値を同時に訴求"
+    
+    - name: "タイミング+政治"
+      types: [timing_issue, internal_politics]
+      strategy: "キーパーソン特定後、適切なタイミングで再アプローチ"
+
+# 難易度別対応時間目安
+difficulty_guide:
+  low:
+    description: "1-2回の対話で解消可能"
+    estimated_interactions: 1-2
+  medium:
+    description: "3-5回の対話と追加資料が必要"
+    estimated_interactions: 3-5
+  high:
+    description: "複数回の対話と第三者証明が必要"
+    estimated_interactions: 5-10
+  very_high:
+    description: "長期的な関係構築と組織的アプローチが必要"
+    estimated_interactions: 10+
+
+# ============================================
+# 競合別反論パターン（v2.0.0 NEW!）
+# ============================================
+competitor_objections:
+  google_workspace:
+    name: "Google Workspace"
+    common_objections:
+      - objection: "Googleの方が安い"
+        type: cost_concern
+        counter_points:
+          - "TCO（総所有コスト）で比較すると、管理コスト削減でMicrosoft 365が有利"
+          - "Enterpriseプランの機能差（eDiscovery, DLP等）を考慮"
+          - "既存のWindows/Office資産との互換性コスト"
+        evidence_needed:
+          - "TCO比較表"
+          - "管理工数削減事例"
+        
+      - objection: "Googleの検索・AI機能が優れている"
+        type: unclear_value
+        counter_points:
+          - "Microsoft Copilotは業務アプリと深く統合"
+          - "Excelでの直接AI活用、PowerPointスライド自動生成"
+          - "Teamsミーティングの自動議事録・要約"
+        evidence_needed:
+          - "Copilotデモ"
+          - "生産性向上事例"
+        
+      - objection: "Googleはクラウドネイティブ"
+        type: already_solved
+        counter_points:
+          - "Microsoft 365もフルクラウド対応"
+          - "ハイブリッド環境のサポートは逆に強み"
+          - "オンプレミスからの移行パスが充実"
+        evidence_needed:
+          - "クラウド移行事例"
+
+  zoom:
+    name: "Zoom"
+    common_objections:
+      - objection: "Zoomの方が会議品質が良い"
+        type: unclear_value
+        counter_points:
+          - "Teams会議の品質は大幅改善済み"
+          - "Togetherモード、ライブキャプション等の独自機能"
+          - "会議からチャット・ファイル共有までシームレス"
+        evidence_needed:
+          - "Teams会議デモ"
+          - "ネットワーク品質レポート"
+        
+      - objection: "社内でZoomが定着している"
+        type: already_solved
+        counter_points:
+          - "段階的移行プランの提案"
+          - "Zoomとの併用期間を設定可能"
+          - "トレーニングと移行支援サービス"
+        evidence_needed:
+          - "移行成功事例"
+          - "トレーニングプログラム"
+        
+      - objection: "Zoomの方がUIがシンプル"
+        type: unclear_value
+        counter_points:
+          - "Teams新UIで操作性が大幅向上"
+          - "会議以外の機能（チャット、ファイル）も統合"
+          - "学習コストは1週間程度で解消"
+        evidence_needed:
+          - "新UIデモ"
+          - "ユーザー満足度調査"
+
+  slack:
+    name: "Slack"
+    common_objections:
+      - objection: "Slackの方がチャットUXが良い"
+        type: unclear_value
+        counter_points:
+          - "Teamsチャット機能は大幅強化済み"
+          - "Office 365との統合でファイル共有がシームレス"
+          - "会議・通話機能が内蔵（追加コスト不要）"
+        evidence_needed:
+          - "Teamsチャットデモ"
+          - "統合機能比較表"
+        
+      - objection: "Slackの連携アプリが豊富"
+        type: already_solved
+        counter_points:
+          - "Teamsアプリストアも2000+のアプリ"
+          - "Power Automateでノーコード連携可能"
+          - "Slackコネクタでの相互運用も可能"
+        evidence_needed:
+          - "連携アプリ一覧"
+          - "Power Automateデモ"
+        
+      - objection: "開発チームがSlackを好む"
+        type: internal_politics
+        counter_points:
+          - "GitHub/Azure DevOpsとの統合"
+          - "開発者向けTeams拡張機能"
+          - "セキュリティ・コンプライアンス要件の充足"
+        evidence_needed:
+          - "開発者向け機能デモ"
+          - "セキュリティ比較"
+
+  other_competitors:
+    name: "その他競合"
+    generic_objections:
+      - objection: "競合製品Xの方が機能が多い"
+        type: unclear_value
+        strategy: "機能の量より質と統合性を訴求"
+        
+      - objection: "競合製品Xの方が業界特化している"
+        type: unclear_value
+        strategy: "カスタマイズ性とエコシステムの広さを訴求"
+        
+      - objection: "競合製品Xを導入済み"
+        type: already_solved
+        strategy: "移行メリットと支援サービスを提案"
+
+# ============================================
+# ACEテンプレート（v2.0.0 NEW!）
+# ============================================
+ace_templates:
+  description: |
+    ACE (Acknowledge-Counter-Evidence) フレームワーク:
+    1. Acknowledge: 相手の懸念を認め、共感する
+    2. Counter: 別の視点や事実を提示する
+    3. Evidence: 根拠となるデータや事例を示す
+
+  price_objection:
+    name: "価格反論用ACEテンプレート"
+    type: cost_concern
+    template:
+      acknowledge:
+        pattern: "コストは非常に重要な検討ポイントですよね。{customer_concern}は十分理解できます。"
+        examples:
+          - "予算制約があるというのは、多くのお客様が直面される課題です"
+          - "初期投資の大きさを懸念されるのは当然です"
+      counter:
+        pattern: "{value_proposition}という観点で見ると、{counter_argument}となります。"
+        examples:
+          - "TCO（総所有コスト）で比較すると、3年間で約15%のコスト削減が見込めます"
+          - "生産性向上による時間削減を金額換算すると、投資回収期間は約8ヶ月です"
+      evidence:
+        pattern: "実際に{customer_example}では、{evidence_result}という結果が出ています。"
+        examples:
+          - "A社様では、導入後1年でIT運用コストを20%削減されました"
+          - "同業界のB社様では、ROI 250%を達成されています"
+    sources_required:
+      - "TCO比較表"
+      - "ROI計算シート"
+      - "導入事例"
+
+  feature_objection:
+    name: "機能反論用ACEテンプレート"
+    type: unclear_value
+    template:
+      acknowledge:
+        pattern: "おっしゃる通り、{competitor}の{feature}は確かに{strength}ですね。"
+        examples:
+          - "Googleの検索機能は非常に優れています"
+          - "Zoomの会議品質には定評がありますね"
+      counter:
+        pattern: "一方で、{our_product}は{our_strength}という点で差別化しています。{business_impact}"
+        examples:
+          - "Microsoft 365はCopilotが業務アプリと深く統合されており、日常業務の中で自然にAIを活用できます"
+          - "Teamsは会議だけでなく、チャット・ファイル共有・タスク管理までワンストップで提供します"
+      evidence:
+        pattern: "{evidence_type}によると、{evidence_data}という結果が出ています。"
+        examples:
+          - "第三者調査によると、Copilot導入企業の70%が生産性向上を実感しています"
+          - "導入企業の平均会議時間は週あたり4時間削減されています"
+    sources_required:
+      - "機能比較表"
+      - "第三者調査レポート"
+      - "ユーザー満足度データ"
+
+  track_record_objection:
+    name: "実績反論用ACEテンプレート"
+    type: trust_deficit
+    template:
+      acknowledge:
+        pattern: "実績を重視されるのは当然のことです。{concern_area}については慎重にご検討されたいですよね。"
+        examples:
+          - "導入実績を確認されたいというのは、リスク管理の観点から重要です"
+          - "弊社のことをまだよくご存じないとのこと、承知しました"
+      counter:
+        pattern: "{track_record}という実績があり、{industry_relevance}。"
+        examples:
+          - "Microsoft 365は全世界で3億人以上が利用しており、日本でも大企業から中小企業まで幅広く導入されています"
+          - "御社と同業界では、X社、Y社、Z社など10社以上の導入実績があります"
+      evidence:
+        pattern: "{reference_type}として{reference_detail}をご紹介できます。実際に{specific_result}を達成されています。"
+        examples:
+          - "リファレンスとして、同業界A社の情報システム部長様をご紹介できます"
+          - "導入事例集では、御社と類似の課題を解決された5社の詳細をご覧いただけます"
+    sources_required:
+      - "導入企業リスト"
+      - "業界別事例集"
+      - "リファレンス顧客連絡先"
+
+  timing_objection:
+    name: "タイミング反論用ACEテンプレート"
+    type: timing_issue
+    template:
+      acknowledge:
+        pattern: "今は忙しい時期とのこと、承知いたしました。{empathy_statement}"
+        examples:
+          - "年度末でプロジェクトが立て込んでいらっしゃるんですね"
+          - "他の優先事項があるのは十分理解できます"
+      counter:
+        pattern: "ただ、{urgency_factor}という点で、{delay_cost}というリスクがあります。"
+        examples:
+          - "競合他社は既にAI導入を進めており、半年の遅れが競争力に影響する可能性があります"
+          - "来期の予算策定に間に合わせるには、今月中の検討開始が必要です"
+      evidence:
+        pattern: "{industry_trend}という動向があり、{early_adopter_benefit}という結果が出ています。"
+        examples:
+          - "業界調査によると、AI導入企業と非導入企業で生産性に20%の差が生じています"
+          - "早期導入企業は、遅延導入企業と比較して2倍のROIを達成しています"
+    sources_required:
+      - "業界動向レポート"
+      - "競合導入状況"
+      - "先行導入事例"
+
+  integration_objection:
+    name: "統合/移行反論用ACEテンプレート"
+    type: already_solved
+    template:
+      acknowledge:
+        pattern: "現在{current_solution}をお使いとのこと。{usage_satisfaction}という点は理解できます。"
+        examples:
+          - "長年使い慣れたシステムを変えることへの不安は当然です"
+          - "移行にかかる労力を懸念されるのはもっともです"
+      counter:
+        pattern: "弊社では{migration_support}を提供しており、{migration_benefit}を実現できます。"
+        examples:
+          - "段階的移行プログラムにより、業務を止めずに3ヶ月で移行完了できます"
+          - "既存システムとの併用期間を設けることで、スムーズな移行が可能です"
+      evidence:
+        pattern: "{migration_example}では、{migration_result}を達成しています。"
+        examples:
+          - "同規模のC社様では、ユーザー5000名の移行を2ヶ月で完了し、トラブルゼロでした"
+          - "移行後の従業員満足度調査では、90%が『使いやすくなった』と回答しています"
+    sources_required:
+      - "移行プログラム資料"
+      - "移行成功事例"
+      - "移行サポート体制"
+
+# ACE生成ルール
+ace_generation_rules:
+  # 優先順位
+  priority:
+    1: "competitor_specific"  # 競合名が特定できる場合
+    2: "objection_type"       # 反論タイプに基づく
+    3: "generic"              # 汎用テンプレート
+
+  # カスタマイズルール
+  customization:
+    - field: "customer_concern"
+      source: "input_objection"
+    - field: "customer_example"
+      source: "research_data"
+    - field: "evidence_result"
+      source: "case_studies"
+      
+  # 必須チェック
+  validation:
+    - "すべてのプレースホルダーが置換されていること"
+    - "根拠資料(sources_required)が準備されていること"
+    - "競合名が正確であること"

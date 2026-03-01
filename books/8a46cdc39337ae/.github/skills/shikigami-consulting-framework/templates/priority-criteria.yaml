@@ -1,0 +1,178 @@
+# Priority Criteria Definition for Multi-Entity Scoring
+# v1.9.0 - REQ-MULTI-002-01
+# 
+# 複数エンティティの優先度スコアリング基準を定義
+
+schema_version: "1.0"
+name: priority-criteria
+description: |
+  エンティティ（企業・製品・プロジェクト等）の優先度を評価するための
+  スコアリング基準を定義。4つの評価軸で総合スコアを算出。
+
+# 評価基準定義
+criteria:
+  - id: urgency
+    name: 緊急度
+    description: "対応の緊急性。規制変更、サプライチェーンリスク、競合動向等"
+    weight: 0.30
+    scoring_type: qualitative
+    levels:
+      high:
+        score: 3
+        description: "即座の対応が必要（規制期限迫る、重大リスク顕在化）"
+        indicators:
+          - "規制期限が1年以内"
+          - "サプライチェーン依存度80%以上"
+          - "競合が既に対応完了"
+      medium:
+        score: 2
+        description: "1-2年以内に対応が必要"
+        indicators:
+          - "規制期限が1-3年以内"
+          - "サプライチェーン依存度50-80%"
+          - "競合が対応中"
+      low:
+        score: 1
+        description: "中長期的な対応で可"
+        indicators:
+          - "規制期限が3年以上先"
+          - "サプライチェーン依存度50%未満"
+          - "競合も未対応"
+
+  - id: opportunity_size
+    name: 機会規模
+    description: "ビジネスチャンスの大きさ。売上ポテンシャル、市場規模等"
+    weight: 0.30
+    scoring_type: quantitative
+    levels:
+      high:
+        score: 3
+        description: "大規模機会（数十億円規模）"
+        thresholds:
+          revenue_potential: ">= 10億円"
+          market_size: ">= 1000億円"
+      medium:
+        score: 2
+        description: "中規模機会（数億円規模）"
+        thresholds:
+          revenue_potential: "1-10億円"
+          market_size: "100-1000億円"
+      low:
+        score: 1
+        description: "小規模機会（1億円未満）"
+        thresholds:
+          revenue_potential: "< 1億円"
+          market_size: "< 100億円"
+
+  - id: accessibility
+    name: アクセス容易性
+    description: "提案先へのアクセスしやすさ。既存関係、意思決定者接点等"
+    weight: 0.20
+    scoring_type: qualitative
+    levels:
+      high:
+        score: 3
+        description: "直接アクセス可能（既存顧客、意思決定者との関係あり）"
+        indicators:
+          - "既存顧客"
+          - "意思決定者と直接コネクション"
+          - "過去プロジェクト実績あり"
+      medium:
+        score: 2
+        description: "間接的アクセス可能（紹介経由、部門レベル接点）"
+        indicators:
+          - "紹介可能な人脈あり"
+          - "部門レベルでの接点あり"
+          - "業界イベント等での接触実績"
+      low:
+        score: 1
+        description: "新規開拓が必要（接点なし）"
+        indicators:
+          - "接点なし"
+          - "新規開拓必要"
+          - "競合が強い関係を持つ"
+
+  - id: strategic_fit
+    name: 戦略適合性
+    description: "自社戦略・強みとの適合度。ケイパビリティマッチ、実績活用等"
+    weight: 0.20
+    scoring_type: qualitative
+    levels:
+      high:
+        score: 3
+        description: "高適合（コア領域、豊富な実績）"
+        indicators:
+          - "コア事業領域"
+          - "類似案件の成功実績5件以上"
+          - "専門チームが存在"
+      medium:
+        score: 2
+        description: "中適合（関連領域、一定の実績）"
+        indicators:
+          - "関連事業領域"
+          - "類似案件の成功実績1-4件"
+          - "対応可能なスキルセット"
+      low:
+        score: 1
+        description: "低適合（新規領域、実績なし）"
+        indicators:
+          - "新規事業領域"
+          - "類似案件の実績なし"
+          - "スキルギャップあり"
+
+# スコア算出ルール
+scoring:
+  method: weighted_sum
+  formula: |
+    totalScore = Σ(criterion.score × criterion.weight)
+    normalizedScore = (totalScore / 3.0) × 100
+
+  # グレード判定
+  grading:
+    A:
+      min_score: 90
+      description: "最優先 - 即座にアプローチ開始"
+      color: "#22c55e"
+    B+:
+      min_score: 75
+      description: "高優先 - 早期にアプローチ計画"
+      color: "#84cc16"
+    B:
+      min_score: 60
+      description: "中優先 - 計画的にアプローチ"
+      color: "#eab308"
+    C:
+      min_score: 45
+      description: "低優先 - 機会を見てアプローチ"
+      color: "#f97316"
+    D:
+      min_score: 0
+      description: "保留 - 状況変化時に再評価"
+      color: "#ef4444"
+
+# 出力設定
+output:
+  ranking:
+    enabled: true
+    format: markdown_table
+    columns:
+      - rank
+      - entity_name
+      - total_score
+      - grade
+      - urgency
+      - opportunity_size
+      - accessibility
+      - strategic_fit
+    sort_by: total_score
+    sort_order: desc
+
+  rationale:
+    enabled: true
+    include_indicators: true
+    include_recommendations: true
+
+  visualization:
+    enabled: true
+    type: mermaid_radar
+    show_comparison: true

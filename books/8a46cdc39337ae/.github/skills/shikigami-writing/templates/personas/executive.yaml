@@ -1,0 +1,172 @@
+# Executive Persona Template
+# v1.9.0 - REQ-SALES-001-04
+#
+# 経営層・役員向けペルソナ定義
+
+schema_version: "1.0"
+persona_id: executive
+name: 経営層・役員
+
+# 基本属性
+profile:
+  role: "CxO、取締役、執行役員クラス"
+  typical_titles:
+    - "CEO / 社長"
+    - "COO / 副社長"
+    - "CFO / 財務担当役員"
+    - "CTO / 技術担当役員"
+    - "事業部長"
+  industry_context:
+    - "全業種共通"
+
+# 意思決定特性
+decision_characteristics:
+  style: "balanced"
+  domain_knowledge: "intermediate"
+  
+  priorities:
+    - id: strategic_impact
+      name: "戦略的インパクト"
+      weight: 0.30
+      description: "中長期戦略への貢献度、競争優位性構築"
+    - id: financial_return
+      name: "財務リターン"
+      weight: 0.25
+      description: "ROI、売上貢献、コスト削減効果"
+    - id: risk_management
+      name: "リスクマネジメント"
+      weight: 0.20
+      description: "事業リスク軽減、コンプライアンス"
+    - id: execution_confidence
+      name: "実行確度"
+      weight: 0.15
+      description: "実現可能性、実行体制、過去実績"
+    - id: organizational_fit
+      name: "組織適合性"
+      weight: 0.10
+      description: "組織文化、変革対応力、人材育成"
+
+# 反論パターン
+common_objections:
+  - type: "unclear_roi"
+    pattern: "投資対効果が見えない"
+    root_cause: "定量的根拠の不足"
+    frequency: "very_high"
+    
+  - type: "priority_conflict"
+    pattern: "他にも優先すべき課題がある"
+    root_cause: "経営アジェンダとの整合性"
+    frequency: "very_high"
+    
+  - type: "timing_question"
+    pattern: "なぜ今やる必要があるのか"
+    root_cause: "緊急性の理解不足"
+    frequency: "high"
+    
+  - type: "internal_politics"
+    pattern: "社内の合意形成が難しい"
+    root_cause: "部門間対立、変革抵抗"
+    frequency: "high"
+    
+  - type: "execution_doubt"
+    pattern: "本当に実行できるのか"
+    root_cause: "過去の失敗経験、リソース不安"
+    frequency: "medium"
+
+# コミュニケーション設定
+communication:
+  vocabulary:
+    preferred:
+      - "戦略的価値"
+      - "競争優位性"
+      - "ROI / ROIC"
+      - "リスク軽減"
+      - "変革"
+      - "イノベーション"
+    avoid:
+      - "技術的詳細"
+      - "オペレーション詳細"
+      - "過度な専門用語"
+  
+  formality: "formal"
+  
+  preferred_evidence:
+    - "財務シミュレーション"
+    - "競合ベンチマーク"
+    - "業界トレンドデータ"
+    - "成功事例（経営層視点）"
+    - "リスク分析"
+  
+  meeting_preferences:
+    - "結論先行の簡潔な説明"
+    - "1枚サマリー"
+    - "Q&A重視"
+
+# プレイブック生成設定
+playbook_settings:
+  structure_emphasis:
+    - "戦略的意義の明確化"
+    - "財務インパクトの定量化"
+    - "実行計画の具体性"
+    - "リスク対策の網羅性"
+  
+  content_priorities:
+    executive_summary:
+      focus: "戦略的価値と財務インパクト"
+      length: "very_short"
+      format: "1_page_max"
+    
+    main_body:
+      focus: "経営判断に必要な情報のみ"
+      include:
+        - "市場環境と競合動向"
+        - "財務シミュレーション"
+        - "リスク・リターン分析"
+    
+    appendix:
+      include:
+        - "詳細分析資料"
+        - "実行計画書"
+        - "FAQ集"
+
+# トークスクリプト生成設定
+talk_script_settings:
+  tone: "executive_strategic"
+  
+  opening_approach:
+    style: "strategic_challenge"
+    example: "御社の中期経営計画における〇〇の実現に向けて、具体的なご支援策をお持ちしました"
+  
+  objection_handling:
+    unclear_roi:
+      strategy: "quantify_with_scenarios"
+      example_response: |
+        ご指摘ごもっともです。ROI試算をご用意いたしました。
+        保守的シナリオでも〇〇%、標準シナリオで〇〇%のリターンを見込んでおります。
+        前提条件と感度分析も併せてご説明させてください。
+    
+    priority_conflict:
+      strategy: "align_with_strategy"
+      example_response: |
+        おっしゃる通り、御社には多くの重要課題がおありかと存じます。
+        実は本件は、御社が掲げる〇〇戦略の実現を加速するものと考えております。
+        具体的には、[戦略との接続を説明]。
+        優先順位の中でどう位置づけるか、ご一緒に整理させていただければ幸いです。
+    
+    timing_question:
+      strategy: "create_urgency"
+      example_response: |
+        「なぜ今か」は非常に重要なご質問です。
+        3つの理由がございます。
+        1つ目は、〇〇規制の施行が〇年後に迫っていること。
+        2つ目は、競合の〇〇社が既に動き始めていること。
+        3つ目は、今着手すれば〇〇の先行者優位が得られること。
+        タイミングを逃すと、〇〇のリスクが顕在化する可能性がございます。
+    
+    internal_politics:
+      strategy: "facilitation_offer"
+      example_response: |
+        社内の合意形成は確かに重要な課題です。
+        弊社としても、〇〇のご説明資料や、各部門向けの説明サポートなど、
+        合意形成のご支援をさせていただく用意がございます。
+        特にどの部門との調整がポイントになりそうでしょうか。

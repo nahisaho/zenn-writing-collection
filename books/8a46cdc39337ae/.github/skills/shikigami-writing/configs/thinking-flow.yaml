@@ -1,0 +1,219 @@
+# Thinking Flow Configuration (v1.20.0)
+# レポート生成に至るまでの思考フローを可視化
+
+# 思考ステップの種類定義
+step_types:
+  # Phase 0: プロジェクト初期化
+  - id: project_init
+    name: "プロジェクト初期化"
+    phase: 0
+    icon: "🚀"
+    description: "プロジェクトフォルダ作成・ナレッジ継承確認"
+    
+  # Phase 1: 目的探索
+  - id: purpose_discovery
+    name: "目的探索"
+    phase: 1
+    icon: "🎯"
+    description: "5 Whys/JTBDによる真の目的発見"
+    
+  - id: hypothesis_generation
+    name: "仮説生成"
+    phase: 1
+    icon: "💡"
+    description: "初期仮説の設定と検証計画"
+    
+  - id: research_planning
+    name: "計画立案"
+    phase: 1
+    icon: "📋"
+    description: "調査タスク分解・優先度設定"
+
+  # Phase 2: Deep Research
+  - id: think
+    name: "思考"
+    phase: 2
+    icon: "🧠"
+    description: "現状分析・ギャップ認識・次アクション決定"
+    
+  - id: search
+    name: "検索"
+    phase: 2
+    icon: "🔍"
+    description: "Web検索による情報収集"
+    
+  - id: visit
+    name: "詳細調査"
+    phase: 2
+    icon: "📖"
+    description: "ページ訪問・詳細情報抽出"
+    
+  - id: verify
+    name: "検証"
+    phase: 2
+    icon: "✅"
+    description: "交差検証・ソース信頼性評価"
+    
+  - id: evolving_report
+    name: "レポート更新"
+    phase: 2
+    icon: "📄"
+    description: "暫定レポートの漸進的更新"
+
+  # Phase 3: 分析
+  - id: framework_selection
+    name: "フレームワーク選択"
+    phase: 3
+    icon: "🔧"
+    description: "最適フレームワークの選定"
+    
+  - id: framework_analysis
+    name: "フレームワーク分析"
+    phase: 3
+    icon: "📊"
+    description: "SWOT/3C/MECE等の適用"
+    
+  - id: insight_extraction
+    name: "洞察抽出"
+    phase: 3
+    icon: "💎"
+    description: "分析結果からの重要示唆導出"
+
+  # Phase 4: レポート生成
+  - id: structure_design
+    name: "構成設計"
+    phase: 4
+    icon: "🏗️"
+    description: "レポート構成・テンプレート選択"
+    
+  - id: content_generation
+    name: "コンテンツ生成"
+    phase: 4
+    icon: "✍️"
+    description: "本文・図表の生成"
+    
+  - id: quality_check
+    name: "品質検証"
+    phase: 4
+    icon: "🔬"
+    description: "ハルシネーション検出・整合性確認"
+    
+  - id: citation_formatting
+    name: "引用整形"
+    phase: 4
+    icon: "📚"
+    description: "参考文献の統一フォーマット化"
+    
+  - id: finalization
+    name: "最終化"
+    phase: 4
+    icon: "🎉"
+    description: "レポート完成・保存"
+
+# 接続（フロー遷移）定義
+transitions:
+  project_init:
+    next: [purpose_discovery]
+    
+  purpose_discovery:
+    next: [hypothesis_generation]
+    
+  hypothesis_generation:
+    next: [research_planning]
+    
+  research_planning:
+    next: [think]
+    
+  think:
+    next: [search, visit, verify, framework_selection]
+    decision_point: true
+    decision_question: "次のアクションは？"
+    
+  search:
+    next: [think, evolving_report]
+    
+  visit:
+    next: [think, evolving_report]
+    
+  verify:
+    next: [think, evolving_report]
+    
+  evolving_report:
+    next: [think, framework_selection]
+    decision_point: true
+    decision_question: "調査は十分か？"
+    
+  framework_selection:
+    next: [framework_analysis]
+    
+  framework_analysis:
+    next: [insight_extraction, framework_analysis]
+    loop_allowed: true
+    
+  insight_extraction:
+    next: [structure_design]
+    
+  structure_design:
+    next: [content_generation]
+    
+  content_generation:
+    next: [quality_check]
+    
+  quality_check:
+    next: [content_generation, citation_formatting]
+    decision_point: true
+    decision_question: "品質基準を満たすか？"
+    
+  citation_formatting:
+    next: [finalization]
+    
+  finalization:
+    next: []
+    terminal: true
+
+# 可視化設定
+visualization:
+  # Mermaidダイアグラム生成設定
+  mermaid:
+    theme: "default"
+    direction: "TB"  # Top to Bottom
+    node_styles:
+      completed: "fill:#10b981,stroke:#059669,color:#fff"
+      in_progress: "fill:#3b82f6,stroke:#2563eb,color:#fff"
+      pending: "fill:#e5e7eb,stroke:#9ca3af,color:#374151"
+      skipped: "fill:#fbbf24,stroke:#d97706,color:#1f2937"
+      failed: "fill:#ef4444,stroke:#dc2626,color:#fff"
+    
+  # タイムラインビュー設定
+  timeline:
+    show_duration: true
+    show_sources_count: true
+    show_confidence: true
+    
+  # サマリービュー設定
+  summary:
+    show_key_decisions: true
+    show_pivots: true
+    show_dead_ends: true
+
+# メトリクス計算
+metrics:
+  # 思考の深さ
+  depth:
+    formula: "max(phase_transitions)"
+    target: 4
+    
+  # 検証率
+  verification_rate:
+    formula: "verified_facts / total_facts * 100"
+    target: 70
+    
+  # 反復回数
+  iteration_count:
+    formula: "count(think_steps)"
+    note: "多すぎると非効率、少なすぎると浅い"
+    
+  # ソース多様性
+  source_diversity:
+    formula: "unique_domains / total_sources * 100"
+    target: 60

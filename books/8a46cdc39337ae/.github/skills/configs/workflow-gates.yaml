@@ -1,0 +1,348 @@
+# workflow-gates.yaml
+# v1.19.0 - 品質ゲート（Phase Gate）定義
+# 各フェーズ間の遷移条件と承認プロセスを定義
+
+version: "1.19.0"
+
+# ========================================
+# 品質ゲート概要
+# ========================================
+description: |
+  各フェーズ間の品質ゲートを定義。
+  ゲート条件を満たさない限り、次フェーズに進めない。
+  ユーザー承認が必要なゲートも定義。
+
+# ========================================
+# Gate 0→0.5: プロジェクト初期化 → プロンプト最適化
+# ========================================
+gate_0_to_0_5:
+  name: "Project Initialization Gate"
+  from_phase: "phase_0"
+  to_phase: "phase_0_5"
+  
+  # 必須条件（すべて満たす必要あり）
+  required_conditions:
+    - id: "G0-05-001"
+      name: "プロジェクトフォルダ存在"
+      check: "projects/pjXXXXX_*/ directory exists"
+      auto_check: true
+    - id: "G0-05-002"
+      name: "manifest.yaml存在"
+      check: "manifest.yaml file exists in project folder"
+      auto_check: true
+    - id: "G0-05-003"
+      name: "ナレッジ継承完了"
+      check: "manifest.yaml:knowledge_inheritance.status == 'complete'"
+      auto_check: true
+  
+  # ユーザー承認（不要）
+  user_approval_required: false
+  
+  # ゲート通過時のアクション
+  on_pass:
+    - action: "log"
+      message: "✅ Gate 0→0.5 通過: プロジェクト初期化完了"
+    - action: "update_manifest"
+      field: "workflow.gates.gate_0_to_0_5"
+      value: "passed"
+  
+  # ゲート失敗時のアクション
+  on_fail:
+    - action: "notify_user"
+      message: "❌ プロジェクト初期化が完了していません。npx shikigami new を実行してください。"
+
+# ========================================
+# Gate 0.5→1: プロンプト最適化 → 目的探索
+# ========================================
+gate_0_5_to_1:
+  name: "Structured Prompt Gate"
+  from_phase: "phase_0_5"
+  to_phase: "phase_1"
+  
+  required_conditions:
+    - id: "G05-1-001"
+      name: "構造化プロンプト生成済み"
+      check: "manifest.yaml:prompt_refinement.structured_prompt != null"
+      auto_check: true
+    - id: "G05-1-002"
+      name: "6要素すべて定義済み"
+      check: "manifest.yaml:prompt_refinement.elements.length == 6"
+      auto_check: true
+    - id: "G05-1-003"
+      name: "ユーザー確認済み"
+      check: "manifest.yaml:prompt_refinement.user_approved == true"
+      auto_check: true
+  
+  # ユーザー承認（必須）
+  user_approval_required: true
+  approval_prompt: |
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    ❓ このプロンプトでよろしいですか？
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+       [はい/承認] → Phase 1（目的深掘り）へ進みます
+       [修正] → 修正したい箇所をお知らせください
+               例: 「TARGETをリチウムのみに絞りたい」
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  
+  on_pass:
+    - action: "log"
+      message: "✅ Gate 0.5→1 通過: 構造化プロンプト承認済み"
+    - action: "update_manifest"
+      field: "workflow.gates.gate_0_5_to_1"
+      value: "passed"
+  
+  on_fail:
+    - action: "notify_user"
+      message: "❌ 構造化プロンプトの確認が必要です。"
+
+# ========================================
+# Gate 1→2: 目的探索 → Deep Research
+# ========================================
+gate_1_to_2:
+  name: "Purpose Discovery Gate"
+  from_phase: "phase_1"
+  to_phase: "phase_2"
+  
+  required_conditions:
+    - id: "G1-2-001"
+      name: "真の目的定義済み"
+      check: "manifest.yaml:purpose_discovery.true_purpose != null"
+      auto_check: true
+    - id: "G1-2-002"
+      name: "調査計画策定済み"
+      check: "manifest.yaml:purpose_discovery.research_plan != null"
+      auto_check: true
+    - id: "G1-2-003"
+      name: "成功条件明確化"
+      check: "manifest.yaml:purpose_discovery.success_condition != null"
+      auto_check: true
+    - id: "G1-2-004"
+      name: "最低3回の対話完了"
+      check: "manifest.yaml:purpose_discovery.dialog_count >= 3"
+      auto_check: true
+  
+  # ユーザー承認（必須）
+  user_approval_required: true
+  approval_prompt: |
+    📋 **Phase 1 完了確認**
+    
+    以下の内容でリサーチを開始してよろしいですか？
+    
+    - **真の目的**: {true_purpose}
+    - **成功条件**: {success_condition.type}
+    - **調査範囲**: {research_plan.scope}
+    
+    「承認」または「修正」を選択してください。
+  
+  on_pass:
+    - action: "log"
+      message: "✅ Gate 1→2 通過: 目的探索完了、ユーザー承認済み"
+    - action: "update_manifest"
+      field: "workflow.gates.gate_1_to_2"
+      value: "passed"
+  
+  on_fail:
+    - action: "notify_user"
+      message: "❌ 目的探索が不完全です。追加の質問が必要です。"
+
+# ========================================
+# Gate 2→3: Deep Research → Framework Analysis
+# ========================================
+gate_2_to_3:
+  name: "Deep Research Gate"
+  from_phase: "phase_2"
+  to_phase: "phase_3"
+  
+  required_conditions:
+    - id: "G2-3-001"
+      name: "最低3ソース収集"
+      check: "manifest.yaml:deep_research.sources.length >= 3"
+      auto_check: true
+    - id: "G2-3-002"
+      name: "ソース信頼性評価済み"
+      check: "manifest.yaml:deep_research.source_quality != null"
+      auto_check: true
+    - id: "G2-3-003"
+      name: "research-summary作成済み"
+      check: "research/research-summary-*.md exists"
+      auto_check: true
+    - id: "G2-3-004"
+      name: "信頼度スコア60%以上"
+      check: "manifest.yaml:deep_research.confidence_score >= 0.6"
+      auto_check: true
+  
+  user_approval_required: false
+  
+  on_pass:
+    - action: "log"
+      message: "✅ Gate 2→3 通過: Deep Research完了"
+    - action: "update_manifest"
+      field: "workflow.gates.gate_2_to_3"
+      value: "passed"
+  
+  on_fail:
+    - action: "notify_user"
+      message: "❌ 調査が不十分です。追加の情報収集が必要です。"
+    - action: "suggest_action"
+      suggestions:
+        - "追加のソースを検索"
+        - "信頼性の低いソースを再評価"
+
+# ========================================
+# Gate 3→4: Framework Analysis → Report Writing
+# ========================================
+gate_3_to_4:
+  name: "Framework Analysis Gate"
+  from_phase: "phase_3"
+  to_phase: "phase_4"
+  
+  required_conditions:
+    - id: "G3-4-001"
+      name: "フレームワーク1つ以上適用"
+      check: "manifest.yaml:framework_analysis.frameworks.length >= 1"
+      auto_check: true
+    - id: "G3-4-002"
+      name: "数値データ検証済み"
+      check: "manifest.yaml:framework_analysis.numerical_validation == true"
+      auto_check: true
+    - id: "G3-4-003"
+      name: "財務分析完了（該当時）"
+      check: "manifest.yaml:framework_analysis.financial_analysis != null OR !requires_financial"
+      auto_check: true
+  
+  user_approval_required: false
+  
+  on_pass:
+    - action: "log"
+      message: "✅ Gate 3→4 通過: Framework Analysis完了"
+    - action: "update_manifest"
+      field: "workflow.gates.gate_3_to_4"
+      value: "passed"
+  
+  on_fail:
+    - action: "notify_user"
+      message: "❌ フレームワーク分析が不完全です。"
+
+# ========================================
+# Gate 4→5: Report Writing → Completion
+# ========================================
+gate_4_to_5:
+  name: "Report Quality Gate"
+  from_phase: "phase_4"
+  to_phase: "phase_5"
+  
+  required_conditions:
+    - id: "G4-5-001"
+      name: "レポートファイル存在"
+      check: "reports/*.md exists"
+      auto_check: true
+    - id: "G4-5-002"
+      name: "数値整合性チェック合格"
+      check: "manifest.yaml:report_writing.quality_checks.consistency_check == 'passed'"
+      auto_check: true
+    - id: "G4-5-003"
+      name: "サマリー整合性チェック合格"
+      check: "manifest.yaml:report_writing.quality_checks.executive_sync == 'passed'"
+      auto_check: true
+    - id: "G4-5-004"
+      name: "引用ソース完備"
+      check: "all_claims_have_citations == true"
+      auto_check: true
+  
+  # ユーザー承認（必須）
+  user_approval_required: true
+  approval_prompt: |
+    📋 **レポート完了確認**
+    
+    レポートが完成しました。内容をご確認ください。
+    
+    - **レポートファイル**: {report_path}
+    - **品質チェック**: {quality_check_summary}
+    - **信頼度スコア**: {confidence_score}%
+    
+    「承認」→ 完了 / 「修正」→ 改訂サイクルへ
+  
+  on_pass:
+    - action: "log"
+      message: "✅ Gate 4→5 通過: レポート承認済み"
+    - action: "update_manifest"
+      field: "workflow.gates.gate_4_to_5"
+      value: "passed"
+  
+  on_fail:
+    - action: "start_revision_cycle"
+      message: "改訂サイクルを開始します"
+
+# ========================================
+# フィードバック・改訂ループ
+# ========================================
+feedback_loop:
+  description: "ユーザーフィードバックに基づく改訂サイクル"
+  
+  trigger_conditions:
+    - "user_requests_revision"
+    - "gate_4_to_5.user_approval == 'revision'"
+  
+  max_iterations: 5  # 最大改訂回数
+  
+  revision_workflow:
+    - step: "collect_feedback"
+      action: "ユーザーから具体的な修正要求を収集"
+      prompt: |
+        📝 **修正リクエスト**
+        
+        どの部分を修正しますか？
+        1. 内容の追加・削除
+        2. 数値・データの修正
+        3. 表現・トーンの調整
+        4. 構成の変更
+        5. その他
+    
+    - step: "categorize_feedback"
+      action: "フィードバックを分類"
+      categories:
+        - "content_change"      # 内容変更
+        - "data_correction"     # データ修正
+        - "tone_adjustment"     # トーン調整
+        - "structure_change"    # 構成変更
+        - "minor_fix"           # 軽微な修正
+    
+    - step: "apply_revision"
+      action: "修正を適用"
+      return_to: "phase_4"  # レポート作成フェーズに戻る
+    
+    - step: "re_quality_check"
+      action: "品質チェックを再実行"
+    
+    - step: "present_revised_report"
+      action: "修正後のレポートを提示"
+      return_to: "gate_4_to_5"  # 再度承認ゲートへ
+  
+  tracking:
+    - "revision_count"
+    - "feedback_history"
+    - "changes_applied"
+
+# ========================================
+# ゲート統計・ダッシュボード
+# ========================================
+gate_dashboard:
+  enabled: true
+  
+  display_format: |
+    ## 🚦 品質ゲート状況
+    
+    | Gate | 状態 | 通過日時 |
+    |------|------|---------|
+    | Gate 0→0.5 | {gate_0_to_0_5_status} | {gate_0_to_0_5_time} |
+    | Gate 0.5→1 | {gate_0_5_to_1_status} | {gate_0_5_to_1_time} |
+    | Gate 1→2 | {gate_1_to_2_status} | {gate_1_to_2_time} |
+    | Gate 2→3 | {gate_2_to_3_status} | {gate_2_to_3_time} |
+    | Gate 3→4 | {gate_3_to_4_status} | {gate_3_to_4_time} |
+    | Gate 4→5 | {gate_4_to_5_status} | {gate_4_to_5_time} |
+  
+  status_icons:
+    passed: "✅"
+    pending: "🔄"
+    failed: "❌"
+    skipped: "⏭️"

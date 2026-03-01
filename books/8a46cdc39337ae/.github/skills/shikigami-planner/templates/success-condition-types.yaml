@@ -1,0 +1,253 @@
+# 成功条件タイプ定義 v1.6.0
+# SHIKIGAMI Purpose Discovery - Success Condition Classification
+
+version: "1.6.0"
+
+success_condition_types:
+
+  IMMEDIATE_APPROVAL:
+    description: "即決・即承認を目指す"
+    description_en: "Seeking immediate decision/approval"
+    keywords:
+      ja:
+        - "即決"
+        - "すぐに"
+        - "その場で"
+        - "即断"
+        - "今日中に"
+        - "この場で"
+        - "即答"
+        - "待てない"
+        - "急ぎ"
+        - "緊急"
+      en:
+        - "immediately"
+        - "right away"
+        - "on the spot"
+        - "urgent"
+        - "asap"
+        - "today"
+    report_template: "immediate-approval-template"
+    required_sections:
+      - executive_summary
+      - why_now
+      - request_items
+      - risk_if_delayed
+    persuasion_triggers:
+      urgency:
+        enabled: true
+        placement:
+          - "introduction"
+          - "conclusion"
+        elements:
+          - "競合の動き"
+          - "機会の窓"
+          - "外部環境変化"
+      loss_aversion:
+        enabled: true
+        placement:
+          - "conclusion"
+        elements:
+          - "機会損失の試算"
+          - "競合先行リスク"
+          - "現状維持コスト"
+
+  STAGED_APPROVAL:
+    description: "段階的承認（役員→社長等）"
+    description_en: "Staged approval process (executive → president)"
+    keywords:
+      ja:
+        - "役員"
+        - "社長"
+        - "段階的"
+        - "二段階"
+        - "多段階"
+        - "順番に"
+        - "まず役員"
+        - "最終的に社長"
+        - "稟議"
+        - "承認フロー"
+      en:
+        - "executive"
+        - "staged"
+        - "multi-step"
+        - "approval chain"
+        - "escalation"
+    report_template: "staged-approval-template"
+    required_sections:
+      - executive_summary_per_stage
+      - detailed_analysis
+      - appendix_for_review
+      - decision_points_per_stage
+    persuasion_triggers:
+      urgency:
+        enabled: false
+      loss_aversion:
+        enabled: false
+
+  CONSIDERATION:
+    description: "検討開始の合意"
+    description_en: "Agreement to start consideration"
+    keywords:
+      ja:
+        - "検討"
+        - "議論"
+        - "考えてもらう"
+        - "俎上に載せる"
+        - "テーブルに"
+        - "話し合い"
+        - "検討会"
+        - "協議"
+      en:
+        - "consider"
+        - "discuss"
+        - "review"
+        - "deliberate"
+        - "evaluate"
+    report_template: "consideration-template"
+    required_sections:
+      - options_comparison
+      - risk_analysis
+      - recommendation
+      - next_steps
+    persuasion_triggers:
+      urgency:
+        enabled: false
+      loss_aversion:
+        enabled: false
+
+  BUDGET_APPROVAL:
+    description: "予算承認"
+    description_en: "Budget approval"
+    keywords:
+      ja:
+        - "予算"
+        - "投資"
+        - "コスト"
+        - "費用"
+        - "ROI"
+        - "投資対効果"
+        - "経費"
+        - "資金"
+        - "金額"
+        - "見積"
+      en:
+        - "budget"
+        - "investment"
+        - "cost"
+        - "ROI"
+        - "funding"
+        - "expense"
+    report_template: "budget-approval-template"
+    required_sections:
+      - financial_plan
+      - roi_analysis
+      - cost_breakdown
+      - payback_period
+      - three_scenario_analysis
+    persuasion_triggers:
+      urgency:
+        enabled: false
+      loss_aversion:
+        enabled: true
+        placement:
+          - "financial_plan"
+        elements:
+          - "遅延による追加コスト"
+          - "競合優位性の喪失"
+
+  PILOT_APPROVAL:
+    description: "PoC/パイロット承認"
+    description_en: "PoC/Pilot approval"
+    keywords:
+      ja:
+        - "PoC"
+        - "パイロット"
+        - "試験"
+        - "実証"
+        - "スモールスタート"
+        - "お試し"
+        - "試行"
+        - "テスト運用"
+        - "限定導入"
+      en:
+        - "PoC"
+        - "pilot"
+        - "trial"
+        - "proof of concept"
+        - "test run"
+        - "small start"
+    report_template: "pilot-approval-template"
+    required_sections:
+      - poc_plan
+      - go_nogo_criteria
+      - scale_up_path
+      - minimal_investment
+      - success_metrics
+    persuasion_triggers:
+      urgency:
+        enabled: false
+      loss_aversion:
+        enabled: false
+
+# 分類ロジック設定
+classification:
+  # 確信度閾値（この値未満の場合、確認質問を行う）
+  confidence_threshold: 0.7
+  
+  # スコア計算方式
+  scoring:
+    # キーワード1つあたりの基本スコア
+    base_score_per_keyword: 0.15
+    # 完全一致ボーナス
+    exact_match_bonus: 0.1
+    # 最大スコア
+    max_score: 1.0
+  
+  # 確信度が閾値未満の場合の確認質問
+  confirmation_question:
+    ja: |
+      👉 このプロジェクトの成功条件は以下のどれに近いですか？
+      
+      1. **即決・即承認**（IMMEDIATE_APPROVAL）
+         → その場で「Yes」をもらいたい
+      
+      2. **段階的承認**（STAGED_APPROVAL）
+         → 役員→社長など、順を追って承認を得たい
+      
+      3. **検討開始の合意**（CONSIDERATION）
+         → まずは検討のテーブルに載せたい
+      
+      4. **予算承認**（BUDGET_APPROVAL）
+         → 投資・予算の承認を得たい
+      
+      5. **PoC/パイロット承認**（PILOT_APPROVAL）
+         → まずは小規模に試したい
+      
+      番号でお答えください（例: 1）
+    
+    en: |
+      👉 Which success condition best describes your goal?
+      
+      1. **Immediate approval** (IMMEDIATE_APPROVAL)
+         → Get a "Yes" on the spot
+      
+      2. **Staged approval** (STAGED_APPROVAL)
+         → Sequential approval (executive → president)
+      
+      3. **Agreement to consider** (CONSIDERATION)
+         → Get the topic on the discussion table
+      
+      4. **Budget approval** (BUDGET_APPROVAL)
+         → Get investment/budget approved
+      
+      5. **PoC/Pilot approval** (PILOT_APPROVAL)
+         → Start with a small-scale trial
+      
+      Please answer with a number (e.g., 1)
+
+# デフォルト値（分類不能時）
+default:
+  type: "CONSIDERATION"
+  confidence: 0.5
+  reason: "キーワードから明確な分類ができなかったため、デフォルトを適用"

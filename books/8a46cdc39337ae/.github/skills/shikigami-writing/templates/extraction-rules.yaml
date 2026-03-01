@@ -1,0 +1,260 @@
+# Context Extraction Rules
+# v1.0.0 - REQ-TMPL-001-02
+#
+# プレースホルダー自動補完のための抽出ルール定義
+
+schema_version: "1.0"
+name: extraction-rules
+description: |
+  提案書テンプレートのプレースホルダーを自動補完するための抽出ルール。
+  manifest.yaml、リサーチ結果、競合比較結果から情報を抽出。
+
+# 抽出ソース定義
+sources:
+  manifest:
+    description: "プロジェクトのmanifest.yaml"
+    path: "projects/{{project_id}}/manifest.yaml"
+    priority: 1  # 最優先
+    
+  research_report:
+    description: "Deep Researchのevolving report"
+    path: "projects/{{project_id}}/reports/*-evolving-report-*.md"
+    priority: 2
+    
+  competitor_analysis:
+    description: "競合分析結果"
+    path: "projects/{{project_id}}/analysis/competitor-*.md"
+    priority: 3
+    
+  client_profile:
+    description: "顧客プロファイル"
+    path: "projects/{{project_id}}/client/profile.yaml"
+    priority: 4
+
+# 抽出パス定義（JSONPath形式）
+extraction_paths:
+  # ============================================
+  # 製品情報
+  # ============================================
+  product:
+    name:
+      source: manifest
+      path: "$.product.name"
+      fallback: "{{製品名}}"
+      
+    version:
+      source: manifest
+      path: "$.product.version"
+      fallback: "1.0"
+      
+    description:
+      source: manifest
+      path: "$.product.description"
+      fallback: null
+      
+    features:
+      source: manifest
+      path: "$.product.features[*].name"
+      transform: "join_list"
+      
+    pricing:
+      source: manifest
+      path: "$.product.pricing"
+      transform: "format_currency"
+
+  # ============================================
+  # 顧客情報
+  # ============================================
+  client:
+    name:
+      source: manifest
+      path: "$.client.name"
+      fallback: "{{顧客名}}"
+      
+    industry:
+      source: manifest
+      path: "$.client.industry"
+      fallback: null
+      inference_rule: "infer_from_name"
+      
+    size:
+      source: manifest
+      path: "$.client.size"
+      fallback: null
+      
+    employee_count:
+      sources:
+        - source: manifest
+          path: "$.client.employees"
+        - source: client_profile
+          path: "$.organization.employee_count"
+        - source: research_report
+          pattern: '従業員数[：:]\s*([0-9,]+)'
+          
+    student_count:
+      sources:
+        - source: manifest
+          path: "$.client.students"
+        - source: client_profile
+          path: "$.education.student_count"
+        - source: research_report
+          pattern: '学生数[：:]\s*([0-9,]+)'
+
+  # ============================================
+  # スコープ情報
+  # ============================================
+  scope:
+    licenses:
+      source: manifest
+      path: "$.scope.licenses"
+      fallback: null
+      
+    duration:
+      source: manifest
+      path: "$.scope.duration"
+      fallback: "1年"
+      
+    regions:
+      source: manifest
+      path: "$.scope.regions[*]"
+      transform: "join_list"
+
+  # ============================================
+  # リサーチ結果からの抽出
+  # ============================================
+  research:
+    market_trends:
+      source: research_report
+      section: "市場動向|業界トレンド|Market Trends"
+      extract: "key_points"
+      max_items: 5
+      
+    competitor_overview:
+      source: research_report
+      section: "競合分析|競合状況|Competitors"
+      extract: "summary"
+      
+    statistics:
+      source: research_report
+      patterns:
+        - pattern: "([0-9]+(?:\\.[0-9]+)?%)"
+          label: "percentage"
+        - pattern: "([0-9,]+(?:億|万)?円)"
+          label: "currency"
+        - pattern: "([0-9,]+)(?:人|社|件)"
+          label: "count"
+      transform: "extract_all"
+      
+    case_studies:
+      source: research_report
+      section: "事例|導入実績|Case Studies"
+      extract: "structured"
+      schema:
+        - company: "string"
+        - industry: "string"
+        - effect: "string"
+        - source_url: "url"
+
+  # ============================================
+  # 競合比較からの抽出
+  # ============================================
+  comparison:
+    competitors:
+      source: competitor_analysis
+      path: "$.competitors[*].name"
+      
+    our_advantages:
+      source: competitor_analysis
+      path: "$.comparison.advantages[*]"
+      
+    competitor_weaknesses:
+      source: competitor_analysis
+      path: "$.competitors[*].weaknesses[*]"
+      
+    pricing_comparison:
+      source: competitor_analysis
+      path: "$.comparison.pricing"
+      transform: "format_table"
+
+  # ============================================
+  # 現行システム情報
+  # ============================================
+  current_systems:
+    lms:
+      sources:
+        - source: client_profile
+          path: "$.systems.lms"
+        - source: research_report
+          pattern: '(?:現行|既存)?LMS[：:]\s*([^\n]+)'
+          
+    erp:
+      sources:
+        - source: client_profile
+          path: "$.systems.erp"
+        - source: research_report
+          pattern: '(?:現行|既存)?ERP[：:]\s*([^\n]+)'
+          
+    crm:
+      sources:
+        - source: client_profile
+          path: "$.systems.crm"
+        - source: research_report
+          pattern: '(?:現行|既存)?CRM[：:]\s*([^\n]+)'
+          
+    idp:
+      sources:
+        - source: client_profile
+          path: "$.systems.identity_provider"
+        - source: research_report
+          pattern: '(?:認証基盤|IdP)[：:]\s*([^\n]+)'
+
+# 変換関数定義
+transforms:
+  join_list:
+    description: "配列を指定区切り文字で結合"
+    default_separator: "、"
+    
+  format_currency:
+    description: "通貨フォーマット"
+    locale: "ja-JP"
+    currency: "JPY"
+    
+  format_table:
+    description: "データをMarkdownテーブルに変換"
+    
+  extract_all:
+    description: "パターンにマッチする全てを抽出"
+    
+  infer_from_name:
+    description: "名前から推論（大学→教育、銀行→金融等）"
+    rules:
+      - pattern: "大学|学園|学院|高校|中学"
+        value: "education"
+      - pattern: "銀行|信金|信用金庫|証券|保険|生命|損保"
+        value: "finance"
+      - pattern: "製造|工業|工場|機械|電機"
+        value: "manufacturing"
+      - pattern: "病院|医療|クリニック|ヘルスケア"
+        value: "healthcare"
+
+# 補完優先順位
+resolution_order:
+  1: "manifest"              # manifest.yamlから直接
+  2: "client_profile"        # 顧客プロファイルから
+  3: "research_report"       # リサーチ結果から推論
+  4: "competitor_analysis"   # 競合分析から
+  5: "inference"             # パターンマッチングによる推論
+  6: "default"               # デフォルト値
+  7: "prompt"                # ユーザーに確認
+
+# 自動補完不可項目（必ずユーザー確認が必要）
+require_confirmation:
+  - "{{提案日}}"
+  - "{{作成者}}"
+  - "{{バージョン}}"
+
+# 検証ルール
+validation:
+  min_confidence: 0.7  # 推論の最低信頼度
+  allow_partial: true  # 部分的な補完を許可
+  log_extractions: true  # 抽出ログを記録

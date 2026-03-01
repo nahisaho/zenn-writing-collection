@@ -1,0 +1,185 @@
+# Talk Script Structure Definition
+# v1.9.0 - REQ-SALES-002-02
+#
+# 3段階トークスクリプト構造定義
+
+schema_version: "1.0"
+name: talk-script-structure
+description: |
+  反論に対する3段階トークスクリプトの構造を定義。
+  共感→リフレーミング→次のステップの流れで構成。
+
+# 3段階構造定義
+structure:
+  steps:
+    - id: acknowledgment
+      name: "共感・受容"
+      order: 1
+      purpose: "相手の発言を受け止め、対立構造を避ける"
+      duration_seconds: 10-15
+      
+      principles:
+        - "相手の発言を否定しない"
+        - "「おっしゃる通り」「ごもっともです」で始める"
+        - "相手の立場・感情を理解していることを示す"
+        - "すぐに反論しない"
+      
+      templates:
+        generic:
+          - "おっしゃる通りです。{{acknowledgment_point}}は重要なポイントですね。"
+          - "ごもっともなご懸念です。{{acknowledgment_point}}については多くの方が同じように感じられます。"
+          - "そのお気持ちはよく分かります。{{acknowledgment_point}}は慎重に検討すべき点ですよね。"
+        
+        by_objection_type:
+          already_solved:
+            - "現状の方法で十分対応できているとのこと、素晴らしいですね。"
+            - "既に対策を講じられているのは、先見性のある判断だと思います。"
+          unclear_value:
+            - "ご説明が不十分で申し訳ありません。"
+            - "確かに、具体的なメリットが見えないとご判断は難しいですよね。"
+          cost_concern:
+            - "コストは非常に重要な検討ポイントですよね。"
+            - "ご予算のご事情は十分理解いたします。"
+          timing_issue:
+            - "今、他にも多くの重要事項を抱えていらっしゃるのですね。"
+            - "タイミングは確かに重要ですよね。"
+          trust_deficit:
+            - "初めてお聞きになる会社ですと、ご不安は当然です。"
+            - "実績をお示しできていない中でのご懸念、ごもっともです。"
+          internal_politics:
+            - "社内の調整は確かに大変ですよね。"
+            - "組織的な意思決定には様々なハードルがありますよね。"
+
+    - id: reframing
+      name: "リフレーミング"
+      order: 2
+      purpose: "反論を新しい視点で捉え直し、価値を再提示"
+      duration_seconds: 30-60
+      
+      principles:
+        - "「実は」「一方で」で視点を変える"
+        - "相手の懸念を解消する具体的情報を提示"
+        - "データ・事例・第三者評価を活用"
+        - "相手の利益になる形で再構成"
+      
+      templates:
+        generic:
+          - "一方で、{{reframing_point}}という観点もございます。"
+          - "実は、{{reframing_point}}というデータがあります。"
+          - "別の角度から見ると、{{reframing_point}}ということも言えます。"
+        
+        by_strategy:
+          demonstrate_with_data:
+            - "実際に、類似の条件で検証した結果、{{data_point}}という結果が出ています。"
+            - "弊社の実績データでは、{{data_point}}となっております。"
+          
+          tco_analysis:
+            - "単価だけを見ると確かに高く見えますが、TCO（総所有コスト）で比較すると、{{tco_benefit}}という結果になります。"
+            - "初期費用は確かにかかりますが、{{period}}で見ると{{cost_reduction}}の削減効果があります。"
+          
+          create_urgency:
+            - "実は今動き始めないと、{{urgency_reason}}というリスクがあります。"
+            - "競合の{{competitor}}は既に{{competitor_action}}を始めています。"
+          
+          proof_points:
+            - "弊社は{{company_count}}社以上にご導入いただいており、特に{{industry}}業界では{{specific_companies}}様にお使いいただいています。"
+            - "第三者機関の{{certification}}も取得しております。"
+          
+          phased_approach:
+            - "全面導入ではなく、まずは{{small_scope}}から始める方法もあります。"
+            - "リスクを最小化するため、{{trial_approach}}という形でスタートすることも可能です。"
+          
+          facilitation_offer:
+            - "社内調整のサポートとして、{{support_content}}をご用意しております。"
+            - "{{stakeholder}}様向けの個別説明の機会を設けることも可能です。"
+
+    - id: next_step
+      name: "次のステップ提案"
+      order: 3
+      purpose: "具体的な次のアクションを提案し、商談を前進させる"
+      duration_seconds: 15-20
+      
+      principles:
+        - "必ず具体的なアクションを提案"
+        - "相手の負担が小さい選択肢を用意"
+        - "日程・期限を明確に"
+        - "二者択一で選びやすく"
+      
+      templates:
+        generic:
+          - "次のステップとして、{{next_action}}はいかがでしょうか。"
+          - "{{option_a}}か{{option_b}}、どちらがご都合よろしいでしょうか。"
+          - "まずは{{small_step}}から始めてみませんか。"
+        
+        by_objection_type:
+          already_solved:
+            - "現状との比較ができるよう、簡単なアセスメントを無料で実施させていただけないでしょうか。"
+            - "他社様の取り組み事例だけでもお持ちしましょうか。"
+          unclear_value:
+            - "より具体的なご説明のため、詳細資料をお送りしてよろしいでしょうか。"
+            - "御社の状況に合わせたシミュレーションを作成しますので、15分だけお時間いただけないでしょうか。"
+          cost_concern:
+            - "詳細なROI試算書をお作りしますので、ご検討いただけないでしょうか。"
+            - "予算に合わせたプランをいくつかご提案させてください。"
+          timing_issue:
+            - "3ヶ月後に改めてご連絡させていただいてよろしいでしょうか。"
+            - "お時間ができた際にすぐ検討いただけるよう、資料だけ先にお送りしておきますね。"
+          trust_deficit:
+            - "実際にご導入いただいた企業様との情報交換の機会を設けることも可能ですが、いかがでしょうか。"
+            - "まずは無料のトライアルから始めていただくこともできます。"
+          internal_politics:
+            - "〇〇部門の方向けの説明資料もご用意しますので、ご活用ください。"
+            - "関係者の方への個別説明の機会を設けることも可能です。"
+
+# スクリプト出力設定
+output:
+  format: conversation
+  include_timing: true
+  include_notes: true
+  
+  conversation_format: |
+    ---
+    **反論**: 「{{objection_phrase}}」
+    
+    **Step 1: 共感・受容** ({{acknowledgment_duration}})
+    > {{acknowledgment_script}}
+    
+    **Step 2: リフレーミング** ({{reframing_duration}})
+    > {{reframing_script}}
+    
+    📊 **エビデンス**: {{evidence}}
+    
+    **Step 3: 次のステップ提案** ({{next_step_duration}})
+    > {{next_step_script}}
+    
+    ✅ **期待する成果**: {{expected_outcome}}
+    ---
+
+# スクリプト生成ルール
+generation_rules:
+  # トーン調整
+  tone_adjustment:
+    formal:
+      honorific: "です・ます"
+      phrases: ["恐れ入りますが", "よろしければ", "お差し支えなければ"]
+    semi_formal:
+      honorific: "です・ます"
+      phrases: ["ちなみに", "実は", "というのも"]
+    casual:
+      honorific: "だ・である混合"
+      phrases: ["正直なところ", "ぶっちゃけ", "率直に言うと"]
+  
+  # 長さ調整
+  length_adjustment:
+    short:
+      acknowledgment_sentences: 1
+      reframing_sentences: 2-3
+      next_step_sentences: 1
+    medium:
+      acknowledgment_sentences: 1-2
+      reframing_sentences: 3-5
+      next_step_sentences: 1-2
+    detailed:
+      acknowledgment_sentences: 2-3
+      reframing_sentences: 5-8
+      next_step_sentences: 2-3

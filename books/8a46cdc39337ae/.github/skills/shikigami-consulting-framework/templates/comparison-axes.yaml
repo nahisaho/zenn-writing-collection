@@ -1,0 +1,465 @@
+# Comparison Axes Definition
+# v1.0.0 - REQ-COMP-001-01
+#
+# 競合比較表生成のための比較軸定義
+
+schema_version: "1.0"
+name: comparison-axes
+description: |
+  競合比較表を生成するための比較軸（評価項目）を定義。
+  汎用軸と業界別追加軸を含む。各軸に抽出パターンと重みを設定。
+
+# ============================================
+# 汎用比較軸（全業界共通）
+# ============================================
+common_axes:
+  pricing:
+    id: "pricing"
+    name: "価格"
+    description: "製品・サービスの価格体系"
+    weight: 0.20
+    sub_items:
+      - id: "base_price"
+        name: "基本価格"
+        extraction_patterns:
+          - '(?:月額|年額)?[：:]\s*[¥￥]?([0-9,]+)(?:円|\/月|\/年|\/ユーザー)'
+          - '(?:\$|USD)?\s*([0-9,]+(?:\.[0-9]+)?)\s*(?:per|/)\s*(?:month|year|user)'
+          - '料金[：:]\s*([^\n]+)'
+        unit: "currency"
+      - id: "pricing_model"
+        name: "課金モデル"
+        options:
+          - "サブスクリプション（月額）"
+          - "サブスクリプション（年額）"
+          - "従量課金"
+          - "買い切り"
+          - "フリーミアム"
+        extraction_patterns:
+          - "(サブスクリプション|月額|年額|従量課金|買い切り|フリーミアム)"
+      - id: "volume_discount"
+        name: "ボリュームディスカウント"
+        type: "boolean"
+        extraction_patterns:
+          - "(ボリューム割引|数量割引|大口割引|エンタープライズ)"
+      - id: "free_tier"
+        name: "無料枠"
+        type: "text"
+        extraction_patterns:
+          - '無料(?:プラン|枠|版)[：:]\s*([^\n]+)'
+          - '(?:Free|無料)\s*(?:tier|plan)?[：:]\s*([^\n]+)'
+
+  core_features:
+    id: "core_features"
+    name: "主要機能"
+    description: "製品の主要機能・特徴"
+    weight: 0.25
+    sub_items:
+      - id: "key_features"
+        name: "主要機能一覧"
+        type: "list"
+        extraction_patterns:
+          - '(?:主要機能|特徴|機能)[：:]\s*\n((?:[-・•]\s*[^\n]+\n?)+)'
+          - 'Features[：:]?\s*\n((?:[-•]\s*[^\n]+\n?)+)'
+      - id: "unique_selling_point"
+        name: "差別化ポイント"
+        type: "text"
+        extraction_patterns:
+          - '(?:差別化|強み|USP|特長)[：:]\s*([^\n]+)'
+      - id: "ai_capabilities"
+        name: "AI機能"
+        type: "boolean"
+        extraction_patterns:
+          - "(AI|人工知能|機械学習|ディープラーニング|生成AI|Copilot)"
+      - id: "mobile_support"
+        name: "モバイル対応"
+        type: "boolean"
+        extraction_patterns:
+          - "(モバイルアプリ|iOS|Android|スマートフォン対応)"
+
+  support:
+    id: "support"
+    name: "サポート体制"
+    description: "カスタマーサポート・導入支援"
+    weight: 0.15
+    sub_items:
+      - id: "support_channels"
+        name: "サポートチャネル"
+        type: "list"
+        options:
+          - "電話"
+          - "メール"
+          - "チャット"
+          - "オンサイト"
+          - "コミュニティ"
+        extraction_patterns:
+          - 'サポート[：:]\s*([^\n]+)'
+      - id: "support_hours"
+        name: "サポート時間"
+        type: "text"
+        extraction_patterns:
+          - '(?:対応時間|営業時間|サポート時間)[：:]\s*([^\n]+)'
+          - "(24時間|365日|営業日|平日)"
+      - id: "sla"
+        name: "SLA"
+        type: "text"
+        extraction_patterns:
+          - 'SLA[：:]\s*([^\n]+)'
+          - '(?:稼働率|可用性)[：:]\s*([0-9.]+%)'
+      - id: "implementation_support"
+        name: "導入支援"
+        type: "boolean"
+        extraction_patterns:
+          - "(導入支援|オンボーディング|カスタマーサクセス)"
+
+  integration:
+    id: "integration"
+    name: "連携機能"
+    description: "他システムとの連携・API"
+    weight: 0.15
+    sub_items:
+      - id: "api_availability"
+        name: "API提供"
+        type: "boolean"
+        extraction_patterns:
+          - "(API|REST API|GraphQL|Webhook)"
+      - id: "integrations"
+        name: "連携サービス"
+        type: "list"
+        extraction_patterns:
+          - '(?:連携|統合|インテグレーション)[：:]\s*([^\n]+)'
+      - id: "sso_support"
+        name: "SSO対応"
+        type: "boolean"
+        extraction_patterns:
+          - "(SSO|シングルサインオン|SAML|OIDC|Azure AD)"
+      - id: "data_import_export"
+        name: "データ入出力"
+        type: "text"
+        extraction_patterns:
+          - '(?:インポート|エクスポート|データ移行)[：:]\s*([^\n]+)'
+
+  security:
+    id: "security"
+    name: "セキュリティ"
+    description: "セキュリティ機能・認証"
+    weight: 0.15
+    sub_items:
+      - id: "certifications"
+        name: "認証取得"
+        type: "list"
+        extraction_patterns:
+          - '(ISO\s*27001|SOC\s*2|ISMS|Pマーク|GDPR)'
+      - id: "encryption"
+        name: "暗号化"
+        type: "text"
+        extraction_patterns:
+          - '(?:暗号化|Encryption)[：:]\s*([^\n]+)'
+          - "(AES-256|TLS|SSL)"
+      - id: "mfa"
+        name: "多要素認証"
+        type: "boolean"
+        extraction_patterns:
+          - "(MFA|多要素認証|二要素認証|2FA)"
+      - id: "data_residency"
+        name: "データ保管場所"
+        type: "text"
+        extraction_patterns:
+          - '(?:データセンター|保管場所|リージョン)[：:]\s*([^\n]+)'
+
+  user_experience:
+    id: "user_experience"
+    name: "ユーザー体験"
+    description: "使いやすさ・UI/UX"
+    weight: 0.10
+    sub_items:
+      - id: "ease_of_use"
+        name: "使いやすさ"
+        type: "rating"
+        scale: 5
+        extraction_patterns:
+          - '(?:使いやすさ|操作性)[：:]\s*([0-9.]+)'
+      - id: "training_required"
+        name: "トレーニング必要性"
+        type: "text"
+        extraction_patterns:
+          - '(?:学習|トレーニング|習熟)[：:]\s*([^\n]+)'
+      - id: "localization"
+        name: "日本語対応"
+        type: "boolean"
+        extraction_patterns:
+          - "(日本語対応|日本語版|日本語UI)"
+
+# ============================================
+# 業界別追加軸
+# ============================================
+industry_axes:
+  education:
+    name: "教育機関向け追加軸"
+    axes:
+      lms_integration:
+        id: "lms_integration"
+        name: "LMS連携"
+        description: "学習管理システムとの連携"
+        weight: 0.15
+        sub_items:
+          - id: "lms_support"
+            name: "対応LMS"
+            type: "list"
+            options:
+              - "Moodle"
+              - "Canvas"
+              - "Blackboard"
+              - "Google Classroom"
+              - "manaba"
+            extraction_patterns:
+              - "(Moodle|Canvas|Blackboard|Google Classroom|manaba)"
+          - id: "lti_support"
+            name: "LTI対応"
+            type: "boolean"
+            extraction_patterns:
+              - "(LTI|Learning Tools Interoperability)"
+          - id: "gradebook_sync"
+            name: "成績連携"
+            type: "boolean"
+            extraction_patterns:
+              - "(成績連携|成績同期|Gradebook)"
+              
+      academic_pricing:
+        id: "academic_pricing"
+        name: "アカデミック価格"
+        description: "教育機関向け特別価格"
+        weight: 0.10
+        sub_items:
+          - id: "student_pricing"
+            name: "学生向け価格"
+            type: "text"
+            extraction_patterns:
+              - '(?:学生|Student)[：:]\s*[¥￥]?([0-9,]+)'
+          - id: "academic_discount"
+            name: "アカデミック割引率"
+            type: "text"
+            extraction_patterns:
+              - '(?:アカデミック|教育機関)(?:割引)?[：:]\s*([0-9]+%|無料)'
+          - id: "site_license"
+            name: "サイトライセンス"
+            type: "boolean"
+            extraction_patterns:
+              - "(サイトライセンス|全学ライセンス|包括契約)"
+
+      accessibility:
+        id: "accessibility"
+        name: "アクセシビリティ"
+        description: "障がい者対応・アクセシビリティ"
+        weight: 0.05
+        sub_items:
+          - id: "wcag_compliance"
+            name: "WCAG準拠"
+            type: "text"
+            extraction_patterns:
+              - '(WCAG\s*[0-9.]+|アクセシビリティ対応)'
+          - id: "screen_reader"
+            name: "スクリーンリーダー対応"
+            type: "boolean"
+            extraction_patterns:
+              - "(スクリーンリーダー|音声読み上げ)"
+
+  manufacturing:
+    name: "製造業向け追加軸"
+    axes:
+      erp_integration:
+        id: "erp_integration"
+        name: "ERP連携"
+        description: "基幹システムとの連携"
+        weight: 0.15
+        sub_items:
+          - id: "erp_support"
+            name: "対応ERP"
+            type: "list"
+            options:
+              - "SAP"
+              - "Oracle"
+              - "Microsoft Dynamics"
+              - "OBIC"
+              - "ProActive"
+            extraction_patterns:
+              - "(SAP|Oracle|Dynamics|OBIC|ProActive|勘定奉行|PCA)"
+          - id: "mes_integration"
+            name: "MES連携"
+            type: "boolean"
+            extraction_patterns:
+              - "(MES|製造実行システム)"
+          - id: "plc_support"
+            name: "PLC接続"
+            type: "list"
+            extraction_patterns:
+              - "(三菱|OMRON|キーエンス|シーメンス|Siemens|Allen-Bradley)"
+
+      offline_capability:
+        id: "offline_capability"
+        name: "オフライン対応"
+        description: "ネットワーク切断時の動作"
+        weight: 0.10
+        sub_items:
+          - id: "offline_mode"
+            name: "オフラインモード"
+            type: "boolean"
+            extraction_patterns:
+              - "(オフライン対応|オフラインモード|オフライン作業)"
+          - id: "sync_mechanism"
+            name: "同期方式"
+            type: "text"
+            extraction_patterns:
+              - '(?:同期|Sync)[：:]\s*([^\n]+)'
+
+      industrial_protocol:
+        id: "industrial_protocol"
+        name: "産業プロトコル"
+        description: "産業用通信プロトコル対応"
+        weight: 0.05
+        sub_items:
+          - id: "protocols"
+            name: "対応プロトコル"
+            type: "list"
+            options:
+              - "OPC UA"
+              - "MQTT"
+              - "Modbus"
+              - "EtherNet/IP"
+              - "CC-Link"
+            extraction_patterns:
+              - '(OPC\\s*UA|MQTT|Modbus|EtherNet/IP|CC-Link|PROFINET)'
+
+  finance:
+    name: "金融業向け追加軸"
+    axes:
+      compliance:
+        id: "compliance"
+        name: "コンプライアンス"
+        description: "金融規制対応"
+        weight: 0.20
+        sub_items:
+          - id: "fisc_compliance"
+            name: "FISC安全対策基準"
+            type: "text"
+            extraction_patterns:
+              - "(FISC|金融情報システムセンター)"
+          - id: "pci_dss"
+            name: "PCI DSS"
+            type: "boolean"
+            extraction_patterns:
+              - '(PCI\\s*DSS|クレジットカード)'
+          - id: "gdpr"
+            name: "GDPR対応"
+            type: "boolean"
+            extraction_patterns:
+              - "(GDPR|EU一般データ保護規則)"
+          - id: "regulatory_reporting"
+            name: "規制報告対応"
+            type: "boolean"
+            extraction_patterns:
+              - "(規制報告|レギュラトリー|Basel)"
+
+      audit:
+        id: "audit"
+        name: "監査ログ"
+        description: "監査証跡・ログ管理"
+        weight: 0.15
+        sub_items:
+          - id: "audit_log"
+            name: "監査ログ"
+            type: "boolean"
+            extraction_patterns:
+              - "(監査ログ|Audit Log|操作履歴)"
+          - id: "log_retention"
+            name: "ログ保存期間"
+            type: "text"
+            extraction_patterns:
+              - '(?:ログ保存|保存期間)[：:]\s*([0-9]+(?:年|日|ヶ月))'
+          - id: "tamper_proof"
+            name: "改ざん防止"
+            type: "boolean"
+            extraction_patterns:
+              - "(改ざん防止|Tamper.*proof|WORM)"
+
+      high_availability:
+        id: "high_availability"
+        name: "高可用性"
+        description: "システム可用性・災害対策"
+        weight: 0.10
+        sub_items:
+          - id: "availability"
+            name: "可用性SLA"
+            type: "text"
+            extraction_patterns:
+              - '(?:可用性|稼働率|Availability)[：:]\s*([0-9.]+%)'
+          - id: "disaster_recovery"
+            name: "DR対応"
+            type: "boolean"
+            extraction_patterns:
+              - "(DR|災害対策|Disaster Recovery|BCP)"
+          - id: "rpo_rto"
+            name: "RPO/RTO"
+            type: "text"
+            extraction_patterns:
+              - '(?:RPO|RTO)[：:]\s*([^\n]+)'
+
+# ============================================
+# 比較結果の判定基準
+# ============================================
+evaluation_criteria:
+  symbols:
+    excellent: "✅"      # 優れている
+    good: "⚠️"          # 問題なし
+    poor: "❌"          # 劣っている
+    unknown: "❓"       # 不明
+    not_applicable: "—" # 該当なし
+    
+  boolean_mapping:
+    true: "✅"
+    false: "❌"
+    unknown: "❓"
+    
+  rating_thresholds:
+    excellent: 4.5
+    good: 3.0
+    poor: 0
+
+# ============================================
+# 出力フォーマット
+# ============================================
+output_format:
+  table_header: |
+    | 評価項目 | {{our_product}} | {{competitor_1}} | {{competitor_2}} | {{competitor_3}} |
+    |---------|----------------|-----------------|-----------------|-----------------|
+  
+  summary_template: |
+    ## 競合比較サマリー
+    
+    ### 総合評価
+    | 製品 | スコア | 評価 |
+    |------|-------|------|
+    {{#each products}}
+    | {{name}} | {{score}} | {{rating}} |
+    {{/each}}
+    
+    ### 自社優位ポイント
+    {{#each advantages}}
+    - **{{axis}}**: {{description}}
+    {{/each}}
+    
+    ### 競合優位ポイント（要対策）
+    {{#each disadvantages}}
+    - **{{axis}}**: {{competitor}} が優位（{{reason}}）
+    {{/each}}
+    
+    ### 推奨アクション
+    {{#each recommendations}}
+    1. {{.}}
+    {{/each}}
+  
+  footnote_template: |
+    ---
+    **出典**
+    {{#each sources}}
+    [{{index}}] {{title}} - {{url}} ({{date}})
+    {{/each}}

@@ -1,0 +1,173 @@
+# success-condition-mapping.yaml
+# v1.16.0 - 成功条件タイプ → リサーチ項目自動導出ルール
+# REQ-PROP-002 実装
+#
+# 用途: success_condition.type に基づいて required_research_items を自動導出
+# 参照元: shikigami-planner/SKILL.md (Phase 1: Purpose Discovery)
+
+version: "1.16.0"
+
+# 成功条件タイプ別マッピング
+success_condition_mapping:
+
+  IMMEDIATE_APPROVAL:
+    description: "即決承認（例：社長がその場で「やろう」）"
+    description_en: "Immediate approval (e.g., CEO says 'Let's do it' on the spot)"
+    required_items:
+      - item: "3シナリオ財務計画"
+        item_en: "3-scenario financial plan"
+        priority: required
+        rationale: "最悪ケースでも投資回収可能を示す"
+        target_prompt: "shikigami-financial-analysis.prompt.md"
+      - item: "ROI分析"
+        item_en: "ROI analysis"
+        priority: required
+        rationale: "投資対効果の明示"
+        target_prompt: "shikigami-financial-analysis.prompt.md"
+      - item: "競合動向・タイミング分析"
+        item_en: "Competitor trends and timing analysis"
+        priority: required
+        rationale: "今やる理由の説明"
+        target_prompt: null  # Deep Research で対応
+      - item: "即決トリガー（緊急性・損失回避）"
+        item_en: "Immediate decision triggers (urgency, loss aversion)"
+        priority: required
+        rationale: "先延ばしのデメリットを示す"
+        target_prompt: null  # レポートテンプレートで対応
+    report_adjustments:
+      - "財務データを最初に配置"
+      - "1ページエグゼクティブサマリー必須"
+      - "Why Now セクションを強調"
+
+  STAGED_APPROVAL:
+    description: "段階的承認（例：役員→社長の2段階）"
+    description_en: "Staged approval (e.g., executive → president in 2 stages)"
+    required_items:
+      - item: "財務計画（各段階向け詳細度調整）"
+        item_en: "Financial plan (detail level adjusted per stage)"
+        priority: required
+        rationale: "各承認者向けに適切な詳細度を提供"
+        target_prompt: "shikigami-financial-analysis.prompt.md"
+      - item: "リスク分析（詳細）"
+        item_en: "Risk analysis (detailed)"
+        priority: required
+        rationale: "上位承認者ほど詳細リスクを求める"
+        target_prompt: "shikigami-risk-sensitivity.prompt.md"
+      - item: "段階別マイルストーン"
+        item_en: "Stage-specific milestones"
+        priority: required
+        rationale: "各段階での達成目標を明示"
+        target_prompt: null
+      - item: "ステークホルダー分析"
+        item_en: "Stakeholder analysis"
+        priority: optional
+        rationale: "各承認者の関心事を把握"
+        target_prompt: "shikigami-stakeholder-impact.prompt.md"
+    report_adjustments:
+      - "各段階向けドキュメントバリアント生成"
+      - "段階別エグゼクティブサマリー"
+
+  BUDGET_APPROVAL:
+    description: "予算承認（例：来期予算への組み込み）"
+    description_en: "Budget approval (e.g., inclusion in next fiscal year budget)"
+    required_items:
+      - item: "詳細コスト見積もり"
+        item_en: "Detailed cost estimate"
+        priority: required
+        rationale: "予算計上に必要な精度のコスト"
+        target_prompt: "shikigami-financial-analysis.prompt.md"
+      - item: "年度別予算配分"
+        item_en: "Annual budget allocation"
+        priority: required
+        rationale: "複数年度にまたがる予算計画"
+        target_prompt: "shikigami-financial-analysis.prompt.md"
+      - item: "コスト削減効果"
+        item_en: "Cost reduction benefits"
+        priority: required
+        rationale: "投資対効果を予算視点で説明"
+        target_prompt: "shikigami-financial-analysis.prompt.md"
+      - item: "5年売上計画"
+        item_en: "5-year revenue plan"
+        priority: optional
+        rationale: "中長期的な財務インパクト"
+        target_prompt: "shikigami-financial-analysis.prompt.md"
+    report_adjustments:
+      - "予算フォーマットに準拠"
+      - "年度別コスト内訳を詳細化"
+
+  PILOT_APPROVAL:
+    description: "PoC/パイロット承認"
+    description_en: "PoC/Pilot approval"
+    required_items:
+      - item: "パイロット範囲・期間・コスト"
+        item_en: "Pilot scope, duration, and cost"
+        priority: required
+        rationale: "限定的な投資範囲を明示"
+        target_prompt: null
+      - item: "成功基準（Go/No-Go）"
+        item_en: "Success criteria (Go/No-Go)"
+        priority: required
+        rationale: "パイロット評価の明確な基準"
+        target_prompt: null
+      - item: "本格展開への移行条件"
+        item_en: "Conditions for full rollout"
+        priority: required
+        rationale: "パイロット後のスケールアップパス"
+        target_prompt: null
+      - item: "リスク分析（限定的）"
+        item_en: "Risk analysis (limited scope)"
+        priority: optional
+        rationale: "パイロット固有のリスク"
+        target_prompt: "shikigami-risk-sensitivity.prompt.md"
+    report_adjustments:
+      - "小規模投資のリスク限定性を強調"
+      - "段階的拡大シナリオを提示"
+
+  CONSIDERATION:
+    description: "検討開始の合意（例：まずは検討テーブルに載せる）"
+    description_en: "Agreement to consider (e.g., get the topic on the discussion table)"
+    required_items:
+      - item: "オプション比較"
+        item_en: "Options comparison"
+        priority: required
+        rationale: "複数の選択肢を提示"
+        target_prompt: null
+      - item: "概算コスト・スケジュール"
+        item_en: "Rough cost and schedule estimates"
+        priority: required
+        rationale: "検討材料としての概要情報"
+        target_prompt: null
+      - item: "次のステップ提案"
+        item_en: "Next steps proposal"
+        priority: required
+        rationale: "検討後のアクションを明示"
+        target_prompt: null
+    report_adjustments:
+      - "詳細分析より選択肢の明示を優先"
+      - "検討ポイントを箇条書きで整理"
+
+# デフォルト値（タイプ未確定時）
+default:
+  type: "CONSIDERATION"
+  required_items:
+    - item: "基本情報収集"
+      item_en: "Basic information gathering"
+      priority: required
+      rationale: "最低限の情報を収集"
+      target_prompt: null
+  report_adjustments:
+    - "汎用的な構成で作成"
+
+# 導出ロジック設定
+derivation:
+  # 導出実行タイミング
+  trigger: "success_condition_confirmed"
+  
+  # manifest.yaml への出力先
+  output_path: "purpose_discovery.required_research_items"
+  
+  # ステータス初期値
+  initial_status: "not_started"
+  
+  # ログ出力
+  log_derivation: true

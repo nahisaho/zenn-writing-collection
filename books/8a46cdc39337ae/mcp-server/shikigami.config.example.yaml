@@ -1,0 +1,174 @@
+# SHIKIGAMI Configuration
+# このファイルをプロジェクトルートに配置して設定をカスタマイズ
+#
+# ファイル名の優先順位:
+#   1. shikigami.config.yaml
+#   2. shikigami.config.yml
+#   3. .shikigami.yaml
+#   4. .shikigami.yml
+#
+# 探索場所（優先順）:
+#   1. カレントディレクトリ
+#   2. ホームディレクトリ
+#
+# 環境変数で上書き可能（環境変数が最優先）
+
+version: "1.0"
+
+# ===== 検索プロバイダー設定 (v1.5.0) =====
+# 複数プロバイダーに対応し、フォールバック機能を追加
+search:
+  # プロバイダー一覧（priority順にフォールバック）
+  providers:
+    # DuckDuckGo: API キー不要（推奨プライマリ）
+    - name: duckduckgo
+      priority: 1
+      enabled: true
+      options:
+        maxRetries: 2
+        rateLimitMs: 1500
+
+    # Brave Search: API キー必須
+    # 取得: https://brave.com/search/api/
+    - name: brave
+      priority: 2
+      enabled: false  # true に変更して有効化
+      apiKey: ""      # 環境変数 BRAVE_API_KEY で設定推奨
+      options:
+        maxRetries: 2
+        rateLimitMs: 500
+
+    # SearXNG: セルフホスト型メタサーチエンジン
+    # 詳細: https://docs.searxng.org/
+    - name: searxng
+      priority: 3
+      enabled: false  # true に変更して有効化
+      endpoint: http://localhost:8080  # SearXNGサーバーURL
+      options:
+        maxRetries: 2
+        timeout: 10000
+
+  # フォールバック設定
+  fallback:
+    enabled: true       # プロバイダー失敗時に次のプロバイダーへ
+    maxRetries: 2       # 各プロバイダーのリトライ回数
+    retryDelayMs: 2000  # リトライ間隔（ms）
+
+  # 共通オプション
+  options:
+    timeout: 30000      # タイムアウト（ms）
+    rateLimitMs: 1500   # リクエスト間隔（ms）
+    locale: ja-JP       # 言語/地域設定
+
+# ===== ページ取得プロバイダー設定 =====
+pageFetcher:
+  # プロバイダー選択
+  # - jina: Jina AI Reader（無料枠あり、デフォルト）
+  # - firecrawl: Firecrawl（要 API キー）
+  # - browserbase: Browserbase（要 API キー）
+  provider: jina
+  options:
+    # apiKey: ""  # 環境変数 JINA_API_KEY で設定推奨
+    timeout: 30000      # タイムアウト（ms）
+    rateLimitMs: 1000   # リクエスト間隔（ms）
+    format: markdown    # 返却形式: markdown | text | html
+    waitForJS: false    # JavaScript 実行を待つか
+
+# ===== LLM プロバイダー設定 =====
+# Deep Research のサマリー生成等で使用（オプション）
+llm:
+  # プロバイダー選択
+  # - ollama: ローカル LLM（デフォルト）
+  # - openai: OpenAI API
+  # - anthropic: Anthropic Claude API
+  # - azure-openai: Azure OpenAI
+  provider: ollama
+  model: llama3.2       # 使用するモデル名
+  options:
+    endpoint: http://localhost:11434  # Ollama エンドポイント
+    # apiKey: ""        # 環境変数 OPENAI_API_KEY 等で設定推奨
+    temperature: 0.7    # 生成の多様性（0.0-1.0）
+    maxTokens: 4096     # 最大トークン数
+
+# ===== Embedding プロバイダー設定 =====
+# セマンティック検索で使用（オプション）
+embedding:
+  # プロバイダー選択
+  # - ollama: ローカル Embedding（デフォルト）
+  # - openai: OpenAI Embeddings API
+  # - huggingface: HuggingFace Inference API
+  provider: ollama
+  model: nomic-embed-text  # 使用するモデル名
+  options:
+    endpoint: http://localhost:11434
+    dimensions: 768     # ベクトル次元数
+
+# ===== 検索リカバリー設定 (v1.7.0) =====
+# 検索結果が0件の場合に自動リカバリーを試行
+searchRecovery:
+  enabled: true         # リカバリー機能を有効にするか
+  maxRetries: 3         # 最大リトライ回数
+  timeoutMs: 30000      # タイムアウト（ms）
+  strategies:
+    # 同義語置換戦略
+    synonym:
+      enabled: true
+      # customDictionary:
+      #   - term: "カスタム用語"
+      #     synonyms: ["同義語1", "同義語2"]
+    # クエリ簡略化戦略
+    simplify:
+      enabled: true
+      maxWords: 3       # 保持する最大語数
+    # 言語変換戦略
+    translate:
+      enabled: true
+      # customDictionary:
+      #   日本語用語: "English term"
+
+# ===== ナレッジ連携設定 (v1.7.0) =====
+# 関連プロジェクトの自動検出
+knowledgeDiscovery:
+  enabled: true
+  searchPath: projects/  # プロジェクト検索パス
+  similarityThreshold: 0.3  # 類似度閾値（0-1）
+  maxResults: 5         # 表示する最大プロジェクト数
+  freshnessWarningDays: 30  # 鮮度警告の日数
+  indexFileName: .shikigami-index.json  # インデックスファイル名
+
+# ===== PDF解析設定 (v1.7.0) =====
+# PDFコンテンツの自動抽出
+pdfParsing:
+  enabled: true
+  maxFileSizeBytes: 10485760  # 最大ファイルサイズ（10MB）
+  maxPages: 50          # 最大ページ数
+  timeoutMs: 60000      # タイムアウト（ms）
+  tempDir: /tmp/shikigami-pdf  # 一時ファイル保存ディレクトリ
+
+# ===== ページ訪問リカバリー設定 (v1.10.0) =====
+# ページ取得失敗時の自動リカバリー
+visitRecovery:
+  enabled: true           # リカバリー機能を有効にするか
+  maxRetries: 2           # 最大リトライ回数
+  retryDelayMs: 1000      # リトライ間隔（ms）
+  timeoutMs: 30000        # タイムアウト（ms）
+  enableWayback: true     # Wayback Machine フォールバックを有効にするか
+
+# ===== キャッシュ設定 =====
+cache:
+  enabled: true         # キャッシュを有効にするか
+  ttlSeconds: 3600      # TTL（秒）= 1時間
+  maxSize: 1000         # 最大エントリ数
+  storage: memory       # memory | file
+  # filePath: .shikigami-cache.json  # file 使用時のパス
+
+# ===== ログ設定 =====
+log:
+  level: info           # debug | info | warn | error
+  output: stderr        # stderr | file
+  # filePath: shikigami.log  # file 使用時のパス
+
+# ===== カスタム設定 =====
+# 拡張用（任意のキー・値を設定可能）
+# custom:
+#   myKey: myValue

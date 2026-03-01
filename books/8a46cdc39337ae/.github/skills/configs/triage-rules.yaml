@@ -1,0 +1,292 @@
+# triage-rules.yaml
+# v1.18.0 - 緊急度トリアージルール定義
+# リサーチの緊急度を判定し、適切なワークフローパスを選択
+
+version: "1.18.0"
+
+# ========================================
+# 緊急度レベル定義
+# ========================================
+urgency_levels:
+  - level: "NORMAL"
+    name: "通常"
+    description: "標準的なリサーチ（Phase 0-5 フルフロー）"
+    icon: "🟢"
+    max_duration: "無制限"
+    workflow_path: "full"
+  
+  - level: "URGENT"
+    name: "緊急"
+    description: "短縮リサーチ（一部フェーズ簡略化）"
+    icon: "🟡"
+    max_duration: "1日以内"
+    workflow_path: "quick"
+  
+  - level: "CRITICAL"
+    name: "超緊急"
+    description: "即時対応（要約のみ）"
+    icon: "🔴"
+    max_duration: "2時間以内"
+    workflow_path: "instant"
+
+# ========================================
+# 緊急度検出キーワード
+# ========================================
+detection_keywords:
+  URGENT:
+    ja:
+      - "急ぎ"
+      - "今日中"
+      - "明日まで"
+      - "早めに"
+      - "できるだけ早く"
+      - "ASAP"
+      - "優先的に"
+      - "1日以内"
+    en:
+      - "urgent"
+      - "asap"
+      - "by today"
+      - "by tomorrow"
+      - "quickly"
+      - "priority"
+      - "within a day"
+  
+  CRITICAL:
+    ja:
+      - "今すぐ"
+      - "至急"
+      - "緊急"
+      - "超急ぎ"
+      - "この1時間"
+      - "会議前に"
+      - "すぐに回答"
+      - "概要だけ"
+      - "ざっくり"
+    en:
+      - "immediately"
+      - "right now"
+      - "critical"
+      - "within an hour"
+      - "before the meeting"
+      - "quick summary"
+      - "just an overview"
+
+# ========================================
+# 緊急度判定ロジック
+# ========================================
+triage_logic:
+  # 判定優先順位
+  evaluation_order:
+    - "explicit_request"      # ユーザーが明示的に指定
+    - "keyword_detection"     # キーワード検出
+    - "deadline_parsing"      # 期限解析
+    - "context_inference"     # コンテキスト推測
+  
+  # 明示的リクエスト
+  explicit_request:
+    patterns:
+      - "緊急度: {level}"
+      - "優先度: {level}"
+      - "{level}で対応"
+    action: "use_specified_level"
+  
+  # 期限解析
+  deadline_parsing:
+    patterns:
+      - regex: "(\\d+)時間以内"
+        mapping:
+          "1-2": "CRITICAL"
+          "3-8": "URGENT"
+          "9+": "NORMAL"
+      - regex: "(今日|本日|tonight)"
+        level: "URGENT"
+      - regex: "(今すぐ|immediately)"
+        level: "CRITICAL"
+  
+  # デフォルト
+  default_level: "NORMAL"
+
+# ========================================
+# ワークフローパス定義
+# ========================================
+workflow_paths:
+  # 通常フロー（フル）
+  full:
+    name: "Full Research Flow"
+    description: "Phase 0-5 すべてを実行"
+    phases:
+      - "phase_0"  # Project Initialization
+      - "phase_1"  # Purpose Discovery
+      - "phase_2"  # Deep Research
+      - "phase_3"  # Framework Analysis
+      - "phase_4"  # Report Writing
+      - "phase_5"  # Completion
+    estimated_time: "数時間〜数日"
+    quality_level: "高"
+  
+  # クイックフロー
+  quick:
+    name: "Quick Research Flow"
+    description: "簡略化されたリサーチ"
+    phases:
+      - "phase_0"      # Project Initialization（必須）
+      - "phase_1_lite" # Purpose Discovery（簡略版: 質問1-2問）
+      - "phase_2"      # Deep Research（通常）
+      - "phase_4_lite" # Report Writing（簡略版: 要約重視）
+    skip_phases:
+      - "phase_3"  # Framework Analysis をスキップ
+    estimated_time: "2-4時間"
+    quality_level: "中"
+    limitations:
+      - "フレームワーク分析なし"
+      - "財務分析なし"
+      - "簡易レポート形式"
+  
+  # 即時フロー
+  instant:
+    name: "Instant Summary Flow"
+    description: "即時要約のみ"
+    phases:
+      - "phase_0"       # Project Initialization（必須）
+      - "phase_2_quick" # Quick Search（3ソース限定）
+      - "phase_4_summary" # Summary Only（要約のみ）
+    skip_phases:
+      - "phase_1"  # Purpose Discovery をスキップ
+      - "phase_3"  # Framework Analysis をスキップ
+    estimated_time: "30分〜1時間"
+    quality_level: "低"
+    limitations:
+      - "目的探索なし（ユーザーの言葉通りに調査）"
+      - "3ソース限定"
+      - "フレームワーク分析なし"
+      - "財務分析なし"
+      - "要約形式のみ（提言書なし）"
+    warning: |
+      ⚠️ **注意**: 即時フローは品質が限定的です。
+      重要な意思決定には、後日フルリサーチを推奨します。
+
+# ========================================
+# フェーズ簡略版定義
+# ========================================
+lite_phases:
+  phase_1_lite:
+    name: "Purpose Discovery Lite"
+    description: "簡略化された目的探索"
+    max_questions: 2
+    required_info:
+      - "基本目的"
+      - "期待する成果形式"
+    skip:
+      - "5 Whys分析"
+      - "JTBD分析"
+      - "詳細ペルソナ収集"
+  
+  phase_2_quick:
+    name: "Quick Search"
+    description: "限定的な情報収集"
+    max_sources: 3
+    search_depth: "shallow"
+    skip:
+      - "ソース批判的評価"
+      - "日英並列検索"
+      - "アーカイブフォールバック"
+  
+  phase_4_lite:
+    name: "Report Writing Lite"
+    description: "簡略化されたレポート"
+    template: "quick-summary-template.md"
+    sections:
+      - "要約（300字以内）"
+      - "主要な発見（3点）"
+      - "推奨アクション（1-2点）"
+      - "参考ソース"
+    skip:
+      - "エグゼクティブサマリー"
+      - "詳細分析"
+      - "財務予測"
+      - "リスク分析"
+  
+  phase_4_summary:
+    name: "Summary Only"
+    description: "要約のみの出力"
+    template: "instant-summary-template.md"
+    sections:
+      - "結論（100字以内）"
+      - "根拠（3点）"
+      - "ソースURL"
+    max_length: 500  # 文字
+
+# ========================================
+# トリアージ確認プロンプト
+# ========================================
+triage_prompts:
+  # 緊急度確認
+  confirm_urgency:
+    trigger: "urgency_detected"
+    prompt: |
+      ⏰ **緊急度の確認**
+      
+      「{detected_keyword}」というキーワードから、{detected_level}のリサーチと判断しました。
+      
+      | フロー | 所要時間 | 品質 | 制限事項 |
+      |--------|---------|------|---------|
+      | 🟢 通常 | 数時間〜 | 高 | なし |
+      | 🟡 緊急 | 2-4時間 | 中 | 分析簡略化 |
+      | 🔴 超緊急 | 30分〜1時間 | 低 | 要約のみ |
+      
+      どのフローで進めますか？（通常/緊急/超緊急）
+  
+  # 緊急フロー警告
+  quick_flow_warning:
+    trigger: "quick_flow_selected"
+    prompt: |
+      ⚠️ **クイックフロー選択**
+      
+      以下の制限があります：
+      - フレームワーク分析（SWOT等）はスキップ
+      - 財務分析はスキップ
+      - 簡易レポート形式
+      
+      続行しますか？
+  
+  # 即時フロー警告
+  instant_flow_warning:
+    trigger: "instant_flow_selected"
+    prompt: |
+      🔴 **超緊急フロー選択**
+      
+      以下の制限があります：
+      - 目的探索なし（ご依頼通りに調査）
+      - 3ソース限定
+      - 要約形式のみ
+      - **重要な意思決定には不向き**
+      
+      後日、フルリサーチを推奨します。続行しますか？
+
+# ========================================
+# トリアージ後のアクション
+# ========================================
+post_triage_actions:
+  - action: "log_triage_decision"
+    log_to: "manifest.yaml:workflow.triage"
+    fields:
+      - "detected_urgency"
+      - "confirmed_urgency"
+      - "selected_workflow_path"
+      - "estimated_completion"
+  
+  - action: "adjust_quality_gates"
+    description: "緊急度に応じて品質ゲートを調整"
+    adjustments:
+      URGENT:
+        gate_1_to_2:
+          required_conditions:
+            - "G1-2-001"  # 真の目的のみ（対話回数緩和）
+        gate_2_to_3:
+          required_conditions:
+            - "G2-3-001"  # 3ソースのみ
+      CRITICAL:
+        skip_gates:
+          - "gate_1_to_2"
+          - "gate_3_to_4"

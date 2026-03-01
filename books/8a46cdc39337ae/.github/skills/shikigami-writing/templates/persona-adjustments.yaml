@@ -1,0 +1,454 @@
+# Persona Adjustments
+# v1.0.0 - REQ-TALK-001-03
+#
+# ペルソナ別トーク調整ルール定義
+
+schema_version: "1.0"
+name: persona-adjustments
+description: |
+  トークスクリプトをペルソナ（経営層、IT部門、現場担当）に応じて
+  自動調整するためのルール定義。トーン、用語レベル、強調ポイントを制御。
+
+# ============================================
+# ペルソナ定義
+# ============================================
+personas:
+  executive:
+    id: "executive"
+    name: "経営層"
+    description: "CEO, CIO, CFO, 役員クラス"
+    aliases:
+      - "経営者"
+      - "役員"
+      - "エグゼクティブ"
+      - "意思決定者"
+      - "オーナー"
+    
+    characteristics:
+      decision_style: "ROI重視、戦略的視点"
+      time_constraint: "非常に多忙、短時間で要点を求める"
+      information_preference: "ハイレベルサマリー、定量データ"
+      risk_tolerance: "中〜低（実績・信頼性重視）"
+    
+    communication:
+      tone:
+        formality: "very_high"
+        directness: "high"
+        emotion: "low"
+      
+      vocabulary:
+        level: "executive"
+        preferred:
+          - "ROI"
+          - "戦略的"
+          - "競争優位"
+          - "成長"
+          - "効率化"
+          - "リスク"
+          - "コスト削減"
+          - "市場シェア"
+        avoid:
+          - "技術仕様"
+          - "API"
+          - "プロトコル"
+          - "実装詳細"
+          - "専門的な略語（未説明）"
+      
+      emphasis:
+        primary:
+          - "投資対効果（ROI）"
+          - "競合との差別化"
+          - "導入実績・信頼性"
+          - "経営課題との紐付け"
+        secondary:
+          - "長期的なパートナーシップ"
+          - "リスク低減"
+          - "ブランド価値"
+      
+      avoid:
+        - "技術的な詳細説明"
+        - "長時間の説明"
+        - "不確実な表現（〜かもしれない）"
+        - "下位レイヤーの話題"
+    
+    script_adjustments:
+      acknowledge:
+        max_length: 30  # 文字数
+        style: "簡潔・直接的"
+      counter:
+        max_length: 100
+        style: "数値・データ中心"
+        include: ["ROI", "競合比較", "市場動向"]
+      evidence:
+        max_length: 80
+        style: "実績・第三者評価"
+        include: ["導入企業名（許可あれば）", "定量効果"]
+
+  it_department:
+    id: "it_department"
+    name: "IT部門"
+    description: "情報システム部長、IT管理者、技術責任者"
+    aliases:
+      - "IT部門長"
+      - "情シス"
+      - "技術担当"
+      - "システム管理者"
+      - "インフラ担当"
+    
+    characteristics:
+      decision_style: "技術的妥当性、運用負荷、セキュリティ重視"
+      time_constraint: "中程度（詳細確認の時間は確保）"
+      information_preference: "技術仕様、連携性、セキュリティ"
+      risk_tolerance: "低（安定性・セキュリティ最優先）"
+    
+    communication:
+      tone:
+        formality: "medium"
+        directness: "high"
+        emotion: "low"
+      
+      vocabulary:
+        level: "technical"
+        preferred:
+          - "API"
+          - "連携"
+          - "セキュリティ"
+          - "SLA"
+          - "可用性"
+          - "バックアップ"
+          - "移行"
+          - "認証"
+          - "暗号化"
+        encourage:
+          - "技術的な詳細"
+          - "アーキテクチャ説明"
+          - "ベンチマーク"
+      
+      emphasis:
+        primary:
+          - "技術仕様・アーキテクチャ"
+          - "セキュリティ・コンプライアンス"
+          - "既存システムとの連携性"
+          - "運用負荷・管理のしやすさ"
+        secondary:
+          - "移行計画・サポート"
+          - "SLA・可用性"
+          - "ベンダーサポート体制"
+      
+      avoid:
+        - "曖昧な技術説明"
+        - "過度なマーケティング表現"
+        - "ビジネス用語のみでの説明"
+    
+    script_adjustments:
+      acknowledge:
+        max_length: 50
+        style: "技術的な懸念を正確に理解"
+      counter:
+        max_length: 150
+        style: "技術仕様・データ中心"
+        include: ["API仕様", "セキュリティ認証", "SLA"]
+      evidence:
+        max_length: 120
+        style: "技術検証結果、ベンチマーク"
+        include: ["技術資料URL", "検証レポート"]
+
+  end_user:
+    id: "end_user"
+    name: "現場担当/エンドユーザー"
+    description: "実際に製品を使用する一般社員、部門担当者"
+    aliases:
+      - "現場"
+      - "ユーザー"
+      - "一般社員"
+      - "部門担当"
+      - "エンドユーザー"
+    
+    characteristics:
+      decision_style: "使いやすさ、業務効率化、学習コスト重視"
+      time_constraint: "日常業務の合間"
+      information_preference: "具体的な使い方、メリット"
+      risk_tolerance: "中（変化への抵抗感あり）"
+    
+    communication:
+      tone:
+        formality: "low"
+        directness: "medium"
+        emotion: "medium"
+      
+      vocabulary:
+        level: "general"
+        preferred:
+          - "使いやすい"
+          - "便利"
+          - "時間短縮"
+          - "簡単"
+          - "サポート"
+          - "トレーニング"
+          - "画面"
+          - "操作"
+        avoid:
+          - "専門用語"
+          - "略語（未説明）"
+          - "技術的な詳細"
+      
+      emphasis:
+        primary:
+          - "使いやすさ・UI"
+          - "日常業務での具体的メリット"
+          - "トレーニング・サポート"
+          - "移行の負担軽減"
+        secondary:
+          - "同僚の評判・口コミ"
+          - "困ったときの相談先"
+          - "段階的な学習"
+      
+      avoid:
+        - "難しい用語"
+        - "抽象的な説明"
+        - "数字の羅列"
+    
+    script_adjustments:
+      acknowledge:
+        max_length: 60
+        style: "共感・親しみやすい"
+      counter:
+        max_length: 100
+        style: "具体例・ストーリー中心"
+        include: ["使用シーン", "ビフォーアフター"]
+      evidence:
+        max_length: 80
+        style: "ユーザーの声、体験談"
+        include: ["同じ立場の人の声", "操作デモ"]
+
+  procurement:
+    id: "procurement"
+    name: "調達/購買部門"
+    description: "調達担当、購買マネージャー、契約担当"
+    aliases:
+      - "購買"
+      - "調達"
+      - "契約担当"
+      - "バイヤー"
+    
+    characteristics:
+      decision_style: "コスト、契約条件、納期重視"
+      time_constraint: "中程度"
+      information_preference: "価格、契約条件、納品スケジュール"
+      risk_tolerance: "低（契約リスク回避）"
+    
+    communication:
+      tone:
+        formality: "high"
+        directness: "very_high"
+        emotion: "low"
+      
+      vocabulary:
+        level: "business"
+        preferred:
+          - "価格"
+          - "契約"
+          - "納期"
+          - "保証"
+          - "SLA"
+          - "支払条件"
+          - "ボリュームディスカウント"
+        avoid:
+          - "技術詳細"
+          - "曖昧な価格表現"
+      
+      emphasis:
+        primary:
+          - "価格・コスト構造"
+          - "契約条件"
+          - "納品スケジュール"
+          - "保証・サポート条件"
+        secondary:
+          - "ベンダー信頼性"
+          - "過去の取引実績"
+      
+      avoid:
+        - "価格の曖昧さ"
+        - "契約条件の不明確さ"
+    
+    script_adjustments:
+      acknowledge:
+        max_length: 40
+        style: "ビジネスライク"
+      counter:
+        max_length: 100
+        style: "数値・条件明確化"
+        include: ["価格表", "契約条件"]
+      evidence:
+        max_length: 80
+        style: "取引実績、財務安定性"
+        include: ["取引先リスト", "財務諸表（必要に応じ）"]
+
+# ============================================
+# 業界別追加調整
+# ============================================
+industry_modifiers:
+  education:
+    vocabulary_additions:
+      - "LMS"
+      - "教育DX"
+      - "学生"
+      - "教職員"
+      - "入学者"
+    emphasis_additions:
+      executive:
+        - "教育の質向上"
+        - "大学ランキング"
+        - "学生満足度"
+      it_department:
+        - "LMS連携"
+        - "学認（Shibboleth）"
+        - "アカデミックプラン"
+    tone_adjustment:
+      formality: -1  # やや緩和
+  
+  manufacturing:
+    vocabulary_additions:
+      - "生産性"
+      - "工場"
+      - "ライン"
+      - "OT"
+      - "PLC"
+    emphasis_additions:
+      executive:
+        - "製造効率"
+        - "不良率削減"
+        - "DX推進"
+      it_department:
+        - "OT/IT統合"
+        - "ERP連携"
+        - "オフライン対応"
+    tone_adjustment:
+      formality: 0  # 変更なし
+  
+  finance:
+    vocabulary_additions:
+      - "コンプライアンス"
+      - "FISC"
+      - "監査"
+      - "規制"
+    emphasis_additions:
+      executive:
+        - "規制対応"
+        - "リスク管理"
+        - "顧客信頼"
+      it_department:
+        - "FISC安全対策基準"
+        - "監査ログ"
+        - "DR/BCP"
+    tone_adjustment:
+      formality: +1  # よりフォーマル
+
+# ============================================
+# 調整適用ルール
+# ============================================
+adjustment_rules:
+  # ペルソナ検出
+  persona_detection:
+    priority:
+      1: "explicit_input"       # ユーザーが明示指定
+      2: "title_inference"      # 役職名から推論
+      3: "context_inference"    # 会話コンテキストから推論
+      4: "default_executive"    # デフォルトは経営層想定
+    
+    title_mapping:
+      executive:
+        - "社長"
+        - "CEO"
+        - "CIO"
+        - "CFO"
+        - "COO"
+        - "役員"
+        - "取締役"
+        - "本部長"
+        - "事業部長"
+      it_department:
+        - "情報システム部長"
+        - "IT部長"
+        - "システム管理者"
+        - "インフラ担当"
+        - "セキュリティ担当"
+        - "技術部長"
+      end_user:
+        - "担当者"
+        - "課長"
+        - "係長"
+        - "主任"
+        - "一般社員"
+      procurement:
+        - "調達部長"
+        - "購買担当"
+        - "契約担当"
+        - "バイヤー"
+  
+  # 文体変換
+  tone_conversion:
+    very_high:
+      endings: ["です", "ます", "ございます"]
+      honorifics: true
+      sentence_structure: "formal"
+    high:
+      endings: ["です", "ます"]
+      honorifics: true
+      sentence_structure: "polite"
+    medium:
+      endings: ["です", "ます"]
+      honorifics: false
+      sentence_structure: "standard"
+    low:
+      endings: ["です", "ね", "よ"]
+      honorifics: false
+      sentence_structure: "casual"
+  
+  # 長さ調整
+  length_adjustment:
+    executive:
+      max_total_words: 200
+      bullet_points: true
+    it_department:
+      max_total_words: 400
+      technical_appendix: true
+    end_user:
+      max_total_words: 250
+      examples: true
+    procurement:
+      max_total_words: 300
+      price_table: true
+
+# ============================================
+# 出力フォーマット
+# ============================================
+output_format:
+  script_template: |
+    ## 反論対応トークスクリプト
+    
+    **反論**: {{objection}}
+    **タイプ**: {{objection_type}}
+    **ペルソナ**: {{persona.name}}
+    
+    ---
+    
+    ### Step 1: 共感・受容 ({{acknowledge.time}})
+    > {{acknowledge.text}}
+    
+    ### Step 2: リフレーミング ({{counter.time}})
+    > {{counter.text}}
+    
+    📊 **エビデンス**: {{evidence.materials}}
+    
+    ### Step 3: 次のステップ提案 ({{next_step.time}})
+    > {{next_step.text}}
+    
+    ✅ **期待する成果**: {{expected_outcome}}
+    
+    ---
+    
+    ### ペルソナ別調整情報
+    - **トーン**: {{persona.tone}}
+    - **強調ポイント**: {{persona.emphasis}}
+    - **避けるべき表現**: {{persona.avoid}}

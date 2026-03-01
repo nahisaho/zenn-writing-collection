@@ -1,0 +1,182 @@
+# financial_5year_plan.yaml
+# v1.16.0 - 5年財務計画テンプレート
+# REQ-FW-FIN-001 実装
+#
+# 用途: 提言書の財務計画セクション生成用テンプレート
+# 参照元: shikigami-consulting-framework/SKILL.md, shikigami-financial-analysis.prompt.md
+
+version: "1.16.0"
+
+# テンプレート情報
+template:
+  name: "5年財務計画テンプレート"
+  name_en: "5-Year Financial Plan Template"
+  description: "投資提案・事業計画の財務分析用テンプレート"
+  applicable_types:
+    - "IMMEDIATE_APPROVAL"
+    - "STAGED_APPROVAL"
+    - "BUDGET_APPROVAL"
+
+# 5年財務計画構造
+five_year_plan:
+  # 年度別財務データ
+  years:
+    - year: 1
+      label: "1年目"
+      fields:
+        revenue: 
+          label: "売上"
+          unit: "万円"
+          required: true
+        cost:
+          label: "コスト（運用費）"
+          unit: "万円"
+          required: true
+        investment:
+          label: "投資額"
+          unit: "万円"
+          required: true
+        profit:
+          label: "利益"
+          unit: "万円"
+          formula: "revenue - cost - investment"
+        cumulative_profit:
+          label: "累計利益"
+          unit: "万円"
+          formula: "sum(profit[0:year])"
+    - year: 2
+      label: "2年目"
+      fields:
+        revenue: { label: "売上", unit: "万円", required: true }
+        cost: { label: "コスト", unit: "万円", required: true }
+        investment: { label: "投資額", unit: "万円", required: false, default: 0 }
+        profit: { label: "利益", unit: "万円", formula: "revenue - cost - investment" }
+        cumulative_profit: { label: "累計利益", unit: "万円", formula: "sum(profit[0:year])" }
+    - year: 3
+      label: "3年目"
+      fields:
+        revenue: { label: "売上", unit: "万円", required: true }
+        cost: { label: "コスト", unit: "万円", required: true }
+        investment: { label: "投資額", unit: "万円", required: false, default: 0 }
+        profit: { label: "利益", unit: "万円", formula: "revenue - cost - investment" }
+        cumulative_profit: { label: "累計利益", unit: "万円", formula: "sum(profit[0:year])" }
+    - year: 4
+      label: "4年目"
+      fields:
+        revenue: { label: "売上", unit: "万円", required: true }
+        cost: { label: "コスト", unit: "万円", required: true }
+        investment: { label: "投資額", unit: "万円", required: false, default: 0 }
+        profit: { label: "利益", unit: "万円", formula: "revenue - cost - investment" }
+        cumulative_profit: { label: "累計利益", unit: "万円", formula: "sum(profit[0:year])" }
+    - year: 5
+      label: "5年目"
+      fields:
+        revenue: { label: "売上", unit: "万円", required: true }
+        cost: { label: "コスト", unit: "万円", required: true }
+        investment: { label: "投資額", unit: "万円", required: false, default: 0 }
+        profit: { label: "利益", unit: "万円", formula: "revenue - cost - investment" }
+        cumulative_profit: { label: "累計利益", unit: "万円", formula: "sum(profit[0:year])" }
+  
+  # 集計項目
+  totals:
+    total_investment:
+      label: "総投資額"
+      formula: "sum(investment[all_years])"
+    total_revenue:
+      label: "総売上"
+      formula: "sum(revenue[all_years])"
+    total_profit:
+      label: "総利益"
+      formula: "sum(profit[all_years])"
+    roi:
+      label: "ROI"
+      unit: "%"
+      formula: "(total_profit / total_investment) * 100"
+    payback_period:
+      label: "投資回収期間"
+      unit: "年"
+      formula: "find_year(cumulative_profit >= 0)"
+
+# 3シナリオ分析構造
+scenarios:
+  pessimistic:
+    label: "悲観シナリオ"
+    label_en: "Pessimistic"
+    default_probability: 0.2
+    description: "市場環境悪化、競合参入増加を想定"
+    adjustment_factors:
+      revenue_multiplier: 0.7
+      cost_multiplier: 1.1
+  
+  base:
+    label: "ベースシナリオ"
+    label_en: "Base"
+    default_probability: 0.6
+    description: "現状の市場環境継続を想定"
+    adjustment_factors:
+      revenue_multiplier: 1.0
+      cost_multiplier: 1.0
+  
+  optimistic:
+    label: "楽観シナリオ"
+    label_en: "Optimistic"
+    default_probability: 0.2
+    description: "市場拡大、競合優位性確立を想定"
+    adjustment_factors:
+      revenue_multiplier: 1.3
+      cost_multiplier: 0.95
+
+# 期待値計算
+expected_value:
+  formula: "sum(scenario.probability * scenario.value)"
+  fields:
+    - "revenue"
+    - "profit"
+    - "roi"
+
+# 出力フォーマット
+output_format:
+  markdown_table: |
+    ## 5年財務計画
+    
+    ### {scenario_name}シナリオ（確率: {probability}%）
+    
+    | 年度 | 売上 | コスト | 投資 | 利益 | 累計利益 |
+    |------|------|--------|------|------|----------|
+    {year_rows}
+    
+    | **合計** | {total_revenue} | {total_cost} | {total_investment} | {total_profit} | - |
+    
+    - **ROI**: {roi}%
+    - **投資回収期間**: {payback_period}年
+  
+  scenarios_comparison: |
+    ## 3シナリオ比較
+    
+    | シナリオ | 確率 | 5年売上 | 5年利益 | ROI | 回収期間 |
+    |----------|------|---------|---------|-----|----------|
+    | 悲観 | {pessimistic.probability}% | {pessimistic.revenue} | {pessimistic.profit} | {pessimistic.roi}% | {pessimistic.payback}年 |
+    | ベース | {base.probability}% | {base.revenue} | {base.profit} | {base.roi}% | {base.payback}年 |
+    | 楽観 | {optimistic.probability}% | {optimistic.revenue} | {optimistic.profit} | {optimistic.roi}% | {optimistic.payback}年 |
+    
+    ### 期待値
+    - **期待売上**: {expected.revenue}
+    - **期待利益**: {expected.profit}
+    - **期待ROI**: {expected.roi}%
+
+# 検証ルール
+validation:
+  rules:
+    - id: "VAL-001"
+      name: "確率合計チェック"
+      condition: "sum(scenario.probability) == 1.0"
+      message: "シナリオ確率の合計が100%になりません"
+    - id: "VAL-002"
+      name: "シナリオ順序チェック"
+      condition: "pessimistic.roi < base.roi < optimistic.roi"
+      message: "シナリオ間のROI順序が不正です（悲観<ベース<楽観）"
+    - id: "VAL-003"
+      name: "投資回収チェック"
+      condition: "base.payback_period <= 5"
+      message: "ベースシナリオで5年以内に投資回収できません"
+      severity: "warning"

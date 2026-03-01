@@ -1,0 +1,189 @@
+# quality-check-schema.yaml
+# v1.16.0 - 品質チェック結果スキーマ
+# REQ-QA-AUTO-001, REQ-QA-AUTO-002 実装
+#
+# 用途: Phase 4 完了時に自動実行される品質チェックの定義とスキーマ
+# 参照元: shikigami-writing/SKILL.md
+
+version: "1.16.0"
+
+# 品質チェック定義
+quality_checks:
+
+  # 数値整合性チェック（REQ-QA-AUTO-001）
+  consistency_check:
+    name: "数値整合性チェック"
+    name_en: "Numerical Consistency Check"
+    description: "レポート内の数値データの整合性を検証"
+    prompt: "shikigami-consistency-check.prompt.md"
+    
+    # 発動条件
+    trigger:
+      condition: "numerical_data_present"
+      detection_rules:
+        - type: "table_with_numbers"
+          description: "数値を含むテーブルが存在"
+        - type: "financial_section"
+          keywords: ["売上", "投資", "ROI", "コスト", "revenue", "investment", "cost"]
+        - type: "market_data"
+          keywords: ["TAM", "SAM", "SOM", "CAGR", "市場規模", "成長率"]
+    
+    # チェック項目
+    check_items:
+      financial_tables:
+        - id: "FIN-001"
+          name: "合計行の計算精度"
+          description: "テーブルの合計行が各行の合計と一致しているか"
+          severity: "error"
+        - id: "FIN-002"
+          name: "前年比成長率の計算"
+          description: "成長率が前年と当年の数値から正しく計算されているか"
+          severity: "error"
+        - id: "FIN-003"
+          name: "複数テーブル間の同一指標の一致"
+          description: "同じ指標が複数箇所で異なる値になっていないか"
+          severity: "error"
+      
+      market_data:
+        - id: "MKT-001"
+          name: "市場規模の単位統一"
+          description: "市場規模が同一単位（億円、million USDなど）で統一されているか"
+          severity: "warning"
+        - id: "MKT-002"
+          name: "CAGRと年度別数値の整合性"
+          description: "CAGRと各年度の数値から逆算した成長率が一致するか"
+          severity: "warning"
+        - id: "MKT-003"
+          name: "TAM/SAM/SOMの階層関係"
+          description: "TAM > SAM > SOM の関係が保たれているか"
+          severity: "error"
+      
+      roi_analysis:
+        - id: "ROI-001"
+          name: "ROI計算式と投資額・リターンの整合性"
+          description: "ROI = (リターン - 投資) / 投資 × 100 で計算されているか"
+          severity: "error"
+        - id: "ROI-002"
+          name: "投資回収期間と累計利益の整合性"
+          description: "回収期間時点で累計利益がプラスになっているか"
+          severity: "error"
+        - id: "ROI-003"
+          name: "3シナリオ間の数値関係"
+          description: "悲観 < ベース < 楽観 の関係が保たれているか"
+          severity: "error"
+    
+    # 出力スキーマ
+    output_schema:
+      executed_at: "datetime"
+      status: "enum[passed, warning, failed]"
+      summary:
+        total_checks: "number"
+        passed: "number"
+        warnings: "number"
+        errors: "number"
+      issues:
+        - type: "string"
+          check_id: "string"
+          location: "string"
+          expected: "string"
+          actual: "string"
+          severity: "enum[error, warning, info]"
+          suggestion: "string"
+
+  # サマリー↔本文整合性検証（REQ-QA-AUTO-002）
+  executive_sync:
+    name: "サマリー↔本文整合性検証"
+    name_en: "Executive Summary Sync Verification"
+    description: "エグゼクティブサマリーと本文の整合性を検証"
+    prompt: "shikigami-executive-sync.prompt.md"
+    
+    # 発動条件
+    trigger:
+      condition: "executive_summary_present"
+      detection_rules:
+        - type: "section_header"
+          patterns:
+            - "エグゼクティブサマリー"
+            - "Executive Summary"
+            - "サマリー"
+            - "概要"
+            - "要約"
+    
+    # チェック項目
+    check_items:
+      numerical_consistency:
+        - id: "SYNC-001"
+          name: "サマリーの数値と本文テーブルの数値一致"
+          description: "サマリーに記載された数値が本文のテーブルと一致しているか"
+          severity: "error"
+        - id: "SYNC-002"
+          name: "サマリーの結論と本文の根拠の対応"
+          description: "サマリーの結論が本文で裏付けられているか"
+          severity: "warning"
+      
+      content_coverage:
+        - id: "COV-001"
+          name: "本文の主要提言がサマリーに含まれている"
+          description: "本文の提言セクションの内容がサマリーに反映されているか"
+          severity: "warning"
+        - id: "COV-002"
+          name: "本文のリスク項目がサマリーに含まれている"
+          description: "主要リスクがサマリーで言及されているか"
+          severity: "info"
+        - id: "COV-003"
+          name: "本文のROI情報がサマリーに含まれている"
+          description: "ROI/投資回収期間がサマリーに含まれているか"
+          severity: "warning"
+      
+      tone_consistency:
+        - id: "TONE-001"
+          name: "サマリーと本文のトーン一貫性"
+          description: "ポジティブ/ネガティブなトーンが一貫しているか"
+          severity: "info"
+        - id: "TONE-002"
+          name: "サマリーと本文の時制一貫性"
+          description: "未来形/現在形の使い方が一貫しているか"
+          severity: "info"
+    
+    # 出力スキーマ
+    output_schema:
+      executed_at: "datetime"
+      status: "enum[passed, warning, failed]"
+      summary:
+        total_checks: "number"
+        passed: "number"
+        warnings: "number"
+        errors: "number"
+      issues:
+        - type: "string"
+          check_id: "string"
+          location: "string"
+          expected: "string"
+          actual: "string"
+          severity: "enum[error, warning, info]"
+          suggestion: "string"
+
+# 品質チェック実行設定
+execution:
+  # 自動実行タイミング
+  auto_trigger: "phase_4_completion"
+  
+  # スキップオプション
+  skip_option: "--skip-consistency-check"
+  
+  # 並列実行
+  parallel_execution: true
+  
+  # タイムアウト（秒）
+  timeout: 60
+  
+  # 失敗時の動作
+  on_failure:
+    action: "warn_and_continue"  # warn_and_continue | block | auto_fix
+    show_suggestions: true
+    require_acknowledgment: false
+
+# manifest.yaml への出力先
+output:
+  path: "report_writing.quality_checks"
+  include_timestamp: true

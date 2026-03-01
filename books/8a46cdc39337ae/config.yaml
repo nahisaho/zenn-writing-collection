@@ -1,0 +1,20 @@
+title: "はじめての AI for Science (入門編)"
+summary: "科学研究におけるAI活用の入門書。AI for Scienceの基本概念から、それを支える技術の進化、科学特有のAI手法、GraphRAG、材料探索、創薬、気象予測などの応用事例、Pythonハンズオン、未来と倫理まで、研究者・エンジニア向けにわかりやすく解説します。"
+topics: ["ai", "science", "machinelearning", "python", "research"]
+published: false
+price: 0 # 有料の場合200〜5000
+# 本に含めるチャプターを順番に並べましょう
+chapters:
+  - "introduction"
+  - "chapter1-what-is-ai-for-science"
+  - "chapter2-doe-report-and-development"
+  - "chapter3-technology-evolution"
+  - "chapter4-ai-methods-for-science"
+  - "chapter5-graphrag"
+  - "chapter6-molecular-simulation"
+  - "chapter7-materials-discovery"
+  - "chapter8-drug-discovery"
+  - "chapter9-weather-and-climate"
+  - "chapter10-hands-on"
+  - "chapter11-future-and-ethics"
+  - "appendix"

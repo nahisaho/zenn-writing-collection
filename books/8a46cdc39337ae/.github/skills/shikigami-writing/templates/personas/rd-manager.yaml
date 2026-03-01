@@ -1,0 +1,162 @@
+# R&D Manager Persona Template
+# v1.9.0 - REQ-SALES-001-04
+#
+# 研究開発部門マネージャー向けペルソナ定義
+
+schema_version: "1.0"
+persona_id: rd-manager
+name: R&D部門マネージャー
+
+# 基本属性
+profile:
+  role: "研究開発部門の部長・課長クラス"
+  typical_titles:
+    - "R&D部長"
+    - "技術開発課長"
+    - "研究所長"
+    - "イノベーション推進室長"
+  industry_context:
+    - "製造業"
+    - "自動車部品"
+    - "電機・電子"
+    - "素材・化学"
+
+# 意思決定特性
+decision_characteristics:
+  style: "data_driven"
+  domain_knowledge: "expert"
+  
+  priorities:
+    - id: technical_feasibility
+      name: "技術的実現可能性"
+      weight: 0.30
+      description: "技術的に実現可能か、自社技術で対応できるか"
+    - id: timeline
+      name: "開発スケジュール"
+      weight: 0.25
+      description: "開発期間は現実的か、マイルストーンは達成可能か"
+    - id: resource_requirement
+      name: "必要リソース"
+      weight: 0.20
+      description: "人員、設備、予算は確保可能か"
+    - id: risk_assessment
+      name: "技術リスク"
+      weight: 0.15
+      description: "技術的な不確実性、失敗リスクは許容範囲か"
+    - id: strategic_alignment
+      name: "技術戦略整合性"
+      weight: 0.10
+      description: "自社の技術ロードマップと整合するか"
+
+# 反論パターン
+common_objections:
+  - type: "technical_doubt"
+    pattern: "本当に技術的に実現可能なのか"
+    root_cause: "技術的裏付けの不足"
+    frequency: "very_high"
+    
+  - type: "resource_concern"
+    pattern: "既存プロジェクトで手一杯"
+    root_cause: "リソース競合への懸念"
+    frequency: "high"
+    
+  - type: "timeline_skepticism"
+    pattern: "このスケジュールは無理がある"
+    root_cause: "過去の遅延経験"
+    frequency: "high"
+    
+  - type: "not_invented_here"
+    pattern: "なぜ外部に頼る必要があるのか"
+    root_cause: "自社技術へのプライド"
+    frequency: "medium"
+    
+  - type: "risk_aversion"
+    pattern: "失敗したときの責任は誰が取るのか"
+    root_cause: "過去の失敗経験、組織的プレッシャー"
+    frequency: "medium"
+
+# コミュニケーション設定
+communication:
+  vocabulary:
+    preferred:
+      - "技術仕様"
+      - "PoC（概念実証）"
+      - "実証データ"
+      - "技術ロードマップ"
+      - "TRL（技術成熟度レベル）"
+      - "スケーラビリティ"
+    avoid:
+      - "営業トーク"
+      - "曖昧な表現"
+      - "根拠なき楽観"
+  
+  formality: "semi_formal"
+  
+  preferred_evidence:
+    - "技術検証データ"
+    - "プロトタイプ実演"
+    - "特許・論文"
+    - "類似案件の技術評価"
+    - "ベンチマーク結果"
+  
+  meeting_preferences:
+    - "技術デモを伴う説明"
+    - "詳細な技術Q&A時間"
+    - "技術者同士の直接対話"
+
+# プレイブック生成設定
+playbook_settings:
+  structure_emphasis:
+    - "技術的実現性の詳細説明"
+    - "開発フェーズと各段階の成果物"
+    - "リスク軽減策の具体化"
+    - "技術サポート体制"
+  
+  content_priorities:
+    executive_summary:
+      focus: "技術的価値と実現可能性"
+      length: "medium"
+    
+    main_body:
+      focus: "技術仕様と検証データ"
+      include:
+        - "技術アーキテクチャ図"
+        - "性能ベンチマーク"
+        - "技術リスク分析"
+    
+    appendix:
+      include:
+        - "詳細技術仕様書"
+        - "PoC計画書"
+        - "技術Q&A集"
+
+# トークスクリプト生成設定
+talk_script_settings:
+  tone: "professional_technical"
+  
+  opening_approach:
+    style: "technical_challenge"
+    example: "御社の〇〇における技術課題について、具体的な解決アプローチをご提案させてください"
+  
+  objection_handling:
+    technical_doubt:
+      strategy: "demonstrate_with_data"
+      example_response: |
+        ご懸念はごもっともです。実際に、類似条件での検証データがあります。
+        [具体的データ提示]
+        技術的な詳細についてはPoC計画書もご用意しておりますので、
+        ぜひ技術チームの方々とも詳細を詰めさせてください。
+    
+    resource_concern:
+      strategy: "phased_approach"
+      example_response: |
+        おっしゃる通り、リソース制約は重要な検討事項です。
+        だからこそ、まずは最小スコープでのPoCから始めることをご提案します。
+        既存プロジェクトへの影響を最小化しながら、技術検証を進められます。
+    
+    not_invented_here:
+      strategy: "complement_internal"
+      example_response: |
+        御社の技術力は十分に認識しております。
+        我々の役割は御社技術を「置き換える」のではなく、
+        「補完する」ことで開発スピードを加速することにあります。

@@ -1,0 +1,164 @@
+# Procurement Manager Persona Template
+# v1.9.0 - REQ-SALES-001-04
+#
+# 調達・購買部門マネージャー向けペルソナ定義
+
+schema_version: "1.0"
+persona_id: procurement-manager
+name: 調達・購買部門マネージャー
+
+# 基本属性
+profile:
+  role: "調達・購買部門の部長・課長クラス"
+  typical_titles:
+    - "調達部長"
+    - "購買課長"
+    - "サプライチェーン管理部長"
+    - "SCM推進室長"
+  industry_context:
+    - "製造業"
+    - "自動車"
+    - "電機・電子"
+    - "食品・日用品"
+
+# 意思決定特性
+decision_characteristics:
+  style: "data_driven"
+  domain_knowledge: "intermediate"
+  
+  priorities:
+    - id: cost_optimization
+      name: "コスト最適化"
+      weight: 0.30
+      description: "TCO削減、価格競争力、コスト構造改善"
+    - id: supply_stability
+      name: "供給安定性"
+      weight: 0.25
+      description: "供給途絶リスク、BCP対応、マルチソース化"
+    - id: compliance
+      name: "コンプライアンス"
+      weight: 0.20
+      description: "規制対応、サプライヤー監査、ESG要件"
+    - id: quality_assurance
+      name: "品質保証"
+      weight: 0.15
+      description: "サプライヤー品質、検査体制、不良率"
+    - id: delivery_reliability
+      name: "納期遵守"
+      weight: 0.10
+      description: "リードタイム、納期遵守率、フレキシビリティ"
+
+# 反論パターン
+common_objections:
+  - type: "cost_concern"
+    pattern: "価格が高すぎる"
+    root_cause: "予算制約、コスト削減プレッシャー"
+    frequency: "very_high"
+    
+  - type: "existing_supplier"
+    pattern: "既存サプライヤーで十分"
+    root_cause: "変更リスク回避、関係性維持"
+    frequency: "very_high"
+    
+  - type: "switching_cost"
+    pattern: "切り替えコストが大きい"
+    root_cause: "移行の手間、評価工数"
+    frequency: "high"
+    
+  - type: "trust_deficit"
+    pattern: "実績がないので信頼できない"
+    root_cause: "新規サプライヤーへの不安"
+    frequency: "high"
+    
+  - type: "timing_issue"
+    pattern: "今は契約更新時期ではない"
+    root_cause: "契約サイクル、予算サイクル"
+    frequency: "medium"
+
+# コミュニケーション設定
+communication:
+  vocabulary:
+    preferred:
+      - "TCO（総所有コスト）"
+      - "ROI"
+      - "BCP（事業継続計画）"
+      - "マルチソース"
+      - "リードタイム"
+      - "コスト削減率"
+    avoid:
+      - "感情的訴求"
+      - "曖昧なメリット"
+      - "長期的ビジョンのみ"
+  
+  formality: "formal"
+  
+  preferred_evidence:
+    - "コスト比較表"
+    - "TCO分析"
+    - "サプライヤー実績データ"
+    - "導入企業リスト"
+    - "第三者認証"
+  
+  meeting_preferences:
+    - "数値データ中心の説明"
+    - "比較表・見積書の提示"
+    - "導入実績の詳細説明"
+
+# プレイブック生成設定
+playbook_settings:
+  structure_emphasis:
+    - "コスト削減効果の定量化"
+    - "リスク軽減策の具体化"
+    - "導入・移行プロセスの明確化"
+    - "サプライヤーとしての信頼性証明"
+  
+  content_priorities:
+    executive_summary:
+      focus: "コスト削減効果と供給安定性"
+      length: "short"
+    
+    main_body:
+      focus: "定量的メリットと実績"
+      include:
+        - "TCO比較分析"
+        - "導入企業事例"
+        - "サプライヤー評価データ"
+    
+    appendix:
+      include:
+        - "詳細見積書"
+        - "サプライヤー資格証明"
+        - "品質保証体制"
+
+# トークスクリプト生成設定
+talk_script_settings:
+  tone: "professional_business"
+  
+  opening_approach:
+    style: "business_value"
+    example: "御社のサプライチェーン強化において、コスト最適化と供給安定性の両立をご支援できればと考えております"
+  
+  objection_handling:
+    cost_concern:
+      strategy: "tco_analysis"
+      example_response: |
+        単価だけを見ると確かに高く見えますが、
+        TCOで比較すると、3年間で約15%のコスト削減が見込めます。
+        具体的には、[詳細なTCO比較を提示]。
+        また、初期費用を抑えた段階的導入プランもご用意しております。
+    
+    existing_supplier:
+      strategy: "complement_not_replace"
+      example_response: |
+        既存サプライヤー様との関係を否定するつもりはございません。
+        ご提案は「置き換え」ではなく「追加」として、
+        サプライチェーンのリスク分散にお役立ていただく形です。
+        BCP観点でのマルチソース化としてご検討いただけないでしょうか。
+    
+    trust_deficit:
+      strategy: "proof_points"
+      example_response: |
+        ご懸念は当然です。弊社の実績としては、
+        御社と同業界の〇〇社様、△△社様にお取引いただいております。
+        ご希望であれば、実際の導入企業様との情報交換の場を設けることも可能です。
+        また、小規模なトライアルから始めていただく方法もございます。

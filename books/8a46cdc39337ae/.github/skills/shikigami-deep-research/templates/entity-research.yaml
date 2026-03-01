@@ -1,0 +1,70 @@
+# v1.8.0 エンティティリサーチテンプレート
+# REQ-MULTI-001: 並列エンティティ調査
+
+# テンプレート形式の定義
+templateVersion: "1.0.0"
+type: entity-research
+
+# エンティティリストのプレースホルダー
+# 実際の使用時にAIエージェントがYAMLを生成する
+entities:
+  # Example:
+  # - name: "プロテリアル"
+  #   aliases: ["Proterial", "日立金属"]
+  #   type: company
+  #   priority: 1
+  #   queries:
+  #     ja: "プロテリアル ネオジム磁石 製品"
+  #     en: "Proterial neodymium magnet products"
+  #   focus: ["製品ラインナップ", "技術特徴", "市場シェア"]
+
+# 調査観点の標準セット
+standardPerspectives:
+  company:
+    - products    # 製品・サービス
+    - technology  # 技術・特許
+    - financials  # 財務状況
+    - strategy    # 事業戦略
+    - competitors # 競合関係
+    - news        # 最新ニュース
+  
+  technology:
+    - principles  # 原理・仕組み
+    - applications # 用途・応用
+    - trends      # トレンド
+    - players     # 主要プレイヤー
+    - challenges  # 課題・限界
+  
+  material:
+    - properties  # 物性・特性
+    - suppliers   # 供給者
+    - pricing     # 価格動向
+    - alternatives # 代替材料
+    - regulations # 規制・環境
+
+# マージ戦略
+mergeStrategy:
+  # 重複排除の基準
+  deduplication:
+    - url_normalized  # URL正規化後の一致
+    - title_similarity: 0.85  # タイトル類似度閾値
+  
+  # 優先順位付け
+  priority:
+    - recency       # 新しい情報を優先
+    - source_trust  # 信頼できるソースを優先
+    - relevance     # 関連度スコア
+  
+  # クロスリファレンス
+  crossReference:
+    enabled: true
+    threshold: 2  # 2エンティティ以上で言及されたら優先
+
+# 出力形式
+output:
+  format: markdown
+  structure:
+    - entity_summary    # エンティティ別サマリー
+    - cross_analysis    # 横断分析
+    - comparison_matrix # 比較表
+    - unified_findings  # 統合発見事項

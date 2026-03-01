@@ -1,0 +1,211 @@
+# Indicator Extraction Rules for Priority Scoring
+# v1.9.0 - REQ-MULTI-002-03
+#
+# 調査結果テキストから優先度指標を抽出するルール定義
+
+schema_version: "1.0"
+name: indicator-extraction
+description: |
+  エンティティ調査結果（Markdown）から優先度スコアリングに必要な
+  指標を自動抽出するためのルール定義。
+
+# 数値パターン抽出
+numeric_patterns:
+  # 緊急度関連
+  - criterion: urgency
+    indicator: dependency_rate
+    name: "サプライチェーン依存度"
+    patterns:
+      - regex: "(中国|China|特定国)依存度[：:]*\\s*(\\d+(?:\\.\\d+)?)\\s*%"
+        capture_group: 2
+      - regex: "依存率[：:]*\\s*(\\d+(?:\\.\\d+)?)\\s*%"
+        capture_group: 1
+      - regex: "(\\d+(?:\\.\\d+)?)\\s*%[がの]依存"
+        capture_group: 1
+    threshold:
+      high: ">= 80"
+      medium: ">= 50"
+      low: "< 50"
+    unit: "%"
+
+  - criterion: urgency
+    indicator: regulation_deadline
+    name: "規制対応期限"
+    patterns:
+      - regex: "(\\d{4})年[までに施行|から施行|施行予定]"
+        capture_group: 1
+        type: year
+      - regex: "期限[：:]*\\s*(\\d{4})年"
+        capture_group: 1
+        type: year
+    threshold:
+      high: "<= 2027"
+      medium: "<= 2029"
+      low: "> 2029"
+    unit: "年"
+
+  # 機会規模関連
+  - criterion: opportunity_size
+    indicator: market_size
+    name: "市場規模"
+    patterns:
+      - regex: "市場規模[：:]*\\s*(\\d+(?:,\\d{3})*)\\s*(億|万|兆)円"
+        capture_groups: [1, 2]
+        normalize: true
+      - regex: "(\\d+(?:\\.\\d+)?)\\s*(億|兆)円.*市場"
+        capture_groups: [1, 2]
+        normalize: true
+    threshold:
+      high: ">= 1000億円"
+      medium: ">= 100億円"
+      low: "< 100億円"
+    unit: "億円"
+
+  - criterion: opportunity_size
+    indicator: growth_rate
+    name: "成長率"
+    patterns:
+      - regex: "CAGR[：:]*\\s*(\\d+(?:\\.\\d+)?)\\s*%"
+        capture_group: 1
+      - regex: "年平均成長率[：:]*\\s*(\\d+(?:\\.\\d+)?)\\s*%"
+        capture_group: 1
+      - regex: "(\\d+(?:\\.\\d+)?)\\s*%.*成長"
+        capture_group: 1
+    threshold:
+      high: ">= 15"
+      medium: ">= 5"
+      low: "< 5"
+    unit: "%"
+
+# キーワードパターン抽出
+keyword_patterns:
+  # 緊急度関連
+  - criterion: urgency
+    indicator: competitive_status
+    name: "競合対応状況"
+    keywords:
+      high:
+        - "競合が先行"
+        - "競合は既に対応"
+        - "業界標準化済み"
+        - "デファクトスタンダード"
+      medium:
+        - "競合も検討中"
+        - "業界動向注視"
+        - "対応検討段階"
+      low:
+        - "競合も未対応"
+        - "業界全体で様子見"
+        - "先行者優位あり"
+
+  - criterion: urgency
+    indicator: risk_level
+    name: "リスクレベル"
+    keywords:
+      high:
+        - "サプライチェーン断絶"
+        - "供給停止リスク"
+        - "事業継続に影響"
+        - "重大なリスク"
+      medium:
+        - "供給不安定"
+        - "代替検討必要"
+        - "中程度のリスク"
+      low:
+        - "安定供給"
+        - "リスク低"
+        - "影響限定的"
+
+  # アクセス容易性関連
+  - criterion: accessibility
+    indicator: relationship_status
+    name: "関係性ステータス"
+    keywords:
+      high:
+        - "既存顧客"
+        - "継続取引"
+        - "パートナー"
+        - "意思決定者と面識"
+      medium:
+        - "過去取引あり"
+        - "紹介可能"
+        - "部門レベル接点"
+      low:
+        - "新規"
+        - "接点なし"
+        - "新規開拓"
+        - "競合の顧客"
+
+  # 戦略適合性関連
+  - criterion: strategic_fit
+    indicator: capability_match
+    name: "ケイパビリティ適合"
+    keywords:
+      high:
+        - "コア事業"
+        - "専門領域"
+        - "豊富な実績"
+        - "成功事例多数"
+      medium:
+        - "関連領域"
+        - "一定の実績"
+        - "対応可能"
+      low:
+        - "新規領域"
+        - "実績なし"
+        - "スキル不足"
+        - "経験不足"
+
+# 存在確認パターン
+existence_patterns:
+  - criterion: urgency
+    indicator: has_deadline
+    name: "期限の有無"
+    positive_patterns:
+      - "期限"
+      - "〜までに"
+      - "施行予定"
+      - "deadline"
+    negative_patterns:
+      - "期限なし"
+      - "未定"
+    score_if_positive: medium
+    score_if_negative: low
+
+  - criterion: accessibility
+    indicator: has_contact
+    name: "接点の有無"
+    positive_patterns:
+      - "担当者"
+      - "窓口"
+      - "連絡先"
+      - "紹介"
+    negative_patterns:
+      - "接点なし"
+      - "不明"
+    score_if_positive: medium
+    score_if_negative: low
+
+# デフォルト値（抽出失敗時）
+defaults:
+  urgency: medium
+  opportunity_size: medium
+  accessibility: low
+  strategic_fit: medium
+
+# 抽出結果フォーマット
+output:
+  format: structured
+  include_source_text: true
+  include_confidence: true
+  
+  confidence_rules:
+    high:
+      description: "数値が明示的に抽出された"
+      min_matches: 2
+    medium:
+      description: "キーワードが複数マッチ"
+      min_matches: 1
+    low:
+      description: "デフォルト値を使用"
+      min_matches: 0

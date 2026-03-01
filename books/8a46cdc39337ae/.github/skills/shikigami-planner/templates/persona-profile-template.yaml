@@ -1,0 +1,290 @@
+# ペルソナプロファイルテンプレート v1.6.0
+# SHIKIGAMI Purpose Discovery - Persona Collection
+
+version: "1.6.0"
+
+# ペルソナ情報収集の質問フロー
+persona_questions:
+
+  - id: role
+    question:
+      ja: "決裁者の役職は何ですか？（例: 部長、役員、社長、委員会）"
+      en: "What is the decision maker's role? (e.g., Director, Executive, President, Committee)"
+    required: true
+    type: text
+    examples:
+      ja:
+        - "PS事業本部役員"
+        - "経営企画部長"
+        - "社長"
+        - "投資委員会"
+      en:
+        - "VP of Product"
+        - "CFO"
+        - "CEO"
+        - "Investment Committee"
+
+  - id: decision_style
+    question:
+      ja: |
+        決裁者は意思決定の際、何を重視しますか？
+        1. 数字・データ重視（data_driven）
+        2. 直感・ビジョン重視（intuitive）
+        3. 合意・調整重視（consensus_driven）
+        4. バランス型（balanced）
+      en: |
+        What does the decision maker prioritize when making decisions?
+        1. Data and numbers (data_driven)
+        2. Intuition and vision (intuitive)
+        3. Consensus and coordination (consensus_driven)
+        4. Balanced approach (balanced)
+    required: true
+    type: choice
+    options:
+      - value: "data_driven"
+        label:
+          ja: "数字・データ重視"
+          en: "Data-driven"
+        description:
+          ja: "ROI、数値データ、定量的根拠を重視"
+          en: "Prioritizes ROI, numerical data, quantitative evidence"
+      - value: "intuitive"
+        label:
+          ja: "直感・ビジョン重視"
+          en: "Intuitive"
+        description:
+          ja: "将来ビジョン、戦略的方向性、大局観を重視"
+          en: "Prioritizes future vision, strategic direction, big picture"
+      - value: "consensus_driven"
+        label:
+          ja: "合意・調整重視"
+          en: "Consensus-driven"
+        description:
+          ja: "ステークホルダー調整、リスク回避、段階的アプローチを重視"
+          en: "Prioritizes stakeholder alignment, risk mitigation, phased approach"
+      - value: "balanced"
+        label:
+          ja: "バランス型"
+          en: "Balanced"
+        description:
+          ja: "データとビジョンの両方をバランスよく重視"
+          en: "Balances both data and vision"
+
+  - id: domain_knowledge
+    question:
+      ja: |
+        このテーマについて決裁者はどのくらい詳しいですか？
+        1. 詳しい（専門家レベル）
+        2. 普通（概要は理解）
+        3. 詳しくない（初心者レベル）
+      en: |
+        How familiar is the decision maker with this topic?
+        1. Expert level
+        2. Intermediate (understands overview)
+        3. Beginner level
+    required: true
+    type: choice
+    options:
+      - value: "expert"
+        label:
+          ja: "詳しい（専門家レベル）"
+          en: "Expert"
+        description:
+          ja: "技術的詳細や専門用語を理解できる"
+          en: "Can understand technical details and jargon"
+      - value: "intermediate"
+        label:
+          ja: "普通（概要は理解）"
+          en: "Intermediate"
+        description:
+          ja: "基本概念は理解しているが、詳細は要説明"
+          en: "Understands basic concepts but needs explanation for details"
+      - value: "beginner"
+        label:
+          ja: "詳しくない（初心者レベル）"
+          en: "Beginner"
+        description:
+          ja: "専門用語の説明や図解が必要"
+          en: "Needs explanation of terminology and visual aids"
+    follow_up:
+      - condition: "domain_knowledge == 'beginner'"
+        question:
+          ja: "特に説明が必要な領域は何ですか？（複数可）"
+          en: "Which areas need more explanation? (multiple allowed)"
+        field: "domain_knowledge.gaps"
+        type: text_list
+        examples:
+          ja:
+            - "AI・機械学習の基礎"
+            - "マテリアルズインフォマティクス"
+            - "クラウドインフラ"
+          en:
+            - "AI/ML fundamentals"
+            - "Materials informatics"
+            - "Cloud infrastructure"
+
+  - id: key_concerns
+    question:
+      ja: |
+        決裁者が最も重視するポイントは何ですか？（複数選択可）
+        1. ROI・投資対効果
+        2. リスク・安全性
+        3. 競争優位性
+        4. 社会貢献・ESG
+        5. イノベーション・先進性
+        6. 実現可能性
+      en: |
+        What are the decision maker's key concerns? (multiple selection allowed)
+        1. ROI
+        2. Risk/Safety
+        3. Competitive advantage
+        4. Social impact/ESG
+        5. Innovation
+        6. Feasibility
+    required: true
+    type: multi_choice
+    options:
+      - value: "roi"
+        label:
+          ja: "ROI・投資対効果"
+          en: "ROI"
+        priority_weight: 1.0
+      - value: "risk"
+        label:
+          ja: "リスク・安全性"
+          en: "Risk/Safety"
+        priority_weight: 0.9
+      - value: "competitive_advantage"
+        label:
+          ja: "競争優位性"
+          en: "Competitive advantage"
+        priority_weight: 0.8
+      - value: "social_impact"
+        label:
+          ja: "社会貢献・ESG"
+          en: "Social impact/ESG"
+        priority_weight: 0.7
+      - value: "innovation"
+        label:
+          ja: "イノベーション・先進性"
+          en: "Innovation"
+        priority_weight: 0.7
+      - value: "feasibility"
+        label:
+          ja: "実現可能性"
+          en: "Feasibility"
+        priority_weight: 0.8
+
+# レポート調整ガイダンス自動生成ルール
+adjustment_rules:
+
+  by_decision_style:
+    data_driven:
+      - "財務計画を冒頭に配置"
+      - "数値データを豊富に含める"
+      - "3シナリオ分析を必須とする"
+      - "グラフ・表を多用"
+      - "定量的な根拠を明示"
+      - "ROI計算を詳細に"
+    intuitive:
+      - "ビジョン・ストーリーを冒頭に配置"
+      - "成功イメージを強調"
+      - "アナロジーを活用（既知→未知）"
+      - "感情に訴える表現を使用"
+      - "将来の可能性を描写"
+      - "競合との差別化ストーリー"
+    consensus_driven:
+      - "ステークホルダー分析を含める"
+      - "反論への対応策を明示"
+      - "段階的アプローチを提示"
+      - "リスク軽減策を詳述"
+      - "関係者の声・支持を記載"
+      - "合意形成のプロセスを提示"
+    balanced:
+      - "データとストーリーのバランスを取る"
+      - "定量・定性両面から分析"
+      - "エグゼクティブサマリーを充実"
+      - "詳細は付録に配置"
+
+  by_domain_knowledge:
+    beginner:
+      - "専門用語に注釈を追加"
+      - "図解を多用"
+      - "アナロジーを使用（例：DALL-E→MatterGen）"
+      - "背景説明を丁寧に"
+      - "Executive Summary を簡潔に"
+      - "用語集を付録に追加"
+      - "1ページサマリーを冒頭に"
+    intermediate:
+      - "適度な技術的詳細を含める"
+      - "用語集は付録に配置"
+      - "必要に応じて補足説明"
+    expert:
+      - "技術的詳細を含める"
+      - "競合技術との詳細比較"
+      - "最新研究動向を引用"
+      - "専門家向けの深い分析"
+      - "技術的リスクの詳細評価"
+
+  by_key_concern:
+    roi:
+      - "財務計画セクションを詳細に"
+      - "ROI計算を明示"
+      - "回収期間を提示"
+      - "3シナリオ（楽観・基準・悲観）分析"
+      - "コスト内訳を詳細に"
+    risk:
+      - "リスク分析セクションを充実"
+      - "軽減策を詳述"
+      - "Go/No-Go基準を明確に"
+      - "リスクマトリクスを含める"
+      - "撤退基準を明示"
+    competitive_advantage:
+      - "競合分析を詳細に"
+      - "差別化ポイントを強調"
+      - "市場ポジショニングを明示"
+      - "先行者優位の説明"
+      - "競合の動向と対策"
+    social_impact:
+      - "社会的意義を強調"
+      - "SDGs/ESGとの関連を明示"
+      - "長期的インパクトを提示"
+      - "ステークホルダーへの影響"
+      - "サステナビリティの観点"
+    innovation:
+      - "技術的新規性を強調"
+      - "将来の発展可能性を提示"
+      - "業界へのインパクト"
+      - "知財・特許の観点"
+    feasibility:
+      - "実現可能性の根拠を詳述"
+      - "必要リソースを明確に"
+      - "タイムラインを詳細に"
+      - "依存関係とリスクを明示"
+      - "段階的実装計画"
+
+# ペルソナプロファイル出力フォーマット
+output_format:
+  persona:
+    id: "string (auto-generated: persona_1, persona_2, ...)"
+    role: "string"
+    decision_style: "data_driven | intuitive | consensus_driven | balanced"
+    domain_knowledge:
+      level: "expert | intermediate | beginner"
+      areas: "string[] (optional)"
+      gaps: "string[] (optional, for beginner)"
+    key_concerns:
+      - concern: "string"
+        priority: "high | medium | low"
+    report_adjustments: "string[] (auto-generated from adjustment_rules)"
+
+# 複数決裁者の場合
+multiple_personas:
+  enabled: true
+  max_count: 5
+  identification_question:
+    ja: "決裁者は複数いますか？（例：役員→社長）"
+    en: "Are there multiple decision makers? (e.g., executive → president)"
+  iteration_prompt:
+    ja: "次の決裁者についてお聞きします。"
+    en: "Let me ask about the next decision maker."

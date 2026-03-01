@@ -1,0 +1,1005 @@
+# auto-invoke-triggers.yaml
+# v1.25.0 - 自動呼出しトリガーマッピング
+# REQ-FW-FIN-002, REQ-QA-AUTO-001, REQ-QA-AUTO-002, REQ-FW-RISK-001, REQ-FW-SRC-001, REQ-FW-STK-001, REQ-FW-KPI-001 実装
+#
+# 用途: ワークフロー全フェーズの自動呼出しトリガーとマッピングを定義
+# 参照元: 各SKILL.md (planner, deep-research, consulting-framework, writing)
+
+version: "1.25.0"
+
+# ========================================
+# 検索結果の永続化ルール（v1.25.0 NEW!）
+# ========================================
+research_persistence:
+  description: "search/visit実行後の結果をresearch/ディレクトリに自動保存"
+  enabled: true
+  
+  # 必須前提条件
+  prerequisites:
+    - "set_project が実行済みであること"
+    - "プロジェクトディレクトリが存在すること"
+  
+  # 保存トリガー
+  triggers:
+    - type: "after_tool_call"
+      tool: "search"
+      action:
+        tool: "save_research"
+        arguments:
+          content: "{search_results}"
+          query: "{search_query}"
+          source: "search"
+    
+    - type: "after_tool_call"
+      tool: "visit"
+      action:
+        tool: "save_research"
+        arguments:
+          content: "{page_content}"
+          query: "{visited_url}"
+          source: "visit"
+  
+  # 保存先
+  output_directory: "research/"
+  
+  # ファイル命名規則
+  naming:
+    search: "search_{query}_{timestamp}.md"
+    visit: "visit_{domain}_{timestamp}.md"
+    manual: "memo_{timestamp}.md"
+
+# ========================================
+# Qiita記事作成（ショートカットワークフロー）v1.22.0 NEW!
+# ========================================
+qiita_article:
+  prompt: "shikigami-qiita-article.prompt.md"
+  description: "Qiita記事を直接作成（Qiita Writing Rules強制適用）"
+  priority: "P0"
+  skill: "shikigami-writing"
+  
+  triggers:
+    - type: "keyword_match"
+      keywords:
+        - "Qiita記事"
+        - "Qiita"
+        - "技術記事"
+        - "技術ブログ"
+        - "Qiitaに投稿"
+        - "Qiita用"
+        - "Qiita向け"
+        - "qiita article"
+        - "tech article"
+        - "post to qiita"
+      match_type: "any"
+    
+    - type: "explicit_command"
+      commands:
+        - "@qiita"
+        - "@shikigami-qiita"
+        - "Qiita記事作成"
+        - "技術記事作成"
+  
+  invoke_at: "immediate"
+  
+  required_rules:
+    - rule: "qiita_writing_rules"
+      description: "Qiita Writing Rulesを強制適用"
+      reference: "shikigami-writing/SKILL.md#qiita-writing-rules"
+    - rule: "frontmatter_required"
+      description: "フロントマター必須（title, tags, private）"
+    - rule: "title_max_50_chars"
+      description: "タイトル50文字以内"
+    - rule: "tags_1_to_5"
+      description: "タグ1〜5個"
+    - rule: "file_name_in_codeblock"
+      description: "コードブロックにファイル名付与"
+  
+  output_format: "qiita_markdown"
+
+# ========================================
+# 0. Phase 0: プロジェクト初期化（ワークフロー開始点）v1.17.0 NEW!
+# ========================================
+project_initialization:
+  prompt: "shikigami-full-research.prompt.md"
+  description: "プロジェクト初期化（npx shikigami new）とナレッジ継承を実行"
+  priority: "P0"
+  skill: "shikigami-planner"
+  
+  triggers:
+    - type: "workflow_start"
+      keywords:
+        - "リサーチ"
+        - "調査"
+        - "research"
+        - "調べて"
+        - "分析して"
+        - "analyze"
+        - "提言書"
+        - "proposal"
+        - "レポート"
+        - "report"
+        - "比較"
+        - "comparison"
+        - "評価"
+        - "evaluation"
+        - "検討"
+        - "consideration"
+      match_type: "any"
+    
+    - type: "explicit_command"
+      commands:
+        - "@shikigami"
+        - "@shikigami-planner"
+        - "shikigami start"
+        - "リサーチ開始"
+        - "プロジェクト開始"
+        - "新規プロジェクト"
+  
+  invoke_at: "workflow_start"
+  
+  # v1.24.0: 承認待機ルール
+  user_confirmation:
+    required: true
+    wait_for_approval: true
+    prohibited_patterns:
+      - "確認いただく前に作成"
+      - "確認前に実行"
+      - "先に作成しておきます"
+    approval_keywords:
+      - "はい"
+      - "OK"
+      - "ok"
+      - "承認"
+      - "approve"
+      - "それで"
+      - "お願いします"
+  
+  required_actions:
+    - action: "run_command"
+      command: "npx shikigami new <ProjectName>"
+      description: "プロジェクトフォルダを作成"
+    - action: "set_project"
+      tool: "set_project"
+      arguments:
+        autoDetect: true
+      description: "MCPツールでプロジェクトを設定（v1.25.0 必須）"
+    - action: "knowledge_inheritance"
+      description: "関連する過去レポートからナレッジ継承"
+  
+  output_to: "manifest.yaml:project_initialization"
+  
+  next_phase:
+    id: "prompt_refinement"
+    condition: "project_initialization.complete == true"
+
+# ========================================
+# 0.5. Phase 0.5: 構造化プロンプト生成（v1.19.0 NEW! / v1.22.0 Updated）
+# ========================================
+prompt_refinement:
+  prompt: "shikigami-purpose-discovery.prompt.md"
+  description: "ユーザーのプロンプトを6要素に構造化し、承認を得る"
+  priority: "P0"
+  skill: "shikigami-planner"
+  
+  # Phase 0完了後に自動的に遷移
+  triggers:
+    - type: "phase_0_complete"
+      condition: "project_folder_exists"
+  
+  invoke_at: "after_phase_0"
+  
+  # v1.22.0: プロンプト保存アクション
+  prompt_saving:
+    enabled: true
+    save_directory: "prompts/"
+    
+    # 元のプロンプトを保存
+    original_prompt:
+      filename: "original-prompt.md"
+      save_at: "phase_0.5_start"
+      format: |
+        ---
+        timestamp: "{timestamp}"
+        project_id: "{project_id}"
+        ---
+        
+        # Original Prompt
+        
+        {user_input}
+    
+    # 構造化プロンプトを保存
+    structured_prompt:
+      filename: "structured-prompt.md"
+      save_at: "phase_0.5_approved"
+      format: |
+        ---
+        timestamp: "{timestamp}"
+        project_id: "{project_id}"
+        version: {version}
+        approved: {approved}
+        ---
+        
+        # Structured Prompt
+        
+        ## PURPOSE（目的）
+        {purpose}
+        
+        ## TARGET（調査対象）
+        {target}
+        
+        ## SCOPE（調査範囲）
+        {scope}
+        
+        ## TIMELINE（時間軸）
+        {timeline}
+        
+        ## CONSTRAINTS（制約条件）
+        {constraints}
+        
+        ## DELIVERABLES（期待する成果物）
+        {deliverables}
+    
+    # 修正履歴を保存（修正があった場合のみ）
+    refinement_history:
+      filename: "refinement-history.md"
+      save_at: "on_refinement"
+      append: true
+      format: |
+        
+        ---
+        
+        ## Refinement {version} - {timestamp}
+        
+        **変更箇所**: {changed_elements}
+        
+        **変更理由**: {reason}
+        
+        **変更内容**:
+        {changes}
+  
+  # 構造化プロンプト生成ルール
+  structured_prompt:
+    enabled: true
+    
+    # 6要素の定義
+    elements:
+      - id: "PURPOSE"
+        name: "目的"
+        description: "何を判断/決定したいか"
+        example: "レアメタル市場への新規参入可否を判断"
+        required: true
+      - id: "TARGET"
+        name: "調査対象"
+        description: "何について/誰について調査するか"
+        example: "リチウム、コバルト、ニッケルの3種"
+        required: true
+      - id: "SCOPE"
+        name: "調査範囲"
+        description: "調査の深さ・広さ"
+        example: "国内市場中心、過去3年〜今後5年予測"
+        required: true
+      - id: "TIMELINE"
+        name: "時間軸"
+        description: "いつまでの情報か、期限"
+        example: "2023-2028年、レポート期限: 1週間"
+        required: true
+      - id: "CONSTRAINTS"
+        name: "制約条件"
+        description: "調査の制限事項"
+        example: "予算上限500万円、競合A社は除外"
+        required: false
+        default_if_missing: "特になし（推測）"
+      - id: "DELIVERABLES"
+        name: "成果物"
+        description: "期待するアウトプット"
+        example: "参入判断レポート、リスク評価表、投資試算"
+        required: true
+    
+    # 表示フォーマット
+    display_format: |
+      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+      ✨ 構造化プロンプトを生成しました
+      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+      
+      📝 元のプロンプト:
+      「{original_prompt}」
+      
+      ⬇️ 構造化後 ⬇️
+      
+      ┌─────────────────────────────────────────────────────────┐
+      │ 📐 構造化プロンプト                                      │
+      ├─────────────────────────────────────────────────────────┤
+      │ 🎯 PURPOSE（目的）:                                      │
+      │    {purpose}                                             │
+      │                                                          │
+      │ 📦 TARGET（調査対象）:                                   │
+      │    {target}                                              │
+      │                                                          │
+      │ 📏 SCOPE（調査範囲）:                                    │
+      │    {scope}                                               │
+      │                                                          │
+      │ ⏰ TIMELINE（時間軸）:                                   │
+      │    {timeline}                                            │
+      │                                                          │
+      │ 🚫 CONSTRAINTS（制約条件）:                              │
+      │    {constraints}                                         │
+      │                                                          │
+      │ 📄 DELIVERABLES（期待する成果物）:                       │
+      │    {deliverables}                                        │
+      └─────────────────────────────────────────────────────────┘
+      
+      📊 補完した要素:
+      • {補完した要素1とその理由}
+      • {補完した要素2とその理由}
+      
+      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+      ❓ このプロンプトでよろしいですか？
+      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+         [はい/承認] → Phase 1（目的深掘り）へ進みます
+         [修正] → 修正したい箇所をお知らせください
+                 例: 「TARGETをリチウムのみに絞りたい」
+      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    
+    # ユーザー確認ルール
+    user_confirmation:
+      required: true
+      max_revisions: 3
+      approval_keywords:
+        - "はい"
+        - "承認"
+        - "OK"
+        - "進める"
+        - "approve"
+        - "yes"
+      revision_keywords:
+        - "修正"
+        - "変更"
+        - "edit"
+        - "change"
+    
+    # AIが推測した要素のマーク
+    inferred_marker: "（推測）"
+  
+  output_to: "manifest.yaml:prompt_refinement"
+  
+  next_phase:
+    id: "purpose_discovery"
+    condition: "prompt_refinement.user_approved == true"
+
+# ========================================
+# 1. Phase 1: 目的探索（対話的目的探索）
+# ========================================
+purpose_discovery:
+  prompt: "shikigami-purpose-discovery.prompt.md"
+  description: "対話的目的探索を開始し、ユーザーの真の目的を特定する"
+  priority: "P0"
+  skill: "shikigami-planner"
+  
+  # Phase 0.5完了後に自動的に遷移
+  triggers:
+    - type: "phase_0_5_complete"
+      condition: "structured_prompt_approved"
+  
+  invoke_at: "after_phase_0_5"
+  
+  # ⚠️ 対話的目的探索の必須ルール（v1.17.8 NEW!）
+  interactive_dialog:
+    enabled: true
+    mode: "one_question_at_a_time"  # 1問1答モード
+    
+    # コンテキスト不足の判定基準
+    context_insufficient_criteria:
+      - "目的が曖昧（「〇〇について調べて」など具体性がない）"
+      - "対象が不明確（「競合分析して」など具体名がない）"
+      - "成功基準が不明（どうなれば成功かわからない）"
+      - "制約が不明（時間・予算・範囲の制約がない）"
+      - "ステークホルダーが不明（誰が結果を使うかわからない）"
+    
+    # 質問カテゴリと質問例
+    question_categories:
+      - category: "WHY"
+        questions:
+          - "なぜこの調査が必要ですか？"
+          - "この情報で何を判断しますか？"
+        purpose: "根本的な動機の発見"
+      - category: "WHO"
+        questions:
+          - "この結果を誰が使いますか？"
+          - "意思決定者は誰ですか？"
+        purpose: "ステークホルダーの特定"
+      - category: "WHAT-IF"
+        questions:
+          - "理想的な結果が得られたら、次に何をしますか？"
+        purpose: "真のゴールの明確化"
+      - category: "CONSTRAINT"
+        questions:
+          - "時間・予算・範囲の制約はありますか？"
+          - "絶対に避けたいことは何ですか？"
+        purpose: "制約条件の把握"
+      - category: "SUCCESS"
+        questions:
+          - "どうなれば成功と言えますか？"
+        purpose: "評価基準の明確化"
+    
+    # 質問数の制限
+    min_questions: 3
+    max_questions: 7
+    
+    # 禁止事項
+    forbidden_actions:
+      - "一度に複数の質問をまとめて投げる"
+      - "曖昧な情報のまま推測でリサーチを開始する"
+      - "回答を待たずに次の質問をする"
+  
+  output_to: "manifest.yaml:purpose_discovery"
+  
+  # Phase 1完了後の遷移先
+  next_phase:
+    prompt: "shikigami-deep-research.prompt.md"
+    condition: "purpose_discovery.complete == true AND true_purpose.defined == true"
+
+# ========================================
+# 2. 財務分析関連（P0）
+# ========================================
+financial_analysis:
+  prompt: "shikigami-financial-analysis.prompt.md"
+  description: "3シナリオ財務計画・ROI分析を自動実行"
+  priority: "P0"
+  
+  triggers:
+    # required_research_items ベースのトリガー
+    - type: "required_research_items"
+      keywords:
+        - "3シナリオ財務計画"
+        - "three-scenario financial plan"
+        - "ROI分析"
+        - "ROI analysis"
+        - "投資対効果"
+        - "財務計画"
+        - "financial plan"
+        - "5年売上計画"
+        - "5-year revenue plan"
+      match_type: "any"  # any | all
+    
+    # success_condition_type ベースのトリガー
+    - type: "success_condition_type"
+      types:
+        - "IMMEDIATE_APPROVAL"
+        - "BUDGET_APPROVAL"
+  
+  invoke_at: "phase_3_start"  # Phase 3開始時に呼出し
+  
+  input_from:
+    - "manifest.yaml:deep_research.collected_data"
+    - "manifest.yaml:purpose_discovery.success_condition"
+  
+  output_to: "manifest.yaml:framework_analysis.financial_analysis"
+
+# ========================================
+# 2. 品質チェック - 数値整合性（P0）
+# ========================================
+consistency_check:
+  prompt: "shikigami-consistency-check.prompt.md"
+  description: "数値データの整合性を自動検証"
+  priority: "P0"
+  
+  triggers:
+    - type: "phase_completion"
+      phase: 4
+      conditions:
+        - "numerical_data_present"
+      detection:
+        keywords:
+          - "売上"
+          - "投資"
+          - "ROI"
+          - "コスト"
+          - "CAGR"
+          - "市場規模"
+        patterns:
+          - "\\d+[万億]円"
+          - "\\d+%"
+          - "\\d+年"
+  
+  invoke_at: "phase_4_completion"
+  
+  input_from:
+    - "generated_report"
+  
+  output_to: "manifest.yaml:report_writing.quality_checks.consistency_check"
+
+# ========================================
+# 3. 品質チェック - サマリー整合性（P0）
+# ========================================
+executive_sync:
+  prompt: "shikigami-executive-sync.prompt.md"
+  description: "エグゼクティブサマリーと本文の整合性を検証"
+  priority: "P0"
+  
+  triggers:
+    - type: "phase_completion"
+      phase: 4
+      conditions:
+        - "executive_summary_present"
+      detection:
+        section_headers:
+          - "エグゼクティブサマリー"
+          - "Executive Summary"
+          - "サマリー"
+          - "概要"
+  
+  invoke_at: "phase_4_completion"
+  
+  input_from:
+    - "generated_report"
+  
+  output_to: "manifest.yaml:report_writing.quality_checks.executive_sync"
+
+# ========================================
+# 4. リスク・感度分析（P1）
+# ========================================
+risk_sensitivity:
+  prompt: "shikigami-risk-sensitivity.prompt.md"
+  description: "リスク分析・感度分析・モンテカルロシミュレーションを実行"
+  priority: "P1"
+  
+  triggers:
+    - type: "required_research_items"
+      keywords:
+        - "リスク分析"
+        - "risk analysis"
+        - "感度分析"
+        - "sensitivity analysis"
+        - "モンテカルロシミュレーション"
+        - "Monte Carlo simulation"
+        - "リスク評価"
+        - "risk assessment"
+      match_type: "any"
+    
+    - type: "success_condition_type"
+      types:
+        - "STAGED_APPROVAL"
+        - "PILOT_APPROVAL"
+  
+  invoke_at: "phase_3_start"
+  
+  input_from:
+    - "manifest.yaml:framework_analysis.financial_analysis"
+    - "manifest.yaml:deep_research.collected_data"
+  
+  output_to: "manifest.yaml:framework_analysis.risk_analysis"
+
+# ========================================
+# 5. ソース批判的評価（P1）
+# ========================================
+source_critique:
+  prompt: "shikigami-source-critique.prompt.md"
+  description: "外部ソースの信頼性・バイアスを評価"
+  priority: "P1"
+  
+  triggers:
+    - type: "phase_completion"
+      phase: 2
+      conditions:
+        - "external_sources_present"
+      detection:
+        min_external_sources: 3
+        source_types:
+          - "web_search"
+          - "document_reference"
+          - "api_data"
+  
+  invoke_at: "phase_2_completion"
+  
+  input_from:
+    - "manifest.yaml:deep_research.sources"
+  
+  output_to: "manifest.yaml:deep_research.source_quality"
+
+# ========================================
+# 6. ステークホルダー影響分析（P1）
+# ========================================
+stakeholder_impact:
+  prompt: "shikigami-stakeholder-impact.prompt.md"
+  description: "ステークホルダーへの影響と対策を分析"
+  priority: "P1"
+  
+  triggers:
+    - type: "required_research_items"
+      keywords:
+        - "ステークホルダー分析"
+        - "stakeholder analysis"
+        - "利害関係者影響"
+        - "stakeholder impact"
+        - "意思決定者分析"
+        - "decision maker analysis"
+        - "関係者マッピング"
+      match_type: "any"
+    
+    - type: "persona_count"
+      min_personas: 2
+  
+  invoke_at: "phase_3_start"
+  
+  input_from:
+    - "manifest.yaml:personas"
+    - "manifest.yaml:purpose_discovery.success_condition"
+  
+  output_to: "manifest.yaml:framework_analysis.stakeholder_analysis"
+
+# ========================================
+# 7. KPIダッシュボード（P2）
+# ========================================
+kpi_dashboard:
+  prompt: "shikigami-kpi-dashboard.prompt.md"
+  description: "KPIダッシュボードを自動生成"
+  priority: "P2"
+  
+  triggers:
+    - type: "deliverable_and_data"
+      deliverable_types:
+        - "提言書"
+        - "proposal"
+        - "事業計画"
+        - "business plan"
+      required_data:
+        - "financial_analysis"
+      detection:
+        has_financial_data: true
+        has_milestones: true
+  
+  invoke_at: "phase_4_completion"
+  
+  input_from:
+    - "manifest.yaml:framework_analysis.financial_analysis"
+    - "manifest.yaml:purpose_discovery.proposal_checklist"
+  
+  output_to: "manifest.yaml:report_writing.kpi_dashboard"
+
+# ========================================
+# 実行設定
+# ========================================
+execution:
+  # グローバルスキップオプション
+  global_skip_option: "--skip-auto-invoke"
+  
+  # 個別スキップオプション
+  individual_skip_options:
+    financial_analysis: "--skip-financial"
+    consistency_check: "--skip-consistency-check"
+    executive_sync: "--skip-executive-sync"
+    risk_sensitivity: "--skip-risk"
+    source_critique: "--skip-source-critique"
+    stakeholder_impact: "--skip-stakeholder"
+    kpi_dashboard: "--skip-kpi"
+  
+  # 並列実行グループ
+  parallel_groups:
+    - name: "phase_3_analysis"
+      prompts:
+        - "financial_analysis"
+        - "risk_sensitivity"
+        - "stakeholder_impact"
+    - name: "phase_4_quality"
+      prompts:
+        - "consistency_check"
+        - "executive_sync"
+        - "kpi_dashboard"
+  
+  # タイムアウト設定
+  timeout:
+    default: 60
+    financial_analysis: 120
+    risk_sensitivity: 90
+  
+  # エラーハンドリング
+  on_error:
+    action: "warn_and_continue"  # warn_and_continue | block | skip
+    log_error: true
+    notify_user: true
+
+# ========================================
+# ロギング設定
+# ========================================
+logging:
+  enabled: true
+  log_path: "manifest.yaml:auto_invoke_log"
+  include:
+    - "trigger_matched"
+    - "prompt_invoked"
+    - "execution_time"
+    - "result_status"
+
+# ========================================
+# ワークフローフェーズ遷移設定 (v1.17.0 Updated!)
+# ========================================
+workflow_phases:
+  description: "SHIKIGAMIワークフローの6フェーズ遷移を定義（Phase 0追加）"
+  
+  phases:
+    # Phase 0: プロジェクト初期化（v1.17.0 NEW!）
+    - id: "phase_0"
+      name: "Project Initialization"
+      skill: "shikigami-planner"
+      prompt: "shikigami-full-research.prompt.md"
+      entry_point: true  # ワークフロー開始点（v1.17.0変更）
+      required_actions:
+        - "npx shikigami new <ProjectName>"
+        - "ナレッジ継承"
+      completion_criteria:
+        - "manifest.yaml exists"
+        - "projects/pjXXXXX_*/ directory created"
+      next: "phase_1"
+    
+    - id: "phase_1"
+      name: "Purpose Discovery"
+      skill: "shikigami-planner"
+      prompt: "shikigami-purpose-discovery.prompt.md"
+      entry_point: false  # v1.17.0変更: Phase 0から遷移
+      completion_criteria:
+        - "manifest.yaml:purpose_discovery.true_purpose defined"
+        - "manifest.yaml:purpose_discovery.research_plan defined"
+      next: "phase_2"
+    
+    - id: "phase_2"
+      name: "Deep Research"
+      skill: "shikigami-deep-research"
+      prompt: "shikigami-deep-research.prompt.md"
+      completion_criteria:
+        - "manifest.yaml:deep_research.status == 'complete'"
+        - "manifest.yaml:deep_research.sources.length >= 3"
+      next: "phase_3"
+    
+    - id: "phase_3"
+      name: "Framework Analysis"
+      skill: "shikigami-consulting-framework"
+      prompt: "shikigami-framework-analysis.prompt.md"
+      auto_invoke:  # このフェーズで自動起動するプロンプト
+        - "financial_analysis"
+        - "risk_sensitivity"
+        - "stakeholder_impact"
+      completion_criteria:
+        - "manifest.yaml:framework_analysis.frameworks.length >= 1"
+      next: "phase_4"
+    
+    - id: "phase_4"
+      name: "Report Writing"
+      skill: "shikigami-writing"
+      prompt: "shikigami-report-writing.prompt.md"
+      auto_invoke:  # このフェーズで自動起動するプロンプト
+        - "consistency_check"
+        - "executive_sync"
+        - "kpi_dashboard"
+      completion_criteria:
+        - "report file created"
+        - "quality_checks passed"
+      next: null  # 終了フェーズ
+
+  # スキル→フェーズマッピング（ルックアップ用）
+  skill_to_phase:
+    shikigami-planner: ["phase_0", "phase_1"]  # v1.17.0: Phase 0も担当
+    shikigami-deep-research: "phase_2"
+    shikigami-consulting-framework: "phase_3"
+    shikigami-writing: "phase_4"
+# ========================================
+# 信頼度スコアリング（v1.18.0 NEW!）
+# ========================================
+confidence_scoring:
+  description: "調査結果の品質を数値化"
+  
+  # スコア計算要素
+  scoring_factors:
+    source_reliability:
+      weight: 0.30
+      description: "ソースの信頼性平均"
+      calculation: "average(sources[].reliability_score)"
+      scale:
+        excellent: 0.9    # 学術機関、公的機関
+        good: 0.7         # 主要メディア、専門誌
+        moderate: 0.5     # 一般メディア、企業サイト
+        low: 0.3          # ブログ、SNS
+        unknown: 0.2      # ソース不明
+    
+    data_freshness:
+      weight: 0.20
+      description: "データの鮮度"
+      calculation: "weighted_average(sources[].publication_date)"
+      scale:
+        recent: 1.0       # 3ヶ月以内
+        current: 0.8      # 1年以内
+        dated: 0.5        # 3年以内
+        old: 0.2          # 3年超
+    
+    coverage:
+      weight: 0.25
+      description: "調査範囲のカバー率"
+      calculation: "covered_topics / required_topics"
+      requirements:
+        - "目的に関連するトピックをどれだけカバーしたか"
+        - "複数の視点（賛否両論）を含むか"
+    
+    source_diversity:
+      weight: 0.15
+      description: "ソースの多様性"
+      calculation: "unique_source_types / total_sources"
+      source_types:
+        - "academic"      # 学術論文
+        - "government"    # 政府機関
+        - "news"          # ニュースメディア
+        - "industry"      # 業界レポート
+        - "company"       # 企業公式
+        - "expert"        # 専門家意見
+    
+    internal_consistency:
+      weight: 0.10
+      description: "データの内部整合性"
+      calculation: "1 - contradiction_ratio"
+      checks:
+        - "数値の矛盾がないか"
+        - "主張の一貫性"
+  
+  # 総合スコア計算
+  overall_calculation: |
+    overall_confidence = 
+      source_reliability * 0.30 +
+      data_freshness * 0.20 +
+      coverage * 0.25 +
+      source_diversity * 0.15 +
+      internal_consistency * 0.10
+  
+  # スコア閾値
+  thresholds:
+    high: 0.8      # 高信頼度（品質ゲート通過推奨）
+    medium: 0.6    # 中信頼度（条件付き通過）
+    low: 0.4       # 低信頼度（追加調査推奨）
+    insufficient: 0.2  # 不十分（ゲート通過不可）
+  
+  # 表示フォーマット
+  display_format: |
+    ## 📊 信頼度スコア
+    
+    | 要素 | スコア | 重み |
+    |------|--------|------|
+    | ソース信頼性 | {source_reliability:.0%} | 30% |
+    | データ鮮度 | {data_freshness:.0%} | 20% |
+    | カバー率 | {coverage:.0%} | 25% |
+    | ソース多様性 | {source_diversity:.0%} | 15% |
+    | 内部整合性 | {internal_consistency:.0%} | 10% |
+    | **総合** | **{overall_confidence:.0%}** | - |
+    
+    判定: {confidence_level}
+  
+  # manifest.yaml への出力
+  output_to: "manifest.yaml:deep_research.confidence_score"
+
+# ========================================
+# 中断・再開機能（v1.18.0 NEW!）
+# ========================================
+checkpoint_resume:
+  description: "ワークフローの中断・再開をサポート"
+  
+  # チェックポイント設定
+  checkpoint:
+    enabled: true
+    
+    # 自動チェックポイント作成タイミング
+    auto_checkpoint_triggers:
+      - "phase_completion"        # フェーズ完了時
+      - "gate_passed"            # ゲート通過時
+      - "major_data_collected"   # 主要データ収集時
+      - "user_pause_request"     # ユーザーの中断要求時
+    
+    # チェックポイントデータ
+    checkpoint_data:
+      workflow_state:
+        current_phase: "phase_id"
+        last_action: "action_name"
+        checkpoint_at: "ISO8601_timestamp"
+      
+      progress:
+        completed_phases: ["phase_0", "phase_1"]
+        pending_phases: ["phase_2", "phase_3", "phase_4"]
+        current_step: "step_description"
+      
+      collected_data:
+        sources_count: 0
+        sources_list: []
+        research_notes: []
+      
+      context:
+        purpose: "true_purpose"
+        success_condition: "condition_type"
+        personas: []
+    
+    # チェックポイント保存先
+    save_location: "manifest.yaml:workflow.checkpoint"
+  
+  # 中断処理
+  pause:
+    # ユーザーからの中断リクエスト検出
+    detection_keywords:
+      ja:
+        - "中断"
+        - "一時停止"
+        - "後で続ける"
+        - "保存して終了"
+        - "また明日"
+      en:
+        - "pause"
+        - "stop"
+        - "continue later"
+        - "save and exit"
+        - "resume tomorrow"
+    
+    # 中断時のアクション
+    on_pause:
+      - action: "save_checkpoint"
+        description: "現在の状態をチェックポイントに保存"
+      - action: "generate_summary"
+        description: "進捗サマリーを生成"
+        output: |
+          ## 🔄 中断時点のサマリー
+          
+          - **現在フェーズ**: {current_phase}
+          - **完了フェーズ**: {completed_phases}
+          - **収集ソース数**: {sources_count}
+          - **中断日時**: {checkpoint_at}
+          
+          再開するには「続きから」「再開」と入力してください。
+      - action: "notify_user"
+        message: "チェックポイントを保存しました。後で「再開」と入力すると続きから開始できます。"
+  
+  # 再開処理
+  resume:
+    # 再開リクエスト検出
+    detection_keywords:
+      ja:
+        - "再開"
+        - "続きから"
+        - "続ける"
+        - "前回の続き"
+        - "チェックポイントから"
+      en:
+        - "resume"
+        - "continue"
+        - "pick up where I left off"
+        - "from checkpoint"
+    
+    # 再開時のアクション
+    on_resume:
+      - action: "load_checkpoint"
+        description: "チェックポイントから状態を復元"
+      - action: "display_context"
+        description: "中断時点のコンテキストを表示"
+        output: |
+          ## 🔄 再開: {project_name}
+          
+          **前回の中断時点**:
+          - フェーズ: {current_phase}
+          - 最終アクション: {last_action}
+          - 中断日時: {checkpoint_at}
+          
+          **収集済みデータ**:
+          - ソース数: {sources_count}
+          - 主要な発見: {key_findings}
+          
+          この状態から続けますか？（はい/いいえ）
+      - action: "resume_workflow"
+        description: "ワークフローを再開"
+  
+  # 古いチェックポイントの処理
+  stale_checkpoint:
+    threshold_days: 30  # 30日以上経過
+    action: "ask_user"
+    prompt: |
+      ⚠️ **古いチェックポイントを検出**
+      
+      このプロジェクトは{days_since_checkpoint}日前に中断されました。
+      
+      - 最終フェーズ: {current_phase}
+      - 中断日時: {checkpoint_at}
+      
+      選択してください：
+      1. 続きから再開
+      2. 最初からやり直し
+      3. 新規プロジェクトとして開始

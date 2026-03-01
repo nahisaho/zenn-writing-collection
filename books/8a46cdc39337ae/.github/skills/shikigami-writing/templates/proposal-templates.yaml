@@ -1,0 +1,661 @@
+# Proposal Templates Catalog
+# v2.0.0 - REQ-TMPL-001-01
+#
+# 業界別提案書テンプレート定義
+
+schema_version: "2.0"
+name: proposal-templates
+description: |
+  業界別・ペルソナ別の提案書テンプレート。
+  各テンプレートは必須/任意のプレースホルダーを含み、
+  リサーチ結果からの自動補完に対応。
+
+# 共通セクション定義
+common_sections:
+  executive_summary:
+    name: "エグゼクティブサマリー"
+    description: "提案の要約（経営層向け1ページ）"
+    required: true
+    structure:
+      - title: "提案概要"
+        content_type: "summary"
+      - title: "期待効果"
+        content_type: "bullet_points"
+      - title: "投資概要"
+        content_type: "table"
+    max_length: 500
+    
+  current_challenges:
+    name: "現状課題"
+    description: "顧客が直面している課題の整理"
+    required: true
+    structure:
+      - title: "業界トレンド"
+        content_type: "narrative"
+      - title: "顧客固有の課題"
+        content_type: "bullet_points"
+      - title: "課題の定量化"
+        content_type: "metrics"
+    
+  proposed_solution:
+    name: "提案ソリューション"
+    description: "課題を解決する製品・サービスの説明"
+    required: true
+    structure:
+      - title: "ソリューション概要"
+        content_type: "narrative"
+      - title: "主要機能"
+        content_type: "feature_table"
+      - title: "差別化ポイント"
+        content_type: "bullet_points"
+    
+  expected_benefits:
+    name: "導入効果"
+    description: "導入による期待効果（定量・定性）"
+    required: true
+    structure:
+      - title: "定量効果"
+        content_type: "metrics"
+      - title: "定性効果"
+        content_type: "bullet_points"
+      - title: "類似事例"
+        content_type: "case_study"
+    
+  roi_analysis:
+    name: "投資対効果"
+    description: "ROI分析、コスト比較"
+    required: true
+    structure:
+      - title: "初期投資"
+        content_type: "cost_table"
+      - title: "ランニングコスト"
+        content_type: "cost_table"
+      - title: "ROI計算"
+        content_type: "calculation"
+      - title: "TCO比較"
+        content_type: "comparison_table"
+    
+  implementation_plan:
+    name: "導入ステップ"
+    description: "導入スケジュールとマイルストーン"
+    required: true
+    structure:
+      - title: "フェーズ概要"
+        content_type: "phase_table"
+      - title: "詳細スケジュール"
+        content_type: "gantt"
+      - title: "役割分担"
+        content_type: "responsibility_matrix"
+    
+  appendix:
+    name: "付録"
+    description: "詳細仕様、参考資料"
+    required: false
+    structure:
+      - title: "技術仕様"
+        content_type: "spec_table"
+      - title: "参考文献"
+        content_type: "references"
+
+# 業界別テンプレート定義
+templates:
+  # ============================================
+  # 教育機関向けテンプレート
+  # ============================================
+  education_executive:
+    id: "education-executive"
+    name: "教育機関向け（経営層）"
+    description: "大学・教育機関の経営層向け提案書"
+    industry: "education"
+    persona: "executive"
+    
+    sections:
+      - section_ref: executive_summary
+        customization:
+          emphasis: ["教育DX", "競争力強化", "学生満足度"]
+          metrics: ["入学者数", "卒業率", "就職率"]
+      
+      - section_ref: current_challenges
+        customization:
+          focus_areas:
+            - "少子化による入学者減"
+            - "教育のデジタル化対応"
+            - "学生サービスの高度化"
+            - "教職員の業務効率化"
+          data_sources:
+            - "文部科学省統計"
+            - "大学ランキング"
+            - "学生満足度調査"
+      
+      - section_ref: proposed_solution
+        customization:
+          value_proposition: "教育の質向上と運営効率化の両立"
+      
+      - section_ref: expected_benefits
+        customization:
+          kpis:
+            - name: "学生満足度"
+              target: "10%向上"
+            - name: "教職員業務時間"
+              target: "20%削減"
+            - name: "IT運用コスト"
+              target: "15%削減"
+      
+      - section_ref: roi_analysis
+        customization:
+          comparison_targets:
+            - "現状維持"
+            - "競合A"
+            - "競合B"
+      
+      - section_ref: implementation_plan
+        customization:
+          considerations:
+            - "学期スケジュール"
+            - "入試時期の回避"
+            - "教授会承認プロセス"
+    
+    placeholders:
+      required:
+        - name: "{{製品名}}"
+          description: "提案する製品・サービス名"
+          extraction_path: "manifest.product.name"
+        - name: "{{顧客名}}"
+          description: "提案先大学・教育機関名"
+          extraction_path: "manifest.client.name"
+        - name: "{{提案日}}"
+          description: "提案書作成日"
+          default: "{{TODAY}}"
+        - name: "{{ライセンス数}}"
+          description: "想定ライセンス数"
+          extraction_path: "manifest.scope.licenses"
+      optional:
+        - name: "{{学生数}}"
+          description: "対象学生数"
+          extraction_path: "research.client_profile.student_count"
+        - name: "{{教職員数}}"
+          description: "対象教職員数"
+          extraction_path: "research.client_profile.staff_count"
+        - name: "{{現行システム}}"
+          description: "現在使用中のシステム"
+          extraction_path: "research.current_systems"
+    
+    tone:
+      formality: "high"
+      emphasis: ["実績", "信頼性", "長期パートナーシップ"]
+      avoid: ["技術的詳細", "専門用語多用"]
+
+  education_it:
+    id: "education-it"
+    name: "教育機関向け（IT部門）"
+    description: "大学・教育機関のIT部門向け提案書"
+    industry: "education"
+    persona: "it_department"
+    
+    sections:
+      - section_ref: executive_summary
+        customization:
+          emphasis: ["技術的優位性", "統合性", "セキュリティ"]
+      
+      - section_ref: current_challenges
+        customization:
+          focus_areas:
+            - "レガシーシステムの保守負担"
+            - "システム間連携の複雑さ"
+            - "セキュリティ対策の高度化"
+            - "クラウド移行の検討"
+          data_sources:
+            - "システム構成図"
+            - "運用コスト内訳"
+            - "インシデント履歴"
+      
+      - section_ref: proposed_solution
+        customization:
+          value_proposition: "既存システムとの円滑な統合と運用負荷軽減"
+          technical_details: true
+      
+      - section_ref: expected_benefits
+        customization:
+          kpis:
+            - name: "システム稼働率"
+              target: "99.9%以上"
+            - name: "インシデント対応時間"
+              target: "50%短縮"
+            - name: "運用工数"
+              target: "30%削減"
+      
+      - section_ref: roi_analysis
+        customization:
+          include_tco: true
+          comparison_period: "5年"
+      
+      - section_ref: implementation_plan
+        customization:
+          considerations:
+            - "既存システム移行計画"
+            - "データ移行手順"
+            - "テスト環境構築"
+            - "ロールバック計画"
+      
+      - section_ref: appendix
+        customization:
+          include:
+            - "技術仕様書"
+            - "API連携仕様"
+            - "セキュリティホワイトペーパー"
+    
+    placeholders:
+      required:
+        - name: "{{製品名}}"
+          description: "提案する製品・サービス名"
+          extraction_path: "manifest.product.name"
+        - name: "{{顧客名}}"
+          description: "提案先機関名"
+          extraction_path: "manifest.client.name"
+        - name: "{{提案日}}"
+          description: "提案書作成日"
+          default: "{{TODAY}}"
+      optional:
+        - name: "{{LMS名}}"
+          description: "現行LMS名（Moodle, Canvas等）"
+          extraction_path: "research.current_systems.lms"
+        - name: "{{IdP}}"
+          description: "認証基盤（Azure AD, Shibboleth等）"
+          extraction_path: "research.current_systems.idp"
+        - name: "{{データセンター}}"
+          description: "現行データセンター情報"
+          extraction_path: "research.infrastructure.datacenter"
+    
+    tone:
+      formality: "medium"
+      emphasis: ["技術仕様", "セキュリティ", "運用効率"]
+      include: ["技術的詳細", "連携方法", "移行手順"]
+
+  # ============================================
+  # 製造業向けテンプレート
+  # ============================================
+  manufacturing_executive:
+    id: "manufacturing-executive"
+    name: "製造業向け（経営層）"
+    description: "製造業の経営層向け提案書"
+    industry: "manufacturing"
+    persona: "executive"
+    
+    sections:
+      - section_ref: executive_summary
+        customization:
+          emphasis: ["生産性向上", "コスト削減", "品質改善"]
+          metrics: ["生産効率", "不良率", "在庫回転率"]
+      
+      - section_ref: current_challenges
+        customization:
+          focus_areas:
+            - "人手不足・技能継承"
+            - "生産効率の向上"
+            - "サプライチェーン最適化"
+            - "品質管理の高度化"
+            - "DX推進"
+          data_sources:
+            - "経済産業省統計"
+            - "業界レポート"
+            - "生産性指標"
+      
+      - section_ref: proposed_solution
+        customization:
+          value_proposition: "製造現場のDXによる競争力強化"
+      
+      - section_ref: expected_benefits
+        customization:
+          kpis:
+            - name: "生産効率"
+              target: "15%向上"
+            - name: "不良率"
+              target: "30%削減"
+            - name: "在庫コスト"
+              target: "20%削減"
+      
+      - section_ref: roi_analysis
+        customization:
+          comparison_targets:
+            - "現状維持"
+            - "段階的導入"
+            - "一括導入"
+      
+      - section_ref: implementation_plan
+        customization:
+          considerations:
+            - "生産ライン稼働への影響最小化"
+            - "パイロットライン選定"
+            - "現場教育計画"
+    
+    placeholders:
+      required:
+        - name: "{{製品名}}"
+          description: "提案する製品・サービス名"
+          extraction_path: "manifest.product.name"
+        - name: "{{顧客名}}"
+          description: "提案先企業名"
+          extraction_path: "manifest.client.name"
+        - name: "{{提案日}}"
+          description: "提案書作成日"
+          default: "{{TODAY}}"
+      optional:
+        - name: "{{工場数}}"
+          description: "対象工場数"
+          extraction_path: "research.client_profile.factory_count"
+        - name: "{{従業員数}}"
+          description: "対象従業員数"
+          extraction_path: "research.client_profile.employee_count"
+        - name: "{{現行ERP}}"
+          description: "現行ERPシステム"
+          extraction_path: "research.current_systems.erp"
+    
+    tone:
+      formality: "high"
+      emphasis: ["ROI", "実績", "グローバル展開"]
+      avoid: ["技術的詳細", "複雑なIT用語"]
+
+  manufacturing_it:
+    id: "manufacturing-it"
+    name: "製造業向け（IT部門）"
+    description: "製造業のIT部門向け提案書"
+    industry: "manufacturing"
+    persona: "it_department"
+    
+    sections:
+      - section_ref: executive_summary
+        customization:
+          emphasis: ["ERP連携", "OT/IT統合", "セキュリティ"]
+      
+      - section_ref: current_challenges
+        customization:
+          focus_areas:
+            - "OT/IT統合の課題"
+            - "レガシーシステムの刷新"
+            - "データ統合・活用"
+            - "セキュリティ（OTセキュリティ含む）"
+          data_sources:
+            - "システム構成図"
+            - "データフロー図"
+            - "セキュリティポリシー"
+      
+      - section_ref: proposed_solution
+        customization:
+          value_proposition: "既存ERP・MESとのシームレスな統合"
+          technical_details: true
+      
+      - section_ref: expected_benefits
+        customization:
+          kpis:
+            - name: "データ統合時間"
+              target: "80%短縮"
+            - name: "システム連携コスト"
+              target: "40%削減"
+            - name: "セキュリティインシデント"
+              target: "50%削減"
+      
+      - section_ref: roi_analysis
+        customization:
+          include_tco: true
+          comparison_period: "5年"
+      
+      - section_ref: implementation_plan
+        customization:
+          considerations:
+            - "ERP連携設計"
+            - "MES統合計画"
+            - "OTネットワーク分離"
+            - "段階的データ移行"
+      
+      - section_ref: appendix
+        customization:
+          include:
+            - "技術仕様書"
+            - "ERP連携仕様"
+            - "OTセキュリティガイドライン"
+    
+    placeholders:
+      required:
+        - name: "{{製品名}}"
+          description: "提案する製品・サービス名"
+          extraction_path: "manifest.product.name"
+        - name: "{{顧客名}}"
+          description: "提案先企業名"
+          extraction_path: "manifest.client.name"
+        - name: "{{提案日}}"
+          description: "提案書作成日"
+          default: "{{TODAY}}"
+      optional:
+        - name: "{{ERP名}}"
+          description: "現行ERPシステム名"
+          extraction_path: "research.current_systems.erp"
+        - name: "{{MES名}}"
+          description: "現行MESシステム名"
+          extraction_path: "research.current_systems.mes"
+        - name: "{{PLCベンダー}}"
+          description: "PLCベンダー"
+          extraction_path: "research.infrastructure.plc_vendor"
+    
+    tone:
+      formality: "medium"
+      emphasis: ["技術仕様", "連携性", "OTセキュリティ"]
+      include: ["API仕様", "プロトコル", "データフォーマット"]
+
+  # ============================================
+  # 金融業向けテンプレート
+  # ============================================
+  finance_executive:
+    id: "finance-executive"
+    name: "金融業向け（経営層）"
+    description: "銀行・保険・証券の経営層向け提案書"
+    industry: "finance"
+    persona: "executive"
+    
+    sections:
+      - section_ref: executive_summary
+        customization:
+          emphasis: ["コンプライアンス", "顧客体験", "コスト効率"]
+          metrics: ["顧客満足度", "処理効率", "コスト削減率"]
+      
+      - section_ref: current_challenges
+        customization:
+          focus_areas:
+            - "規制対応（FISC、PCI DSS等）"
+            - "顧客チャネルのデジタル化"
+            - "レガシーシステムの刷新"
+            - "サイバーセキュリティ強化"
+            - "データ活用・AI導入"
+          data_sources:
+            - "金融庁ガイドライン"
+            - "業界レポート"
+            - "顧客満足度調査"
+      
+      - section_ref: proposed_solution
+        customization:
+          value_proposition: "規制準拠と顧客体験向上の両立"
+      
+      - section_ref: expected_benefits
+        customization:
+          kpis:
+            - name: "顧客対応時間"
+              target: "40%短縮"
+            - name: "コンプライアンスコスト"
+              target: "25%削減"
+            - name: "顧客満足度"
+              target: "15%向上"
+      
+      - section_ref: roi_analysis
+        customization:
+          comparison_targets:
+            - "現状維持"
+            - "競合ソリューション"
+            - "フルスクラッチ開発"
+      
+      - section_ref: implementation_plan
+        customization:
+          considerations:
+            - "規制当局への報告"
+            - "監査対応"
+            - "BCPとの整合性"
+            - "顧客影響最小化"
+    
+    placeholders:
+      required:
+        - name: "{{製品名}}"
+          description: "提案する製品・サービス名"
+          extraction_path: "manifest.product.name"
+        - name: "{{顧客名}}"
+          description: "提案先金融機関名"
+          extraction_path: "manifest.client.name"
+        - name: "{{提案日}}"
+          description: "提案書作成日"
+          default: "{{TODAY}}"
+      optional:
+        - name: "{{顧客数}}"
+          description: "対象顧客数"
+          extraction_path: "research.client_profile.customer_count"
+        - name: "{{店舗数}}"
+          description: "対象店舗数"
+          extraction_path: "research.client_profile.branch_count"
+        - name: "{{勘定系}}"
+          description: "現行勘定系システム"
+          extraction_path: "research.current_systems.core_banking"
+    
+    tone:
+      formality: "very_high"
+      emphasis: ["コンプライアンス", "セキュリティ", "実績"]
+      avoid: ["リスク軽視", "過度な簡略化"]
+
+  finance_it:
+    id: "finance-it"
+    name: "金融業向け（IT部門）"
+    description: "銀行・保険・証券のIT部門向け提案書"
+    industry: "finance"
+    persona: "it_department"
+    
+    sections:
+      - section_ref: executive_summary
+        customization:
+          emphasis: ["FISC準拠", "セキュリティ", "可用性"]
+      
+      - section_ref: current_challenges
+        customization:
+          focus_areas:
+            - "FISC安全対策基準への対応"
+            - "基幹系システムの近代化"
+            - "API開放（オープンバンキング）"
+            - "災害対策・BCP"
+            - "セキュリティ監査対応"
+          data_sources:
+            - "FISC安全対策基準"
+            - "システムアーキテクチャ図"
+            - "セキュリティ監査報告書"
+      
+      - section_ref: proposed_solution
+        customization:
+          value_proposition: "FISC準拠と最新技術導入の両立"
+          technical_details: true
+      
+      - section_ref: expected_benefits
+        customization:
+          kpis:
+            - name: "システム可用性"
+              target: "99.99%以上"
+            - name: "FISC対応工数"
+              target: "40%削減"
+            - name: "API連携時間"
+              target: "70%短縮"
+      
+      - section_ref: roi_analysis
+        customization:
+          include_tco: true
+          comparison_period: "7年"
+      
+      - section_ref: implementation_plan
+        customization:
+          considerations:
+            - "FISC適合性確認"
+            - "監査証跡の確保"
+            - "DR/BCPテスト計画"
+            - "段階的移行（リスク分散）"
+      
+      - section_ref: appendix
+        customization:
+          include:
+            - "FISC対応状況表"
+            - "セキュリティホワイトペーパー"
+            - "監査対応ドキュメント"
+            - "SLA詳細"
+    
+    placeholders:
+      required:
+        - name: "{{製品名}}"
+          description: "提案する製品・サービス名"
+          extraction_path: "manifest.product.name"
+        - name: "{{顧客名}}"
+          description: "提案先金融機関名"
+          extraction_path: "manifest.client.name"
+        - name: "{{提案日}}"
+          description: "提案書作成日"
+          default: "{{TODAY}}"
+      optional:
+        - name: "{{勘定系}}"
+          description: "現行勘定系システム"
+          extraction_path: "research.current_systems.core_banking"
+        - name: "{{チャネル系}}"
+          description: "現行チャネル系システム"
+          extraction_path: "research.current_systems.channel"
+        - name: "{{DC所在地}}"
+          description: "データセンター所在地"
+          extraction_path: "research.infrastructure.datacenter_location"
+    
+    tone:
+      formality: "high"
+      emphasis: ["FISC準拠", "監査対応", "高可用性"]
+      include: ["技術仕様", "セキュリティ詳細", "SLA"]
+
+# 出力フォーマット設定
+output_format:
+  file_extension: ".md"
+  naming_pattern: "{{client_name}}-proposal-{{template_id}}-{{version}}.md"
+  
+  header_template: |
+    # {{製品名}} 導入提案書
+    
+    **提案先**: {{顧客名}} 様  
+    **提案日**: {{提案日}}  
+    **作成者**: {{作成者}}  
+    **バージョン**: {{version}}
+    
+    ---
+    
+    ## 変更履歴
+    
+    | バージョン | 日付 | 変更内容 |
+    |-----------|------|----------|
+    | v1.0 | {{提案日}} | 初版作成 |
+    
+    ---
+  
+  toc_template: |
+    ## 目次
+    
+    {{#each sections}}
+    {{index}}. [{{name}}](#{{anchor}})
+    {{/each}}
+    
+    ---
+
+# バリデーションルール
+validation:
+  required_placeholders:
+    error_on_missing: true
+    warning_message: "必須プレースホルダー '{{name}}' が未設定です"
+  
+  optional_placeholders:
+    error_on_missing: false
+    warning_message: "任意プレースホルダー '{{name}}' が未設定です（スキップ可）"
+  
+  max_unresolved: 0
+  
+  placeholder_pattern: "\\{\\{[^}]+\\}\\}"

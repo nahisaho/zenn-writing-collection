@@ -1,0 +1,299 @@
+# Context Adaptation Rules
+# v1.9.0 - REQ-SALES-002-03
+#
+# ペルソナ・業界に応じたコンテキスト適応ルール
+
+schema_version: "1.0"
+name: context-adaptation
+description: |
+  トークスクリプトをペルソナ・業界・状況に応じて
+  適応させるためのルール定義。
+
+# ペルソナ別適応ルール
+persona_adaptation:
+  rd_manager:
+    name: "R&D部門マネージャー"
+    
+    vocabulary:
+      use:
+        - "技術検証"
+        - "PoC"
+        - "実証データ"
+        - "技術ロードマップ"
+        - "スケーラビリティ"
+        - "アーキテクチャ"
+      avoid:
+        - "営業目標"
+        - "売上"
+        - "コミッション"
+    
+    evidence_types:
+      preferred:
+        - "技術検証データ"
+        - "ベンチマーク結果"
+        - "特許・論文"
+        - "プロトタイプデモ"
+      secondary:
+        - "技術者の声"
+        - "アーキテクチャ図"
+    
+    formality: semi_formal
+    
+    tone_adjustments:
+      - "技術的詳細を厚く"
+      - "営業トーク感を排除"
+      - "エンジニア同士の会話調"
+    
+    example_phrases:
+      acknowledgment:
+        - "技術的なご懸念、ごもっともです。"
+        - "実装面でのリスクを重視されるのは当然ですね。"
+      reframing:
+        - "技術的な観点で申し上げますと..."
+        - "実際のベンチマークデータでは..."
+      next_step:
+        - "技術チームの方とのディスカッションの場を設けられればと思います。"
+        - "PoCの計画書をお持ちしましょうか。"
+
+  procurement_manager:
+    name: "調達・購買部門マネージャー"
+    
+    vocabulary:
+      use:
+        - "TCO"
+        - "コスト削減"
+        - "サプライヤー評価"
+        - "リードタイム"
+        - "BCP"
+        - "マルチソース"
+      avoid:
+        - "技術的詳細"
+        - "イノベーション"
+        - "将来ビジョン"
+    
+    evidence_types:
+      preferred:
+        - "コスト比較表"
+        - "TCO分析"
+        - "導入企業リスト"
+        - "サプライヤー資格証明"
+      secondary:
+        - "品質データ"
+        - "納期遵守実績"
+    
+    formality: formal
+    
+    tone_adjustments:
+      - "数値・データを多用"
+      - "ビジネスライクに"
+      - "感情的表現を避ける"
+    
+    example_phrases:
+      acknowledgment:
+        - "コスト面でのご懸念、十分理解いたします。"
+        - "既存サプライヤーとの関係性は重要ですよね。"
+      reframing:
+        - "TCOベースで比較いたしますと..."
+        - "弊社の実績としては、同業界で〇〇社様..."
+      next_step:
+        - "詳細な見積書をご用意しますので、ご検討いただけないでしょうか。"
+        - "トライアル発注という形から始めることも可能です。"
+
+  executive:
+    name: "経営層・役員"
+    
+    vocabulary:
+      use:
+        - "戦略的価値"
+        - "競争優位"
+        - "ROI"
+        - "リスク軽減"
+        - "事業インパクト"
+      avoid:
+        - "技術詳細"
+        - "オペレーション詳細"
+        - "細かい数字の羅列"
+    
+    evidence_types:
+      preferred:
+        - "経営指標（ROI、ROIC）"
+        - "競合ベンチマーク"
+        - "成功事例（経営者視点）"
+        - "市場データ"
+      secondary:
+        - "リスク分析"
+        - "シナリオ分析"
+    
+    formality: formal
+    
+    tone_adjustments:
+      - "結論先行"
+      - "簡潔に"
+      - "大局的視点で"
+    
+    example_phrases:
+      acknowledgment:
+        - "経営判断として慎重になられるのは当然です。"
+        - "投資対効果を重視されるのは経営者として当然のことです。"
+      reframing:
+        - "経営戦略の観点から申し上げますと..."
+        - "御社の中期計画との関連で言えば..."
+      next_step:
+        - "詳細は担当者間で詰めさせていただき、ポイントだけ改めてご報告させてください。"
+        - "まずは事業部長様とのディスカッションの機会をいただけないでしょうか。"
+
+# 業界別適応ルール
+industry_adaptation:
+  automotive:
+    name: "自動車・自動車部品"
+    
+    vocabulary:
+      industry_terms:
+        - "OEM"
+        - "Tier1/Tier2"
+        - "SOP"
+        - "PPAP"
+        - "IATF16949"
+        - "EVシフト"
+        - "CASE"
+      
+    context:
+      current_trends:
+        - "EV化対応"
+        - "サプライチェーン再編"
+        - "脱炭素"
+        - "SDV（Software Defined Vehicle）"
+      
+      common_challenges:
+        - "中国依存リスク"
+        - "半導体調達"
+        - "電動化投資"
+        - "既存サプライヤーとの関係"
+    
+    example_customization:
+      reframing_additions:
+        - "EVシフトが加速する中で..."
+        - "サプライチェーンの強靭化という観点では..."
+        - "CASEへの対応を考えますと..."
+
+  manufacturing:
+    name: "製造業（一般）"
+    
+    vocabulary:
+      industry_terms:
+        - "生産性向上"
+        - "歩留まり"
+        - "スマートファクトリー"
+        - "DX"
+        - "IoT"
+        - "予知保全"
+      
+    context:
+      current_trends:
+        - "人手不足対応"
+        - "デジタル化"
+        - "カーボンニュートラル"
+        - "グローバル調達"
+      
+      common_challenges:
+        - "熟練技術者の高齢化"
+        - "設備老朽化"
+        - "新興国との競争"
+        - "原材料高騰"
+    
+    example_customization:
+      reframing_additions:
+        - "製造業のDXという観点では..."
+        - "人手不足が深刻化する中..."
+        - "スマートファクトリー実現の一環として..."
+
+  pharmaceutical:
+    name: "医薬品・ヘルスケア"
+    
+    vocabulary:
+      industry_terms:
+        - "GMP"
+        - "治験"
+        - "薬事規制"
+        - "創薬"
+        - "バリデーション"
+        - "規制当局"
+      
+    context:
+      current_trends:
+        - "創薬DX"
+        - "リアルワールドデータ活用"
+        - "バイオ医薬品"
+        - "個別化医療"
+      
+      common_challenges:
+        - "開発コスト増大"
+        - "規制対応"
+        - "治験の効率化"
+        - "データ管理"
+    
+    example_customization:
+      reframing_additions:
+        - "薬事規制の観点からも..."
+        - "創薬プロセスの効率化という意味では..."
+        - "GMP対応という点でも..."
+
+# 状況別適応ルール
+situation_adaptation:
+  initial_meeting:
+    name: "初回面談"
+    
+    adjustments:
+      - "説明を丁寧に"
+      - "基礎情報から"
+      - "質問を多めに"
+    
+    next_step_focus: "次回アポイント取得"
+
+  follow_up:
+    name: "フォローアップ"
+    
+    adjustments:
+      - "前回の宿題を確認"
+      - "進展状況を確認"
+      - "具体的な提案へ"
+    
+    next_step_focus: "意思決定に向けた具体的アクション"
+
+  negotiation:
+    name: "条件交渉"
+    
+    adjustments:
+      - "Win-Winを意識"
+      - "代替案を用意"
+      - "最終決定へ導く"
+    
+    next_step_focus: "合意・契約"
+
+  reactivation:
+    name: "再アプローチ"
+    
+    adjustments:
+      - "状況変化を確認"
+      - "新しい価値を提示"
+      - "過去の経緯を踏まえる"
+    
+    next_step_focus: "関係性の再構築"
+
+# 適応処理ルール
+processing_rules:
+  # 複合適応の優先順位
+  priority:
+    1: persona_adaptation    # ペルソナが最優先
+    2: industry_adaptation   # 業界コンテキスト
+    3: situation_adaptation  # 状況に応じた微調整
+  
+  # 適応の組み合わせ
+  combination:
+    method: "merge"
+    conflict_resolution: "persona_wins"
+  
+  # 出力フォーマット
+  output:
+    include_adaptation_notes: true
+    highlight_customizations: true
