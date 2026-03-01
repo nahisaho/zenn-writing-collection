@@ -1,5 +1,14 @@
+node_modules/
+.vscode/
+
 books/b74ddeabae1adf/internal-only/
 books/b74ddeabae1adf/.claude-flow/
 books/b74ddeabae1adf/.swarm/
 .claude-flow/
 .swarm/
+
+# books/cffd2306e225bb
+books/cffd2306e225bb/.github/
+books/cffd2306e225bb/.vscode/
+books/cffd2306e225bb/mcp-server/
+books/cffd2306e225bb/AGENTS.md

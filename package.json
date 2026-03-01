@@ -24,6 +24,7 @@
   "homepage": "https://github.com/hisahonakata/zenn.dev#readme",
   "description": "",
   "dependencies": {
+    "@nahisaho/shikigami": "^1.52.1",
     "yaml": "^2.8.2",
     "zenn-cli": "^0.2.3"
   }

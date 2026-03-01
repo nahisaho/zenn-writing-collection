@@ -1,0 +1,20 @@
+title: "はじめての AI for Science (AIエージェント開発編)"
+summary: "科学研究を加速するAIエージェントの設計・開発入門書。MCP（Model Context Protocol）を活用した科学データ連携、LLMベースの実験計画エージェント、マルチエージェントによる仮説生成・検証、シミュレーション自動化など、研究者・エンジニア向けに実践的なAIエージェント開発手法を解説します。"
+topics: ["ai", "agent", "mcp", "python", "science"]
+published: false
+price: 0 # 有料の場合200〜5000
+# 本に含めるチャプターを順番に並べましょう
+chapters:
+  - "introduction"
+  - "chapter01-ai-agent-overview"
+  - "chapter02-llm-foundations"
+  - "chapter03-agent-architecture"
+  - "chapter04-mcp-basics"
+  - "chapter05-tool-use-and-function-calling"
+  - "chapter06-scientific-data-mcp-server"
+  - "chapter07-experiment-planning-agent"
+  - "chapter08-multi-agent-systems"
+  - "chapter09-simulation-automation"
+  - "chapter10-evaluation-and-safety"
+  - "chapter11-hands-on-project"
+  - "appendix"

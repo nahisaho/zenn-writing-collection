@@ -1,0 +1,111 @@
+# エンコーディング処理設定
+# @requirements REQ-VISIT-003, REQ-VISIT-003-01, REQ-VISIT-003-02
+# @design DES-VISIT-003
+# @version 1.11.0
+
+# サポートするエンコーディング
+supported_encodings:
+  - utf-8
+  - shift_jis
+  - euc-jp
+  - iso-2022-jp
+  - windows-31j
+
+# エンコーディング検出優先順位
+detection_priority:
+  - content-type      # HTTP Content-Typeヘッダー
+  - meta-charset      # HTML meta charset
+  - bom               # BOM (Byte Order Mark)
+  - heuristic         # ヒューリスティック検出
+
+# 文字化けパターン定義
+mojibake_patterns:
+  # Shift_JIS → UTF-8 誤変換パターン
+  shift_jis_as_utf8:
+    patterns:
+      - "縺"
+      - "譁"
+      - "繧"
+      - "繝"
+      - "蜀"
+    suggested_encoding: shift_jis
+    description: "Shift_JISをUTF-8として誤解釈した場合のパターン"
+  
+  # EUC-JP → UTF-8 誤変換パターン
+  euc_jp_as_utf8:
+    patterns:
+      - "ʸ"
+      - "ɽ"
+    suggested_encoding: euc-jp
+    description: "EUC-JPをUTF-8として誤解釈した場合のパターン"
+  
+  # UTF-8 → Latin1 誤変換パターン
+  utf8_as_latin1:
+    patterns:
+      - "ã€"
+      - "ã‚"
+      - "ã"
+    suggested_encoding: utf-8
+    description: "UTF-8をLatin1として誤解釈した場合のパターン"
+  
+  # 置換文字（変換失敗の兆候）
+  replacement:
+    patterns:
+      - "�"
+      - "\uFFFD"
+    suggested_encoding: shift_jis  # 日本語サイトではShift_JISが多い
+    description: "エンコーディング変換失敗による置換文字"
+
+# BOMマッピング
+bom_map:
+  "\xEF\xBB\xBF": utf-8
+  "\xFE\xFF": utf-8      # UTF-16BE (UTF-8として扱う)
+  "\xFF\xFE": utf-8      # UTF-16LE (UTF-8として扱う)
+
+# Content-Type charsetマッピング
+charset_aliases:
+  # UTF-8
+  utf-8: utf-8
+  utf8: utf-8
+  
+  # Shift_JIS
+  shift_jis: shift_jis
+  shift-jis: shift_jis
+  sjis: shift_jis
+  x-sjis: shift_jis
+  
+  # Windows-31J (CP932)
+  windows-31j: windows-31j
+  cp932: windows-31j
+  ms932: windows-31j
+  
+  # EUC-JP
+  euc-jp: euc-jp
+  eucjp: euc-jp
+  x-euc-jp: euc-jp
+  
+  # ISO-2022-JP
+  iso-2022-jp: iso-2022-jp
+  jis: iso-2022-jp
+
+# デフォルト設定
+defaults:
+  fallback_encoding: utf-8
+  enable_mojibake_detection: true
+  enable_auto_conversion: true
+  timeout_ms: 5000
+  verbose_logging: false
+
+# ヒューリスティック検出設定
+heuristic:
+  # 日本語文字範囲
+  japanese_ranges:
+    hiragana: [0x3040, 0x309F]
+    katakana: [0x30A0, 0x30FF]
+    kanji: [0x4E00, 0x9FFF]
+  
+  # 検出に必要な日本語文字の最小割合
+  min_japanese_ratio: 0.1
+  
+  # サンプルサイズ（バイト）
+  sample_size: 4096

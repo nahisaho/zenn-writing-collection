@@ -1,0 +1,20 @@
+title: "はじめての AI for Science (AIエージェント開発編)"
+summary: "AI for Scienceにおけるエージェント開発の実践書。科学研究を自律的に遂行するAIエージェントの設計・実装を、MCP・A2A・GraphRAGなどの最新プロトコルとともに解説。文献調査エージェント、実験計画エージェント、Self-Driving Laboratoryの構築まで、コード付きで学べます。"
+topics: ["ai", "agent", "science", "python", "mcp"]
+published: false
+price: 0 # 有料の場合200〜5000
+# 本に含めるチャプターを順番に並べましょう
+chapters:
+  - "introduction"
+  - "chapter1-ai-agent-overview"
+  - "chapter2-satori-architecture"
+  - "chapter3-mcp-tooluniverse-a2a"
+  - "chapter4-literature-agent"
+  - "chapter5-graphrag-for-science"
+  - "chapter6-experiment-planning-agent"
+  - "chapter7-data-analysis-agent"
+  - "chapter8-self-driving-lab"
+  - "chapter9-multi-agent-pipeline"
+  - "chapter10-hands-on"
+  - "chapter11-future-and-ethics"
+  - "appendix"
