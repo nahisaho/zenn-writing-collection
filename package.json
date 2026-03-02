@@ -27,5 +27,9 @@
     "@nahisaho/shikigami": "^1.52.1",
     "yaml": "^2.8.2",
     "zenn-cli": "^0.2.3"
+  },
+  "devDependencies": {
+    "textlint": "^15.5.2",
+    "textlint-rule-preset-ja-technical-writing": "^12.0.2"
   }
 }

@@ -7,8 +7,8 @@ price: 0 # 有料の場合200〜5000
 chapters:
   - "introduction"
   - "chapter1-ai-agent-overview"
-  - "chapter2-satori-architecture"
-  - "chapter3-mcp-tooluniverse-a2a"
+  - "chapter2-satori-skills"
+  - "chapter3-agent-development"
   - "chapter4-literature-agent"
   - "chapter5-graphrag-for-science"
   - "chapter6-experiment-planning-agent"
@@ -18,3 +18,4 @@ chapters:
   - "chapter10-hands-on"
   - "chapter11-future-and-ethics"
   - "appendix"
+  - "analysis-report-exp001-010"
